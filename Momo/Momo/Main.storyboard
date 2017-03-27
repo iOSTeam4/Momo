@@ -52,7 +52,7 @@
         <!--Item-->
         <scene sceneID="lFy-Lt-iZ6">
             <objects>
-                <navigationController storyboardIdentifier="MainNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="RPI-Bk-JXx" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RPI-Bk-JXx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="tWw-YU-um2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="SMG-Yg-jAd">
@@ -79,6 +79,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="RPI-Bk-JXx" kind="relationship" relationship="viewControllers" id="X9z-EM-5eX"/>
                         <segue destination="IbN-tA-7a0" kind="presentation" identifier="LaunchViewSegue" animates="NO" id="2pp-do-5l9"/>
                     </connections>
                 </tabBarController>
