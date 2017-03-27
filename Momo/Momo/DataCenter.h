@@ -10,4 +10,22 @@
 
 @interface DataCenter : NSObject
 
+// 싱글턴 객체 호출 메소드
++ (instancetype)sharedInstance;
+
+@end
+
+
+
+
+// Account Category : 계정 관련 -------------------------//
+
+@interface DataCenter (Account)
+
+#pragma mark - Token setter, getter, remover
+
++ (NSString *)getUserToken;                             // Token get
++ (void)setUserTokenWithStr:(NSString *)tokenStr;       // Token set
++ (void)removeUserToken;                                // Token remove
+
 @end

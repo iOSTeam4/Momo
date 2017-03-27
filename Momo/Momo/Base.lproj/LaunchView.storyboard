@@ -38,22 +38,14 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9p7-Zf-bK4" secondAttribute="bottom" constant="78" id="pX3-Wd-nUe"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ECo-sw-9b1"/>
                     <connections>
-                        <segue destination="0i3-QP-gfN" kind="show" identifier="mainView" id="75N-wi-hb4"/>
-                        <segue destination="tLq-uN-Aqf" kind="show" identifier="loginView" id="ZvU-wN-vvH"/>
+                        <segue destination="tLq-uN-Aqf" kind="show" identifier="LoginViewSegue" id="ZvU-wN-vvH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
-        </scene>
-        <!--MainView-->
-        <scene sceneID="BBT-UR-08q">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MainView" id="0i3-QP-gfN" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iua-yA-74x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="765" y="-42"/>
+            <point key="canvasLocation" x="2175" y="524"/>
         </scene>
         <!--LoginView-->
         <scene sceneID="xuT-BN-ZQw">
@@ -61,7 +53,7 @@
                 <viewControllerPlaceholder storyboardName="LoginView" id="tLq-uN-Aqf" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXX-iw-eAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="107"/>
+            <point key="canvasLocation" x="2722" y="524"/>
         </scene>
     </scenes>
 </document>

@@ -29,7 +29,7 @@
 
 - (IBAction)loginBtnAction:(id)sender {
     
-    [self performSegueWithIdentifier:@"loginView" sender:self];
+    [self performSegueWithIdentifier:@"LoginViewSegue" sender:self];
     
 }
 
