@@ -41,4 +41,11 @@
 }
 */
 
+- (IBAction)logoutTempBtnAction:(id)sender {
+    
+    [DataCenter removeUserToken];
+    
+    [(MainTabBarController *)self.tabBarController autoLoginCheck];
+}
+
 @end

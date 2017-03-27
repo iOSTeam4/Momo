@@ -15,6 +15,7 @@
 #import "MainTabBarController.h"
 
 // Pods
+@import GoogleMaps;
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AFNetworking/AFNetworking.h>
 

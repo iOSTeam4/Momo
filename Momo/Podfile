@@ -8,7 +8,6 @@ target 'Momo' do
 
   # Pods for Momo
     pod 'GoogleMaps'
-
     pod 'SDWebImage'
     pod 'AFNetworking', '~> 3.0'
 
