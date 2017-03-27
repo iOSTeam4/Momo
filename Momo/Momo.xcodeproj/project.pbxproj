@@ -10,6 +10,8 @@
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5D1E8916BC001B87F0 /* MainViewController.m */; };
 		3F745F611E891728001B87F0 /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F601E891728001B87F0 /* NetworkModule.m */; };
+		3FD918CC1E893067005B1583 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD918CB1E893067005B1583 /* MapViewController.m */; };
+		3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD918CE1E8930BF005B1583 /* Map.storyboard */; };
 		3FD9A5341E88ED3700B965A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5331E88ED3700B965A7 /* main.m */; };
 		3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5361E88ED3700B965A7 /* AppDelegate.m */; };
 		3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */; };
@@ -31,6 +33,9 @@
 		3F745F5D1E8916BC001B87F0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3F745F5F1E891728001B87F0 /* NetworkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkModule.h; sourceTree = "<group>"; };
 		3F745F601E891728001B87F0 /* NetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModule.m; sourceTree = "<group>"; };
+		3FD918CA1E893067005B1583 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		3FD918CB1E893067005B1583 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		3FD918CE1E8930BF005B1583 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		3FD9A52F1E88ED3700B965A7 /* Momo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD9A5331E88ED3700B965A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3FD9A5351E88ED3700B965A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -86,6 +91,16 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
+		3FD918CD1E8930A2005B1583 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD918CA1E893067005B1583 /* MapViewController.h */,
+				3FD918CB1E893067005B1583 /* MapViewController.m */,
+				3FD918CE1E8930BF005B1583 /* Map.storyboard */,
+			);
+			name = MapView;
+			sourceTree = "<group>";
+		};
 		3FD9A5261E88ED3600B965A7 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +128,7 @@
 				3FD9A5531E88F13300B965A7 /* LaunchView */,
 				3FD9A5541E88F15000B965A7 /* LoginView */,
 				3FD9A5581E88F4FA00B965A7 /* MainView */,
+				3FD918CD1E8930A2005B1583 /* MapView */,
 				3FD9A5321E88ED3700B965A7 /* Supporting Files */,
 			);
 			path = Momo;
@@ -260,6 +276,7 @@
 				3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */,
 				3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */,
 				3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */,
+				3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +342,7 @@
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
+				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,
 			);

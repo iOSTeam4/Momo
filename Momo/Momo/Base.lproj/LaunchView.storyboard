@@ -39,11 +39,22 @@
                                     <action selector="goMain_Temp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eqa-Dj-a9t"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOMO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpS-pO-CCn">
+                                <rect key="frame" x="130.5" y="315.5" width="114" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="Cbt-BL-9aG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9p7-Zf-bK4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Je-ES-W9J"/>
+                            <constraint firstItem="vpS-pO-CCn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="S70-VJ-5Z6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9p7-Zf-bK4" secondAttribute="bottom" constant="78" id="pX3-Wd-nUe"/>
+                            <constraint firstItem="vpS-pO-CCn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tSt-TG-Bln"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ECo-sw-9b1"/>
