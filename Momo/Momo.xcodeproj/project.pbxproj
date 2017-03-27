@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3FD9A5341E88ED3700B965A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5331E88ED3700B965A7 /* main.m */; };
+		3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5361E88ED3700B965A7 /* AppDelegate.m */; };
+		3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */; };
+		3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */; };
+		3FD9A53F1E88ED3700B965A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A53E1E88ED3700B965A7 /* Assets.xcassets */; };
+		3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */; };
+		3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A54A1E88F08500B965A7 /* LoginViewController.m */; };
+		3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */; };
+		3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5511E88F12600B965A7 /* DataCenter.m */; };
+		3FD9A5571E88F35400B965A7 /* MainView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* MainView.storyboard */; };
+		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3FD9A52F1E88ED3700B965A7 /* Momo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FD9A5331E88ED3700B965A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3FD9A5351E88ED3700B965A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3FD9A5361E88ED3700B965A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3FD9A5381E88ED3700B965A7 /* LaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		3FD9A53C1E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchView.storyboard; sourceTree = "<group>"; };
+		3FD9A53E1E88ED3700B965A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3FD9A5411E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3FD9A5431E88ED3700B965A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FD9A5491E88F08500B965A7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3FD9A54A1E88F08500B965A7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
+		3FD9A5501E88F12600B965A7 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
+		3FD9A5511E88F12600B965A7 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
+		3FD9A5561E88F35400B965A7 /* MainView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainView.storyboard; sourceTree = "<group>"; };
+		77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Momo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.release.xcconfig"; sourceTree = "<group>"; };
+		E13D47394EE09B673C723CE7 /* Pods-Momo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3FD9A52C1E88ED3700B965A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15DC98F4A4A76B66B13157A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3FD9A5261E88ED3600B965A7 = {
+			isa = PBXGroup;
+			children = (
+				3FD9A5311E88ED3700B965A7 /* Momo */,
+				3FD9A5301E88ED3700B965A7 /* Products */,
+				5BFB7AE743B07EA5BE3457CD /* Pods */,
+				15DC98F4A4A76B66B13157A8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3FD9A5301E88ED3700B965A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A52F1E88ED3700B965A7 /* Momo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3FD9A5311E88ED3700B965A7 /* Momo */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A54F1E88F0FE00B965A7 /* AppDelegate */,
+				3FD9A54E1E88F0EE00B965A7 /* Model */,
+				3FD9A5531E88F13300B965A7 /* LaunchView */,
+				3FD9A5541E88F15000B965A7 /* LoginView */,
+				3FD9A5581E88F4FA00B965A7 /* MainView */,
+				3FD9A5321E88ED3700B965A7 /* Supporting Files */,
+			);
+			path = Momo;
+			sourceTree = "<group>";
+		};
+		3FD9A5321E88ED3700B965A7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A53E1E88ED3700B965A7 /* Assets.xcassets */,
+				3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */,
+				3FD9A5431E88ED3700B965A7 /* Info.plist */,
+				3FD9A5331E88ED3700B965A7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3FD9A54E1E88F0EE00B965A7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A5501E88F12600B965A7 /* DataCenter.h */,
+				3FD9A5511E88F12600B965A7 /* DataCenter.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3FD9A54F1E88F0FE00B965A7 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A5351E88ED3700B965A7 /* AppDelegate.h */,
+				3FD9A5361E88ED3700B965A7 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		3FD9A5531E88F13300B965A7 /* LaunchView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A5381E88ED3700B965A7 /* LaunchViewController.h */,
+				3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */,
+				3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */,
+			);
+			name = LaunchView;
+			sourceTree = "<group>";
+		};
+		3FD9A5541E88F15000B965A7 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A5491E88F08500B965A7 /* LoginViewController.h */,
+				3FD9A54A1E88F08500B965A7 /* LoginViewController.m */,
+				3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		3FD9A5581E88F4FA00B965A7 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD9A5561E88F35400B965A7 /* MainView.storyboard */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		5BFB7AE743B07EA5BE3457CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E13D47394EE09B673C723CE7 /* Pods-Momo.debug.xcconfig */,
+				9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3FD9A52E1E88ED3700B965A7 /* Momo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FD9A5461E88ED3700B965A7 /* Build configuration list for PBXNativeTarget "Momo" */;
+			buildPhases = (
+				27F0D5130FA21F7EEFAC9FF1 /* [CP] Check Pods Manifest.lock */,
+				3FD9A52B1E88ED3700B965A7 /* Sources */,
+				3FD9A52C1E88ED3700B965A7 /* Frameworks */,
+				3FD9A52D1E88ED3700B965A7 /* Resources */,
+				6DF7E0E7BEE6ADE69B344E53 /* [CP] Embed Pods Frameworks */,
+				45201C0B995B554079D44563 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Momo;
+			productName = Momo;
+			productReference = 3FD9A52F1E88ED3700B965A7 /* Momo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3FD9A5271E88ED3600B965A7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = JeheonChoi;
+				TargetAttributes = {
+					3FD9A52E1E88ED3700B965A7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = NN7QXHC8A3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3FD9A52A1E88ED3600B965A7 /* Build configuration list for PBXProject "Momo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3FD9A5261E88ED3600B965A7;
+			productRefGroup = 3FD9A5301E88ED3700B965A7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3FD9A52E1E88ED3700B965A7 /* Momo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3FD9A52D1E88ED3700B965A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */,
+				3FD9A53F1E88ED3700B965A7 /* Assets.xcassets in Resources */,
+				3FD9A5571E88F35400B965A7 /* MainView.storyboard in Resources */,
+				3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */,
+				3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27F0D5130FA21F7EEFAC9FF1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		45201C0B995B554079D44563 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momo/Pods-Momo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DF7E0E7BEE6ADE69B344E53 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momo/Pods-Momo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3FD9A52B1E88ED3700B965A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
+				3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */,
+				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
+				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
+				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD9A53C1E88ED3700B965A7 /* Base */,
+			);
+			name = LaunchView.storyboard;
+			sourceTree = "<group>";
+		};
+		3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD9A5411E88ED3700B965A7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3FD9A5441E88ED3700B965A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3FD9A5451E88ED3700B965A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3FD9A5471E88ED3700B965A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E13D47394EE09B673C723CE7 /* Pods-Momo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NN7QXHC8A3;
+				INFOPLIST_FILE = Momo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jereator.Momo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3FD9A5481E88ED3700B965A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NN7QXHC8A3;
+				INFOPLIST_FILE = Momo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jereator.Momo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3FD9A52A1E88ED3600B965A7 /* Build configuration list for PBXProject "Momo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FD9A5441E88ED3700B965A7 /* Debug */,
+				3FD9A5451E88ED3700B965A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FD9A5461E88ED3700B965A7 /* Build configuration list for PBXNativeTarget "Momo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FD9A5471E88ED3700B965A7 /* Debug */,
+				3FD9A5481E88ED3700B965A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3FD9A5271E88ED3600B965A7 /* Project object */;
+}
