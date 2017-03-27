@@ -8,6 +8,9 @@
 
 #import "LaunchViewController.h"
 
+static NSString * const LOGIN_SEGUE = @"LoginViewSegue";
+
+
 @interface LaunchViewController ()
 
 @end
@@ -21,16 +24,32 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+// UIButtonAction : 버튼 액션 관련 -------------------------//
+
 - (IBAction)loginBtnAction:(id)sender {
     
-    [self performSegueWithIdentifier:@"LoginViewSegue" sender:self];
+    [self.navigationController.navigationBar setHidden:NO];
+    [self performSegueWithIdentifier:LOGIN_SEGUE sender:self];
     
+}
+
+
+- (IBAction)goMain_Temp:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

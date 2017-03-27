@@ -10,6 +10,6 @@
 
 @interface MainTabBarController : UITabBarController
 
-- (void)autoLoginCheck;
+- (void)autoLoginCheck;     // autoLogin
 
 @end

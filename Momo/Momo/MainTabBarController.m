@@ -9,6 +9,9 @@
 #import "MainTabBarController.h"
 #import "DataCenter.h"
 
+static NSString * const LAUNCH_SEGUE = @"LaunchViewSegue";
+
+
 @interface MainTabBarController ()
 
 @end
@@ -45,9 +48,8 @@
         // Token이 없으면 nil
         
         NSLog(@"토큰 정보 없음, Login View로 이동");
-        [self performSegueWithIdentifier:@"LaunchViewSegue" sender:self];
+        [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
     }
-
 }
 
 

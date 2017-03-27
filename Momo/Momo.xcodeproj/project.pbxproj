@@ -22,7 +22,6 @@
 		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
-		EF4702E91E891E3D0007E4AE /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E81E891E3D0007E4AE /* SignupPageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -322,11 +321,7 @@
 				3F745F611E891728001B87F0 /* NetworkModule.m in Sources */,
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
-<<<<<<< HEAD
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
-=======
-				EF4702E91E891E3D0007E4AE /* SignupPageViewController.m in Sources */,
->>>>>>> 041f392ac7ada69f5aaaf7f63f727332711b92bf
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,
