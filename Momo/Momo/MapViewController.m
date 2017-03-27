@@ -1,29 +1,24 @@
 //
-//  MainViewController.m
+//  MapViewController.m
 //  Momo
 //
 //  Created by Jeheon Choi on 2017. 3. 27..
 //  Copyright © 2017년 JeheonChoi. All rights reserved.
 //
 
-#import "MainViewController.h"
-#import "MainTabBarController.h"
+#import "MapViewController.h"
 
-@interface MainViewController ()
+@interface MapViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation MapViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
-    [self.navigationItem setTitle:@"Main View"];
-
-
-    // AutoLoginCheck
-    [(MainTabBarController *)self.tabBarController autoLoginCheck];
-    
+    [self.navigationItem setTitle:@"Map View"];
 }
 
 - (void)didReceiveMemoryWarning {
