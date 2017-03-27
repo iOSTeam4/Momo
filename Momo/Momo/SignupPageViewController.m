@@ -1,18 +1,22 @@
 //
-//  LoginViewController.m
+//  SignupPageViewController.m
 //  Momo
 //
-//  Created by Jeheon Choi on 2017. 3. 27..
+//  Created by Hanson Jung on 2017. 3. 27..
 //  Copyright © 2017년 JeheonChoi. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "SignupPageViewController.h"
 
-@interface LoginViewController ()
+@interface SignupPageViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *idTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwReEnterTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
 @end
 
-@implementation LoginViewController
+@implementation SignupPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,8 +27,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 /*
 #pragma mark - Navigation
