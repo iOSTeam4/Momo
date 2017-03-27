@@ -1,18 +1,20 @@
 //
-//  LoginViewController.m
+//  LoginPageViewController.m
 //  Momo
 //
-//  Created by Jeheon Choi on 2017. 3. 27..
+//  Created by Hanson Jung on 2017. 3. 27..
 //  Copyright © 2017년 JeheonChoi. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "LoginPageViewController.h"
 
-@interface LoginViewController ()
+@interface LoginPageViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *idTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 
 @end
 
-@implementation LoginViewController
+@implementation LoginPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -21,6 +21,8 @@
 		3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5511E88F12600B965A7 /* DataCenter.m */; };
 		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
+		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
+		EF4702E91E891E3D0007E4AE /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E81E891E3D0007E4AE /* SignupPageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,10 @@
 		77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Momo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.release.xcconfig"; sourceTree = "<group>"; };
 		E13D47394EE09B673C723CE7 /* Pods-Momo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.debug.xcconfig"; sourceTree = "<group>"; };
+		EF4702E41E891E1E0007E4AE /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
+		EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
+		EF4702E71E891E3D0007E4AE /* SignupPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupPageViewController.h; sourceTree = "<group>"; };
+		EF4702E81E891E3D0007E4AE /* SignupPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupPageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,10 @@
 			children = (
 				3FD9A5491E88F08500B965A7 /* LoginViewController.h */,
 				3FD9A54A1E88F08500B965A7 /* LoginViewController.m */,
+				EF4702E41E891E1E0007E4AE /* LoginPageViewController.h */,
+				EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */,
+				EF4702E71E891E3D0007E4AE /* SignupPageViewController.h */,
+				EF4702E81E891E3D0007E4AE /* SignupPageViewController.m */,
 				3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */,
 			);
 			name = LoginView;
@@ -312,9 +322,14 @@
 				3F745F611E891728001B87F0 /* NetworkModule.m in Sources */,
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
+<<<<<<< HEAD
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
+=======
+				EF4702E91E891E3D0007E4AE /* SignupPageViewController.m in Sources */,
+>>>>>>> 041f392ac7ada69f5aaaf7f63f727332711b92bf
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
+				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
