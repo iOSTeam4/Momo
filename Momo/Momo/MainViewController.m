@@ -17,9 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationItem setTitle:@"Main View"];
-
 
     // AutoLoginCheck
     [(MainTabBarController *)self.tabBarController autoLoginCheck];

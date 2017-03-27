@@ -8,6 +8,7 @@
 
 #import "MainTabBarController.h"
 
+
 @interface MainTabBarController ()
 
 @end
@@ -18,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setViewControllersWithTabBarItems];       // TabBarController Setting
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,44 +27,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
 
-
-
-// TabBarController Setting -----------------------------------//
-
-- (void)setViewControllersWithTabBarItems {
-    
-    
-    // get ViewControllers
-    
-    // 메인 뷰
-    UINavigationController *mainNaviVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainNaviViewController"];
-    
-    
-    // 지도 뷰
-    UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
-    UINavigationController *mapNaviVC = [mapStoryBoard instantiateViewControllerWithIdentifier:@"MapNaviViewController"];
-    
-    // set ViewControllers
-    [self setViewControllers:@[mainNaviVC, mapNaviVC]];
-
-    
-    
-    // set TabBarItems
-    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"메인" image:nil tag:100];
-    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"지도" image:nil tag:200];
-    
-    mainNaviVC.tabBarItem = item1;
-    mapNaviVC.tabBarItem = item2;
-    
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
-
-
-
-
-
-
-// Auto Login Check Method -----------------------------------//
+*/
 
 - (void)autoLoginCheck {
     
