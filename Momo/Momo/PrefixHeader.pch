@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  Momo
+//
+//  Created by Jeheon Choi on 2017. 3. 27..
+//  Copyright © 2017년 JeheonChoi. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Custom Classes
+#import "DataCenter.h"
+#import "NetworkModule.h"
+#import "MainTabBarController.h"
+
+// Pods
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <AFNetworking/AFNetworking.h>
+
+
+// Define Setting
+#define LAUNCH_SEGUE @"LaunchViewSegue"     //static NSString * const LAUNCH_SEGUE = @"LaunchViewSegue";
+#define LOGIN_SEGUE @"LoginViewSegue"       //static NSString * const LOGIN_SEGUE = @"LoginViewSegue";
+
+
+
+#endif /* PrefixHeader_pch */

@@ -7,10 +7,6 @@
 //
 
 #import "NetworkModule.h"
-#import "DataCenter.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import <AFNetworking/AFNetworking.h>
-
 
 // 일단 이전 Network 실습에 사용한 서버 및 코드 테스트용으로 사용
 

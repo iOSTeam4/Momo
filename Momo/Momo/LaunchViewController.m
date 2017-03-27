@@ -8,9 +8,6 @@
 
 #import "LaunchViewController.h"
 
-static NSString * const LOGIN_SEGUE = @"LoginViewSegue";
-
-
 @interface LaunchViewController ()
 
 @end

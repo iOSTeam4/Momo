@@ -7,9 +7,6 @@
 //
 
 #import "MainTabBarController.h"
-#import "DataCenter.h"
-
-static NSString * const LAUNCH_SEGUE = @"LaunchViewSegue";
 
 
 @interface MainTabBarController ()
