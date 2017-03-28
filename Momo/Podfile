@@ -11,6 +11,8 @@ target 'Momo' do
     pod 'SDWebImage'
     pod 'AFNetworking', '~> 3.0'
 
-
+    pod 'JSONModel'
+    pod 'SVProgressHUD'     # 로딩 팝업
+    pod 'FontAwesomeKit/FontAwesome'    # icon fonts
 
 end

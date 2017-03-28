@@ -41,7 +41,7 @@
     
     
     // 지도 뷰
-    UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
+    UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"MapView" bundle:nil];
     UINavigationController *mapNaviVC = [mapStoryBoard instantiateViewControllerWithIdentifier:@"MapNaviViewController"];
     
     // set ViewControllers

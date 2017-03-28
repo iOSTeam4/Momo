@@ -46,6 +46,12 @@
     self = [super init];
     if (self) {
         // 초기화
+        
+        // 더미 위치 데이터
+        self.locationArr = [[NSMutableArray alloc] initWithArray:@[@[@37.503639f, @127.044907f],
+                                                                   @[@37.565738f, @126.976761f],
+                                                                   @[@37.545426f, @126.855904f],
+                                                                   @[@37.321065f, @127.040955f]]];
     }
     return self;
 }
