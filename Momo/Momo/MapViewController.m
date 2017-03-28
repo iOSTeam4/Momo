@@ -13,32 +13,49 @@
 @end
 
 @implementation MapViewController {
-    GMSMapView *mapView_;
+    GMSMapView *_mapView;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self initialSetting];
+}
+
+
+
+// MapViewController 초기 세팅 ----------------------------//
+
+- (void)initialSetting {
     [self.navigationItem setTitle:@"Map View"];
     
+    [self createAndInitialSetGoogleMapView];
+}
+
+
+// GoogleMaps 관련 --------------------------------------//
+
+// Google Map View 관련 객체 생성 및 초기설정
+- (void)createAndInitialSetGoogleMapView {
     
+
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.515697
+                                                            longitude:127.021370
+                                                                 zoom:10];
     
-    // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
-    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    mapView_.myLocationEnabled = YES;
-    self.view = mapView_;
+    CGRect mapFrame = CONTENT_VIEW_FRAME_WITHOUT_TABBAR_AND_NAVIBAR;
+    _mapView = [GMSMapView mapWithFrame:mapFrame camera:camera];
+    
+    _mapView.myLocationEnabled = YES;
+    [self.view addSubview:_mapView];
     
     // Creates a marker in the center of the map.
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
-    marker.map = mapView_;
-    
+    for (NSArray *arr in [DataCenter sharedInstance].locationArr) {
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = CLLocationCoordinate2DMake([arr[0] doubleValue], [arr[1] doubleValue]);
+        marker.map = _mapView;
+    }
 }
 
 

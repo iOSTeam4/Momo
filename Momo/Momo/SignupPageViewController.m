@@ -17,9 +17,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwReEnterTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
 @property (weak, nonatomic) UITextField *lastFirstResponderTextField;
-@property (weak, nonatomic) UILabel * errorAlert;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end
 
@@ -84,17 +85,18 @@
                             if (isSuccess) {
                                 
                                 NSLog(@"log in success %@", result);
-                                //[self.indicatorView setHidden:YES];
                                 
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self.indicator stopAnimating];
+                                    
+                                    [self.navigationController popToRootViewControllerAnimated:NO];
 
                                 });
                                 
                             } else {
                                 
                                 NSLog(@"system error %@", result);
-                                //[self.indicatorView setHidden:YES];
+                                
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self.indicator stopAnimating];
                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"

@@ -13,6 +13,9 @@
 // 싱글턴 객체 호출 메소드
 + (instancetype)sharedInstance;
 
+
+@property (nonatomic) NSMutableArray *locationArr;
+
 @end
 
 
