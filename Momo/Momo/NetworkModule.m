@@ -54,7 +54,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
                                                             
                                                         } else {
-                                                            NSLog(@"network error code %ld", error.code);
+                                                            NSLog(@"network error code %d", error.code);
                                                             completionBlock(NO, nil);
                                                         }
                                                     }];
@@ -93,7 +93,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
                                                             
                                                         } else {
-                                                            NSLog(@"network error code %ld", error.code);
+                                                            NSLog(@"network error code %d", error.code);
                                                             completionBlock(NO, nil);
                                                         }
                                                     }];
@@ -139,7 +139,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             completionBlock(YES, responseDic);
                                                             
                                                         } else {
-                                                            NSLog(@"network error code %ld", error.code);
+                                                            NSLog(@"network error code %d", error.code);
                                                             completionBlock(NO, nil);
                                                         }
                                                     }];

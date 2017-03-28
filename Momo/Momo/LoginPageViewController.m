@@ -14,16 +14,15 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *idTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
-
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) UITextField *lastFirstResponderTextField;
+@property (weak, nonatomic) UILabel * errorAlert;
 @end
 
 @implementation LoginPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.idTextField.delegate = self;
-    self.pwTextField.delegate = self;
     
 }
 
@@ -46,7 +45,27 @@
     
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSLog(@"textFieldDidBeginEditing");
+    self.lastFirstResponderTextField = textField;
+    //4개의 텍스트필드중 두번째걸 작성하고 있다면 그게 마지막 텍스트필드.
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    NSLog(@"touchesBegan");
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.lastFirstResponderTextField isFirstResponder] && ([touch view] != self.lastFirstResponderTextField)) {
+        //늘 내가 작성중인 텍스트필드가 마지막이라 바깥 어딜 눌러도 키보드가 내려간다.
+        [self.lastFirstResponderTextField resignFirstResponder];
+    }
+}
+
 - (IBAction)loginBtnAction:(id)sender {
+    
+    [self.indicator startAnimating];
+    [self.lastFirstResponderTextField resignFirstResponder];
     
     [NetworkModule loginRequestWithUsername:self.idTextField.text
                                withPassword:self.pwTextField.text
@@ -55,23 +74,36 @@
                             if (isSuccess) {
                                 
                                 NSLog(@"log in success %@", result);
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.indicator stopAnimating];
+                                     self.errorAlert.text = @"";
+                                });
                                 
                             } else {
                                 
                                 NSLog(@"system error %@", result);
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.indicator stopAnimating];
+                                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                                             message:@"아이디 또는 비밀번호가 틀렸네요"
+                                                                                                      preferredStyle:UIAlertControllerStyleAlert];
+                                    
+                                    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                                       style:UIAlertActionStyleDefault
+                                                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                                                         NSLog(@"확인버튼이 클릭되었습니다");
+                                                                                     }];
+                                    [alertController addAction:okButton];
+                                    
+                                    [self presentViewController:alertController animated:YES completion:nil];
+                                    
+                                });
                             }
                             
                         }];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
