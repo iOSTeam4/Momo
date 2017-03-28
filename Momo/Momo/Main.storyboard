@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-2c-ZBq">
-                                <rect key="frame" x="136" y="318.5" width="102" height="30"/>
+                                <rect key="frame" x="136" y="319" width="102" height="30"/>
                                 <state key="normal" title="Log out (temp)"/>
                                 <connections>
                                     <action selector="logoutTempBtnAction:" destination="muX-Rm-wUg" eventType="touchUpInside" id="b6u-4C-Ir7"/>
@@ -36,6 +36,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="f02-D1-HJa"/>
+                    <connections>
+                        <segue destination="IbN-tA-7a0" kind="presentation" identifier="LaunchViewSegue" animates="NO" id="ZoJ-Nc-nKd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZB-P6-wbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -47,7 +50,7 @@
                 <viewControllerPlaceholder storyboardName="LaunchView" id="IbN-tA-7a0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40d-UN-0K1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3817" y="-647"/>
+            <point key="canvasLocation" x="5690" y="-676"/>
         </scene>
         <!--Item-->
         <scene sceneID="lFy-Lt-iZ6">
@@ -79,7 +82,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="IbN-tA-7a0" kind="presentation" identifier="LaunchViewSegue" animates="NO" id="2pp-do-5l9"/>
+                        <segue destination="RPI-Bk-JXx" kind="relationship" relationship="viewControllers" id="Ma8-Zw-J4m"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ic3-FT-iK2" userLabel="First Responder" sceneMemberID="firstResponder"/>

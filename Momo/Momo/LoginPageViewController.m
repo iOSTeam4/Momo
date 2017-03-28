@@ -14,9 +14,10 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *idTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 @property (weak, nonatomic) UITextField *lastFirstResponderTextField;
-@property (weak, nonatomic) UILabel * errorAlert;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
 @end
 
 @implementation LoginPageViewController
@@ -74,9 +75,10 @@
                             if (isSuccess) {
                                 
                                 NSLog(@"log in success %@", result);
+                                
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self.indicator stopAnimating];
-                                     self.errorAlert.text = @"";
+                                    [self.navigationController popToRootViewControllerAnimated:NO];
                                 });
                                 
                             } else {

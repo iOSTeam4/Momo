@@ -21,10 +21,19 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setHidden:YES];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    [self autoLoginCheck];
+
 }
 
 
@@ -48,5 +57,26 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+// Auto Login Check Method -----------------------------------//
+
+- (void)autoLoginCheck {
+    
+    NSLog(@"autoLoginCheck");
+    
+    if ([DataCenter getUserToken]) {
+        // Token이 없으면 nil : NO, 있으면 YES
+        NSLog(@"Token : %@", [DataCenter getUserToken]);
+    
+//        sleep(3);       // 3초 후 dismiss
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }
+    
+    NSLog(@"토큰 정보 없음, Login View로 이동");
+    
+}
+
 
 @end

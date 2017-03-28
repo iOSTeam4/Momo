@@ -21,11 +21,6 @@
     [self setViewControllersWithTabBarItems];       // TabBarController Setting
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 
 
@@ -59,23 +54,6 @@
 }
 
 
-
-
-
-
-// Auto Login Check Method -----------------------------------//
-
-- (void)autoLoginCheck {
-    
-    NSLog(@"autoLoginCheck");
-    
-    if (![DataCenter getUserToken]) {
-        // Token이 없으면 nil
-        
-        NSLog(@"토큰 정보 없음, Login View로 이동");
-        [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
-    }
-}
 
 
 @end

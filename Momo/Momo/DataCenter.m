@@ -68,6 +68,7 @@
 #pragma mark - Token setter, getter, remover
 
 + (void)setUserTokenWithStr:(NSString *)tokenStr {
+    NSLog(@"Set Token : %@", tokenStr);
     [[NSUserDefaults standardUserDefaults] setObject:tokenStr forKey:@"UserToken"];
 }
 
