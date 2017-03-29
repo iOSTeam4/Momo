@@ -17,13 +17,20 @@
 
 // Pods -----------------------------------------//
 @import GoogleMaps;
+@import GooglePlaces;
+#define GOOGLE_API_KEY @"AIzaSyAM5K-MEVoy-PNGz5nagHkPB-cpCk4eyBA"
+
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AFNetworking/AFNetworking.h>
+#import <FontAwesomeKit/FAKFontAwesome.h>
 
 // Define Setting -------------------------------//
 #define LAUNCH_SEGUE @"LaunchViewSegue"     //static NSString * const LAUNCH_SEGUE = @"LaunchViewSegue";
 #define LOGIN_SEGUE @"LoginViewSegue"       //static NSString * const LOGIN_SEGUE = @"LoginViewSegue";
 
+#define PIN_MARKER_DETAIL 0
+#define PIN_MARKER_CIRCLE 1
+#define PIN_MARKER_SMALL_CIRCLE 2
 
 // 탭바, 네비바 제외한 콘텐트 뷰의 프레임
 #define CONTENT_VIEW_FRAME_WITHOUT_TABBAR_AND_NAVIBAR CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height + self.tabBarController.tabBar.frame.size.height));

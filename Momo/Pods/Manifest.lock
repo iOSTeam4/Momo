@@ -22,6 +22,11 @@ PODS:
   - GoogleMaps/Base (2.2.0)
   - GoogleMaps/Maps (2.2.0):
     - GoogleMaps/Base
+  - GooglePlacePicker (2.2.0):
+    - GoogleMaps (= 2.2.0)
+    - GooglePlaces (= 2.2.0)
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
   - JSONModel (1.7.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
@@ -32,6 +37,8 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - FontAwesomeKit/FontAwesome
   - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
   - JSONModel
   - SDWebImage
   - SVProgressHUD
@@ -40,10 +47,12 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 3c13facc9b8c21964f10d9e17e86b5f273b37429
+PODFILE CHECKSUM: 02c15a6b507cefaafba34e1ac1280166d4f05e37
 
 COCOAPODS: 1.2.0.beta.1

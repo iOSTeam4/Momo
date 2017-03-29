@@ -7,6 +7,7 @@
 //
 
 #import "DataCenter.h"
+#import <UIKit/UIKit.h>
 
 
 
@@ -46,12 +47,12 @@
     self = [super init];
     if (self) {
         // 초기화
-        
         // 더미 위치 데이터
-        self.locationArr = [[NSMutableArray alloc] initWithArray:@[@[@37.503639f, @127.044907f],
-                                                                   @[@37.565738f, @126.976761f],
-                                                                   @[@37.545426f, @126.855904f],
-                                                                   @[@37.321065f, @127.040955f]]];
+        self.locationArr = [[NSMutableArray alloc] initWithArray:@[@[@37.503639f, @127.044907f, @"1번 마커", [UIColor brownColor], [FAKFontAwesome coffeeIconWithSize:10]],
+                                                                   @[@37.565738f, @126.976761f, @"2번 마커 2번 마커", [UIColor orangeColor], [FAKFontAwesome cutleryIconWithSize:10]],
+                                                                   @[@37.545426f, @126.855904f, @"3번 마커 하하하하하하하하ㅎ하ㅎㅎ", [UIColor redColor], [FAKFontAwesome appleIconWithSize:10]],
+                                                                   @[@37.321065f, @127.040955f, @"4번 마커 asdavskhbjsh", [UIColor purpleColor], [FAKFontAwesome universityIconWithSize:10]]
+                                                                   ]];
     }
     return self;
 }
