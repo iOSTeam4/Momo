@@ -87,7 +87,7 @@
 
 // Override drawRect method
 - (void)drawRect:(CGRect)rect {
-    NSLog(@"@Override drawRect method -> PinMarker view");
+//    NSLog(@"@Override drawRect method -> PinMarker view");
     /* PinMarker
         
      // zoomCase 0 : PIN_MARKER_DETAIL -------------------//
@@ -174,7 +174,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setEnabled:NO];        // 버튼으로서 사용되진 않음
     btn.frame = rect;
-    
+
     [self addSubview:btn];
     
     // ConerRadius
@@ -187,11 +187,7 @@
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 4, 0, 0)];
 
     // ImageView (icon)
-    FAKFontAwesome *icon = self.arr[4];
-    [icon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
-    UIImage *iconImg = [icon imageWithSize:CGSizeMake(rect.size.height-8, rect.size.height-8)];
-    
-    [btn setImage:iconImg forState:UIControlStateDisabled];
+    [btn setImage:(UIImage *)self.arr[4] forState:UIControlStateDisabled];
     [btn.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 4)];
 
@@ -205,13 +201,9 @@
 - (void)setPinMarkerZoomCaseOne {
     
     // ImageView (icon)
-    FAKFontAwesome *icon = self.arr[4];
-    [icon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
-    UIImage *iconImg = [icon imageWithSize:CGSizeMake(self.frame.size.width-8, self.frame.size.height-8)];
-    
-    UIImageView *iconimgView = [[UIImageView alloc] initWithImage:iconImg];
+    UIImageView *iconimgView = [[UIImageView alloc] initWithImage:self.arr[4]];
     [iconimgView setContentMode:UIViewContentModeScaleAspectFit];
-    iconimgView.frame = CGRectMake(4, 4, self.frame.size.width-8, self.frame.size.height-8);
+    iconimgView.frame = CGRectMake(4, 4, PIN_MARKER_ICON_IMAGE_SIZE, PIN_MARKER_ICON_IMAGE_SIZE);
     
     [self addSubview:iconimgView];
 }

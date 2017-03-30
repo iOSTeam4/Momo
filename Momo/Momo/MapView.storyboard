@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Delegate-->
         <scene sceneID="ioa-WR-uTN">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="5WV-cE-pnR" customClass="MapViewController" sceneMemberID="viewController">
@@ -17,12 +17,65 @@
                         <viewControllerLayoutGuide type="top" id="Yca-w4-DVE"/>
                         <viewControllerLayoutGuide type="bottom" id="pFe-Tf-wF9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kX6-0h-d80">
+                    <view key="view" contentMode="scaleToFill" id="kX6-0h-d80" customClass="GMSMapView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caz-H9-CDx">
+                                <rect key="frame" x="-0.5" y="667" width="375" height="49"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ISh-gH-Z5T">
+                                        <rect key="frame" x="8" y="3.5" width="359" height="41"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-e8-Mib">
+                                                <rect key="frame" x="0.0" y="0.0" width="175.5" height="41"/>
+                                                <state key="normal" title="취소">
+                                                    <color key="titleColor" red="1" green="0.4308942556" blue="0.43099984530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelBtnAction:" destination="5WV-cE-pnR" eventType="touchUpInside" id="Xf2-wH-Gyy"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVJ-bp-TgT">
+                                                <rect key="frame" x="183.5" y="0.0" width="175.5" height="41"/>
+                                                <color key="backgroundColor" red="1" green="0.4308942556" blue="0.43099984530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="다음">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="nextBtnAction:" destination="5WV-cE-pnR" eventType="touchUpInside" id="FyA-9n-byX"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="1mW-Mf-Nc9"/>
+                                    <constraint firstItem="ISh-gH-Z5T" firstAttribute="height" secondItem="caz-H9-CDx" secondAttribute="height" constant="-8" id="MC5-A8-zxX"/>
+                                    <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerX" secondItem="caz-H9-CDx" secondAttribute="centerX" id="b67-o0-xfI"/>
+                                    <constraint firstItem="ISh-gH-Z5T" firstAttribute="width" secondItem="caz-H9-CDx" secondAttribute="width" constant="-16" id="uiJ-KO-UWZ"/>
+                                    <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerY" secondItem="caz-H9-CDx" secondAttribute="centerY" id="v4d-tr-s9i"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="caz-H9-CDx" firstAttribute="centerX" secondItem="kX6-0h-d80" secondAttribute="centerX" id="2L6-jV-vYr"/>
+                            <constraint firstItem="pFe-Tf-wF9" firstAttribute="top" secondItem="caz-H9-CDx" secondAttribute="bottom" constant="-49" id="agO-7n-Ziu"/>
+                            <constraint firstItem="caz-H9-CDx" firstAttribute="width" secondItem="kX6-0h-d80" secondAttribute="width" id="e9C-t5-Nxr"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="5WV-cE-pnR" id="edI-ty-mQU"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="tR1-Vo-1rG"/>
+                    <connections>
+                        <outlet property="cancelBtn" destination="nT2-e8-Mib" id="yPH-HR-C4j"/>
+                        <outlet property="makingMarkerBtnView" destination="caz-H9-CDx" id="0oF-Gk-HQ2"/>
+                        <outlet property="mapView" destination="kX6-0h-d80" id="QEZ-8b-JZF"/>
+                        <outlet property="nextBtn" destination="GVJ-bp-TgT" id="PMm-Nw-nOc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfg-PO-EI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,14 +8,24 @@
 
 #import "MapViewController.h"
 #import "PinMarkerUIView.h"
+#import "PinViewController.h"
 
 
 @interface MapViewController () <GMSMapViewDelegate>
 
-@property (nonatomic) GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) NSInteger currentZoomCase;
+
+
+@property (nonatomic) BOOL isMakingMarker;
+@property (nonatomic) GMSMarker *makingMarker;
+//@property (nonatomic) BOOL isDragingMarker;
+
+@property (weak, nonatomic) IBOutlet UIView *makingMarkerBtnView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
 @end
 
@@ -42,18 +52,27 @@
 - (void)initialSetting {
     [self.navigationItem setTitle:@"Map View"];
     
-    [self createAndInitialSetGoogleMapView];
+    [self initialSetGoogleMapView];
+    
+    self.makingMarkerBtnView.layer.borderWidth = 0.25f;
+    self.makingMarkerBtnView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    
+    self.cancelBtn.layer.cornerRadius = 10;
+    self.cancelBtn.layer.borderWidth = 1;
+    self.cancelBtn.layer.borderColor = self.cancelBtn.titleLabel.textColor.CGColor;
+    
+    self.nextBtn.layer.cornerRadius = 10;
+    self.nextBtn.layer.borderWidth = 1;
+    self.nextBtn.layer.borderColor = self.nextBtn.backgroundColor.CGColor;
 }
 
 
 // GoogleMaps 관련 --------------------------------------//
 
 // Google Map View 관련 객체 생성 및 초기설정
-- (void)createAndInitialSetGoogleMapView {
+- (void)initialSetGoogleMapView {
     
-    CGRect mapFrame = CONTENT_VIEW_FRAME_WITHOUT_TABBAR_AND_NAVIBAR;
-    self.mapView = [[GMSMapView alloc] initWithFrame:mapFrame];
-    self.mapView.delegate = self;
+    self.mapView.padding = UIEdgeInsetsMake(64, 0, 49, 0);
     
     // 내 위치 정보
     self.mapView.myLocationEnabled = YES;
@@ -75,7 +94,6 @@
                                                                          zoom:13.5f];
             
             [self.mapView setCamera:camera];    // 내 위치 중심으로 설정
-            [self.view addSubview:self.mapView];
         });
     });
     
@@ -99,6 +117,10 @@
         PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithArr:arr withZoomCase:self.currentZoomCase];
         marker.icon = [pinMarkerView imageFromViewForMarker];
         marker.map = self.mapView;
+    }
+    
+    if (self.isMakingMarker) {
+        self.makingMarker.map = self.mapView;
     }
 }
 
@@ -125,6 +147,8 @@
     }
 }
 
+
+
 //- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
 //
 //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
@@ -149,6 +173,67 @@
 //    return view;
 //}
 
+
+
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
+    NSLog(@"didTapMarker");
+    
+    UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
+    PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
+    
+    [self.navigationController pushViewController:pinVC animated:YES];
+    pinVC.navigationItem.title = marker.title;
+    
+    return YES;
+}
+
+
+// 지도 롱클릭해서 새 핀 등록
+- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinatee {
+    NSLog(@"didLongPressAtCoordinate, isDragingMarker:%d", self.isMakingMarker);
+    
+    if (!self.isMakingMarker) {
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = coordinatee;
+        marker.infoWindowAnchor = CGPointMake(0.5f, 0.0f);
+        marker.draggable = YES;
+        
+        marker.map = mapView;
+        self.isMakingMarker = YES;  // 핀 마커 만드는 중 (하나씩만 만들 수 있게)
+        self.makingMarker = marker;
+        
+        // 위치등록 버튼 노출
+        [self.makingMarkerBtnView setHidden:NO];
+        [self.tabBarController.tabBar setHidden:YES];
+        [self.view bringSubviewToFront:self.makingMarkerBtnView];
+    }
+}
+
+
+- (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker {
+    NSLog(@"didBeginDraggingMarker");
+    
+//    self.isDragingMarker = YES;
+}
+
+- (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker {
+    NSLog(@"didEndDraggingMarker");
+
+//    self.isDragingMarker = NO;
+}
+
+- (IBAction)cancelBtnAction:(id)sender {
+    // 위치등록 버튼 노출
+    self.makingMarker.map = nil;
+    self.isMakingMarker = NO;
+    [self.makingMarkerBtnView setHidden:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
+
+- (IBAction)nextBtnAction:(id)sender {
+    
+}
 
 
 @end
