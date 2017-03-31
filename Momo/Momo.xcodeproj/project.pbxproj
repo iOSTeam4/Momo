@@ -27,6 +27,7 @@
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
+		EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,8 @@
 		EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2661E8A10470013008C /* SignupPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupPageViewController.h; sourceTree = "<group>"; };
 		EF4FA2671E8A10470013008C /* SignupPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupPageViewController.m; sourceTree = "<group>"; };
+		EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinContentsCollectionViewCell.h; sourceTree = "<group>"; };
+		EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinContentsCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 			children = (
 				3F9C27CD1E8A48C6008DD04A /* PinViewController.h */,
 				3F9C27CE1E8A48C6008DD04A /* PinViewController.m */,
+				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
+				EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */,
 				3F9C27D01E8A48D3008DD04A /* PinView.storyboard */,
 			);
 			name = PinView;
@@ -373,6 +378,7 @@
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,
+				EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
