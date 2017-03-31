@@ -10,6 +10,6 @@
 
 @interface PinContentsCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+@property (weak, nonatomic) IBOutlet UIButton *contentsBtn;
 
 @end

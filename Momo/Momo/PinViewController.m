@@ -8,6 +8,10 @@
 
 #import "PinViewController.h"
 #import "PinContentsCollectionViewCell.h"
+#import "PinModificationViewController.h"
+#import "PinDetailTableViewController.h"
+
+
 
 @interface PinViewController ()
 <UICollectionViewDataSource>
@@ -19,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *pinName;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress;
 @property (weak, nonatomic) IBOutlet UILabel *pinMainText;
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
+@property (weak, nonatomic) IBOutlet UILabel *userNameToMade;
+@property (weak, nonatomic) IBOutlet UILabel *date;
 
 @property (nonatomic) NSArray *dataTempArr;
 
@@ -28,12 +35,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat itemWidth = self.collectionView.frame.size.width / 2.0f;
+    //collectionView size
+    CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
     self.flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
+    // collectionView 임시 contents
+    self.dataTempArr = @[@"ic_person_pin_white", @"Arches", @"Bryce Canyon", @"Katmai", @"Denali"];
     
-    
-    
-    self.dataTempArr = @[@"Arches", @"Katmai", @"Denali"];
+    // pin 생성user
+    self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
+    self.userProfileImage.layer.masksToBounds = YES;
+    self.userProfileImage.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,22 +53,39 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     return self.dataTempArr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     PinContentsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    [cell.imgView setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]]];
+    [cell.contentsBtn setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]] forState:UIControlStateNormal];
+    [cell.contentsBtn setTag:indexPath.row];
     
     return cell;
 }
+
+- (IBAction)selectedContentsBtnAction:(UIButton *)sender {
+    
+    NSLog(@"버튼 눌림 tag = %ld", sender.tag);
+    
+    if (sender.tag == 0) {
+//        PinModificationViewController *pinModiVC = [[PinModificationViewController alloc] init];
+        
+//        PinModificationViewController *pinModiVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinModificationViewController"];
+//        [self.navigationController pushViewController:pinModiVC animated:YES];
+        
+        [self performSegueWithIdentifier:@"pinModiSegue" sender:self];
+        
+    } else {
+        
+        [self performSegueWithIdentifier:@"pinDetailSegue" sender:self];
+    }
+}
+
 
 //- (void)inputImageData:(NSString *)data {
 //    

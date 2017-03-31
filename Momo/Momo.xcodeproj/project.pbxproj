@@ -19,7 +19,6 @@
 		3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5361E88ED3700B965A7 /* AppDelegate.m */; };
 		3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */; };
 		3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */; };
-		3FD9A53F1E88ED3700B965A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A53E1E88ED3700B965A7 /* Assets.xcassets */; };
 		3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */; };
 		3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A54A1E88F08500B965A7 /* LoginViewController.m */; };
 		3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */; };
@@ -29,6 +28,7 @@
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
 		EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */; };
+		EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD11B9B1E8E90EF00896952 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,6 @@
 		3FD9A5381E88ED3700B965A7 /* LaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		3FD9A53C1E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchView.storyboard; sourceTree = "<group>"; };
-		3FD9A53E1E88ED3700B965A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FD9A5411E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FD9A5431E88ED3700B965A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FD9A5491E88F08500B965A7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		EF4FA2671E8A10470013008C /* SignupPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinContentsCollectionViewCell.h; sourceTree = "<group>"; };
 		EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinContentsCollectionViewCell.m; sourceTree = "<group>"; };
+		EFD11B9B1E8E90EF00896952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,8 +172,8 @@
 		3FD9A5321E88ED3700B965A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EFD11B9B1E8E90EF00896952 /* Assets.xcassets */,
 				3FF685AF1E892D5300FD927D /* PrefixHeader.pch */,
-				3FD9A53E1E88ED3700B965A7 /* Assets.xcassets */,
 				3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */,
 				3FD9A5431E88ED3700B965A7 /* Info.plist */,
 				3FD9A5331E88ED3700B965A7 /* main.m */,
@@ -308,9 +308,9 @@
 			files = (
 				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
 				3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */,
-				3FD9A53F1E88ED3700B965A7 /* Assets.xcassets in Resources */,
 				3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */,
 				3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */,
+				EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */,
 				3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */,
 				3FD918CF1E8930BF005B1583 /* MapView.storyboard in Resources */,
 			);
