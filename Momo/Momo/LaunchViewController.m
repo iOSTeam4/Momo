@@ -72,9 +72,9 @@
 //        sleep(3);       // 3초 후 dismiss
         [self dismissViewControllerAnimated:YES completion:nil];
         
+    } else {
+        NSLog(@"토큰 정보 없음, Login View로 이동");
     }
-    
-    NSLog(@"토큰 정보 없음, Login View로 이동");
     
 }
 

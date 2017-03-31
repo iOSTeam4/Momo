@@ -13,6 +13,7 @@
 
 @end
 
+
 @implementation MainViewController
 
 - (void)viewDidLoad {
@@ -23,7 +24,7 @@
     // ShowLoginView & AutoLoginCheck
     NSLog(@"performSegueWithIdentifier");
     [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,4 +45,9 @@
     [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
 }
 
+
+
+
 @end
+
+

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class FAKFontAwesome;
 
 @interface DataCenter : NSObject
 
@@ -14,7 +15,20 @@
 + (instancetype)sharedInstance;
 
 
-@property (nonatomic) NSMutableArray *locationArr;
+
+
+// 기본 세팅 관련 ----------------------------------------//
+
+
+@property (nonatomic) NSMutableArray *tabBarIconArr;    // 테스트용 탭바 아이콘 어레이
+
+@property (nonatomic) NSMutableArray *locationArr;      // 테스트용 위치 데이터 어레이
+
+
+#pragma mark - Icon 관련
+
+// TabBar Item Icons
+- (NSArray *)getTabBarItemIconsArr;
 
 @end
 

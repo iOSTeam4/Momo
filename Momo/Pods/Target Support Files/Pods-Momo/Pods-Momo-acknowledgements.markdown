@@ -38,6 +38,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Copyright 2017 Google
 
+## GooglePlacePicker
+
+Copyright 2017 Google
+
+## GooglePlaces
+
+Copyright 2017 Google
+
 ## JSONModel
 
 Copyright (c) 2012-2016 Marin Todorov and JSONModel contributors

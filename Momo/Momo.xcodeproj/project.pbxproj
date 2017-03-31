@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */; };
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5D1E8916BC001B87F0 /* MainViewController.m */; };
 		3F745F611E891728001B87F0 /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F601E891728001B87F0 /* NetworkModule.m */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMarkerUIView.h; sourceTree = "<group>"; };
+		3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMarkerUIView.m; sourceTree = "<group>"; };
 		3F745F591E88FF1F001B87F0 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		3F745F5C1E8916BC001B87F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				3F9C27CC1E8A489F008DD04A /* PinView */,
 				3FD918CA1E893067005B1583 /* MapViewController.h */,
 				3FD918CB1E893067005B1583 /* MapViewController.m */,
+				3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */,
+				3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */,
 				3FD918CE1E8930BF005B1583 /* MapView.storyboard */,
 			);
 			name = MapView;
@@ -373,6 +378,7 @@
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
+				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,

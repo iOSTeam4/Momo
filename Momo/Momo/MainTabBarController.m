@@ -34,19 +34,16 @@
     // 메인 뷰
     UINavigationController *mainNaviVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainNaviViewController"];
     
-    
     // 지도 뷰
     UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"MapView" bundle:nil];
     UINavigationController *mapNaviVC = [mapStoryBoard instantiateViewControllerWithIdentifier:@"MapNaviViewController"];
     
     // set ViewControllers
     [self setViewControllers:@[mainNaviVC, mapNaviVC]];
-
-    
     
     // set TabBarItems
-    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"메인" image:nil tag:100];
-    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"지도" image:nil tag:200];
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"메인" image:[DataCenter sharedInstance].tabBarIconArr[0]  tag:100];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"지도" image:[DataCenter sharedInstance].tabBarIconArr[1] tag:200];
     
     mainNaviVC.tabBarItem = item1;
     mapNaviVC.tabBarItem = item2;
