@@ -42,6 +42,10 @@
 - (IBAction)logoutTempBtnAction:(id)sender {
     
     [DataCenter removeUserToken];
+    [NetworkModule FacebookLogOutWithCompletionBlock:^(BOOL isSuccess) {
+        NSLog(@"Facebook Log out");
+    }];
+    
     [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
 }
 

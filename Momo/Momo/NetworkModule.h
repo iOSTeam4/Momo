@@ -10,6 +10,22 @@
 
 @interface NetworkModule : NSObject
 
+
+
+// Facebook account -------------------------------//
+#pragma mark - Facebook Auth Account Methods
+
+// Facebook Login (& Sign Up)
++ (void)FacebookLoginFromVC:(UIViewController *)fromVC
+        WithCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock ;
+// Facebook Log Out
++ (void)FacebookLogOutWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;
+
+
+
+// E-mail account ---------------------------------//
+#pragma mark - E-mail Auth Account Methods
+
 // Sign Up
 + (void)signUpRequestWithUsername:(NSString *)username
                     withPassword1:(NSString *)password1

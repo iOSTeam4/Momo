@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cZc-ta-h4a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cZc-ta-h4a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,6 +37,9 @@
                                         <state key="normal" title="페이스북으로 연결하기">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="fbBtnAction:" destination="cZc-ta-h4a" eventType="touchUpInside" id="nTh-sT-yro"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7Q-0j-275">
                                         <rect key="frame" x="20" y="180" width="160" height="40"/>
@@ -102,13 +105,22 @@
                                     <constraint firstAttribute="width" constant="200" id="ygq-76-MfI"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="O8y-OO-xFj">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="O8y-OO-xFj" firstAttribute="centerY" secondItem="R2E-Mr-Wsn" secondAttribute="centerY" id="3ei-Ek-JuK"/>
                             <constraint firstItem="OtC-TH-XLK" firstAttribute="centerX" secondItem="R2E-Mr-Wsn" secondAttribute="centerX" id="8mi-TY-FXh"/>
                             <constraint firstItem="OtC-TH-XLK" firstAttribute="centerY" secondItem="R2E-Mr-Wsn" secondAttribute="centerY" id="Ph1-fd-YLP"/>
+                            <constraint firstItem="O8y-OO-xFj" firstAttribute="centerX" secondItem="R2E-Mr-Wsn" secondAttribute="centerX" id="eOB-Hm-ZDZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fbLoginBtn" destination="kbM-xJ-izl" id="g0r-aF-J7C"/>
+                        <outlet property="indicator" destination="O8y-OO-xFj" id="QTf-4x-aV8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXU-vD-sci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

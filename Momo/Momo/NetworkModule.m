@@ -22,6 +22,67 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
 @implementation NetworkModule
 
 
+
+// Facebook account -------------------------------//
+#pragma mark - Facebook Auth Account Methods
+
+// FBSDKLoginManager Singleton Instance
++ (FBSDKLoginManager *)sharedFBLoginManeger {
+    
+    static FBSDKLoginManager *fbLoginManeger;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        fbLoginManeger = [[FBSDKLoginManager alloc] init];
+    });
+    
+    return fbLoginManeger;
+}
+
+
+
+// Facebook Login (& Sign Up)
++ (void)FacebookLoginFromVC:(UIViewController *)fromVC
+        WithCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock {
+    
+    
+    [[self sharedFBLoginManeger] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
+                                       fromViewController:fromVC
+                                                  handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                                      if (error == nil) {
+                                                          
+                                                          NSLog(@"Current Token : %@ | Token String : %@", [FBSDKAccessToken currentAccessToken],[FBSDKAccessToken currentAccessToken].tokenString);
+                                                          
+                                                          if (!result.isCancelled) {
+                                                              [DataCenter setUserTokenWithStr: [FBSDKAccessToken currentAccessToken].tokenString];
+                                                          }
+                                                          
+                                                          completionBlock(!result.isCancelled, result.token.tokenString);    // isCancelled가 NO면 참
+                                                          
+                                                      } else {
+                                                          NSLog(@"network error code %ld", error.code);
+                                                          completionBlock(NO, nil);
+                                                      }
+                                                  }];
+}
+
+
+// Facebook Log out
++ (void)FacebookLogOutWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
+    
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [[self sharedFBLoginManeger] logOut];
+        completionBlock(YES);
+    }
+}
+
+
+
+
+
+// E-mail account ---------------------------------//
+#pragma mark - E-mail Auth Account Methods
+
 // Sign Up
 + (void)signUpRequestWithUsername:(NSString *)username
                     withPassword1:(NSString *)password1

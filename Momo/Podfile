@@ -7,12 +7,20 @@ target 'Momo' do
   # use_frameworks!
 
   # Pods for Momo
+    # google map, places api
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'GooglePlacePicker'
     
-    pod 'SDWebImage'
+    
+    # facebook api
+    pod 'Bolts'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
+    
     pod 'AFNetworking', '~> 3.0'
+    pod 'SDWebImage'
 
     pod 'JSONModel'
     pod 'SVProgressHUD'     # 로딩 팝업

@@ -35,7 +35,6 @@
         data = [[self alloc] init];
     });
     
-    
     return data;
 }
 
