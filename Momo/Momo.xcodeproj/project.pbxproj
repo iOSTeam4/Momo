@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */; };
+		3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */; };
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5D1E8916BC001B87F0 /* MainViewController.m */; };
 		3F745F611E891728001B87F0 /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F601E891728001B87F0 /* NetworkModule.m */; };
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
 		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
+		3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */; };
 		3FD918CC1E893067005B1583 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD918CB1E893067005B1583 /* MapViewController.m */; };
 		3FD918CF1E8930BF005B1583 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD918CE1E8930BF005B1583 /* MapView.storyboard */; };
 		3FD9A5341E88ED3700B965A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5331E88ED3700B965A7 /* main.m */; };
@@ -24,6 +26,7 @@
 		3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */; };
 		3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5511E88F12600B965A7 /* DataCenter.m */; };
 		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
+		3FF1344E1E926248003B1822 /* RealmDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1344D1E926248003B1822 /* RealmDB.m */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
@@ -34,6 +37,8 @@
 /* Begin PBXFileReference section */
 		3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMarkerUIView.h; sourceTree = "<group>"; };
 		3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMarkerUIView.m; sourceTree = "<group>"; };
+		3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsModule.h; sourceTree = "<group>"; };
+		3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsModule.m; sourceTree = "<group>"; };
 		3F745F591E88FF1F001B87F0 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		3F745F5C1E8916BC001B87F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -43,6 +48,7 @@
 		3F9C27CD1E8A48C6008DD04A /* PinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinViewController.h; sourceTree = "<group>"; };
 		3F9C27CE1E8A48C6008DD04A /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
 		3F9C27D01E8A48D3008DD04A /* PinView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinView.storyboard; sourceTree = "<group>"; };
+		3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FD918CA1E893067005B1583 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		3FD918CB1E893067005B1583 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		3FD918CE1E8930BF005B1583 /* MapView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
@@ -61,6 +67,8 @@
 		3FD9A5501E88F12600B965A7 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		3FD9A5511E88F12600B965A7 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		3FD9A5561E88F35400B965A7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3FF1344C1E926248003B1822 /* RealmDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDB.h; sourceTree = "<group>"; };
+		3FF1344D1E926248003B1822 /* RealmDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDB.m; sourceTree = "<group>"; };
 		3FF685AF1E892D5300FD927D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Momo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +118,8 @@
 			children = (
 				3F745F5F1E891728001B87F0 /* NetworkModule.h */,
 				3F745F601E891728001B87F0 /* NetworkModule.m */,
+				3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */,
+				3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -176,6 +186,7 @@
 				3FF685AF1E892D5300FD927D /* PrefixHeader.pch */,
 				3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */,
 				3FD9A5431E88ED3700B965A7 /* Info.plist */,
+				3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */,
 				3FD9A5331E88ED3700B965A7 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -186,6 +197,8 @@
 			children = (
 				3FD9A5501E88F12600B965A7 /* DataCenter.h */,
 				3FD9A5511E88F12600B965A7 /* DataCenter.m */,
+				3FF1344C1E926248003B1822 /* RealmDB.h */,
+				3FF1344D1E926248003B1822 /* RealmDB.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -307,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
+				3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */,
 				3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */,
 				3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */,
 				3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */,
@@ -380,7 +394,9 @@
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
 				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
+				3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */,
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
+				3FF1344E1E926248003B1822 /* RealmDB.m in Sources */,
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,

@@ -18,12 +18,17 @@
 #import "MainTabBarController.h"
 
 // Pods -----------------------------------------//
+#import <Google/Analytics.h>
+#import "GoogleAnalyticsModule.h"
+
 @import GoogleMaps;
 @import GooglePlaces;
 #define GOOGLE_API_KEY @"AIzaSyAM5K-MEVoy-PNGz5nagHkPB-cpCk4eyBA"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+
+#import <Realm/Realm.h>
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AFNetworking/AFNetworking.h>

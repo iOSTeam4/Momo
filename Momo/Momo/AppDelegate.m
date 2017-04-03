@@ -17,6 +17,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // Google Analytics
+    [self googleAnalyticsTrackerStart];
+    
     // GoogleMaps & GooglePlaces API Key Setting
     [GMSServices provideAPIKey:GOOGLE_API_KEY];
     [GMSPlacesClient provideAPIKey:GOOGLE_API_KEY];
@@ -69,6 +72,20 @@
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
+}
+
+- (void)googleAnalyticsTrackerStart {
+    // [START tracker_objc]
+    // Configure tracker from GoogleService-Info.plist.
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    // Optional: configure GAI options.
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
+    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app release
+    // [END tracker_objc]
 }
 
 @end

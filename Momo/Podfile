@@ -7,17 +7,22 @@ target 'Momo' do
   # use_frameworks!
 
   # Pods for Momo
-    # google map, places api
+    # Google api
+    # map, places
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'GooglePlacePicker'
-    
-    
-    # facebook api
+    # analytics
+    pod 'Google/Analytics'
+
+    # Facebook api
     pod 'Bolts'
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
+    
+    # Realm Mobile DB
+    pod 'Realm'
     
     pod 'AFNetworking', '~> 3.0'
     pod 'SDWebImage'

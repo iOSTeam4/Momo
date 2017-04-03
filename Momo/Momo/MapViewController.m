@@ -43,27 +43,17 @@
     
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];    
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
+
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSLog(@"viewDidAppear");
     
-    // ViewDidAppear에서 TabBar Hidden No로 셋해놔야, 원하는대로 makingMarkerBtnView 오토레이아웃 적용됨
-    [self.tabBarController.tabBar setHidden:NO];    // 추후, 커스텀 탭바 적용하여 이 문제 해결할 것.
-    [self.view layoutIfNeeded];
-    
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"viewWillAppear");
-    
-    if (self.isMakingMarker) {
-        // 위치등록 버튼 노출
-        // 다시 뷰를 나타낼시, 구글맵 뷰가 맨 위로 올라가는 현상..
-        [self.makingMarkerBtnView setHidden:NO];
-        [self.tabBarController.tabBar setHidden:YES];
-    }
 }
 
 
@@ -244,8 +234,9 @@
         
         // 위치등록 버튼 노출
         [self.tabBarController.tabBar setHidden:YES];
+        [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
         [self.makingMarkerBtnView setHidden:NO];
-        [self.view bringSubviewToFront:self.makingMarkerBtnView];
+        [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라감
     }
 }
 

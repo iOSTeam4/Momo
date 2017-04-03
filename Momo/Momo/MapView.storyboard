@@ -22,13 +22,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caz-H9-CDx">
-                                <rect key="frame" x="-1" y="667" width="376" height="49"/>
+                                <rect key="frame" x="-0.5" y="618" width="375" height="49"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ISh-gH-Z5T">
-                                        <rect key="frame" x="9" y="4" width="359" height="41"/>
+                                        <rect key="frame" x="8.5" y="4" width="359" height="41"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-e8-Mib">
-                                                <rect key="frame" x="0.0" y="0.0" width="176" height="41"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="175.5" height="41"/>
                                                 <state key="normal" title="취소">
                                                     <color key="titleColor" red="1" green="0.4308942556" blue="0.43099984530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -37,7 +37,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVJ-bp-TgT">
-                                                <rect key="frame" x="184" y="0.0" width="175" height="41"/>
+                                                <rect key="frame" x="183.5" y="0.0" width="175.5" height="41"/>
                                                 <color key="backgroundColor" red="1" green="0.4308942556" blue="0.43099984530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="다음">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,7 +62,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="caz-H9-CDx" firstAttribute="centerX" secondItem="kX6-0h-d80" secondAttribute="centerX" id="2L6-jV-vYr"/>
-                            <constraint firstItem="pFe-Tf-wF9" firstAttribute="top" secondItem="caz-H9-CDx" secondAttribute="bottom" constant="-49" id="agO-7n-Ziu"/>
+                            <constraint firstAttribute="bottom" secondItem="caz-H9-CDx" secondAttribute="bottom" id="aek-Zv-ce5"/>
                             <constraint firstItem="caz-H9-CDx" firstAttribute="width" secondItem="kX6-0h-d80" secondAttribute="width" id="e9C-t5-Nxr"/>
                         </constraints>
                         <connections>
@@ -86,7 +86,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MapNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="n2O-kY-Doq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U2D-7v-x2U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2D-7v-x2U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

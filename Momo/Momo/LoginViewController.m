@@ -22,6 +22,11 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"LoginViewController"];
+}
+
 
 - (IBAction)fbBtnAction:(id)sender {
     

@@ -24,10 +24,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"LaunchViewController"];
+
     [self.navigationController.navigationBar setHidden:YES];
-    
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
