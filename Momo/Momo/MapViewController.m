@@ -40,19 +40,19 @@
     [super viewDidLoad];
     
     [self initialSetting];
-    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];    
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
+    NSLog(@"MapViewController : viewWillAppear");
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"viewDidAppear");
+    NSLog(@"MapViewController : viewDidAppear");
     
 }
 
