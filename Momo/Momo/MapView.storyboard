@@ -24,6 +24,13 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caz-H9-CDx">
                                 <rect key="frame" x="-0.5" y="618" width="375" height="49"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UwP-pG-VPt" userLabel="line">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.25" id="tmE-ww-bCg"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ISh-gH-Z5T">
                                         <rect key="frame" x="8.5" y="4" width="359" height="41"/>
                                         <subviews>
@@ -52,8 +59,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="1mW-Mf-Nc9"/>
+                                    <constraint firstItem="UwP-pG-VPt" firstAttribute="centerX" secondItem="caz-H9-CDx" secondAttribute="centerX" id="7gj-bi-VbV"/>
+                                    <constraint firstItem="UwP-pG-VPt" firstAttribute="width" secondItem="caz-H9-CDx" secondAttribute="width" id="KPX-Wa-tH7"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="height" secondItem="caz-H9-CDx" secondAttribute="height" constant="-8" id="MC5-A8-zxX"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerX" secondItem="caz-H9-CDx" secondAttribute="centerX" id="b67-o0-xfI"/>
+                                    <constraint firstItem="UwP-pG-VPt" firstAttribute="top" secondItem="caz-H9-CDx" secondAttribute="top" id="rLh-z2-zZ2"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="width" secondItem="caz-H9-CDx" secondAttribute="width" constant="-16" id="uiJ-KO-UWZ"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerY" secondItem="caz-H9-CDx" secondAttribute="centerY" id="v4d-tr-s9i"/>
                                 </constraints>

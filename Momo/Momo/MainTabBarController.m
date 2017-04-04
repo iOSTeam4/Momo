@@ -9,7 +9,7 @@
 #import "MainTabBarController.h"
 #import "MakeViewController.h"
 
-#define TAB_BAR_HEIGHT 49   // UITabBar 49pt, border 0.5pt
+#define TAB_BAR_HEIGHT 49.0f   // UITabBar 49pt, border 0.25pt
 
 @interface MainTabBarController ()
 
@@ -63,7 +63,7 @@
     customTabBar.backgroundColor = [UIColor whiteColor];
     self.customTabBar = customTabBar;
 
-    UIView *customTabBarBorderLine = [[UIView alloc] initWithFrame:CGRectMake(0, customTabBar.bounds.origin.y-0.25f, self.view.bounds.size.width, 0.25f)];
+    UIView *customTabBarBorderLine = [[UIView alloc] initWithFrame:CGRectMake(0, customTabBar.bounds.origin.y, self.view.bounds.size.width, 0.25f)];
     customTabBarBorderLine.backgroundColor = [UIColor lightGrayColor];
 
     [customTabBar addSubview:customTabBarBorderLine];
@@ -152,6 +152,9 @@
 }
 
 
-
+- (void)customTabBarSetHidden:(BOOL)hidden {
+    [self.tabBar setHidden:hidden];
+    [self.customTabBar setHidden:hidden];
+}
 
 @end
