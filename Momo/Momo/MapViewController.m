@@ -40,19 +40,19 @@
     [super viewDidLoad];
     
     [self initialSetting];
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];    
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
-    NSLog(@"MapViewController : viewWillAppear");
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"MapViewController : viewDidAppear");
+    NSLog(@"viewDidAppear");
     
 }
 
@@ -67,7 +67,10 @@
     [self.navigationItem setTitle:@"Map View"];
     
     [self initialSetGoogleMapView];
-        
+    
+    self.makingMarkerBtnView.layer.borderWidth = 0.25f;
+    self.makingMarkerBtnView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    
     self.cancelBtn.layer.cornerRadius = 10;
     self.cancelBtn.layer.borderWidth = 1;
     self.cancelBtn.layer.borderColor = self.cancelBtn.titleLabel.textColor.CGColor;
@@ -198,6 +201,8 @@
     if (!self.isMakingMarker) {
         // 핀마커 등록 중엔 상세 보기 페이지 이동 불가
         
+        [self.tabBarController.tabBar setHidden:NO];
+        
         UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
@@ -228,10 +233,10 @@
         self.makingMarker = marker;     // 새롭게 만드는 마커 프로퍼티에 셋
         
         // 위치등록 버튼 노출
-        [self.makingMarkerBtnView setHidden:NO];
-        [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
+        [self.tabBarController.tabBar setHidden:YES];
         [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
-        [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
+        [self.makingMarkerBtnView setHidden:NO];
+        [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라감
     }
 }
 
@@ -298,7 +303,7 @@
     self.isMakingMarker = NO;
     
     [self.makingMarkerBtnView setHidden:YES];
-    [(MainTabBarController *)self.tabBarController customTabBarSetHidden:NO];
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 

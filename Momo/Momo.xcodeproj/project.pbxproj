@@ -15,12 +15,6 @@
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
 		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
 		3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */; };
-		3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */; };
-		3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */; };
-		3FD392EF1E93C92600AFBB3A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392EE1E93C92600AFBB3A /* MyViewController.m */; };
-		3FD392F11E93C94400AFBB3A /* MyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD392F01E93C94400AFBB3A /* MyStoryboard.storyboard */; };
-		3FD392F91E93D58E00AFBB3A /* MakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392F71E93D58E00AFBB3A /* MakeViewController.m */; };
-		3FD392FA1E93D58E00AFBB3A /* MakeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD392F81E93D58E00AFBB3A /* MakeViewController.xib */; };
 		3FD918CC1E893067005B1583 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD918CB1E893067005B1583 /* MapViewController.m */; };
 		3FD918CF1E8930BF005B1583 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD918CE1E8930BF005B1583 /* MapView.storyboard */; };
 		3FD9A5341E88ED3700B965A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5331E88ED3700B965A7 /* main.m */; };
@@ -37,6 +31,7 @@
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
 		EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */; };
+		EFB6417A1E935CC700305E6A /* PinMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB641791E935CC700305E6A /* PinMakeViewController.m */; };
 		EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD11B9B1E8E90EF00896952 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -55,16 +50,6 @@
 		3F9C27CE1E8A48C6008DD04A /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
 		3F9C27D01E8A48D3008DD04A /* PinView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinView.storyboard; sourceTree = "<group>"; };
 		3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3FD392E31E93B59800AFBB3A /* UIColor+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MMAdditions.h"; sourceTree = "<group>"; };
-		3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MMAdditions.m"; sourceTree = "<group>"; };
-		3FD392E51E93B59800AFBB3A /* UIFont+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MMAdditions.h"; sourceTree = "<group>"; };
-		3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MMAdditions.m"; sourceTree = "<group>"; };
-		3FD392ED1E93C92600AFBB3A /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		3FD392EE1E93C92600AFBB3A /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		3FD392F01E93C94400AFBB3A /* MyStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyStoryboard.storyboard; sourceTree = "<group>"; };
-		3FD392F61E93D58E00AFBB3A /* MakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeViewController.h; sourceTree = "<group>"; };
-		3FD392F71E93D58E00AFBB3A /* MakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeViewController.m; sourceTree = "<group>"; };
-		3FD392F81E93D58E00AFBB3A /* MakeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MakeViewController.xib; sourceTree = "<group>"; };
 		3FD918CA1E893067005B1583 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		3FD918CB1E893067005B1583 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		3FD918CE1E8930BF005B1583 /* MapView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
@@ -95,6 +80,8 @@
 		EF4FA2671E8A10470013008C /* SignupPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinContentsCollectionViewCell.h; sourceTree = "<group>"; };
 		EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinContentsCollectionViewCell.m; sourceTree = "<group>"; };
+		EFB641781E935CC700305E6A /* PinMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMakeViewController.h; sourceTree = "<group>"; };
+		EFB641791E935CC700305E6A /* PinMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMakeViewController.m; sourceTree = "<group>"; };
 		EFD11B9B1E8E90EF00896952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,8 +112,7 @@
 				3FD9A5541E88F15000B965A7 /* LoginView */,
 				3FD9A5581E88F4FA00B965A7 /* MainView */,
 				3FD918CD1E8930A2005B1583 /* MapView */,
-				3FD392F21E93D54400AFBB3A /* MakeView */,
-				3FD392EC1E93C8ED00AFBB3A /* MyView */,
+				3F9C27CC1E8A489F008DD04A /* PinView */,
 			);
 			name = "View & Controller";
 			sourceTree = "<group>";
@@ -145,6 +131,8 @@
 		3F9C27CC1E8A489F008DD04A /* PinView */ = {
 			isa = PBXGroup;
 			children = (
+				EFB641781E935CC700305E6A /* PinMakeViewController.h */,
+				EFB641791E935CC700305E6A /* PinMakeViewController.m */,
 				3F9C27CD1E8A48C6008DD04A /* PinViewController.h */,
 				3F9C27CE1E8A48C6008DD04A /* PinViewController.m */,
 				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
@@ -154,41 +142,9 @@
 			name = PinView;
 			sourceTree = "<group>";
 		};
-		3FD392EC1E93C8ED00AFBB3A /* MyView */ = {
-			isa = PBXGroup;
-			children = (
-				3FD392ED1E93C92600AFBB3A /* MyViewController.h */,
-				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
-				3FD392F01E93C94400AFBB3A /* MyStoryboard.storyboard */,
-			);
-			name = MyView;
-			sourceTree = "<group>";
-		};
-		3FD392F21E93D54400AFBB3A /* MakeView */ = {
-			isa = PBXGroup;
-			children = (
-				3FD392F61E93D58E00AFBB3A /* MakeViewController.h */,
-				3FD392F71E93D58E00AFBB3A /* MakeViewController.m */,
-				3FD392F81E93D58E00AFBB3A /* MakeViewController.xib */,
-			);
-			name = MakeView;
-			sourceTree = "<group>";
-		};
-		3FD392FB1E93D70700AFBB3A /* DesignGuide */ = {
-			isa = PBXGroup;
-			children = (
-				3FD392E31E93B59800AFBB3A /* UIColor+MMAdditions.h */,
-				3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */,
-				3FD392E51E93B59800AFBB3A /* UIFont+MMAdditions.h */,
-				3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */,
-			);
-			name = DesignGuide;
-			sourceTree = "<group>";
-		};
 		3FD918CD1E8930A2005B1583 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				3F9C27CC1E8A489F008DD04A /* PinView */,
 				3FD918CA1E893067005B1583 /* MapViewController.h */,
 				3FD918CB1E893067005B1583 /* MapViewController.m */,
 				3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */,
@@ -231,7 +187,6 @@
 		3FD9A5321E88ED3700B965A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3FD392FB1E93D70700AFBB3A /* DesignGuide */,
 				EFD11B9B1E8E90EF00896952 /* Assets.xcassets */,
 				3FF685AF1E892D5300FD927D /* PrefixHeader.pch */,
 				3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */,
@@ -370,14 +325,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
-				3FD392F11E93C94400AFBB3A /* MyStoryboard.storyboard in Resources */,
 				3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */,
 				3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */,
 				3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */,
 				3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */,
 				EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */,
 				3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */,
-				3FD392FA1E93D58E00AFBB3A /* MakeViewController.xib in Resources */,
 				3FD918CF1E8930BF005B1583 /* MapView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,26 +390,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
 				EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */,
 				3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */,
 				3F745F611E891728001B87F0 /* NetworkModule.m in Sources */,
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
-				3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */,
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
+				EFB6417A1E935CC700305E6A /* PinMakeViewController.m in Sources */,
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
 				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
 				3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */,
-				3FD392F91E93D58E00AFBB3A /* MakeViewController.m in Sources */,
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FF1344E1E926248003B1822 /* RealmDB.m in Sources */,
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,
 				EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */,
-				3FD392EF1E93C92600AFBB3A /* MyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

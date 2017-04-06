@@ -57,7 +57,6 @@
     NSLog(@"textFieldDidBeginEditing");
     self.lastFirstResponderTextField = textField;
     //4개의 텍스트필드중 두번째걸 작성하고 있다면 그게 마지막 텍스트필드.
-    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

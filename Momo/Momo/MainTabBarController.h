@@ -10,6 +10,4 @@
 
 @interface MainTabBarController : UITabBarController
 
-- (void)customTabBarSetHidden:(BOOL)hidden;
-
 @end

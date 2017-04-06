@@ -8,6 +8,9 @@
 
 #import "PinViewController.h"
 #import "PinContentsCollectionViewCell.h"
+#import "PinModificationViewController.h"
+#import "PinDetailTableViewController.h"
+
 
 
 @interface PinViewController ()
@@ -32,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //collectionView size
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
     self.flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
@@ -50,6 +54,7 @@
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
 }
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
