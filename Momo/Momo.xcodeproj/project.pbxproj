@@ -28,6 +28,9 @@
 		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
 		3FF1344E1E926248003B1822 /* RealmDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1344D1E926248003B1822 /* RealmDB.m */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
+		EF441A0D1E972FFC002AA624 /* MapMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF441A061E972FFC002AA624 /* MapMakeViewController.m */; };
+		EF441A0F1E972FFC002AA624 /* PinDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF441A0A1E972FFC002AA624 /* PinDetailViewCell.m */; };
+		EF441A101E972FFC002AA624 /* PinModificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF441A0C1E972FFC002AA624 /* PinModificationViewController.m */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
 		EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */; };
@@ -74,6 +77,12 @@
 		77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Momo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.release.xcconfig"; sourceTree = "<group>"; };
 		E13D47394EE09B673C723CE7 /* Pods-Momo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.debug.xcconfig"; sourceTree = "<group>"; };
+		EF441A051E972FFC002AA624 /* MapMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMakeViewController.h; sourceTree = "<group>"; };
+		EF441A061E972FFC002AA624 /* MapMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMakeViewController.m; sourceTree = "<group>"; };
+		EF441A091E972FFC002AA624 /* PinDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailViewCell.h; sourceTree = "<group>"; };
+		EF441A0A1E972FFC002AA624 /* PinDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailViewCell.m; sourceTree = "<group>"; };
+		EF441A0B1E972FFC002AA624 /* PinModificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinModificationViewController.h; sourceTree = "<group>"; };
+		EF441A0C1E972FFC002AA624 /* PinModificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinModificationViewController.m; sourceTree = "<group>"; };
 		EF4702E41E891E1E0007E4AE /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
 		EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2661E8A10470013008C /* SignupPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupPageViewController.h; sourceTree = "<group>"; };
@@ -131,6 +140,12 @@
 		3F9C27CC1E8A489F008DD04A /* PinView */ = {
 			isa = PBXGroup;
 			children = (
+				EF441A051E972FFC002AA624 /* MapMakeViewController.h */,
+				EF441A061E972FFC002AA624 /* MapMakeViewController.m */,
+				EF441A091E972FFC002AA624 /* PinDetailViewCell.h */,
+				EF441A0A1E972FFC002AA624 /* PinDetailViewCell.m */,
+				EF441A0B1E972FFC002AA624 /* PinModificationViewController.h */,
+				EF441A0C1E972FFC002AA624 /* PinModificationViewController.m */,
 				EFB641781E935CC700305E6A /* PinMakeViewController.h */,
 				EFB641791E935CC700305E6A /* PinMakeViewController.m */,
 				3F9C27CD1E8A48C6008DD04A /* PinViewController.h */,
@@ -393,9 +408,12 @@
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
 				EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */,
 				3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */,
+				EF441A101E972FFC002AA624 /* PinModificationViewController.m in Sources */,
 				3F745F611E891728001B87F0 /* NetworkModule.m in Sources */,
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
+				EF441A0D1E972FFC002AA624 /* MapMakeViewController.m in Sources */,
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
+				EF441A0F1E972FFC002AA624 /* PinDetailViewCell.m in Sources */,
 				EFB6417A1E935CC700305E6A /* PinMakeViewController.m in Sources */,
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
 				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
