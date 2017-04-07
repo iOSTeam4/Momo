@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1G6-Jp-tf5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1G6-Jp-tf5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,13 +37,13 @@
                                             <constraint firstAttribute="height" constant="55" id="4tC-p0-yJL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                        <state key="normal" title="새 지도" image="tabMap"/>
+                                        <state key="normal" title="새 지도" image="tapMapWhite"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAx-0m-e2R">
                                         <rect key="frame" x="0.0" y="100" width="325" height="55"/>
                                         <color key="backgroundColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                        <state key="normal" title="새 핀" image="tabPin"/>
+                                        <state key="normal" title="새 핀" image="tapPinWhite"/>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -174,7 +174,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahz-GM-dId">
-                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
+                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ahz-GM-dId" secondAttribute="height" id="Pnw-ZC-Xxo"/>
                                                         </constraints>
@@ -590,7 +590,7 @@
         <image name="makeCheckBtnS" width="52" height="48"/>
         <image name="mapCheckBtn" width="31" height="31"/>
         <image name="mapCheckBtnS" width="31" height="31"/>
-        <image name="tabMap" width="30" height="26"/>
-        <image name="tabPin" width="16" height="27"/>
+        <image name="tapMapWhite" width="30" height="25"/>
+        <image name="tapPinWhite" width="16" height="27"/>
     </resources>
 </document>

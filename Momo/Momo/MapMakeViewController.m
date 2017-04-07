@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController setNavigationBarHidden:YES];
+    
     [self.mapNameTextField addTarget:self action:@selector(mapNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.mapContentTextField addTarget:self action:@selector(mapContentTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
 }
@@ -34,6 +36,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //NavigationBar 숨긴거 되살리기
+    [self.navigationController setNavigationBarHidden:NO];
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -45,7 +55,7 @@
     }
     return YES;
 }
-    
+
 // 핀이름 textfield에 space 입력했을때를 걸러내려고 --------------//
 - (void)mapNameTextFieldEditingChanged:(UITextField *)sender {
     
@@ -83,15 +93,19 @@
     }
 }
 
+- (IBAction)selectedPopViewBtn:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
