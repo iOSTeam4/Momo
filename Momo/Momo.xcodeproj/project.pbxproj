@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E331E94B25C009F082D /* MapMakeViewController.m */; };
+		3F395E361E94B325009F082D /* Make.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E351E94B325009F082D /* Make.storyboard */; };
+		3F395E3F1E95EFF5009F082D /* MapProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */; };
+		3F395E401E95EFF5009F082D /* MapProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E3E1E95EFF5009F082D /* MapProfileTableViewCell.xib */; };
+		3F395E441E95F00C009F082D /* PinProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E421E95F00C009F082D /* PinProfileTableViewCell.m */; };
+		3F395E451E95F00C009F082D /* PinProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E431E95F00C009F082D /* PinProfileTableViewCell.xib */; };
+		3F395E551E961F72009F082D /* UserProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E541E961F72009F082D /* UserProfileHeaderView.xib */; };
+		3F395E581E961FC8009F082D /* UserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E571E961FC8009F082D /* UserProfileHeaderView.m */; };
+		3F395E5D1E963695009F082D /* pika.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E5B1E963695009F082D /* pika.png */; };
+		3F395E5E1E963695009F082D /* pika2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E5C1E963695009F082D /* pika2.png */; };
 		3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */; };
+		3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */; };
 		3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */; };
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5D1E8916BC001B87F0 /* MainViewController.m */; };
@@ -15,32 +26,49 @@
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
 		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
 		3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */; };
+		3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */; };
+		3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */; };
+		3FD392EF1E93C92600AFBB3A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392EE1E93C92600AFBB3A /* MyViewController.m */; };
+		3FD392F11E93C94400AFBB3A /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD392F01E93C94400AFBB3A /* My.storyboard */; };
+		3FD392F91E93D58E00AFBB3A /* MakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392F71E93D58E00AFBB3A /* MakeViewController.m */; };
 		3FD918CC1E893067005B1583 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD918CB1E893067005B1583 /* MapViewController.m */; };
-		3FD918CF1E8930BF005B1583 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD918CE1E8930BF005B1583 /* MapView.storyboard */; };
+		3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD918CE1E8930BF005B1583 /* Map.storyboard */; };
 		3FD9A5341E88ED3700B965A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5331E88ED3700B965A7 /* main.m */; };
 		3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5361E88ED3700B965A7 /* AppDelegate.m */; };
 		3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */; };
-		3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */; };
+		3FD9A53D1E88ED3700B965A7 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A53B1E88ED3700B965A7 /* Launch.storyboard */; };
 		3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */; };
 		3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A54A1E88F08500B965A7 /* LoginViewController.m */; };
-		3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */; };
+		3FD9A54D1E88F0A300B965A7 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A54C1E88F0A300B965A7 /* Login.storyboard */; };
 		3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5511E88F12600B965A7 /* DataCenter.m */; };
 		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
 		3FF1344E1E926248003B1822 /* RealmDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1344D1E926248003B1822 /* RealmDB.m */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
-		EF441A0D1E972FFC002AA624 /* MapMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF441A061E972FFC002AA624 /* MapMakeViewController.m */; };
-		EF441A0F1E972FFC002AA624 /* PinDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF441A0A1E972FFC002AA624 /* PinDetailViewCell.m */; };
-		EF441A101E972FFC002AA624 /* PinModificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF441A0C1E972FFC002AA624 /* PinModificationViewController.m */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
 		EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */; };
-		EFB6417A1E935CC700305E6A /* PinMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB641791E935CC700305E6A /* PinMakeViewController.m */; };
 		EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD11B9B1E8E90EF00896952 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F395E321E94B25C009F082D /* MapMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMakeViewController.h; sourceTree = "<group>"; };
+		3F395E331E94B25C009F082D /* MapMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMakeViewController.m; sourceTree = "<group>"; };
+		3F395E351E94B325009F082D /* Make.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Make.storyboard; sourceTree = "<group>"; };
+		3F395E3C1E95EFF5009F082D /* MapProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapProfileTableViewCell.h; sourceTree = "<group>"; };
+		3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapProfileTableViewCell.m; sourceTree = "<group>"; };
+		3F395E3E1E95EFF5009F082D /* MapProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapProfileTableViewCell.xib; sourceTree = "<group>"; };
+		3F395E411E95F00C009F082D /* PinProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinProfileTableViewCell.h; sourceTree = "<group>"; };
+		3F395E421E95F00C009F082D /* PinProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinProfileTableViewCell.m; sourceTree = "<group>"; };
+		3F395E431E95F00C009F082D /* PinProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinProfileTableViewCell.xib; sourceTree = "<group>"; };
+		3F395E541E961F72009F082D /* UserProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileHeaderView.xib; sourceTree = "<group>"; };
+		3F395E561E961FC8009F082D /* UserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHeaderView.h; sourceTree = "<group>"; };
+		3F395E571E961FC8009F082D /* UserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHeaderView.m; sourceTree = "<group>"; };
+		3F395E5B1E963695009F082D /* pika.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pika.png; sourceTree = "<group>"; };
+		3F395E5C1E963695009F082D /* pika2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pika2.png; sourceTree = "<group>"; };
 		3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMarkerUIView.h; sourceTree = "<group>"; };
 		3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMarkerUIView.m; sourceTree = "<group>"; };
+		3F4F4F881E97376A00CD9C1C /* PinMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMakeViewController.h; sourceTree = "<group>"; };
+		3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMakeViewController.m; sourceTree = "<group>"; };
 		3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsModule.h; sourceTree = "<group>"; };
 		3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsModule.m; sourceTree = "<group>"; };
 		3F745F591E88FF1F001B87F0 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -53,21 +81,30 @@
 		3F9C27CE1E8A48C6008DD04A /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
 		3F9C27D01E8A48D3008DD04A /* PinView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinView.storyboard; sourceTree = "<group>"; };
 		3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3FD392E31E93B59800AFBB3A /* UIColor+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MMAdditions.h"; sourceTree = "<group>"; };
+		3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MMAdditions.m"; sourceTree = "<group>"; };
+		3FD392E51E93B59800AFBB3A /* UIFont+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MMAdditions.h"; sourceTree = "<group>"; };
+		3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MMAdditions.m"; sourceTree = "<group>"; };
+		3FD392ED1E93C92600AFBB3A /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		3FD392EE1E93C92600AFBB3A /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		3FD392F01E93C94400AFBB3A /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
+		3FD392F61E93D58E00AFBB3A /* MakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeViewController.h; sourceTree = "<group>"; };
+		3FD392F71E93D58E00AFBB3A /* MakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeViewController.m; sourceTree = "<group>"; };
 		3FD918CA1E893067005B1583 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		3FD918CB1E893067005B1583 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		3FD918CE1E8930BF005B1583 /* MapView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
+		3FD918CE1E8930BF005B1583 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		3FD9A52F1E88ED3700B965A7 /* Momo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD9A5331E88ED3700B965A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3FD9A5351E88ED3700B965A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3FD9A5361E88ED3700B965A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3FD9A5381E88ED3700B965A7 /* LaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
-		3FD9A53C1E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchView.storyboard; sourceTree = "<group>"; };
+		3FD9A53C1E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		3FD9A5411E88ED3700B965A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FD9A5431E88ED3700B965A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FD9A5491E88F08500B965A7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3FD9A54A1E88F08500B965A7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
+		3FD9A54C1E88F0A300B965A7 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		3FD9A5501E88F12600B965A7 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		3FD9A5511E88F12600B965A7 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		3FD9A5561E88F35400B965A7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -77,20 +114,12 @@
 		77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Momo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.release.xcconfig"; sourceTree = "<group>"; };
 		E13D47394EE09B673C723CE7 /* Pods-Momo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.debug.xcconfig"; sourceTree = "<group>"; };
-		EF441A051E972FFC002AA624 /* MapMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMakeViewController.h; sourceTree = "<group>"; };
-		EF441A061E972FFC002AA624 /* MapMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMakeViewController.m; sourceTree = "<group>"; };
-		EF441A091E972FFC002AA624 /* PinDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailViewCell.h; sourceTree = "<group>"; };
-		EF441A0A1E972FFC002AA624 /* PinDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailViewCell.m; sourceTree = "<group>"; };
-		EF441A0B1E972FFC002AA624 /* PinModificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinModificationViewController.h; sourceTree = "<group>"; };
-		EF441A0C1E972FFC002AA624 /* PinModificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinModificationViewController.m; sourceTree = "<group>"; };
 		EF4702E41E891E1E0007E4AE /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
 		EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2661E8A10470013008C /* SignupPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupPageViewController.h; sourceTree = "<group>"; };
 		EF4FA2671E8A10470013008C /* SignupPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinContentsCollectionViewCell.h; sourceTree = "<group>"; };
 		EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinContentsCollectionViewCell.m; sourceTree = "<group>"; };
-		EFB641781E935CC700305E6A /* PinMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMakeViewController.h; sourceTree = "<group>"; };
-		EFB641791E935CC700305E6A /* PinMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMakeViewController.m; sourceTree = "<group>"; };
 		EFD11B9B1E8E90EF00896952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +143,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3F395E591E9631F6009F082D /* HeaderView&Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3F395E561E961FC8009F082D /* UserProfileHeaderView.h */,
+				3F395E571E961FC8009F082D /* UserProfileHeaderView.m */,
+				3F395E541E961F72009F082D /* UserProfileHeaderView.xib */,
+				3F395E3C1E95EFF5009F082D /* MapProfileTableViewCell.h */,
+				3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */,
+				3F395E3E1E95EFF5009F082D /* MapProfileTableViewCell.xib */,
+				3F395E411E95F00C009F082D /* PinProfileTableViewCell.h */,
+				3F395E421E95F00C009F082D /* PinProfileTableViewCell.m */,
+				3F395E431E95F00C009F082D /* PinProfileTableViewCell.xib */,
+			);
+			name = "HeaderView&Cell";
+			sourceTree = "<group>";
+		};
+		3F395E5A1E96367F009F082D /* Imges */ = {
+			isa = PBXGroup;
+			children = (
+				3F395E5B1E963695009F082D /* pika.png */,
+				3F395E5C1E963695009F082D /* pika2.png */,
+			);
+			name = Imges;
+			sourceTree = "<group>";
+		};
 		3F4C91AB1E8A0695005BF38F /* View & Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +175,8 @@
 				3FD9A5541E88F15000B965A7 /* LoginView */,
 				3FD9A5581E88F4FA00B965A7 /* MainView */,
 				3FD918CD1E8930A2005B1583 /* MapView */,
-				3F9C27CC1E8A489F008DD04A /* PinView */,
+				3FD392F21E93D54400AFBB3A /* MakeView */,
+				3FD392EC1E93C8ED00AFBB3A /* MyView */,
 			);
 			name = "View & Controller";
 			sourceTree = "<group>";
@@ -140,14 +195,6 @@
 		3F9C27CC1E8A489F008DD04A /* PinView */ = {
 			isa = PBXGroup;
 			children = (
-				EF441A051E972FFC002AA624 /* MapMakeViewController.h */,
-				EF441A061E972FFC002AA624 /* MapMakeViewController.m */,
-				EF441A091E972FFC002AA624 /* PinDetailViewCell.h */,
-				EF441A0A1E972FFC002AA624 /* PinDetailViewCell.m */,
-				EF441A0B1E972FFC002AA624 /* PinModificationViewController.h */,
-				EF441A0C1E972FFC002AA624 /* PinModificationViewController.m */,
-				EFB641781E935CC700305E6A /* PinMakeViewController.h */,
-				EFB641791E935CC700305E6A /* PinMakeViewController.m */,
 				3F9C27CD1E8A48C6008DD04A /* PinViewController.h */,
 				3F9C27CE1E8A48C6008DD04A /* PinViewController.m */,
 				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
@@ -157,14 +204,51 @@
 			name = PinView;
 			sourceTree = "<group>";
 		};
+		3FD392EC1E93C8ED00AFBB3A /* MyView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD392ED1E93C92600AFBB3A /* MyViewController.h */,
+				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
+				3FD392F01E93C94400AFBB3A /* My.storyboard */,
+				3F395E591E9631F6009F082D /* HeaderView&Cell */,
+			);
+			name = MyView;
+			sourceTree = "<group>";
+		};
+		3FD392F21E93D54400AFBB3A /* MakeView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD392F71E93D58E00AFBB3A /* MakeViewController.m */,
+				3FD392F61E93D58E00AFBB3A /* MakeViewController.h */,
+				3F395E321E94B25C009F082D /* MapMakeViewController.h */,
+				3F395E331E94B25C009F082D /* MapMakeViewController.m */,
+				3F4F4F881E97376A00CD9C1C /* PinMakeViewController.h */,
+				3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */,
+				3F395E351E94B325009F082D /* Make.storyboard */,
+			);
+			name = MakeView;
+			sourceTree = "<group>";
+		};
+		3FD392FB1E93D70700AFBB3A /* DesignGuide */ = {
+			isa = PBXGroup;
+			children = (
+				3FD392E31E93B59800AFBB3A /* UIColor+MMAdditions.h */,
+				3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */,
+				3FD392E51E93B59800AFBB3A /* UIFont+MMAdditions.h */,
+				3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */,
+			);
+			name = DesignGuide;
+			sourceTree = "<group>";
+		};
 		3FD918CD1E8930A2005B1583 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				3F9C27CC1E8A489F008DD04A /* PinView */,
 				3FD918CA1E893067005B1583 /* MapViewController.h */,
 				3FD918CB1E893067005B1583 /* MapViewController.m */,
 				3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */,
 				3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */,
-				3FD918CE1E8930BF005B1583 /* MapView.storyboard */,
+				3FD918CE1E8930BF005B1583 /* Map.storyboard */,
 			);
 			name = MapView;
 			sourceTree = "<group>";
@@ -202,6 +286,8 @@
 		3FD9A5321E88ED3700B965A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3FD392FB1E93D70700AFBB3A /* DesignGuide */,
+				3F395E5A1E96367F009F082D /* Imges */,
 				EFD11B9B1E8E90EF00896952 /* Assets.xcassets */,
 				3FF685AF1E892D5300FD927D /* PrefixHeader.pch */,
 				3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */,
@@ -237,7 +323,7 @@
 			children = (
 				3FD9A5381E88ED3700B965A7 /* LaunchViewController.h */,
 				3FD9A5391E88ED3700B965A7 /* LaunchViewController.m */,
-				3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */,
+				3FD9A53B1E88ED3700B965A7 /* Launch.storyboard */,
 			);
 			name = LaunchView;
 			sourceTree = "<group>";
@@ -251,7 +337,7 @@
 				EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */,
 				EF4FA2661E8A10470013008C /* SignupPageViewController.h */,
 				EF4FA2671E8A10470013008C /* SignupPageViewController.m */,
-				3FD9A54C1E88F0A300B965A7 /* LoginView.storyboard */,
+				3FD9A54C1E88F0A300B965A7 /* Login.storyboard */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
@@ -339,14 +425,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F395E5D1E963695009F082D /* pika.png in Resources */,
+				3F395E451E95F00C009F082D /* PinProfileTableViewCell.xib in Resources */,
 				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
+				3FD392F11E93C94400AFBB3A /* My.storyboard in Resources */,
 				3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */,
+				3F395E551E961F72009F082D /* UserProfileHeaderView.xib in Resources */,
 				3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */,
 				3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */,
-				3FD9A53D1E88ED3700B965A7 /* LaunchView.storyboard in Resources */,
+				3FD9A53D1E88ED3700B965A7 /* Launch.storyboard in Resources */,
+				3F395E401E95EFF5009F082D /* MapProfileTableViewCell.xib in Resources */,
 				EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */,
-				3FD9A54D1E88F0A300B965A7 /* LoginView.storyboard in Resources */,
-				3FD918CF1E8930BF005B1583 /* MapView.storyboard in Resources */,
+				3FD9A54D1E88F0A300B965A7 /* Login.storyboard in Resources */,
+				3F395E361E94B325009F082D /* Make.storyboard in Resources */,
+				3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */,
+				3F395E5E1E963695009F082D /* pika2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,38 +498,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
+				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
 				EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */,
+				3F395E581E961FC8009F082D /* UserProfileHeaderView.m in Sources */,
 				3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */,
-				EF441A101E972FFC002AA624 /* PinModificationViewController.m in Sources */,
 				3F745F611E891728001B87F0 /* NetworkModule.m in Sources */,
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
-				EF441A0D1E972FFC002AA624 /* MapMakeViewController.m in Sources */,
+				3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */,
 				3FD9A53A1E88ED3700B965A7 /* LaunchViewController.m in Sources */,
-				EF441A0F1E972FFC002AA624 /* PinDetailViewCell.m in Sources */,
-				EFB6417A1E935CC700305E6A /* PinMakeViewController.m in Sources */,
+				3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */,
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
 				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
 				3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */,
+				3FD392F91E93D58E00AFBB3A /* MakeViewController.m in Sources */,
+				3F395E441E95F00C009F082D /* PinProfileTableViewCell.m in Sources */,
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FF1344E1E926248003B1822 /* RealmDB.m in Sources */,
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,
 				EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */,
+				3FD392EF1E93C92600AFBB3A /* MyViewController.m in Sources */,
+				3F395E3F1E95EFF5009F082D /* MapProfileTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3FD9A53B1E88ED3700B965A7 /* LaunchView.storyboard */ = {
+		3FD9A53B1E88ED3700B965A7 /* Launch.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3FD9A53C1E88ED3700B965A7 /* Base */,
 			);
-			name = LaunchView.storyboard;
+			name = Launch.storyboard;
 			sourceTree = "<group>";
 		};
 		3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */ = {

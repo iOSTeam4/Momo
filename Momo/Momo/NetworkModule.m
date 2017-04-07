@@ -34,6 +34,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         fbLoginManeger = [[FBSDKLoginManager alloc] init];
+        fbLoginManeger.loginBehavior = FBSDKLoginBehaviorSystemAccount;
     });
     
     return fbLoginManeger;

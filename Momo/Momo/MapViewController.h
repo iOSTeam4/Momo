@@ -10,4 +10,7 @@
 
 @interface MapViewController : UIViewController
 
+- (void)makePinByMakePinBtn;    // 새 핀 만들기 버튼로 새 핀 생성시 호출하는 메서드
+
+
 @end

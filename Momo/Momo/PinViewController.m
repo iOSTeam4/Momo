@@ -8,8 +8,6 @@
 
 #import "PinViewController.h"
 #import "PinContentsCollectionViewCell.h"
-#import "PinModificationViewController.h"
-#import "PinDetailTableViewController.h"
 
 
 

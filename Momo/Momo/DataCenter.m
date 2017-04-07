@@ -63,7 +63,7 @@
     
     // 더미 위치 데이터
     self.locationArr = [[NSMutableArray alloc] initWithArray:@[@[
-                                                                   @37.516122f, @127.025618f, @"1번 마커", [UIColor brownColor],
+                                                                   @37.503639f, @127.044907f, @"1번 마커", [UIColor brownColor],
                                                                    [self getUIImageIconWithFAKFontAwesomIcon:[FAKFontAwesome coffeeIconWithSize:PIN_MARKER_ICON_IMAGE_SIZE] withSize:PIN_MARKER_ICON_IMAGE_SIZE withColor:[UIColor whiteColor]]
                                                                    ],
                                                                @[

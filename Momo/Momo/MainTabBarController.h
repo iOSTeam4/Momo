@@ -10,4 +10,10 @@
 
 @interface MainTabBarController : UITabBarController
 
+- (void)customTabBarSetHidden:(BOOL)hidden;
+
+// MakeViewController 버튼들의 Selector Methods (직접 불러 사용하지 않음)
+- (void)selectedMakeMapBtn:(UIButton *)sender;
+- (void)selectedMakePinBtn:(UIButton *)sender;
+
 @end

@@ -24,13 +24,20 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caz-H9-CDx">
                                 <rect key="frame" x="-0.5" y="618" width="375" height="49"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UwP-pG-VPt" userLabel="line">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.25" id="tmE-ww-bCg"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ISh-gH-Z5T">
                                         <rect key="frame" x="8.5" y="4" width="359" height="41"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-e8-Mib">
                                                 <rect key="frame" x="0.0" y="0.0" width="175.5" height="41"/>
                                                 <state key="normal" title="취소">
-                                                    <color key="titleColor" red="1" green="0.4308942556" blue="0.43099984530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.00059560901718214154" green="0.70855957269668579" blue="0.99971479177474976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="cancelBtnAction:" destination="5WV-cE-pnR" eventType="touchUpInside" id="Xf2-wH-Gyy"/>
@@ -38,7 +45,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVJ-bp-TgT">
                                                 <rect key="frame" x="183.5" y="0.0" width="175.5" height="41"/>
-                                                <color key="backgroundColor" red="1" green="0.4308942556" blue="0.43099984530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.00059560901718214154" green="0.70855957269668579" blue="0.99971479177474976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="다음">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -52,8 +59,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="1mW-Mf-Nc9"/>
+                                    <constraint firstItem="UwP-pG-VPt" firstAttribute="centerX" secondItem="caz-H9-CDx" secondAttribute="centerX" id="7gj-bi-VbV"/>
+                                    <constraint firstItem="UwP-pG-VPt" firstAttribute="width" secondItem="caz-H9-CDx" secondAttribute="width" id="KPX-Wa-tH7"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="height" secondItem="caz-H9-CDx" secondAttribute="height" constant="-8" id="MC5-A8-zxX"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerX" secondItem="caz-H9-CDx" secondAttribute="centerX" id="b67-o0-xfI"/>
+                                    <constraint firstItem="UwP-pG-VPt" firstAttribute="top" secondItem="caz-H9-CDx" secondAttribute="top" id="rLh-z2-zZ2"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="width" secondItem="caz-H9-CDx" secondAttribute="width" constant="-16" id="uiJ-KO-UWZ"/>
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerY" secondItem="caz-H9-CDx" secondAttribute="centerY" id="v4d-tr-s9i"/>
                                 </constraints>
@@ -86,7 +96,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MapNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="n2O-kY-Doq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2D-7v-x2U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U2D-7v-x2U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
