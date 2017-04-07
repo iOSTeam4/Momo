@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D17a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,20 +23,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOMO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgO-4c-1iu">
-                                <rect key="frame" x="130.5" y="315.5" width="114" height="36"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchBackImg" translatesAutoresizingMaskIntoConstraints="NO" id="IKT-sR-Zk0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZY-sS-8UV" userLabel="LogoView">
+                                <rect key="frame" x="101" y="178" width="172.5" height="258"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinSymbol" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-1f-Q7O">
+                                        <rect key="frame" x="24" y="0.0" width="125" height="134"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="lZr-1f-Q7O" secondAttribute="height" multiplier="122:131" id="2eY-tt-sKr"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="momo" translatesAutoresizingMaskIntoConstraints="NO" id="xND-Gb-eUE">
+                                        <rect key="frame" x="0.5" y="144" width="172.5" height="53"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="xND-Gb-eUE" secondAttribute="height" multiplier="163:50" id="6Ye-xS-GzW"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="momoComment" translatesAutoresizingMaskIntoConstraints="NO" id="3gr-6R-GHl">
+                                        <rect key="frame" x="36.5" y="197" width="100" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="3gr-6R-GHl" secondAttribute="height" multiplier="109:38" id="oDD-WK-LAx"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="114" id="qQb-2X-Tcr"/>
+                                    <constraint firstItem="xND-Gb-eUE" firstAttribute="centerX" secondItem="lZr-1f-Q7O" secondAttribute="centerX" id="4tq-7v-qAH"/>
+                                    <constraint firstItem="lZr-1f-Q7O" firstAttribute="top" secondItem="tZY-sS-8UV" secondAttribute="top" id="8n9-Cj-jpq"/>
+                                    <constraint firstItem="3gr-6R-GHl" firstAttribute="centerX" secondItem="xND-Gb-eUE" secondAttribute="centerX" id="Wi7-vC-HxH"/>
+                                    <constraint firstItem="xND-Gb-eUE" firstAttribute="top" secondItem="lZr-1f-Q7O" secondAttribute="bottom" constant="10" id="XXV-MT-dYj"/>
+                                    <constraint firstItem="3gr-6R-GHl" firstAttribute="top" secondItem="xND-Gb-eUE" secondAttribute="bottom" id="Y3E-bH-yIr"/>
+                                    <constraint firstItem="lZr-1f-Q7O" firstAttribute="centerX" secondItem="tZY-sS-8UV" secondAttribute="centerX" id="ZkT-LP-UMY"/>
+                                    <constraint firstItem="xND-Gb-eUE" firstAttribute="width" secondItem="tZY-sS-8UV" secondAttribute="width" id="kGU-DX-OrH"/>
+                                    <constraint firstItem="lZr-1f-Q7O" firstAttribute="width" secondItem="tZY-sS-8UV" secondAttribute="width" multiplier="0.724" id="mbO-MU-yka"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TgO-4c-1iu" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PhE-4r-ddm"/>
-                            <constraint firstItem="TgO-4c-1iu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wXW-OB-hy7"/>
+                            <constraint firstItem="tZY-sS-8UV" firstAttribute="centerY" secondItem="IKT-sR-Zk0" secondAttribute="centerY" multiplier="0.92" id="6OG-nX-gcg"/>
+                            <constraint firstItem="IKT-sR-Zk0" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="84d-dU-Aqa"/>
+                            <constraint firstItem="tZY-sS-8UV" firstAttribute="height" secondItem="IKT-sR-Zk0" secondAttribute="height" multiplier="0.387" id="AqO-iz-VoP"/>
+                            <constraint firstItem="IKT-sR-Zk0" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="AqU-AA-DKu"/>
+                            <constraint firstItem="tZY-sS-8UV" firstAttribute="width" secondItem="IKT-sR-Zk0" secondAttribute="width" multiplier="0.46" id="DZJ-Uf-gP1"/>
+                            <constraint firstItem="IKT-sR-Zk0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PrP-sL-GqH"/>
+                            <constraint firstItem="tZY-sS-8UV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bwj-5D-8f0"/>
+                            <constraint firstItem="IKT-sR-Zk0" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="pkH-ms-xpN"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -43,4 +79,10 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchBackImg" width="375" height="667"/>
+        <image name="momo" width="178" height="57"/>
+        <image name="momoComment" width="100" height="34"/>
+        <image name="pinSymbol" width="142" height="154"/>
+    </resources>
 </document>

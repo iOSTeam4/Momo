@@ -20,10 +20,6 @@
     [super viewDidLoad];
     
     [self.navigationItem setTitle:@"Main View"];
-
-    // ShowLoginView & AutoLoginCheck
-    NSLog(@"performSegueWithIdentifier");
-    [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
     
 }
 
@@ -39,12 +35,15 @@
 
 - (IBAction)logoutTempBtnAction:(id)sender {
     
-    [DataCenter removeUserToken];
-    [NetworkModule FacebookLogOutWithCompletionBlock:^(BOOL isSuccess) {
-        NSLog(@"Facebook Log out");
+    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
+        if (isSuccess) {
+            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+            UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+            
+            [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+        }
     }];
-    
-    [self performSegueWithIdentifier:LAUNCH_SEGUE sender:self];
 }
 
 

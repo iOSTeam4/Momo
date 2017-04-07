@@ -18,8 +18,6 @@
 // Facebook Login (& Sign Up)
 + (void)FacebookLoginFromVC:(UIViewController *)fromVC
         WithCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock ;
-// Facebook Log Out
-+ (void)FacebookLogOutWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;
 
 
 
@@ -38,6 +36,9 @@
                     withPassword:(NSString *)password
              withCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock;
 
+
+// Common ----------------------------------------//
+#pragma mark - Account Common Methods
 // Log Out
 + (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock;
 

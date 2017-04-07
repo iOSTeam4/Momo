@@ -20,11 +20,11 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - FBSDKCoreKit (4.20.2):
+  - FBSDKCoreKit (4.21.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.20.2):
+  - FBSDKLoginKit (4.21.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.20.2):
+  - FBSDKShareKit (4.21.0):
     - FBSDKCoreKit
   - FirebaseAnalytics (3.7.0):
     - FirebaseCore (~> 3.5)
@@ -56,9 +56,9 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - JSONModel (1.7.0)
-  - Realm (2.5.0):
-    - Realm/Headers (= 2.5.0)
-  - Realm/Headers (2.5.0)
+  - Realm (2.5.1):
+    - Realm/Headers (= 2.5.1)
+  - Realm/Headers (2.5.1)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -76,16 +76,16 @@ DEPENDENCIES:
   - GooglePlacePicker
   - GooglePlaces
   - JSONModel
-  - Realm (~> 2.5)
+  - Realm
   - SDWebImage
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
-  FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
-  FBSDKShareKit: ca9b22264ea49a896dafb2467c1a4f72aa41996f
+  FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
+  FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
+  FBSDKShareKit: 649a7acfd01a3e056a33994c1bfbb997814cc8a2
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
@@ -97,10 +97,10 @@ SPEC CHECKSUMS:
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
-  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
+  Realm: 32f86104d37c8521f864d4274050b38ba6190733
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 5c27e30aaf9ca1793158b9b4ccff482505153740
+PODFILE CHECKSUM: a99c023d8ad8e731114728aa51e48de4989f6e34
 
 COCOAPODS: 1.2.0.beta.1

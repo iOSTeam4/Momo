@@ -10,7 +10,7 @@
 #import "UserProfileHeaderView.h"
 
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderBtnSelectDelegate>
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate>
 
 @property (nonatomic) NSArray *mapPinDataArr;
 

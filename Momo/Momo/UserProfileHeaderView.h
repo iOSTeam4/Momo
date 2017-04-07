@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol UserProfileHeaderBtnSelectDelegate;
+@protocol UserProfileHeaderViewDelegate;
 
 
 @interface UserProfileHeaderView : UITableViewHeaderFooterView
 
-@property (weak, nonatomic) id<UserProfileHeaderBtnSelectDelegate> delegate;
+@property (weak, nonatomic) id<UserProfileHeaderViewDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *backView;
 
@@ -33,10 +33,10 @@
 
 
 
-// 지도, 핀 버튼 델리게이트 프로토콜 -----------------------//
+// 델리게이트 프로토콜 ----------------------------//
 
-@protocol UserProfileHeaderBtnSelectDelegate <NSObject>
+@protocol UserProfileHeaderViewDelegate <NSObject>
 
-- (void)selectedMapPinBtnWithNum:(NSInteger)num;
+- (void)selectedMapPinBtnWithNum:(NSInteger)num;    // 지도, 핀 버튼 선택 델리게이트 메서드
 
 @end

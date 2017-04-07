@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 @property (weak, nonatomic) UITextField *lastFirstResponderTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *signInBtn;
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end
@@ -25,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.signInBtn.layer.cornerRadius = self.signInBtn.frame.size.height/2;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,40 +76,32 @@
                                withPassword:self.pwTextField.text
                         withCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
                             
+                            [self.indicator stopAnimating];
+
                             if (isSuccess) {
-                                
                                 NSLog(@"log in success %@", result);
                                 
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [self.indicator stopAnimating];
-                                    [self.navigationController popToRootViewControllerAnimated:NO];
-                                });
+                                [self.indicator stopAnimating];
+                                [self.navigationController popToRootViewControllerAnimated:NO];
                                 
                             } else {
-                                
                                 NSLog(@"system error %@", result);
                                 
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [self.indicator stopAnimating];
-                                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                             message:@"아이디 또는 비밀번호가 틀렸네요"
-                                                                                                      preferredStyle:UIAlertControllerStyleAlert];
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                                         message:@"아이디 또는 비밀번호가 틀렸네요"
+                                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                                   style:UIAlertActionStyleDefault
+                                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                                     NSLog(@"확인버튼이 클릭되었습니다");
+                                                                                 }];
+                                [alertController addAction:okButton];
+                                [self presentViewController:alertController animated:YES completion:nil];
                                     
-                                    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                                       style:UIAlertActionStyleDefault
-                                                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                                                         NSLog(@"확인버튼이 클릭되었습니다");
-                                                                                     }];
-                                    [alertController addAction:okButton];
-                                    
-                                    [self presentViewController:alertController animated:YES completion:nil];
-                                    
-                                });
                             }
-                            
                         }];
 }
-
 
 
 @end

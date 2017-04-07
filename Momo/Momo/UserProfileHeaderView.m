@@ -39,7 +39,8 @@
     
     self.pinBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     self.pinBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-
+    
+    
 }
 - (IBAction)mapPinBtnAction:(UIButton *)sender {
     
