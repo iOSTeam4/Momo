@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Navi Pop Gesture 활성화
+    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
 
     self.fbBtn.layer.cornerRadius = self.fbBtn.frame.size.height/2;
@@ -45,6 +45,15 @@
     [super viewDidAppear:animated];
     
     [self autoLoginCheck];
+}
+
+// NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리 (다른 Gesture 쓰는 것 없음)
+    if(self.navigationController.viewControllers.count > 1){
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -89,19 +98,20 @@
                            NSLog(@"로그인 성공");
                            [self autoLoginCheck];
                        
-                       } else {                           
-                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
-                                                                                             preferredStyle:UIAlertControllerStyleAlert];
-                           
-                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                              style:UIAlertActionStyleDefault
-                                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                                                NSLog(@"확인버튼이 클릭되었습니다");
-                                                                            }];
-                           [alertController addAction:okButton];
-                           
-                           [self presentViewController:alertController animated:YES completion:nil];
+                       } else {
+                           // 일단 Facebook 계정의 경우엔 Alert창을 안띄우는게 더 자연스러운 것 같아 주석처리
+//                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+//                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
+//                                                                                             preferredStyle:UIAlertControllerStyleAlert];
+//                           
+//                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+//                                                                              style:UIAlertActionStyleDefault
+//                                                                            handler:^(UIAlertAction * _Nonnull action) {
+//                                                                                NSLog(@"확인버튼이 클릭되었습니다");
+//                                                                            }];
+//                           [alertController addAction:okButton];
+//                           
+//                           [self presentViewController:alertController animated:YES completion:nil];
                            
                        }
                    }];
