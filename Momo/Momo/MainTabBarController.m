@@ -146,7 +146,7 @@
 
         [self.customTabBar addSubview:btn];
         
-        btn.frame = CGRectMake(0, 0, self.customTabBar.bounds.size.width / (CGFloat)arr.count, 40);
+        btn.frame = CGRectMake(0, 1, self.customTabBar.bounds.size.width / (CGFloat)arr.count, 38);
         btn.center = CGPointMake(centerX, self.customTabBar.bounds.size.height/2);
         
     }

@@ -32,16 +32,13 @@
     [self.userEditBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
     [self.userEditBtn.layer setBorderWidth:1];
     
-    
-    // Map & Pin 버튼
-    self.mapBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
-    self.mapBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-    
-    self.pinBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
-    self.pinBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-    
-    
 }
+
+
+- (IBAction)editBtnAction:(id)sender {
+    [self.delegate selectedUserEditBtn];
+}
+
 - (IBAction)mapPinBtnAction:(UIButton *)sender {
     
     sender.selected = YES;

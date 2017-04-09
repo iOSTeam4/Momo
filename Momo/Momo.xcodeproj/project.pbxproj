@@ -19,6 +19,9 @@
 		3F395E5E1E963695009F082D /* pika2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E5C1E963695009F082D /* pika2.png */; };
 		3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */; };
 		3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */; };
+		3F5D69CD1E9A752300129C90 /* UserProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */; };
+		3F5D69D31E9A76E800129C90 /* UserAccountEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */; };
+		3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */; };
 		3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */; };
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5D1E8916BC001B87F0 /* MainViewController.m */; };
@@ -68,6 +71,12 @@
 		3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMarkerUIView.m; sourceTree = "<group>"; };
 		3F4F4F881E97376A00CD9C1C /* PinMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMakeViewController.h; sourceTree = "<group>"; };
 		3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMakeViewController.m; sourceTree = "<group>"; };
+		3F5D69CB1E9A752300129C90 /* UserProfileEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileEditViewController.h; sourceTree = "<group>"; };
+		3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileEditViewController.m; sourceTree = "<group>"; };
+		3F5D69D11E9A76E800129C90 /* UserAccountEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountEditViewController.h; sourceTree = "<group>"; };
+		3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountEditViewController.m; sourceTree = "<group>"; };
+		3F5D69D41E9A913D00129C90 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsModule.h; sourceTree = "<group>"; };
 		3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsModule.m; sourceTree = "<group>"; };
 		3F745F591E88FF1F001B87F0 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -178,6 +187,15 @@
 			name = "View & Controller";
 			sourceTree = "<group>";
 		};
+		3F5D69D71E9A936D00129C90 /* UIPlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				3F5D69D41E9A913D00129C90 /* UIPlaceHolderTextView.h */,
+				3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */,
+			);
+			name = UIPlaceHolderTextView;
+			sourceTree = "<group>";
+		};
 		3F745F621E89172C001B87F0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +226,11 @@
 			children = (
 				3FD392ED1E93C92600AFBB3A /* MyViewController.h */,
 				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
+				3F5D69D11E9A76E800129C90 /* UserAccountEditViewController.h */,
+				3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */,
+				3F5D69CB1E9A752300129C90 /* UserProfileEditViewController.h */,
+				3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */,
+				3F5D69D71E9A936D00129C90 /* UIPlaceHolderTextView */,
 				3FD392F01E93C94400AFBB3A /* My.storyboard */,
 				3F395E591E9631F6009F082D /* HeaderView&Cell */,
 			);
@@ -489,8 +512,10 @@
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
+				3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */,
 				EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */,
 				3F395E581E961FC8009F082D /* UserProfileHeaderView.m in Sources */,
+				3F5D69CD1E9A752300129C90 /* UserProfileEditViewController.m in Sources */,
 				3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */,
 				3F745F611E891728001B87F0 /* NetworkModule.m in Sources */,
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
@@ -504,6 +529,7 @@
 				3F395E441E95F00C009F082D /* PinProfileTableViewCell.m in Sources */,
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FEBB8961E97C70B006E3E77 /* PostMakeViewController.m in Sources */,
+				3F5D69D31E9A76E800129C90 /* UserAccountEditViewController.m in Sources */,
 				3FF1344E1E926248003B1822 /* RealmDB.m in Sources */,
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,

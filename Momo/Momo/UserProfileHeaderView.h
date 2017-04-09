@@ -23,6 +23,12 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *userEditBtn;
 
+@property (weak, nonatomic) IBOutlet UILabel *followerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followerBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followingBtn;
+
 @property (weak, nonatomic) IBOutlet UILabel *userCommentLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *mapBtn;
@@ -37,6 +43,7 @@
 
 @protocol UserProfileHeaderViewDelegate <NSObject>
 
+- (void)selectedUserEditBtn;
 - (void)selectedMapPinBtnWithNum:(NSInteger)num;    // 지도, 핀 버튼 선택 델리게이트 메서드
 
 @end
