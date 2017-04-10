@@ -240,8 +240,8 @@
 		3FD392F21E93D54400AFBB3A /* MakeView */ = {
 			isa = PBXGroup;
 			children = (
-				3FD392F71E93D58E00AFBB3A /* MakeViewController.m */,
 				3FD392F61E93D58E00AFBB3A /* MakeViewController.h */,
+				3FD392F71E93D58E00AFBB3A /* MakeViewController.m */,
 				3F395E321E94B25C009F082D /* MapMakeViewController.h */,
 				3F395E331E94B25C009F082D /* MapMakeViewController.m */,
 				3F4F4F881E97376A00CD9C1C /* PinMakeViewController.h */,

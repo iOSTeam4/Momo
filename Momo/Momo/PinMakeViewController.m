@@ -189,16 +189,20 @@
               withPrivate:self.publicSwitch.on];
 }
 
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    NSLog(@"touchesBegan");
-    UITouch *touch = [[event allTouches] anyObject];
-    if ([touch view] != self.pinNameTextField) {
-        [self.pinNameTextField resignFirstResponder];
-
-    }
+- (IBAction)textFieldResignTapGesture:(id)sender {
+    
+    [self.pinNameTextField resignFirstResponder];
 }
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    [super touchesBegan:touches withEvent:event];
+//    NSLog(@"touchesBegan");
+//    UITouch *touch = [[event allTouches] anyObject];
+//    if ([touch view] != self.pinNameTextField) {
+//        [self.pinNameTextField resignFirstResponder];
+//
+//    }
+//}
 
 
 // 아마 데이터 센터에 추가 될 메서드 (일단 예시로 여기다 만들어놓음)

@@ -11,6 +11,7 @@
 @interface PostMakeViewController ()
 <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (nonatomic) UIImageView *photoImageView;
 @property (nonatomic) UIImage *chosenImage;
@@ -19,16 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *photoUploadBtn;
 @property (weak, nonatomic) IBOutlet UITextField *contentTextField;
 
-@property (weak, nonatomic) IBOutlet UIButton *cafeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *foodBtn;
-@property (weak, nonatomic) IBOutlet UIButton *shopBtn;
-@property (weak, nonatomic) IBOutlet UIButton *placeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *etcBtn;
-@property (weak, nonatomic) UIButton *categoryLastSelectedBtn;
-
-@property (nonatomic) BOOL checkCategory;
 @property (nonatomic) BOOL checkTextField;
-@property (nonatomic) BOOL checkPhoto;
 
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
@@ -147,6 +139,13 @@
     
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.photoImageView.hidden) {
+    [self.scrollView setContentOffset:CGPointMake(0,100) animated:YES];
+    } else {
+    [self.scrollView setContentOffset:CGPointMake(0,450) animated:YES];
+    }
+}
 
 - (void)textFieldEditingChanged:(UITextField *)sender {
     
@@ -159,19 +158,6 @@
     [self checkMakeBtnState];
 }
 
-- (IBAction)selectedCategoryBtn:(UIButton *)sender {
-    
-    if (sender.tag != self.categoryLastSelectedBtn.tag) {
-        self.categoryLastSelectedBtn.selected = NO;
-        self.categoryLastSelectedBtn = sender;
-        sender.selected = YES;
-    }
-    self.checkCategory = YES;
-    [self checkMakeBtnState];
-    
-}
-
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [self.contentTextField resignFirstResponder];
@@ -180,23 +166,11 @@
     
 }
 
-- (void)checkMakeBtnState {
+// 터치하면 텍스트필드 resign되게
+- (IBAction)textFiedlResignTapGesture:(id)sender {
     
-    
-    
+    [self.contentTextField resignFirstResponder];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 
 //Image의 선택이 끝났을 때, 불리는 Method
 //#pragma mark- UpdateViewController didFinishPickingMediaWithInfo Delegate Method
@@ -215,6 +189,22 @@
  
     
     self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.makeBtn3.frame.origin.y + self.makeBtn3.frame.size.height + 30);
+   
+    [self.scrollView setContentOffset:CGPointMake(0,400) animated:YES];
+    [self checkMakeBtnState];
+}
+
+- (void)checkMakeBtnState {
+    
+    if (self.photoImageView.hidden == 0 && self.checkTextField) {
+        [self.makeBtn1 setEnabled:YES];
+        [self.makeBtn2 setEnabled:YES];
+        [self.makeBtn3 setEnabled:YES];
+    } else {
+        [self.makeBtn1 setEnabled:NO];
+        [self.makeBtn2 setEnabled:NO];
+        [self.makeBtn3 setEnabled:NO];
+    }
     
 }
 
