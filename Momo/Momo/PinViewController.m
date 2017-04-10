@@ -38,7 +38,7 @@
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
     self.flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
     // collectionView 임시 contents
-    self.dataTempArr = @[@"ic_person_pin_white", @"Arches", @"Bryce Canyon", @"Katmai", @"Denali"];
+    self.dataTempArr = @[@"addPost", @"textPhoto", @"postTest1", @"postTest2", @"postTest3", @"postTest4", @"postTest5", @"postTest6"];
     
     // pin 생성user
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;

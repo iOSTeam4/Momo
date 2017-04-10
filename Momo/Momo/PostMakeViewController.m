@@ -11,6 +11,11 @@
 @interface PostMakeViewController ()
 <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (nonatomic) UIImageView *photoImageView;
+@property (nonatomic) UIImage *chosenImage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photoBtnTopSpacingConstraint;
+
 @property (weak, nonatomic) IBOutlet UIButton *photoUploadBtn;
 @property (weak, nonatomic) IBOutlet UITextField *contentTextField;
 
@@ -35,8 +40,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:YES];
     [self.contentTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(26, self.photoUploadBtn.frame.origin.y, self.view.frame.size.width-26, self.view.frame.size.width-26)];
+    [self.contentView addSubview:self.photoImageView];
+    [self.photoImageView setHidden:YES];
     
 }
 
@@ -48,9 +57,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO];
-    
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 
 - (IBAction)selectedBackBtn:(id)sender {
     
@@ -191,6 +204,17 @@
     NSLog(@"info %@", info);
 //    self.updateViewBackgroundPhoto.image = [info objectForKey:UIImagePickerControllerEditedImage];;
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    if (self.photoImageView.hidden) {
+        self.photoBtnTopSpacingConstraint.constant = self.photoImageView.frame.size.height + self.photoBtnTopSpacingConstraint.constant + 20.0;
+        [self.view layoutIfNeeded];     // autolayout constraint 값을 코드로 변경한 걸 적용할 때 꼭!!!!
+    }
+    
+    self.photoImageView.image = info[UIImagePickerControllerEditedImage];
+    [self.photoImageView setHidden:NO];
+ 
+    
+    self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.makeBtn3.frame.origin.y + self.makeBtn3.frame.size.height + 30);
     
 }
 
