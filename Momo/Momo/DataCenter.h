@@ -20,7 +20,6 @@
 // 기본 세팅 관련 ----------------------------------------//
 
 // 임시 더미 데이터
-@property (nonatomic) NSMutableArray *tabBarIconArr;    // 테스트용 탭바 아이콘 어레이
 @property (nonatomic) NSMutableArray *locationArr;      // 테스트용 위치 데이터 어레이
 
 

@@ -16,10 +16,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *pinNameTextField;
 
 @property (weak, nonatomic) UIButton *categoryLastSelectedBtn;
+@property (weak, nonatomic) UIButton *mapLastSelectedBtn;
 
 @property (nonatomic) NSMutableArray<UIButton *> *mapCheckBtnArr;
-
-@property (weak, nonatomic) IBOutlet UISwitch *publicSwitch;
 
 @property (nonatomic) BOOL checkName;
 @property (nonatomic) BOOL checkCategory;
@@ -47,8 +46,9 @@
                        @[@1, @"패스트캠퍼스 맛집"]];
     
     [self makeMyMapCheckBtnViewWithArr:myMap];
-    
+    // constraint의 property를 정의해서 맵이 늘어날수록 constraint가 대응하도록 한다
     self.segmentedTopMargin.constant = 30 + 44 * (myMap.count - 1);
+    // 변동 constraint를 준 후 반드시 명령
     [self.view layoutIfNeeded];
 
 }
@@ -76,7 +76,7 @@
         
         UIButton *mapCheckBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [mapCheckBtn setImage:[UIImage imageNamed:@"mapCheckBtn"] forState:UIControlStateNormal];
-        [mapCheckBtn setImage:[UIImage imageNamed:@"mapCheckBtnS"] forState:UIControlStateSelected];
+        [mapCheckBtn setImage:[UIImage imageNamed:@"mapSelectBtn"] forState:UIControlStateSelected];
         [mapCheckBtn setContentMode:UIViewContentModeScaleAspectFit];
         
         UIButton *mapNameBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -89,12 +89,15 @@
         mapNameBtn.tag = i;
         [self.mapCheckBtnArr addObject:mapCheckBtn];
         
+        
         [mapCheckBtn addTarget:self action:@selector(selectedMapCheckBtn:) forControlEvents:UIControlEventTouchUpInside];
         [mapNameBtn addTarget:self action:@selector(selectedMapCheckBtn:) forControlEvents:UIControlEventTouchUpInside];
         
         if ([arr[i][0] isEqual:@1]) {
             [mapNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
             [mapNameBtn setContentMode:UIViewContentModeScaleAspectFit];
+            // mapName 버튼과 자물쇠 사이 spacing
+            [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         }
         
         
@@ -130,65 +133,6 @@
     return YES;
 }
 
-- (IBAction)selecedCategoryBtn:(UIButton *)sender {
-    NSLog(@"%d", sender.tag);
-    
-    if (sender.tag != self.categoryLastSelectedBtn.tag) {
-        self.categoryLastSelectedBtn.selected = NO;
-        
-        self.categoryLastSelectedBtn = sender;
-        sender.selected = YES;
-    }
-    
-    self.checkCategory = YES;
-    [self checkMakeBtnState];
-}
-
-
-- (void)selectedMapCheckBtn:(UIButton *)sender {
-    
-    self.mapCheckBtnArr[sender.tag].selected = !self.mapCheckBtnArr[sender.tag].selected;
-
-    self.checkMap = NO;
-    for (UIButton *mapBtn in self.mapCheckBtnArr) {
-        if (mapBtn.selected == YES) {
-            self.checkMap = YES;
-            break;
-        }
-    }
-    [self checkMakeBtnState];
-}
-
-
-- (void)checkMakeBtnState {
-    if (self.checkName && self.checkCategory && self.checkMap) {
-        [self.makeBtn1 setEnabled:YES];
-        [self.makeBtn2 setEnabled:YES];
-        [self.makeBtn3 setEnabled:YES];
-    } else {
-        [self.makeBtn1 setEnabled:NO];
-        [self.makeBtn2 setEnabled:NO];
-        [self.makeBtn3 setEnabled:NO];
-    }
-}
-
-
-- (IBAction)selectedMakeBtn {
-    
-    NSString *mapStr = [[NSString alloc] init];
-    
-    for (NSInteger i=0 ; i < self.mapCheckBtnArr.count ; i++) {
-        if (self.mapCheckBtnArr[i].selected == YES) {
-            mapStr = [NSString stringWithFormat:@"%@ %d", mapStr, i];
-        }
-    }
-    
-    [self makePinWithName:self.pinNameTextField.text
-             withCategory:self.categoryLastSelectedBtn.tag
-          withSelectedMap:mapStr
-              withPrivate:self.publicSwitch.on];
-}
-
 - (IBAction)textFieldResignTapGesture:(id)sender {
     
     [self.pinNameTextField resignFirstResponder];
@@ -204,20 +148,112 @@
 //    }
 //}
 
+- (IBAction)selecedCategoryBtn:(UIButton *)sender {
+    NSLog(@"%d", sender.tag);
+    
+    // Radio Button
+    if (sender.tag != self.categoryLastSelectedBtn.tag) {
+        self.categoryLastSelectedBtn.selected = NO;
+        
+        self.categoryLastSelectedBtn = sender;
+        sender.selected = YES;
+    }
+    
+    self.checkCategory = YES;
+    [self checkMakeBtnState];
+}
+
+
+- (void)selectedMapCheckBtn:(UIButton *)sender {
+
+    if (self.mapCheckBtnArr[sender.tag] == self.mapLastSelectedBtn) {
+        self.mapLastSelectedBtn.selected = !self.mapLastSelectedBtn.selected;
+    } else {
+        // 누르면 해당 누른버튼 yes
+        self.mapCheckBtnArr[sender.tag].selected = YES;
+        // 라스트버튼값은 초기화
+        self.mapLastSelectedBtn.selected = NO;
+        // 해당 누른버튼을 라스트버튼으로
+        self.mapLastSelectedBtn = self.mapCheckBtnArr[sender.tag];
+    }
+    
+// 최소 한개이상의  맵체크했을 때 만들기 활성화. 삼항연산자 참이면 앞에꺼
+    self.checkMap = self.mapCheckBtnArr[sender.tag].selected ? YES : NO;
+// 같은 조건식.
+//    if (self.mapCheckBtnArr[sender.tag].selected) {
+//        // YES
+//        self.checkMap = YES;
+//    } else {
+//        // NO
+//        self.checkMap = NO;
+//    }
+
+    [self checkMakeBtnState];
+    
+    
+//    // 토글버튼. 체크된건 안되게, 안된건 되게
+//    self.mapCheckBtnArr[sender.tag].selected = !self.mapCheckBtnArr[sender.tag].selected;
+//    self.checkMap = NO;
+//
+//
+//    if (sender.tag != self.mapCheckBtnArr[sender.tag]) {
+//        self.mapLastSelectedBtn.selected = NO;
+//        self.mapLastSelectedBtn = sender;
+//        sender.selected = YES;
+//    }
+//    
+//
+//    for (UIButton *mapBtn in self.mapCheckBtnArr) {
+//        
+//        if (mapBtn.selected == YES) {
+//            self.checkMap = YES;
+//            break;
+//        }
+//    }
+//    [self checkMakeBtnState];
+}
+
+
+- (void)checkMakeBtnState {
+    if (self.checkName && self.checkCategory && self.checkMap) {
+        [self.makeBtn1 setEnabled:YES];
+        [self.makeBtn2 setEnabled:YES];
+        [self.makeBtn3 setEnabled:YES];
+    } else {
+        [self.makeBtn1 setEnabled:NO];
+        [self.makeBtn2 setEnabled:NO];
+        [self.makeBtn3 setEnabled:NO];
+    }
+}
+
+- (IBAction)selectedMakeBtn {
+    
+    NSString *mapStr = [[NSString alloc] init];
+    // string형태로 맵체크 정보를 저장. ex. 010112
+    for (NSInteger i=0 ; i < self.mapCheckBtnArr.count ; i++) {
+        if (self.mapCheckBtnArr[i].selected == YES) {
+            mapStr = [NSString stringWithFormat:@"%@ %d", mapStr, i];
+        }
+    }
+    
+    [self makePinWithName:self.pinNameTextField.text
+             withCategory:self.categoryLastSelectedBtn.tag
+          withSelectedMap:mapStr];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 // 아마 데이터 센터에 추가 될 메서드 (일단 예시로 여기다 만들어놓음)
 - (void)makePinWithName:(NSString *)name
            withCategory:(NSInteger)category
-        withSelectedMap:(NSString *)mapStr
-            withPrivate:(BOOL)private {
+        withSelectedMap:(NSString *)mapStr {
     // 알아서 안에서 데이터 처리~~~
     
     NSLog(@"name : %@", name);
-    NSLog(@"category : %ld", category);
+    NSLog(@"category : %d", category);
     NSLog(@"mapStr : %@", mapStr);
-    NSLog(@"private : %d", private);
 }
-
 
 
 

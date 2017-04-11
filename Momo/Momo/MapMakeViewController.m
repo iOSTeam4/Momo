@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
+@property (weak, nonatomic) IBOutlet UISwitch *secretSwitch;
 
 @end
 
@@ -48,11 +49,16 @@
     
 }
 
+- (IBAction)selectedPopViewBtn:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField.tag == 1) {
         [self.mapContentTextField becomeFirstResponder];
-        [self.scrollView setContentOffset:CGPointMake(0,50) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(0,200) animated:YES];
         
     } else {
         [self.mapContentTextField resignFirstResponder];
@@ -61,6 +67,12 @@
     }
     return YES;
 }
+
+- (IBAction)textFieldResignTapGesture:(id)sender {
+    [self.mapNameTextField resignFirstResponder];
+    [self.mapContentTextField resignFirstResponder];
+}
+
 
 // 핀이름 textfield에 space 입력했을때를 걸러내려고 --------------//
 - (void)mapNameTextFieldEditingChanged:(UITextField *)sender {
@@ -99,15 +111,37 @@
     }
 }
 
-- (IBAction)selectedPopViewBtn:(id)sender {
+- (IBAction)selectedMapMakeView:(id)sender {
+    
+    NSLog(@"새맵 만들어!");
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+    [self makeMapWithName:self.mapNameTextField.text
+           withMapContent:self.mapContentTextField.text
+              withPrivate:self.secretSwitch.on];
     
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
-- (IBAction)textFieldResignTapGesture:(id)sender {
-    [self.mapNameTextField resignFirstResponder];
-    [self.mapContentTextField resignFirstResponder];
+
+- (IBAction)flickedSecretSwitch:(id)sender {
+    NSLog(@"비밀지도 switch");
+    
 }
+
+// 아마 데이터 센터에 추가 될 메서드 (일단 예시로 여기다 만들어놓음)
+- (void)makeMapWithName:(NSString *)name
+           withMapContent:(NSString *)content
+            withPrivate:(BOOL)private {
+    // 알아서 안에서 데이터 처리~~~
+    
+    NSLog(@"name : %@", name);
+    NSLog(@"content : %@", content);
+    NSLog(@"private : %d", private);
+}
+
+
 
 
 /*
