@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class FAKFontAwesome;
+@class MomoUserDataSet;
 
 @interface DataCenter : NSObject
 
@@ -21,7 +21,6 @@
 
 
 @property (nonatomic) NSMutableArray *tabBarIconArr;    // 테스트용 탭바 아이콘 어레이
-
 @property (nonatomic) NSMutableArray *locationArr;      // 테스트용 위치 데이터 어레이
 
 
@@ -30,19 +29,23 @@
 // TabBar Item Icons
 - (NSArray *)getTabBarItemIconsArr;
 
-@end
 
 
+#pragma mark - MOMO 내 계정 Dataset 관련
+@property (nonatomic) MomoUserDataSet *momoUserData;    // Map, Pin, Post 전부 포함
+
+// Account Token 자동로그인 ------------------------------//
+#pragma mark - Auto Login / Token getter
+- (NSString *)getUserToken;
+//- (FBSDKAccessToken *)getUserFBToken;
 
 
-// Account Category : 계정 관련 -------------------------//
+// User Data 저장, 불러오기, 삭제 --------------------------//
+#pragma mark - MOMO User Data 저장, 불러오기, 삭제
+- (void)saveMomoUserData;   // 저장
+//- (void)fetchMomoUserData;  // 불러오기
+- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;
+- (void)removeMomoUserData; // 삭제
 
-@interface DataCenter (Account)
-
-#pragma mark - Token setter, getter, remover
-
-+ (NSString *)getUserToken;                             // Token get
-+ (void)setUserTokenWithStr:(NSString *)tokenStr;       // Token set
-+ (void)removeUserToken;                                // Token remove
 
 @end

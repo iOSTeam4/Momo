@@ -17,7 +17,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // App 전체 tint 컬러 적용
     [self.window setTintColor:[UIColor mm_brightSkyBlueColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];        // NaviBar Background Tint Color
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor mm_brightSkyBlueColor]}];  // NaviBar Title Tint Color
+
     
     // Google Analytics
     [self googleAnalyticsTrackerStart];
@@ -30,6 +34,7 @@
     // Facebook API
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+
     
     return YES;
 }
@@ -62,6 +67,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    if ([[DataCenter sharedInstance] getUserToken] != nil) {
+        [[DataCenter sharedInstance] saveMomoUserData];     // 앱 종료 전 데이터 저장
+    }
 }
     
     

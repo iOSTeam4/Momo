@@ -33,6 +33,22 @@
     self.loginBtn.layer.cornerRadius = self.loginBtn.frame.size.height/2;
     self.signUpBtn.layer.cornerRadius = self.signUpBtn.frame.size.height/2;
 
+    
+    // 앱 실행하면서, 토큰 값에 따라 유저 정보 패치
+    [self.indicator startAnimating];
+    
+    [[DataCenter sharedInstance] fetchMomoUserDataWithCompletionBlock:^(BOOL isSuccess) {
+        NSLog(@"fetchMomoUserDataWithCompletionBlock : %d", isSuccess);
+        
+        [self.indicator stopAnimating];
+        
+        if (isSuccess) {
+            [self autoLoginCheck];
+            
+        } else {
+            NSLog(@"토큰 정보 없음");
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -43,8 +59,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self autoLoginCheck];
+
+    [self autoLoginCheck];  // 오토 로그인 체크
 }
 
 // NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
@@ -64,11 +80,11 @@
     
     NSLog(@"autoLoginCheck");
     
-    if ([DataCenter getUserToken]) {
+    if ([[DataCenter sharedInstance] getUserToken]) {
         // Token이 없으면 nil : NO, 있으면 YES
-        NSLog(@"Token : %@", [DataCenter getUserToken]);
+        NSLog(@"Token : %@", [[DataCenter sharedInstance] getUserToken]);
         
-        //        sleep(3);       // 3초 후 dismiss
+//        sleep(3);       // 3초 후 dismiss
 //        [self dismissViewControllerAnimated:YES completion:nil];
         
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -78,9 +94,8 @@
         [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
         
     } else {
-        NSLog(@"토큰 정보 없음, Login View로 이동");
+        NSLog(@"토큰 정보 없음");
     }
-    
 }
 
 
@@ -89,32 +104,35 @@
 - (IBAction)fbBtnAction:(id)sender {
     [self.indicator startAnimating];
     
-    [NetworkModule FacebookLoginFromVC:self
-                   WithCompletionBlock:^(BOOL isSuccess, NSString *token) {
-                       
-                      [self.indicator stopAnimating];
-                       
-                       if (isSuccess) {
-                           NSLog(@"로그인 성공");
-                           [self autoLoginCheck];
-                       
-                       } else {
-                           // 일단 Facebook 계정의 경우엔 Alert창을 안띄우는게 더 자연스러운 것 같아 주석처리
-//                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-//                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
-//                                                                                             preferredStyle:UIAlertControllerStyleAlert];
-//                           
-//                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-//                                                                              style:UIAlertActionStyleDefault
-//                                                                            handler:^(UIAlertAction * _Nonnull action) {
-//                                                                                NSLog(@"확인버튼이 클릭되었습니다");
-//                                                                            }];
-//                           [alertController addAction:okButton];
-//                           
-//                           [self presentViewController:alertController animated:YES completion:nil];
-                           
-                       }
-                   }];
+    [FacebookModule fbLoginFromVC:self
+              withCompletionBlock:^(BOOL isSuccess, NSString *token) {
+                  
+                  [self.indicator stopAnimating];
+                  
+                  if (isSuccess) {
+                      NSLog(@"로그인 성공");
+                      
+                      [[DataCenter sharedInstance] saveMomoUserData];
+                      
+                      [self autoLoginCheck];
+                      
+                  } else {
+                      // 일단 Facebook 계정의 경우엔 Alert창을 안띄우는게 더 자연스러운 것 같아 주석처리
+                      //                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                      //                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
+                      //                                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                      //
+                      //                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                      //                                                                              style:UIAlertActionStyleDefault
+                      //                                                                            handler:^(UIAlertAction * _Nonnull action) {
+                      //                                                                                NSLog(@"확인버튼이 클릭되었습니다");
+                      //                                                                            }];
+                      //                           [alertController addAction:okButton];
+                      //
+                      //                           [self presentViewController:alertController animated:YES completion:nil];
+                      
+                  }
+              }];
 }
 
 

@@ -10,7 +10,6 @@
 #import "UserProfileHeaderView.h"
 #import "UserAccountEditViewController.h"
 
-
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate>
 
 @property (nonatomic) NSArray *mapPinDataArr;
@@ -64,13 +63,20 @@
                                                           
                                                           [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
                                                               if (isSuccess) {
-                                                                  UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-                                                                  UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+                                                                  NSLog(@"log out success");
                                                                   
-                                                                  [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-                                                                  [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+                                                              } else {
+                                                                  NSLog(@"log out fail");
                                                               }
                                                           }];
+                                                          
+                                                          // 블럭에 넣어 기다리지 않고, 바로 로그아웃
+                                                          UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+                                                          UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+                                                          
+                                                          [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+                                                          [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+
                                                       }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
@@ -142,6 +148,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
     
     UITableViewCell *cell;
     
@@ -150,6 +157,7 @@
     } else if (self.mapPinNum == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
     }
+    
     return cell;
 }
 

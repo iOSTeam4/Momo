@@ -29,6 +29,8 @@
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
 		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
 		3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */; };
+		3FC77F4E1E9B7DDA009921D5 /* MomoDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */; };
+		3FC77F511E9C066A009921D5 /* FacebookModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC77F501E9C066A009921D5 /* FacebookModule.m */; };
 		3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */; };
 		3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E61E93B59800AFBB3A /* UIFont+MMAdditions.m */; };
 		3FD392EF1E93C92600AFBB3A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392EE1E93C92600AFBB3A /* MyViewController.m */; };
@@ -89,6 +91,10 @@
 		3F9C27CE1E8A48C6008DD04A /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
 		3F9C27D01E8A48D3008DD04A /* PinView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinView.storyboard; sourceTree = "<group>"; };
 		3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3FC77F4C1E9B7DDA009921D5 /* MomoDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomoDataSet.h; sourceTree = "<group>"; };
+		3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomoDataSet.m; sourceTree = "<group>"; };
+		3FC77F4F1E9C066A009921D5 /* FacebookModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookModule.h; sourceTree = "<group>"; };
+		3FC77F501E9C066A009921D5 /* FacebookModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookModule.m; sourceTree = "<group>"; };
 		3FD392E31E93B59800AFBB3A /* UIColor+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MMAdditions.h"; sourceTree = "<group>"; };
 		3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MMAdditions.m"; sourceTree = "<group>"; };
 		3FD392E51E93B59800AFBB3A /* UIFont+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MMAdditions.h"; sourceTree = "<group>"; };
@@ -203,6 +209,8 @@
 				3F745F601E891728001B87F0 /* NetworkModule.m */,
 				3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */,
 				3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */,
+				3FC77F4F1E9C066A009921D5 /* FacebookModule.h */,
+				3FC77F501E9C066A009921D5 /* FacebookModule.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -327,6 +335,8 @@
 				3FD9A5511E88F12600B965A7 /* DataCenter.m */,
 				3FF1344C1E926248003B1822 /* RealmDB.h */,
 				3FF1344D1E926248003B1822 /* RealmDB.m */,
+				3FC77F4C1E9B7DDA009921D5 /* MomoDataSet.h */,
+				3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -512,7 +522,9 @@
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
+				3FC77F511E9C066A009921D5 /* FacebookModule.m in Sources */,
 				3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */,
+				3FC77F4E1E9B7DDA009921D5 /* MomoDataSet.m in Sources */,
 				EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */,
 				3F395E581E961FC8009F082D /* UserProfileHeaderView.m in Sources */,
 				3F5D69CD1E9A752300129C90 /* UserProfileEditViewController.m in Sources */,

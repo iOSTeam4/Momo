@@ -23,54 +23,6 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
 
 
 
-// Facebook account -------------------------------//
-#pragma mark - Facebook Auth Account Methods
-
-// FBSDKLoginManager Singleton Instance
-+ (FBSDKLoginManager *)sharedFBLoginManeger {
-    
-    static FBSDKLoginManager *fbLoginManeger;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        fbLoginManeger = [[FBSDKLoginManager alloc] init];
-    });
-    
-    return fbLoginManeger;
-}
-
-
-
-// Facebook Login (& Sign Up)
-+ (void)FacebookLoginFromVC:(UIViewController *)fromVC
-        WithCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock {
-    
-    
-    [[self sharedFBLoginManeger] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
-                                       fromViewController:fromVC
-                                                  handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                                      if (error == nil) {
-                                                          
-                                                          NSLog(@"Current Token : %@ | Token String : %@", [FBSDKAccessToken currentAccessToken],[FBSDKAccessToken currentAccessToken].tokenString);
-                                                          
-                                                          if (!result.isCancelled) {
-                                                              [DataCenter setUserTokenWithStr: [FBSDKAccessToken currentAccessToken].tokenString];
-                                                          }
-                                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                                              completionBlock(!result.isCancelled, result.token.tokenString);    // isCancelled가 NO면 참
-                                                          });
-                                                          
-                                                      } else {
-                                                          NSLog(@"network error code %ld", error.code);
-                                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                                              completionBlock(NO, nil);
-                                                          });
-                                                      }
-                                                  }];
-}
-
-
-
 
 // E-mail account ---------------------------------//
 #pragma mark - E-mail Auth Account Methods
@@ -103,13 +55,17 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                             NSLog(@"%@",[responseDic objectForKey:@"key"]);
                                                             
-                                                            [DataCenter setUserTokenWithStr:[responseDic objectForKey:@"key"]];
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
-                                                            });
+                                                            [self getUserProfileInfosWithToken:[responseDic objectForKey:@"key"] withCompletionBlock:^(MomoUserDataSet *momoUserData) {
+                                                                
+                                                                [DataCenter sharedInstance].momoUserData = momoUserData;
+                                                                
+                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
+                                                                });
+                                                            }];
                                                             
                                                         } else {
-                                                            NSLog(@"network error code %ld", error.code);
+                                                            NSLog(@"network error : %@", error.description);
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 completionBlock(NO, nil);
@@ -147,14 +103,17 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                             NSLog(@"%@",[responseDic objectForKey:@"key"]);
                                                             
-                                                            [DataCenter setUserTokenWithStr:[responseDic objectForKey:@"key"]];
-                                                            
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
-                                                            });
-                                                            
+                                                            [self getUserProfileInfosWithToken:[responseDic objectForKey:@"key"] withCompletionBlock:^(MomoUserDataSet *momoUserData) {
+                                                                
+                                                                [DataCenter sharedInstance].momoUserData = momoUserData;
+                                                                
+                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
+                                                                });
+                                                            }];
+                                                
                                                         } else {
-                                                            NSLog(@"network error code %ld", error.code);
+                                                            NSLog(@"network error : %@", error.description);
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 completionBlock(NO, nil);
@@ -172,13 +131,17 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
 // Log Out (Facebook & e-mail 계정)
 + (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock {
     
-    // 토큰 삭제
-    [DataCenter removeUserToken];
+    NSLog(@"로그아웃, token : %@", [[DataCenter sharedInstance] getUserToken]);
+    [[DataCenter sharedInstance] removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
+    NSLog(@"초기화 완료 -> token : %@", [[DataCenter sharedInstance] getUserToken]);
+    
     
     if ([FBSDKAccessToken currentAccessToken]) { // Facebook 계정
         NSLog(@"Facebook Log out");
         
-        [[self sharedFBLoginManeger] logOut];
+        [FacebookModule fbLogOut];
+//        [[DataCenter sharedInstance] removeMomoUserData];       // 토큰을 비롯한 유저 데이터 삭제
+
         completionBlock(YES, nil);
         
     } else {        // e-mail 계정
@@ -192,7 +155,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         
         // 헤더 세팅
-        [request addValue:[NSString stringWithFormat:@"token %@", [DataCenter getUserToken]] forHTTPHeaderField:@"Authorization"];
+        [request addValue:[NSString stringWithFormat:@"token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
         
         request.HTTPBody = [@"" dataUsingEncoding:NSUTF8StringEncoding];        // @"" 왜 넣어야하지?
         request.HTTPMethod = @"POST";
@@ -209,16 +172,14 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             if (error == nil) {
                                                                 NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                                 
-                                                                NSLog(@"로그아웃, token : %@", [DataCenter getUserToken]);
-                                                                [DataCenter removeUserToken];
-                                                                NSLog(@"초기화 완료 -> token : %@", [DataCenter getUserToken]);
+//                                                                [[DataCenter sharedInstance] removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
                                                                 
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     completionBlock(YES, responseDic);
                                                                 });
                                                                 
                                                             } else {
-                                                                NSLog(@"network error code %ld", error.code);
+                                                                NSLog(@"network error : %@", error.description);
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     completionBlock(NO, nil);
                                                                 });
@@ -227,6 +188,18 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
         
         [postTask resume];
     }
+}
+
+
+// 서버로부터 유저 정보들 받아오는 메서드
++ (void)getUserProfileInfosWithToken:(NSString *)token withCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock {
+    NSLog(@"getUserProfileInfosWithToken, token : %@", token);
+    MomoUserDataSet *momoUserData = [[MomoUserDataSet alloc] init];
+    momoUserData.user_token = token;
+    
+    // 서버로부터 유저 정보 받아와 세팅할 부분
+    
+    completionBlock(momoUserData);
 }
 
 

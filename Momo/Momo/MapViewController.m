@@ -129,7 +129,7 @@
 //        marker.infoWindowAnchor = CGPointMake(0.5f, 0.0f);
         
         PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithArr:arr withZoomCase:self.currentZoomCase];
-        marker.icon = [pinMarkerView imageFromViewForMarker];
+        marker.iconView = pinMarkerView;
         marker.map = self.mapView;
     }
     

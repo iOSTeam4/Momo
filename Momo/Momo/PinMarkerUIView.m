@@ -210,21 +210,4 @@
 
 
 
-// UIView to UIImage ---------------------------------------//
-
-- (UIImage *)imageFromViewForMarker {
-    
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, [[UIScreen mainScreen] scale]);
-    } else {
-        UIGraphicsBeginImageContext(self.frame.size);
-    }
-    [self.layer renderInContext: UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-    return image;
-}
-
-
 @end

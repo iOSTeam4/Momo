@@ -91,7 +91,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaC-BX-6Hc">
-                                <rect key="frame" x="278" y="315" width="97" height="29"/>
+                                <rect key="frame" x="278" y="316" width="97" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zaC-BX-6Hc" secondAttribute="height" multiplier="10:3" id="zRH-Uh-A8m"/>
                                 </constraints>

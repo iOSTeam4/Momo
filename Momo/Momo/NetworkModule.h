@@ -10,15 +10,9 @@
 
 @interface NetworkModule : NSObject
 
-
-
-// Facebook account -------------------------------//
-#pragma mark - Facebook Auth Account Methods
-
-// Facebook Login (& Sign Up)
-+ (void)FacebookLoginFromVC:(UIViewController *)fromVC
-        WithCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock ;
-
+/////////////////////////////////////////////////////
+// Account 관련 ------------------------------------//
+/////////////////////////////////////////////////////
 
 
 // E-mail account ---------------------------------//
@@ -38,9 +32,14 @@
 
 
 // Common ----------------------------------------//
+
 #pragma mark - Account Common Methods
 // Log Out
 + (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock;
+
+
+// 서버로부터 유저 정보들 받아오는 메서드
++ (void)getUserProfileInfosWithToken:(NSString *)token withCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock;
 
 
 @end

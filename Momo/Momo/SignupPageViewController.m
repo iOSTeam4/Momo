@@ -116,32 +116,32 @@
 - (IBAction)fbBtnAction:(id)sender {
     [self.indicator startAnimating];
     
-    [NetworkModule FacebookLoginFromVC:self
-                   WithCompletionBlock:^(BOOL isSuccess, NSString *token) {
+    [FacebookModule fbLoginFromVC:self
+              withCompletionBlock:^(BOOL isSuccess, NSString *token) {
                        
-                       [self.indicator stopAnimating];
-                       
-                       if (isSuccess) {
-                           NSLog(@"로그인 성공");
-                           [self.navigationController popToRootViewControllerAnimated:NO];
-                           
-                       } else {
-                           // 일단 Facebook 계정의 경우엔 Alert창을 안띄우는게 더 자연스러운 것 같아 주석처리
-//                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-//                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
-//                                                                                             preferredStyle:UIAlertControllerStyleAlert];
-//                           
-//                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-//                                                                              style:UIAlertActionStyleDefault
-//                                                                            handler:^(UIAlertAction * _Nonnull action) {
-//                                                                                NSLog(@"확인버튼이 클릭되었습니다");
-//                                                                            }];
-//                           [alertController addAction:okButton];
-//                           
-//                           [self presentViewController:alertController animated:YES completion:nil];
-                           
-                       }
-                   }];
+                  [self.indicator stopAnimating];
+                  
+                  if (isSuccess) {
+                      NSLog(@"로그인 성공");
+                      [self.navigationController popToRootViewControllerAnimated:NO];
+                      
+                  } else {
+                      // 일단 Facebook 계정의 경우엔 Alert창을 안띄우는게 더 자연스러운 것 같아 주석처리
+                      //                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                      //                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
+                      //                                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                      //
+                      //                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                      //                                                                              style:UIAlertActionStyleDefault
+                      //                                                                            handler:^(UIAlertAction * _Nonnull action) {
+                      //                                                                                NSLog(@"확인버튼이 클릭되었습니다");
+                      //                                                                            }];
+                      //                           [alertController addAction:okButton];
+                      //
+                      //                           [self presentViewController:alertController animated:YES completion:nil];
+                      
+                  }
+              }];
 }
 
 
