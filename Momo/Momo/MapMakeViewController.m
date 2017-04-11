@@ -11,6 +11,8 @@
 @interface MapMakeViewController ()
 <UITextFieldDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *mapNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *mapContentTextField;
 
@@ -50,8 +52,12 @@
     
     if (textField.tag == 1) {
         [self.mapContentTextField becomeFirstResponder];
+        [self.scrollView setContentOffset:CGPointMake(0,50) animated:YES];
+        
     } else {
         [self.mapContentTextField resignFirstResponder];
+        [self.scrollView setContentOffset:CGPointMake(0,0) animated:YES];
+
     }
     return YES;
 }
@@ -97,6 +103,12 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)textFieldResignTapGesture:(id)sender {
+    [self.mapNameTextField resignFirstResponder];
+    [self.mapContentTextField resignFirstResponder];
+}
+
 
 /*
  #pragma mark - Navigation

@@ -174,7 +174,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahz-GM-dId">
-                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
+                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ahz-GM-dId" secondAttribute="height" id="Pnw-ZC-Xxo"/>
                                                         </constraints>
@@ -279,6 +279,7 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="Wj6-vx-ubH" firstAttribute="leading" secondItem="A2R-Uh-CtU" secondAttribute="leading" id="10i-HY-Azy"/>
                                             <constraint firstItem="A2R-Uh-CtU" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="2VT-BZ-OFp"/>
@@ -325,6 +326,9 @@
                                             <constraint firstItem="8DW-Tr-Y9V" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="z4L-h6-sBo"/>
                                             <constraint firstItem="cKR-eT-24o" firstAttribute="leading" secondItem="A2R-Uh-CtU" secondAttribute="leading" id="zFK-Q9-k3X"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="1Ft-al-43E" appends="YES" id="8nn-d7-ydx"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -359,6 +363,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52q-nU-915" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1Ft-al-43E">
+                    <connections>
+                        <action selector="textFieldResignTapGesture:" destination="7Os-gD-gL4" id="9EZ-Vc-7jB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="708" y="178"/>
         </scene>
@@ -500,6 +509,7 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="496-zH-Mjr" firstAttribute="top" secondItem="2mj-So-7vy" secondAttribute="top" constant="60" id="01Y-gb-Er7"/>
                                             <constraint firstItem="WyY-Dn-VqG" firstAttribute="top" secondItem="ql8-UR-VF4" secondAttribute="bottom" constant="45" id="1Ij-H0-6k7"/>
@@ -540,6 +550,9 @@
                                             <constraint firstItem="fxu-4O-aZu" firstAttribute="width" secondItem="eiA-ep-E5t" secondAttribute="width" id="vo6-F1-hdI"/>
                                             <constraint firstAttribute="trailing" secondItem="fxu-4O-aZu" secondAttribute="trailing" constant="24" id="yax-5A-xfK"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="b4K-SP-EXO" appends="YES" id="q79-o7-iBq"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -566,9 +579,15 @@
                         <outlet property="makeBtn3" destination="fxu-4O-aZu" id="ALQ-LE-xs0"/>
                         <outlet property="mapContentTextField" destination="noZ-ZW-5uw" id="QQX-nQ-E0k"/>
                         <outlet property="mapNameTextField" destination="X7r-8Z-VJj" id="NmJ-gc-6zo"/>
+                        <outlet property="scrollView" destination="TH3-0a-Fhx" id="TrN-Tc-paO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tk5-6K-Zy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="b4K-SP-EXO">
+                    <connections>
+                        <action selector="textFieldResignTapGesture:" destination="Ppv-D8-ji0" id="tBo-m7-HrB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1423" y="178"/>
         </scene>
