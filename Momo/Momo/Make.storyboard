@@ -87,10 +87,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgX-eJ-HrK" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="683.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="600.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfq-Kc-GvB" userLabel="back">
-                                                <rect key="frame" x="26" y="20" width="44" height="44"/>
+                                                <rect key="frame" x="24" y="20" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Jdw-OW-uut"/>
                                                     <constraint firstAttribute="width" constant="44" id="Z8c-yN-fgP"/>
@@ -108,7 +108,7 @@
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
-                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="eHx-3X-SHU"/>
+                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="kkl-ae-yHj"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 핀 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYK-ST-Zie">
@@ -149,10 +149,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="IjB-WE-olU">
-                                                <rect key="frame" x="26" y="305" width="349" height="66.5"/>
+                                                <rect key="frame" x="26" y="305" width="339" height="64.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rg-dd-ygY">
-                                                        <rect key="frame" x="0.0" y="0.0" width="66.5" height="66.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="64.5" height="64.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="3rg-dd-ygY" secondAttribute="height" id="u7T-Uk-Eth"/>
                                                         </constraints>
@@ -163,7 +163,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-SJ-3B7">
-                                                        <rect key="frame" x="70.5" y="0.0" width="66.5" height="66.5"/>
+                                                        <rect key="frame" x="68.5" y="0.0" width="64.5" height="64.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="eO0-SJ-3B7" secondAttribute="height" id="5Yn-2d-Ulb"/>
                                                         </constraints>
@@ -174,7 +174,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahz-GM-dId">
-                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
+                                                        <rect key="frame" x="137" y="0.0" width="65" height="64.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ahz-GM-dId" secondAttribute="height" id="Pnw-ZC-Xxo"/>
                                                         </constraints>
@@ -185,7 +185,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2e-p3-fxh">
-                                                        <rect key="frame" x="212" y="0.0" width="66.5" height="66.5"/>
+                                                        <rect key="frame" x="206" y="0.0" width="64.5" height="64.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="L2e-p3-fxh" secondAttribute="height" id="gW0-HP-YKb"/>
                                                         </constraints>
@@ -196,7 +196,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsG-nD-nQ5">
-                                                        <rect key="frame" x="282.5" y="0.0" width="66.5" height="66.5"/>
+                                                        <rect key="frame" x="274.5" y="0.0" width="64.5" height="64.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="MsG-nD-nQ5" secondAttribute="height" id="HC2-wT-fgv"/>
                                                         </constraints>
@@ -209,13 +209,13 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="핀을 만들 지도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DW-Tr-Y9V">
-                                                <rect key="frame" x="26" y="411.5" width="114.5" height="24"/>
+                                                <rect key="frame" x="26" y="409.5" width="114.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDP-36-fCu">
-                                                <rect key="frame" x="26" y="445.5" width="29" height="29"/>
+                                                <rect key="frame" x="26" y="443.5" width="29" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="29" id="Lts-D6-luY"/>
                                                     <constraint firstAttribute="width" constant="29" id="ucm-9Q-Euj"/>
@@ -224,7 +224,7 @@
                                                 <state key="selected" image="mapCheckBtnS"/>
                                             </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기억할만한 장소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5o-AC-EWd">
-                                                <rect key="frame" x="85" y="449.5" width="130" height="20"/>
+                                                <rect key="frame" x="85" y="447.5" width="130" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="5Ox-5C-4kE"/>
                                                     <constraint firstAttribute="width" constant="130" id="poT-ZD-Y32"/>
@@ -234,26 +234,22 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockBtnClose" translatesAutoresizingMaskIntoConstraints="NO" id="w21-9b-yta">
-                                                <rect key="frame" x="62" y="450.5" width="15" height="19"/>
+                                                <rect key="frame" x="62" y="448.5" width="15" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="15" id="q91-O6-vEY"/>
                                                     <constraint firstAttribute="height" constant="19" id="xGf-fs-Vhn"/>
                                                 </constraints>
                                             </imageView>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="60R-41-3Ex">
-                                                <rect key="frame" x="26" y="524.5" width="51" height="31"/>
-                                                <color key="onTintColor" red="0.33119907980000002" green="0.7146651745" blue="0.97653818130000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </switch>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANm-pj-EFx" userLabel="makeBtnBottom">
-                                                <rect key="frame" x="310" y="590" width="41" height="39"/>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANm-pj-EFx" userLabel="makeBtn3">
+                                                <rect key="frame" x="310" y="507" width="41" height="39"/>
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
-                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="doF-8C-4FX"/>
+                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="NSw-J9-5us"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pN-Wg-EvK">
-                                                <rect key="frame" x="193" y="585.5" width="107" height="48"/>
+                                                <rect key="frame" x="193" y="502.5" width="107" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="만들기">
                                                     <color key="titleColor" red="0.32737913730000001" green="0.71068596839999998" blue="0.97653865809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -265,33 +261,20 @@
                                                     <color key="titleColor" red="0.31593313810000001" green="0.69874501229999997" blue="0.97654020789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="ZQF-Za-bNH"/>
+                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="1p7-F6-CsH"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이 핀을 비밀로 하시겠어요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro7-JB-2DM">
-                                                <rect key="frame" x="92" y="528" width="250" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="ro7-JB-2DM" secondAttribute="height" multiplier="125:12" id="VB8-9C-PtQ"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" red="0.31593313810000001" green="0.69874501229999997" blue="0.97654020789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="Wj6-vx-ubH" firstAttribute="leading" secondItem="A2R-Uh-CtU" secondAttribute="leading" id="10i-HY-Azy"/>
                                             <constraint firstItem="A2R-Uh-CtU" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="2VT-BZ-OFp"/>
-                                            <constraint firstItem="ro7-JB-2DM" firstAttribute="width" secondItem="XgX-eJ-HrK" secondAttribute="width" multiplier="1:1.5" id="3mR-Ao-L5K"/>
-                                            <constraint firstItem="6pN-Wg-EvK" firstAttribute="top" secondItem="60R-41-3Ex" secondAttribute="bottom" constant="30" id="3wY-0M-NLu"/>
                                             <constraint firstItem="6pN-Wg-EvK" firstAttribute="width" secondItem="mYK-ST-Zie" secondAttribute="width" multiplier="1:1.5" id="8Gu-a1-9fT"/>
                                             <constraint firstItem="w21-9b-yta" firstAttribute="centerY" secondItem="fDP-36-fCu" secondAttribute="centerY" id="8dW-dd-769"/>
                                             <constraint firstItem="V5o-AC-EWd" firstAttribute="centerY" secondItem="fDP-36-fCu" secondAttribute="centerY" id="Bif-er-rDH"/>
                                             <constraint firstItem="A2R-Uh-CtU" firstAttribute="width" secondItem="mYK-ST-Zie" secondAttribute="width" id="Dx2-WE-cYl"/>
                                             <constraint firstItem="w21-9b-yta" firstAttribute="leading" secondItem="fDP-36-fCu" secondAttribute="leading" constant="36" id="H6m-eV-G2j"/>
-                                            <constraint firstItem="60R-41-3Ex" firstAttribute="top" secondItem="fDP-36-fCu" secondAttribute="bottom" constant="50.5" id="HkP-CU-F5g"/>
-                                            <constraint firstAttribute="bottom" secondItem="6pN-Wg-EvK" secondAttribute="bottom" constant="50" id="Hkg-Nv-54M"/>
                                             <constraint firstItem="mYK-ST-Zie" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="Hwj-2Q-aj1"/>
                                             <constraint firstAttribute="trailing" secondItem="Wj6-vx-ubH" secondAttribute="trailing" constant="20" id="IxH-CB-MSY"/>
                                             <constraint firstItem="V5o-AC-EWd" firstAttribute="leading" secondItem="fDP-36-fCu" secondAttribute="trailing" constant="30" id="Jav-PG-oRA"/>
@@ -305,9 +288,9 @@
                                             <constraint firstItem="IjB-WE-olU" firstAttribute="top" secondItem="fAT-Qz-bS9" secondAttribute="bottom" constant="10" id="Wcw-5g-Hb9"/>
                                             <constraint firstItem="8DW-Tr-Y9V" firstAttribute="width" secondItem="A2R-Uh-CtU" secondAttribute="height" multiplier="19:4" id="asm-Q8-F5G"/>
                                             <constraint firstItem="8DW-Tr-Y9V" firstAttribute="top" secondItem="IjB-WE-olU" secondAttribute="bottom" constant="40" id="brZ-1Y-SW0"/>
+                                            <constraint firstItem="6pN-Wg-EvK" firstAttribute="top" secondItem="fDP-36-fCu" secondAttribute="bottom" constant="30" id="cUn-cL-Y3U"/>
                                             <constraint firstItem="cKR-eT-24o" firstAttribute="top" secondItem="A2R-Uh-CtU" secondAttribute="bottom" constant="45" id="cpQ-Rn-djL"/>
                                             <constraint firstItem="cfq-Kc-GvB" firstAttribute="top" secondItem="XgX-eJ-HrK" secondAttribute="top" constant="20" id="dxG-Sl-hJB"/>
-                                            <constraint firstItem="60R-41-3Ex" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="ekB-cG-59S"/>
                                             <constraint firstItem="ANm-pj-EFx" firstAttribute="height" secondItem="SEj-XY-4NS" secondAttribute="height" id="gKW-J1-hme"/>
                                             <constraint firstItem="mYK-ST-Zie" firstAttribute="width" secondItem="XgX-eJ-HrK" secondAttribute="width" multiplier="3:7" id="gQF-WX-T8m"/>
                                             <constraint firstItem="ANm-pj-EFx" firstAttribute="centerY" secondItem="6pN-Wg-EvK" secondAttribute="centerY" id="jZu-Jd-Qee"/>
@@ -318,11 +301,10 @@
                                             <constraint firstItem="mYK-ST-Zie" firstAttribute="top" secondItem="XgX-eJ-HrK" secondAttribute="top" constant="60" id="mAA-YE-nGs"/>
                                             <constraint firstItem="ANm-pj-EFx" firstAttribute="leading" secondItem="6pN-Wg-EvK" secondAttribute="trailing" constant="10" id="nLE-cZ-uHK"/>
                                             <constraint firstItem="fDP-36-fCu" firstAttribute="top" secondItem="8DW-Tr-Y9V" secondAttribute="bottom" constant="10" id="pzw-7y-PLQ"/>
-                                            <constraint firstItem="ro7-JB-2DM" firstAttribute="centerY" secondItem="60R-41-3Ex" secondAttribute="centerY" id="s7t-A7-jY8"/>
                                             <constraint firstItem="fDP-36-fCu" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="sXy-Ec-2Rc"/>
                                             <constraint firstItem="A2R-Uh-CtU" firstAttribute="top" secondItem="mYK-ST-Zie" secondAttribute="bottom" constant="54" id="tXG-Vn-4dt"/>
-                                            <constraint firstItem="cfq-Kc-GvB" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="voK-2A-FYC"/>
-                                            <constraint firstItem="ro7-JB-2DM" firstAttribute="leading" secondItem="60R-41-3Ex" secondAttribute="trailing" constant="17" id="yAD-z6-pRq"/>
+                                            <constraint firstAttribute="bottom" secondItem="6pN-Wg-EvK" secondAttribute="bottom" constant="50" id="ub4-OW-3YZ"/>
+                                            <constraint firstItem="cfq-Kc-GvB" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="24" id="voK-2A-FYC"/>
                                             <constraint firstItem="8DW-Tr-Y9V" firstAttribute="leading" secondItem="XgX-eJ-HrK" secondAttribute="leading" constant="26" id="z4L-h6-sBo"/>
                                             <constraint firstItem="cKR-eT-24o" firstAttribute="leading" secondItem="A2R-Uh-CtU" secondAttribute="leading" id="zFK-Q9-k3X"/>
                                         </constraints>
@@ -347,7 +329,7 @@
                             <constraint firstItem="szP-4k-mIj" firstAttribute="centerY" secondItem="B9g-1u-eUh" secondAttribute="centerY" id="8yn-mo-QVY"/>
                             <constraint firstItem="szP-4k-mIj" firstAttribute="width" secondItem="B9g-1u-eUh" secondAttribute="width" id="Ans-gO-cNL"/>
                             <constraint firstItem="IjB-WE-olU" firstAttribute="leading" secondItem="B9g-1u-eUh" secondAttribute="leading" constant="26" id="bcM-tL-cAQ"/>
-                            <constraint firstItem="IjB-WE-olU" firstAttribute="width" secondItem="B9g-1u-eUh" secondAttribute="width" constant="-26" id="fDF-fO-veN"/>
+                            <constraint firstItem="IjB-WE-olU" firstAttribute="width" secondItem="B9g-1u-eUh" secondAttribute="width" constant="-36" id="fDF-fO-veN"/>
                             <constraint firstItem="szP-4k-mIj" firstAttribute="height" secondItem="B9g-1u-eUh" secondAttribute="height" id="kqG-0i-B5m"/>
                         </constraints>
                     </view>
@@ -357,9 +339,8 @@
                         <outlet property="makeBtn3" destination="ANm-pj-EFx" id="cc0-6d-awa"/>
                         <outlet property="mapCheckRefOriginY" destination="fDP-36-fCu" id="gH8-lv-wno"/>
                         <outlet property="pinNameTextField" destination="Wj6-vx-ubH" id="fOE-5Z-5X1"/>
-                        <outlet property="publicSwitch" destination="60R-41-3Ex" id="TCB-kO-WRr"/>
                         <outlet property="scrContentView" destination="XgX-eJ-HrK" id="Y4B-Ah-x2p"/>
-                        <outlet property="segmentedTopMargin" destination="HkP-CU-F5g" id="aoK-3c-Ft4"/>
+                        <outlet property="segmentedTopMargin" destination="cUn-cL-Y3U" id="eOB-aa-Y94"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52q-nU-915" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -397,7 +378,7 @@
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
-                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="lKg-cW-ofy"/>
+                                                    <action selector="selectedMapMakeView:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="32c-Rc-ryD"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 맵 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="496-zH-Mjr">
@@ -435,14 +416,14 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3s-6W-f94" userLabel="back">
-                                                <rect key="frame" x="26" y="20" width="44" height="44"/>
+                                                <rect key="frame" x="24" y="20" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="Pq8-uq-xVY"/>
                                                     <constraint firstAttribute="height" constant="44" id="SWC-GT-nRg"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="backAndOneLineTitle"/>
                                                 <connections>
-                                                    <action selector="selectedPopViewBtn:" destination="7Os-gD-gL4" eventType="touchUpInside" id="dQM-3K-fIh"/>
+                                                    <action selector="selectedPopViewBtn:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="cdS-KP-Ffv"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="맵 설명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7Z-zN-snY">
@@ -473,6 +454,9 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AW9-UE-u9e">
                                                 <rect key="frame" x="26" y="404" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.33119907980000002" green="0.7146651745" blue="0.97653818130000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <connections>
+                                                    <action selector="flickedSecretSwitch:" destination="Ppv-D8-ji0" eventType="valueChanged" id="gXj-Ah-ekr"/>
+                                                </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀 지도로 만드시겠어요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pS6-is-Ht8">
                                                 <rect key="frame" x="92" y="407.5" width="250" height="24"/>
@@ -488,7 +472,7 @@
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
-                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="pwr-ji-8BH"/>
+                                                    <action selector="selectedMapMakeView:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="mvK-R0-sBU"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WeS-GQ-jtJ">
@@ -504,7 +488,7 @@
                                                     <color key="titleColor" red="0.31593313810000001" green="0.69874501229999997" blue="0.97654020789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="91W-qH-YAf"/>
+                                                    <action selector="selectedMapMakeView:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="MsD-lq-xRP"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -518,7 +502,7 @@
                                             <constraint firstItem="uoX-w5-ZGT" firstAttribute="top" secondItem="I7Z-zN-snY" secondAttribute="bottom" constant="45" id="2Vb-zj-vEE"/>
                                             <constraint firstAttribute="trailing" secondItem="uoX-w5-ZGT" secondAttribute="trailing" constant="-2" id="5AV-2w-EBP"/>
                                             <constraint firstItem="uoX-w5-ZGT" firstAttribute="leading" secondItem="I7Z-zN-snY" secondAttribute="leading" id="6Gb-TK-vhj"/>
-                                            <constraint firstItem="E3s-6W-f94" firstAttribute="leading" secondItem="2mj-So-7vy" secondAttribute="leading" constant="26" id="F2V-lc-EUF"/>
+                                            <constraint firstItem="E3s-6W-f94" firstAttribute="leading" secondItem="2mj-So-7vy" secondAttribute="leading" constant="24" id="F2V-lc-EUF"/>
                                             <constraint firstItem="WeS-GQ-jtJ" firstAttribute="width" secondItem="496-zH-Mjr" secondAttribute="width" multiplier="1:1.5" id="FQj-Hv-CyY"/>
                                             <constraint firstItem="X7r-8Z-VJj" firstAttribute="top" secondItem="ql8-UR-VF4" secondAttribute="bottom" constant="10" id="Flg-SS-Y41"/>
                                             <constraint firstItem="pS6-is-Ht8" firstAttribute="centerY" secondItem="AW9-UE-u9e" secondAttribute="centerY" id="GRa-bC-xqY"/>
@@ -580,6 +564,7 @@
                         <outlet property="mapContentTextField" destination="noZ-ZW-5uw" id="QQX-nQ-E0k"/>
                         <outlet property="mapNameTextField" destination="X7r-8Z-VJj" id="NmJ-gc-6zo"/>
                         <outlet property="scrollView" destination="TH3-0a-Fhx" id="TrN-Tc-paO"/>
+                        <outlet property="secretSwitch" destination="AW9-UE-u9e" id="V3v-Yh-vkB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tk5-6K-Zy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -593,16 +578,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="01On" width="66" height="67"/>
-        <image name="01S" width="73" height="73"/>
-        <image name="02On" width="66" height="67"/>
-        <image name="02S" width="72" height="73"/>
-        <image name="03On" width="66" height="67"/>
-        <image name="03S" width="73" height="73"/>
+        <image name="01On" width="67" height="67"/>
+        <image name="01S" width="67" height="67"/>
+        <image name="02On" width="67" height="67"/>
+        <image name="02S" width="66" height="67"/>
+        <image name="03On" width="67" height="67"/>
+        <image name="03S" width="67" height="67"/>
         <image name="04On" width="66" height="67"/>
-        <image name="04S" width="72" height="73"/>
-        <image name="05On" width="66" height="67"/>
-        <image name="05S" width="70" height="73"/>
+        <image name="04S" width="66" height="67"/>
+        <image name="05On" width="67" height="67"/>
+        <image name="05S" width="67" height="67"/>
         <image name="backAndOneLineTitle" width="25" height="22"/>
         <image name="lockBtnClose" width="16" height="19"/>
         <image name="makeCheckBtn" width="50" height="48"/>
