@@ -62,8 +62,6 @@
 
     // 테스트용 데이터, 아이콘들 -----------------------//
     
-    self.tabBarIconArr = [[NSMutableArray alloc] initWithArray:[self getTabBarItemIconsArr]];
-    
     // 더미 위치 데이터
     self.locationArr = [[NSMutableArray alloc] initWithArray:@[@[
                                                                    @37.503639f, @127.044907f, @"1번 마커", [UIColor brownColor],
@@ -90,23 +88,6 @@
 
 #pragma mark - Icon 관련
 
-// TabBar Icon
-
-- (NSArray *)getTabBarItemIconsArr {
-    
-    NSMutableArray *iconImagearr = [[NSMutableArray alloc] init];
-    
-    NSArray *iconArr = @[[FAKFontAwesome homeIconWithSize:TABBAR_ICON_IMAGE_SIZE],
-                         [FAKFontAwesome mapIconWithSize:TABBAR_ICON_IMAGE_SIZE]];
-    
-    for (FAKFontAwesome *icon in iconArr) {
-        [iconImagearr addObject:[self getUIImageIconWithFAKFontAwesomIcon:icon withSize:TABBAR_ICON_IMAGE_SIZE withColor:[UIColor blackColor]]];
-    }
-    
-    return iconImagearr;
-}
-
-
 // Icon Image Setting
 
 - (UIImage *)getUIImageIconWithFAKFontAwesomIcon:(FAKFontAwesome *)icon withSize:(CGFloat)size withColor:(UIColor *)color{
@@ -116,6 +97,25 @@
     
     return img;
 }
+
+
+// MOMO Dataset 관련 -----------------------------------//
+#pragma mark - MOMO Dataset 관련
+
++ (NSArray<MomoMapDataSet *> *)myMapList {
+    return [DataCenter sharedInstance].momoUserData.user_map_list;
+}
+
++ (NSArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex {
+    return [DataCenter myMapList][mapIndex].map_pin_list;
+}
+
++ (NSArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex {
+    return [DataCenter myPinListWithMapIndex:mapIndex][pinIndex].pin_post_list;
+}
+
+
+
 
 
 // Account Token 자동로그인 ------------------------------//
@@ -140,8 +140,10 @@
 // 저장
 - (void)saveMomoUserData {
     NSLog(@"saveMomoUserData : %@", self.momoUserData);
-    [[NSUserDefaults standardUserDefaults] setObject:self.momoUserData.user_token forKey:@"token"];
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", self.momoUserData.user_fb_token] forKey:@"fb_token"];      // non p-list type error
+    [[NSUserDefaults standardUserDefaults] setObject:self.momoUserData.user_token         forKey:@"token"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.momoUserData.user_id            forKey:@"user_id"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.momoUserData.user_username      forKey:@"user_username"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.momoUserData.user_profile_image_url forKey:@"user_profile_image_url"];
     
 }
 
@@ -153,22 +155,24 @@
 
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]) {     // nil이 아닐 때 불러옴
         
-        // 페북 계정 & 유저 정보 불러와서 프로퍼티로 Set
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"fb_token"]) {
+        // 서버랑 변동사항 없나 확인 절차 필요
+        
+        // 기존 저장되어있던 기본 데이터들 패치 (페북 & 이메일 공통)
+        self.momoUserData = [[MomoUserDataSet alloc] init];
+        
+        self.momoUserData.user_token    = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+        self.momoUserData.user_id       = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
+        self.momoUserData.user_username = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_username"];
+        self.momoUserData.user_profile_image_url = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_profile_image_url"];
 
-            [FacebookModule getFacebookProfileInfosWithCompletionBlock:^(MomoUserDataSet *momoUserData) {
-                self.momoUserData = momoUserData;
-                completionBlock(YES);
-            }];
-            // fb계정의 경우 추가로 모모 서버랑 연결해서 정보 가져와야 함
-            
-        } else {
-            // 이메일 계정 & 유저 정보 불러와서 프로퍼티로 Set
-            [NetworkModule getUserProfileInfosWithToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"token"] withCompletionBlock:^(MomoUserDataSet *momoUserData) {
-                self.momoUserData = momoUserData;
-                completionBlock(YES);
-            }];
-        }
+        self.momoUserData.user_profile_image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.momoUserData.user_profile_image_url]]];
+        
+        [NetworkModule getUserMapDataWithCompletionBlock:^(NSArray<MomoMapDataSet *> *user_map_list) {
+            self.momoUserData.user_map_list = user_map_list;
+            completionBlock(YES);
+        }];
+        
+        
     } else {    // 토큰 없을 때
         completionBlock(NO);
     }
@@ -181,9 +185,16 @@
     NSLog(@"user_token : %@", self.momoUserData.user_token);
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fb_token"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_username"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_profile_image_url"];
+    
     NSLog(@"removeMomoUserData : %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]);
+
 }
+
+
+
 
 
 @end
