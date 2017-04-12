@@ -10,12 +10,17 @@
 #import "UserProfileHeaderView.h"
 #import "UserAccountEditViewController.h"
 
+#import "MapProfileTableViewCell.h"
+#import "PinProfileTableViewCell.h"
+
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate>
 
 @property (nonatomic) NSArray *mapPinDataArr;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end
 
@@ -61,22 +66,23 @@
                                                       handler:^(UIAlertAction * _Nonnull action) {
                                                           NSLog(@"Log Out");
                                                           
+                                                          [self.indicator startAnimating];
+                                                          
                                                           [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
+                                                              [self.indicator stopAnimating];
+                                                              
                                                               if (isSuccess) {
                                                                   NSLog(@"log out success");
+                                                                  UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+                                                                  UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+                                                                  
+                                                                  [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+                                                                  [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
                                                                   
                                                               } else {
                                                                   NSLog(@"log out fail");
                                                               }
                                                           }];
-                                                          
-                                                          // 블럭에 넣어 기다리지 않고, 바로 로그아웃
-                                                          UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-                                                          UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
-                                                          
-                                                          [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-                                                          [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-
                                                       }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
@@ -121,6 +127,17 @@
     UserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"userProfileHeader"];
     headerView.delegate = self;
     
+    // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+    if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
+        headerView.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+    }
+    if ([DataCenter sharedInstance].momoUserData.user_username) {
+        headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
+    }
+    if ([DataCenter sharedInstance].momoUserData.user_id) {
+        headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
+    }
+    
     return headerView;
 }
 
@@ -133,7 +150,11 @@
 #pragma mark - Rows Settings
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((NSArray *)self.mapPinDataArr[self.mapPinNum]).count;
+    if (self.mapPinNum == 0) {
+        return [DataCenter sharedInstance].momoUserData.user_map_list.count;
+    } else {
+        return ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,15 +171,36 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
     
-    UITableViewCell *cell;
-    
     if (self.mapPinNum == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
-    } else if (self.mapPinNum == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
+        MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
+        
+        // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+        if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
+            mapCell.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+        }
+        if ([DataCenter sharedInstance].momoUserData.user_username) {
+            mapCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
+        }
+        
+        mapCell.mapNameLabel.text = ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[indexPath.row])).map_name;
+        
+        return mapCell;
+        
+    } else  {
+        PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
+        
+        // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+        if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
+            pinCell.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+        }
+        if ([DataCenter sharedInstance].momoUserData.user_username) {
+            pinCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
+        }
+        
+        pinCell.pinNameLabel.text = ((MomoPinDataSet *)((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list[indexPath.row]).pin_name;
+        
+        return pinCell;
     }
-    
-    return cell;
 }
 
 

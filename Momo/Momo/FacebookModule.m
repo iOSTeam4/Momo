@@ -70,7 +70,7 @@
                                                   }];
 }
 
-
+// 페북 계정, 서버로부터 유저 프로필 정보들 받아오는 메서드
 + (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock {
     
     MomoUserDataSet *momoUserData = [[MomoUserDataSet alloc] init];
@@ -79,7 +79,7 @@
     momoUserData.user_token = [FBSDKAccessToken currentAccessToken].tokenString;
     momoUserData.user_id = [FBSDKAccessToken currentAccessToken].userID;
     
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, email, picture.width(100).height(100)"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, picture.type(large), email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 
         NSLog(@"result : %@", result);
         
@@ -88,19 +88,24 @@
                 momoUserData.user_username = [result objectForKey:@"name"];
                 NSLog(@"momoUserData.user_username : %@", momoUserData.user_username);
             }
+            if ([result objectForKey:@"picture"]) {
+                momoUserData.user_profile_image_url = result[@"picture"][@"data"][@"url"];
+                momoUserData.user_profile_image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:momoUserData.user_profile_image_url]]];
+                NSLog(@"url : %@", result[@"picture"][@"data"][@"url"]);
+            }
             if ([result objectForKey:@"email"]) {
                 momoUserData.user_email = [result objectForKey:@"email"];
                 NSLog(@"momoUserData.user_email : %@", momoUserData.user_email);
             }
-            if ([result objectForKey:@"picture"]) {
-                momoUserData.user_profile_image = [result objectForKey:@"picture"];
-                NSLog(@"momoUserData.user_profile_image : %@", momoUserData.user_profile_image);
-            }
+
         } else {
             NSLog(@"network error : %@", error.localizedDescription);
         }
         
-        completionBlock(momoUserData);
+        [NetworkModule getUserMapDataWithCompletionBlock:^(NSArray<MomoMapDataSet *> *user_map_list) {
+            momoUserData.user_map_list = user_map_list;
+            completionBlock(momoUserData);
+        }];
     }];
 }
 

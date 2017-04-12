@@ -19,20 +19,17 @@
 
 // 기본 세팅 관련 ----------------------------------------//
 
-
-@property (nonatomic) NSMutableArray *tabBarIconArr;    // 테스트용 탭바 아이콘 어레이
+// 임시 더미 데이터
 @property (nonatomic) NSMutableArray *locationArr;      // 테스트용 위치 데이터 어레이
 
 
-#pragma mark - Icon 관련
 
-// TabBar Item Icons
-- (NSArray *)getTabBarItemIconsArr;
-
-
-
-#pragma mark - MOMO 내 계정 Dataset 관련
+// MOMO Dataset 관련 -----------------------------------//
+#pragma mark - MOMO Dataset 관련
 @property (nonatomic) MomoUserDataSet *momoUserData;    // Map, Pin, Post 전부 포함
++ (NSArray<MomoMapDataSet *> *)myMapList;
++ (NSArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex;
++ (NSArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex;
 
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter

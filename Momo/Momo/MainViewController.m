@@ -11,6 +11,9 @@
 
 @interface MainViewController ()
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @end
 
 
@@ -20,6 +23,11 @@
     [super viewDidLoad];
     
     [self.navigationItem setTitle:@"Main View"];
+    
+    _imageView.image = [DataCenter sharedInstance].momoUserData.user_profile_image;
+    [self.view addSubview:_imageView];
+    _imageView.frame = CGRectMake(0, 0, 30, 30);
+    
     
 }
 
@@ -33,24 +41,31 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.imageView setImage:[DataCenter sharedInstance].momoUserData.user_profile_image];
+}
+
 - (IBAction)logoutTempBtnAction:(id)sender {
     
+    [self.indicator startAnimating];
+    
     [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
+        [self.indicator stopAnimating];
+        
         if (isSuccess) {
             NSLog(@"log out success");
+            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+            UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+            
+            [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
             
         } else {
             NSLog(@"log out fail");
         }
     }];
-    
-    // 블럭에 넣어 기다리지 않고, 바로 로그아웃
-    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
-    
-    [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-    [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-
 }
 
 

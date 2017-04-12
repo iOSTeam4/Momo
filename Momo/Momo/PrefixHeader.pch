@@ -37,6 +37,7 @@
 #import <Realm/Realm.h>
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIImage+MultiFormat.h>
 #import <AFNetworking/AFNetworking.h>
 #import <FontAwesomeKit/FAKFontAwesome.h>
 

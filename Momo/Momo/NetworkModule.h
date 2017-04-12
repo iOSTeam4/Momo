@@ -39,7 +39,9 @@
 
 
 // 서버로부터 유저 정보들 받아오는 메서드
-+ (void)getUserProfileInfosWithToken:(NSString *)token withCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock;
++ (void)getEmailUserProfileInfosWithToken:(NSString *)token withCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock;
 
+// 서버로부터 유저 지도리스트 받아오는 메서드
++ (void)getUserMapDataWithCompletionBlock:(void (^)(NSArray<MomoMapDataSet *> *user_map_list))completionBlock;
 
 @end

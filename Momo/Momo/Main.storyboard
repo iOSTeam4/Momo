@@ -28,14 +28,32 @@
                                     <action selector="logoutTempBtnAction:" destination="muX-Rm-wUg" eventType="touchUpInside" id="b6u-4C-Ir7"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9yx-Rs-DZQ">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RvG-wi-TCQ">
+                                <rect key="frame" x="112.5" y="94" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="BaJ-Ye-Bkm"/>
+                                    <constraint firstAttribute="width" constant="150" id="lRy-su-3qA"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9yx-Rs-DZQ" firstAttribute="centerY" secondItem="dlW-hg-dLE" secondAttribute="centerY" id="6Od-wq-h7W"/>
+                            <constraint firstItem="RvG-wi-TCQ" firstAttribute="top" secondItem="IWE-1l-VUA" secondAttribute="bottom" constant="30" id="ADd-oa-gVC"/>
+                            <constraint firstItem="9yx-Rs-DZQ" firstAttribute="centerX" secondItem="dlW-hg-dLE" secondAttribute="centerX" id="K79-gw-3dx"/>
+                            <constraint firstItem="RvG-wi-TCQ" firstAttribute="centerX" secondItem="dlW-hg-dLE" secondAttribute="centerX" id="XI7-LK-4LR"/>
                             <constraint firstItem="cf2-2c-ZBq" firstAttribute="centerY" secondItem="dlW-hg-dLE" secondAttribute="centerY" id="dfl-8F-ce6"/>
                             <constraint firstItem="cf2-2c-ZBq" firstAttribute="centerX" secondItem="dlW-hg-dLE" secondAttribute="centerX" id="vIg-gk-bi3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="f02-D1-HJa"/>
+                    <connections>
+                        <outlet property="imageView" destination="RvG-wi-TCQ" id="iZN-GG-1XC"/>
+                        <outlet property="indicator" destination="9yx-Rs-DZQ" id="E0h-Du-nTk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZB-P6-wbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

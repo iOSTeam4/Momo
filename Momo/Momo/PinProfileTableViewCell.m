@@ -13,6 +13,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+    if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
+        self.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+    }
+    if ([DataCenter sharedInstance].momoUserData.user_username) {
+        self.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
