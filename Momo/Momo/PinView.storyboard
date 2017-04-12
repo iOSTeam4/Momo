@@ -266,7 +266,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLT-B4-hTP" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-dI-Zq6">
                                                 <rect key="frame" x="26" y="20" width="44" height="44"/>
@@ -298,7 +298,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMw-x6-zU1">
-                                                <rect key="frame" x="26" y="184" width="230" height="48"/>
+                                                <rect key="frame" x="26" y="186" width="230" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="flu-HP-XFe"/>
                                                     <constraint firstAttribute="width" constant="230" id="jBQ-de-Iu6"/>
@@ -309,7 +309,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="글 남기기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-cZ-xnL">
-                                                <rect key="frame" x="26" y="262" width="208.5" height="25"/>
+                                                <rect key="frame" x="26" y="264" width="208.5" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="CwD-hL-U45"/>
                                                 </constraints>
@@ -318,7 +318,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55F-JN-18i" userLabel="textFieldBackView">
-                                                <rect key="frame" x="26" y="297" width="339" height="100"/>
+                                                <rect key="frame" x="26" y="299" width="339" height="100"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGo-lI-C6z" userLabel="textFieldBackView2">
                                                         <rect key="frame" x="1" y="1" width="337" height="98"/>
@@ -337,7 +337,7 @@
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="이곳에 어떤 이야기가 있나요?" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CjX-rb-hIV">
-                                                <rect key="frame" x="36" y="302" width="329" height="90"/>
+                                                <rect key="frame" x="36" y="304" width="329" height="90"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -364,7 +364,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-cC-sNL" userLabel="makeBtnBottom">
-                                                <rect key="frame" x="310" y="431.5" width="41" height="39"/>
+                                                <rect key="frame" x="310" y="433.5" width="41" height="39"/>
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
@@ -372,7 +372,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVx-Qp-GJe">
-                                                <rect key="frame" x="222" y="427" width="78" height="48"/>
+                                                <rect key="frame" x="222" y="429" width="78" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="만들기">
                                                     <color key="titleColor" red="0.32737913730000001" green="0.71068596839999998" blue="0.97653865809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -415,7 +415,7 @@
                                             <constraint firstItem="a7v-dI-Zq6" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="iQ3-Dt-Nr0"/>
                                             <constraint firstItem="WXE-Ts-voj" firstAttribute="top" secondItem="KLT-B4-hTP" secondAttribute="top" constant="60" id="j9m-Ca-gIe"/>
                                             <constraint firstItem="YG1-cZ-xnL" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="kTh-c5-y9h"/>
-                                            <constraint firstItem="YMw-x6-zU1" firstAttribute="top" secondItem="zoT-PG-aZ5" secondAttribute="bottom" constant="18" id="kWt-JM-VpO"/>
+                                            <constraint firstItem="YMw-x6-zU1" firstAttribute="top" secondItem="zoT-PG-aZ5" secondAttribute="bottom" constant="20" id="kWt-JM-VpO"/>
                                             <constraint firstItem="mVx-Qp-GJe" firstAttribute="top" secondItem="55F-JN-18i" secondAttribute="bottom" constant="30" id="mTi-h4-Qgj"/>
                                             <constraint firstItem="a7v-dI-Zq6" firstAttribute="top" secondItem="KLT-B4-hTP" secondAttribute="top" constant="20" id="mkY-kF-Gu9"/>
                                             <constraint firstItem="xUb-id-PaA" firstAttribute="centerY" secondItem="WXE-Ts-voj" secondAttribute="centerY" id="nC3-3p-0h9"/>

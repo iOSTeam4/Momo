@@ -16,14 +16,14 @@
 @property (nonatomic) UIImageView *photoImageView;
 @property (nonatomic) UIImage *chosenImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *photoBtnTopSpacingConstraint;
-
+@property (nonatomic) NSLayoutConstraint *originphotoBtnTopSpacingConstraintY;
 @property (weak, nonatomic) IBOutlet UIButton *photoUploadBtn;
 @property (nonatomic) UIButton *deletePhoto;
 @property (weak, nonatomic) IBOutlet UITextField *contentTextField;
 
 @property (nonatomic) BOOL checkTextField;
 
-@property (weak, nonatomic) IBOutlet UIButton *makeBtn1
+@property (weak, nonatomic) IBOutlet UIButton *makeBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
 
@@ -40,7 +40,7 @@
     self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(26, self.photoUploadBtn.frame.origin.y, self.view.frame.size.width-26, self.view.frame.size.width-26)];
     [self.contentView addSubview:self.photoImageView];
     [self.photoImageView setHidden:YES];
-    
+    self.originphotoBtnTopSpacingConstraintY.constant = self.photoBtnTopSpacingConstraint.constant;
     self.deletePhoto = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, self.photoUploadBtn.frame.origin.y + 20, 26, 26)];
     
     [self.deletePhoto setImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
@@ -192,7 +192,7 @@
 - (void)deleteImage:(UIButton *)sender {
     NSLog(@"click deletePhoto");
     
-//    self.photoBtnTopSpacingConstraint.constant = 원래값;
+    self.photoBtnTopSpacingConstraint.constant = 20;
     [self.view layoutIfNeeded];
     [self.scrollView setContentOffset:CGPointMake(0,0) animated:YES];
     [self.photoImageView setHidden:YES];
