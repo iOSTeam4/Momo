@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *backView;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIButton *mapBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *pinNameLabel;
 

@@ -28,6 +28,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
+// 선택 지도 보기
+@property (nonatomic) BOOL showSelectedMap;
+
+@property (nonatomic) MomoMapDataSet *mapData;
+@property (weak, nonatomic) IBOutlet UIView *mapInfoView;
+@property (weak, nonatomic) IBOutlet UILabel *mapInfoViewNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mapInfoViewDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mapInfoViewPinNumLabel;
+@property (weak, nonatomic) IBOutlet UIButton *mapInfoViewBtn;
+
 @end
 
 
@@ -38,21 +48,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    // MapViewController 공통 기능 기본 세팅
     [self initialSetting];
+    
+    
+    if (self.showSelectedMap) {
+        // 선택 지도 보기 세팅
+        [self mapInfoViewSetting];
+        
+    } else {
+        // 사용자 모든 핀 보기
+        self.mapData = [DataCenter myMapList][0];   // 일단 더미 0번 지도 데이터
+    }
+    [self markPinMarkers];      // 마커찍기
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];    
-    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
-    NSLog(@"MapViewController : viewWillAppear");
+    [super viewWillAppear:animated];
+//    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
+//    NSLog(@"MapViewController : viewWillAppear");
 
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    //    NSLog(@"viewDidLayoutSubviews");
+}
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"MapViewController : viewDidAppear");
+//    NSLog(@"MapViewController : viewDidAppear");
     
     
 }
@@ -61,14 +89,44 @@
 
 #pragma mark - Initial Setting Methods
 
+// 선택 지도 보기 세팅
+
+- (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData {
+    NSLog(@"showSelectedMapAndSetMapIndex : %@", mapData.map_name);
+    
+    self.showSelectedMap = YES;
+    self.mapData = mapData;
+}
+
+
+- (void)mapInfoViewSetting {
+    
+    // 정보 세팅
+    self.mapInfoViewNameLabel.text = self.mapData.map_name;
+    self.mapInfoViewDescriptionLabel.text = self.mapData.map_description;
+    self.mapInfoViewPinNumLabel.text = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list.count];
+    
+    // 수정하기 (팔로워/팔로잉) 버튼
+    [self.mapInfoViewBtn.layer setCornerRadius:5];
+    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
+    [self.mapInfoViewBtn.layer setBorderWidth:1];
+    
+    // 선택지도보기 뷰 띄우기
+    [self.view bringSubviewToFront:self.mapInfoView];
+    [self.mapInfoView setHidden:NO];
+    
+    [self.view layoutIfNeeded];     // 지도 설명 길어졌을 때, View Height 달라짐
+    self.mapView.padding = UIEdgeInsetsMake(64, 0, 49 + self.mapInfoView.frame.size.height, 0);
+
+}
+
+
 
 // MapViewController 초기 세팅 ----------------------------//
 
 - (void)initialSetting {
     [self.navigationItem setTitle:@"Map View"];
     
-    [self initialSetGoogleMapView];
-        
     self.cancelBtn.layer.cornerRadius = 10;
     self.cancelBtn.layer.borderWidth = 1;
     self.cancelBtn.layer.borderColor = self.cancelBtn.titleLabel.textColor.CGColor;
@@ -76,6 +134,9 @@
     self.nextBtn.layer.cornerRadius = 10;
     self.nextBtn.layer.borderWidth = 1;
     self.nextBtn.layer.borderColor = self.nextBtn.backgroundColor.CGColor;
+    
+    [self initialSetGoogleMapView];
+
 }
 
 
@@ -99,7 +160,7 @@
         while([self.mapView myLocation].coordinate.latitude == 0.0f);   // 내 위치 받아오기까지 조금 시간 걸림
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"%f, %f", [self.mapView myLocation].coordinate.latitude, [self.mapView myLocation].coordinate.longitude);
+//            NSLog(@"%f, %f", [self.mapView myLocation].coordinate.latitude, [self.mapView myLocation].coordinate.longitude);
             
             GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.mapView myLocation].coordinate.latitude
                                                                     longitude:[self.mapView myLocation].coordinate.longitude
@@ -110,7 +171,6 @@
     });
     
     self.currentZoomCase = PIN_MARKER_DETAIL;
-    [self markPinMarkers];      // 마커찍기
     
 }
 
@@ -118,17 +178,13 @@
 
 - (void)markPinMarkers {
     
-    for (NSArray *arr in [DataCenter sharedInstance].locationArr) {
+    for (MomoPinDataSet *pinData in self.mapData.map_pin_list) {
         GMSMarker *marker = [[GMSMarker alloc] init];
         
-        marker.position = CLLocationCoordinate2DMake([arr[0] doubleValue], [arr[1] doubleValue]);
+        marker.position = CLLocationCoordinate2DMake(pinData.pin_place.place_lat, pinData.pin_place.place_lng);
         marker.appearAnimation = kGMSMarkerAnimationPop;
         
-//        marker.title = arr[2];
-//        marker.snippet = arr[2];
-//        marker.infoWindowAnchor = CGPointMake(0.5f, 0.0f);
-        
-        PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithArr:arr withZoomCase:self.currentZoomCase];
+        PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:pinData withZoomCase:self.currentZoomCase];
         marker.iconView = pinMarkerView;
         marker.map = self.mapView;
     }
@@ -143,7 +199,7 @@
 #pragma mark - GMSMapViewDelegate Methods
 
 - (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position {
-    NSLog(@"didChangeCameraPosition");
+//    NSLog(@"didChangeCameraPosition");
     
     NSInteger zoomCase;
     
@@ -162,35 +218,6 @@
     }
 }
 
-- (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position {
-    NSLog(@"idleAtCameraPosition");
-    
-}
-
-
-//- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
-//
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-//    [view setBackgroundColor:[UIColor grayColor]];
-//
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btn setTitle:@"마커마커" forState:UIControlStateNormal];
-//    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [btn.titleLabel setAdjustsFontSizeToFitWidth:YES];
-//    [view addSubview:btn];
-//
-//    btn.frame = CGRectMake(10, 0, 30, 30);
-//
-//    UILabel *lb = [[UILabel alloc] init];
-//    [view addSubview:lb];
-//    lb.frame = CGRectMake(50, 0, 40, 30);
-//    lb.text = @"이게 바로 마커인가?";
-//    lb.textColor = [UIColor blueColor];
-//    [lb setAdjustsFontSizeToFitWidth:YES];
-//    [lb setBackgroundColor:[UIColor purpleColor]];
-//
-//    return view;
-//}
 
 
 
@@ -214,39 +241,40 @@
 
 // 롱 프레스 새 핀마커 생성, 등록
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinatee {
-    NSLog(@"didLongPressAtCoordinate, isDragingMarker:%d, makingMarker:%d", self.isDragingMarker, self.isMakingMarker);
+    NSLog(@"didLongPressAtCoordinate, isMakingMarker:%d", self.isMakingMarker);
     
     if (!self.isDragingMarker) {
-        // 기존 새 핀마커를 롱클릭하여 드래깅하고 있는 상황이 아닐 때, 새 핀마커 생성 (하나씩만 만들 수 있게)
-        
+        // 마커 드래그 아닐 때, 새 핀마커 생성 (하나씩만 만들 수 있게)
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = coordinatee;
         marker.icon = [UIImage imageNamed:@"tabPinS"];
         marker.draggable = YES;     // 드래그 가능
-        
-//        marker.infoWindowAnchor = CGPointMake(0.5f, 0.0f);
         
         self.isMakingMarker = YES;  // 핀 마커 만드는 중
         
         self.makingMarker.map = nil;    // 이전 만들던 마커 삭제
         self.makingMarker = marker;     // 새롭게 만드는 마커 프로퍼티에 셋
         
-//        marker.accessibilityFrame = CGRectMake(marker.accessibilityFrame.origin.x, marker.accessibilityFrame.origin.y - 100, marker.accessibilityFrame.size.width, marker.accessibilityFrame.size.height);
-        
         marker.map = mapView;
 
         
-//        [UIView animateWithDuration:5.0f animations:^{
-//            self.makingMarker.accessibilityFrame = CGRectMake(self.makingMarker.accessibilityFrame.origin.x, self.makingMarker.accessibilityFrame.origin.y + self.view.frame.size.height/2, self.makingMarker.accessibilityFrame.size.width, self.makingMarker.accessibilityFrame.size.height);
-//        }];
-        
         // 위치등록 버튼 노출
         [self.makingMarkerBtnView setHidden:NO];
+
         [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
+
+        if (self.showSelectedMap) {
+            // 선택지도 보기 상황
+            [self.mapInfoView setHidden:YES];
+            self.mapView.padding = UIEdgeInsetsMake(64, 0, 49, 0);
+        }
+        
         [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
         [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
     }
 }
+
+
 
 - (void)makePinByMakePinBtn {
     // 내 위치를 중심으로 Map 띄우기
@@ -267,54 +295,15 @@
 }
 
 
-// 롱 프레스 새 핀마커 이동
+// 드래그 시작
 - (void)mapView:(GMSMapView *)mapView didBeginDraggingMarker:(GMSMarker *)marker {
-    NSLog(@"didBeginDraggingMarker");
-    
     self.isDragingMarker = YES;
 }
-
-// 엣지 부분으로 핀마커 드래그 했을 때, 맵 이동
-// 제스쳐로 처리해야 부드럽게 잘 될 것임.
-// 이건 실패 ㅠㅠ.. 꼭 지우고 다시 새롭게 적용할 것, 일단 우선순위에서 밀리는 추가 기능이므로 skip
-- (void)mapView:(GMSMapView *)mapView didDragMarker:(GMSMarker *)marker {
-    
-    NSLog(@"height %f", self.view.frame.size.height);
-    NSLog(@"didDragMarker mapView.frame.size : %f, %f  markerframe : %f, %f, %f, %f", mapView.frame.size.width, mapView.frame.size.height, marker.accessibilityFrame.origin.x, marker.accessibilityFrame.origin.y, marker.accessibilityFrame.size.width, marker.accessibilityFrame.size.height);
-    
-    CGFloat moveX = 0;
-    CGFloat moveY = 0;
-    
-    if (marker.accessibilityFrame.origin.x < 50) {
-        NSLog(@"x left < 50");
-        
-        moveX = -50;
-        
-    } else if (mapView.frame.size.width - marker.accessibilityFrame.origin.x < 50) {
-        NSLog(@"x right < 50, %f", mapView.frame.size.width - marker.accessibilityFrame.origin.x);
-        
-        moveX = 50;
-    }
-    
-    if (marker.accessibilityFrame.origin.y < 50) {
-        NSLog(@"y left < 50");
-        
-        moveY = -50;
-        
-    } else if (mapView.frame.size.height - 113 - marker.accessibilityFrame.origin.y < 50) {
-        NSLog(@"y right < 50, %f", mapView.frame.size.height - 113 - marker.accessibilityFrame.origin.y);
-        
-        moveY = 50;
-    }
-
-    [mapView animateWithCameraUpdate:[GMSCameraUpdate scrollByX:moveX Y:moveY]];
-}
-
+// 종료
 - (void)mapView:(GMSMapView *)mapView didEndDraggingMarker:(GMSMarker *)marker {
-    NSLog(@"didEndDraggingMarker");
-    
     self.isDragingMarker = NO;
 }
+
 
 
 
@@ -330,6 +319,12 @@
     
     [self.makingMarkerBtnView setHidden:YES];
     [(MainTabBarController *)self.tabBarController customTabBarSetHidden:NO];
+    
+    if (self.showSelectedMap) {
+        // 선택지도 보기 상황
+        [self.mapInfoView setHidden:NO];
+        self.mapView.padding = UIEdgeInsetsMake(64, 0, 49 + self.mapInfoView.frame.size.height, 0);
+    }
 }
 
 
@@ -342,5 +337,9 @@
     
 }
 
+- (IBAction)mapInfoViewBtnAction:(id)sender {
+    
+    
+}
 
 @end

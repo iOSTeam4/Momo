@@ -13,7 +13,9 @@
 #import "MapProfileTableViewCell.h"
 #import "PinProfileTableViewCell.h"
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate>
+#import "MapViewController.h"
+
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate>
 
 @property (nonatomic) NSArray *mapPinDataArr;
 
@@ -182,13 +184,14 @@
             mapCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
         }
         
-        mapCell.mapNameLabel.text = ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[indexPath.row])).map_name;
+        mapCell.mapNameLabel.text = [DataCenter myMapList][indexPath.row].map_name;
+        mapCell.mapPinNumLabel.text = [NSString stringWithFormat:@"%ld", [DataCenter myMapList][indexPath.row].map_pin_list.count];
         
         return mapCell;
         
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
-        
+
         // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
         if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
             pinCell.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
@@ -197,9 +200,27 @@
             pinCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
         }
         
-        pinCell.pinNameLabel.text = ((MomoPinDataSet *)((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list[indexPath.row]).pin_name;
+        // 유저의 모든 핀이 나와야 하나, 일단 0번 지도로만 고정
+        pinCell.pinNameLabel.text = [DataCenter myPinListWithMapIndex:0][indexPath.row].pin_name;
         
         return pinCell;
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.mapPinNum == 0) {
+        
+        UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
+        MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
+        
+        [mapVC showSelectedMapAndSetMapData:[DataCenter myMapList][indexPath.row]];
+        
+        [self.navigationController pushViewController:mapVC animated:YES];
+        
+    } else {
+        
     }
 }
 

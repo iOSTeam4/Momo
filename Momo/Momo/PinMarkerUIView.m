@@ -8,18 +8,9 @@
 
 #import "PinMarkerUIView.h"
 
-#define PIN_MARKER_DETAIL_HEIGHT       24.f
-#define PIN_MARKER_DETAIL_WIDTH_MARGIN 24.f
-#define PIN_MARKER_DETAIL_FONT_SIZE    11.f
-#define PIN_MARKER_DETAIL_FONT         [UIFont boldSystemFontOfSize:PIN_MARKER_DETAIL_FONT_SIZE]
-
-#define PIN_MARKER_CIRCLE_SIZE             18.f
-#define PIN_MARKER_SMALL_CIRCLE_SIZE       10.f
-
-
 @interface PinMarkerUIView ()
 
-@property (nonatomic) NSArray *arr;     // 더미 데이터 어레이 (테스트용)
+@property (nonatomic) MomoPinDataSet *pinData;
 
 @property (nonatomic) const CGFloat *colorComponents;
 @property (nonatomic) NSInteger zoomCase;
@@ -31,11 +22,11 @@
 
 
 // 반드시 이 메소드로 init
-- (instancetype)initWithArr:(NSArray *)arr withZoomCase:(NSInteger)zoomCase {
+- (instancetype)initWithPinData:(MomoPinDataSet *)pinData withZoomCase:(NSInteger)zoomCase {
     self = [super init];
     
     if (self) {
-        self.arr = arr;
+        self.pinData = pinData;
         self.zoomCase = zoomCase;
         
         [self setFrameWithZoomCase];
@@ -47,7 +38,6 @@
 
 
 
-
 // 기본 세팅 커스텀 메소드 --------------------------------------//
 
 
@@ -55,7 +45,7 @@
 - (void)setFrameWithZoomCase {
     switch (self.zoomCase) {
         case PIN_MARKER_DETAIL: {
-            CGSize pinMarkerInfoSize = [(NSString *)self.arr[2] sizeWithAttributes:@{NSFontAttributeName:PIN_MARKER_DETAIL_FONT}];
+            CGSize pinMarkerInfoSize = [self.pinData.pin_name sizeWithAttributes:@{NSFontAttributeName:PIN_MARKER_DETAIL_FONT}];
             CGFloat pinMarkerWidth = pinMarkerInfoSize.width + PIN_MARKER_DETAIL_WIDTH_MARGIN;
 
             self.frame = CGRectMake(0, 0, pinMarkerWidth, PIN_MARKER_DETAIL_HEIGHT);
@@ -78,10 +68,9 @@
 
 // RGB 추출 메소드
 - (void)setColorComponents {
-    _colorComponents = CGColorGetComponents([(UIColor *)self.arr[3] CGColor]);     // Alpha는 무조건 1
-//    NSLog(@"Red: %f",   _colorComponents[0]);
-//    NSLog(@"Green: %f", _colorComponents[1]);
-//    NSLog(@"Blue: %f",  _colorComponents[2]);
+    self.colorComponents = CGColorGetComponents([[self.pinData labelColor] CGColor]);     // Alpha는 무조건 1
+    NSLog(@"Pin name : %@, Label : %ld", self.pinData.pin_name, self.pinData.pin_label);
+    NSLog(@"Red: %.5f, Green: %.5f, Blue: %.5f",   _colorComponents[0], _colorComponents[1], _colorComponents[2]);
 }
 
 
@@ -116,7 +105,7 @@
     switch (self.zoomCase) {
         case PIN_MARKER_DETAIL: {
             
-            CGFloat ratio = 0.75f;       // PinMarkerInfo : PinMarkerTail = ratio : (1-ratio)
+            CGFloat ratio = 0.8f;       // PinMarkerInfo : PinMarkerTail = ratio : (1-ratio)
             CGFloat pinMarkerInfoMaxY = CGRectGetMinY(rect) + CGRectGetHeight(rect)*ratio;
             
             CGFloat pinMarkerInfoMinX = CGRectGetMinX(rect) + CGRectGetHeight(rect)*ratio/2.f;
@@ -149,7 +138,7 @@
             
             CGFloat lineWidth = 2;
             CGRect borderRect = CGRectInset(rect, lineWidth * 0.5, lineWidth * 0.5);
-            
+
             CGContextSetRGBFillColor(ctx, _colorComponents[0], _colorComponents[1], _colorComponents[2], 1);
             CGContextSetRGBStrokeColor(ctx, 1, 1, 1, 1);
             CGContextSetLineWidth(ctx, 1);
@@ -181,15 +170,15 @@
     btn.layer.cornerRadius = btn.frame.size.height/2.0f;
     
     // Title Label
-    [btn setTitle:_arr[2] forState:UIControlStateDisabled];
+    [btn setTitle:self.pinData.pin_name forState:UIControlStateDisabled];
     [btn.titleLabel setFont:PIN_MARKER_DETAIL_FONT];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 4, 0, 0)];
+//    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 4, 0, 0)];
 
-    // ImageView (icon)
-    [btn setImage:(UIImage *)self.arr[4] forState:UIControlStateDisabled];
-    [btn.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 4)];
+//    // ImageView (icon)
+//    [btn setImage:[self.pinData labelIcon] forState:UIControlStateDisabled];
+//    [btn.imageView setContentMode:UIViewContentModeScaleAspectFit];
+//    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 4)];
 
     // Set InfoBtn BackgroundColor
     [btn setBackgroundColor:[UIColor colorWithRed:_colorComponents[0] green:_colorComponents[1] blue:_colorComponents[2] alpha:1]];
@@ -201,12 +190,33 @@
 - (void)setPinMarkerZoomCaseOne {
     
     // ImageView (icon)
-    UIImageView *iconimgView = [[UIImageView alloc] initWithImage:self.arr[4]];
+    UIImageView *iconimgView = [[UIImageView alloc] initWithImage:[self labelIcon]];
     [iconimgView setContentMode:UIViewContentModeScaleAspectFit];
-    iconimgView.frame = CGRectMake(4, 4, PIN_MARKER_ICON_IMAGE_SIZE, PIN_MARKER_ICON_IMAGE_SIZE);
+    
+    CGFloat iconSize = PIN_MARKER_CIRCLE_SIZE - PIN_MARKER_ICON_IMAGE_MARGIN;
+    iconimgView.frame = CGRectMake(PIN_MARKER_ICON_IMAGE_MARGIN/2, PIN_MARKER_ICON_IMAGE_MARGIN/2, iconSize, iconSize);
     
     [self addSubview:iconimgView];
 }
+
+
+// 핀 라벨 아이콘
+- (UIImage *)labelIcon {
+    switch (self.pinData.pin_label) {
+        case 0:
+            return [UIImage imageNamed:@"0cafe"];
+        case 1:
+            return [UIImage imageNamed:@"1food"];
+        case 2:
+            return [UIImage imageNamed:@"2shop"];
+        case 3:
+            return [UIImage imageNamed:@"3place"];
+        default:
+            return [UIImage imageNamed:@"4etc"];
+    }
+}
+
+
 
 
 

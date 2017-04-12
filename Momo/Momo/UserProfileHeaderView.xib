@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdR-tf-O6X">
+                <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="NdR-tf-O6X">
                     <rect key="frame" x="5" y="10" width="365" height="260"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pika.png" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-gd-9mD">
@@ -71,7 +71,7 @@
                             <color key="textColor" red="0.55289608239999999" green="0.54851245879999999" blue="0.57745069270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팔로워들에게 자기소개를 해보세요 :0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnD-av-G4c">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="팔로워들에게 자기소개를 해보세요 :0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnD-av-G4c">
                             <rect key="frame" x="15" y="155" width="335" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="BLB-bA-8BW"/>
@@ -195,7 +195,7 @@
                 <outlet property="userImgView" destination="MSu-gd-9mD" id="eTZ-qh-DuV"/>
                 <outlet property="userNameLabel" destination="Zec-gh-XT0" id="lw4-J3-9Gp"/>
             </connections>
-            <point key="canvasLocation" x="-88.5" y="-136"/>
+            <point key="canvasLocation" x="-89" y="-77"/>
         </view>
     </objects>
     <resources>

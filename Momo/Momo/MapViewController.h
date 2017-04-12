@@ -12,5 +12,7 @@
 
 - (void)makePinByMakePinBtn;    // 새 핀 만들기 버튼로 새 핀 생성시 호출하는 메서드
 
+// 선택지도 보기, 지도 데이터 세팅
+- (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData;
 
 @end

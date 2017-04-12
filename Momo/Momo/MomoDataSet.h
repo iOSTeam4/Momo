@@ -66,6 +66,10 @@
 
 @property (nonatomic) NSArray<MomoPostDataSet *> *pin_post_list;
 
+// 핀 라벨 아이콘, 색 반환 메서드
+- (UIImage *)labelIcon;
+- (UIColor *)labelColor;
+
 @end
 
 

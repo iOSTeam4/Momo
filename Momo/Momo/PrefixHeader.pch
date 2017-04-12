@@ -39,7 +39,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+MultiFormat.h>
 #import <AFNetworking/AFNetworking.h>
-#import <FontAwesomeKit/FAKFontAwesome.h>
 
 // Define Setting -------------------------------//
 #define LAUNCH_SEGUE @"LaunchViewSegue"     //static NSString * const LAUNCH_SEGUE = @"LaunchViewSegue";
@@ -49,11 +48,6 @@
 // TabBar icon
 #define TABBAR_ICON_IMAGE_SIZE 20
 
-// Pin Marker 관련
-#define PIN_MARKER_DETAIL 0
-#define PIN_MARKER_CIRCLE 1
-#define PIN_MARKER_SMALL_CIRCLE 2
-#define PIN_MARKER_ICON_IMAGE_SIZE 10
 
 
 #endif /* PrefixHeader_pch */

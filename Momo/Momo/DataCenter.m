@@ -58,45 +58,12 @@
     
     // UserData 세팅
 //    [self fetchMomoUserData];
-    
 
-    // 테스트용 데이터, 아이콘들 -----------------------//
-    
-    // 더미 위치 데이터
-    self.locationArr = [[NSMutableArray alloc] initWithArray:@[@[
-                                                                   @37.517181f, @127.028488f, @"1번 마커", [UIColor brownColor],
-                                                                   [self getUIImageIconWithFAKFontAwesomIcon:[FAKFontAwesome coffeeIconWithSize:PIN_MARKER_ICON_IMAGE_SIZE] withSize:PIN_MARKER_ICON_IMAGE_SIZE withColor:[UIColor whiteColor]]
-                                                                   ],
-                                                               @[
-                                                                   @37.565738f, @126.976761f, @"2번 마커 2번 마커", [UIColor orangeColor],
-                                                                   [self getUIImageIconWithFAKFontAwesomIcon:[FAKFontAwesome cutleryIconWithSize:PIN_MARKER_ICON_IMAGE_SIZE] withSize:PIN_MARKER_ICON_IMAGE_SIZE withColor:[UIColor whiteColor]]
-                                                                   ],
-                                                               @[
-                                                                   @37.545426f, @126.855904f, @"3번 마커 하하하하하하하하ㅎ하ㅎㅎ", [UIColor redColor],
-                                                                   [self getUIImageIconWithFAKFontAwesomIcon:[FAKFontAwesome appleIconWithSize:PIN_MARKER_ICON_IMAGE_SIZE] withSize:PIN_MARKER_ICON_IMAGE_SIZE withColor:[UIColor whiteColor]]
-                                                                   ],
-                                                               @[
-                                                                   @37.321065f, @127.040955f, @"4번 마커 asdavskhbjsh", [UIColor purpleColor],
-                                                                   [self getUIImageIconWithFAKFontAwesomIcon:[FAKFontAwesome universityIconWithSize:PIN_MARKER_ICON_IMAGE_SIZE] withSize:PIN_MARKER_ICON_IMAGE_SIZE withColor:[UIColor whiteColor]]
-                                                                   ]]];
     
 }
 
 
 
-
-
-#pragma mark - Icon 관련
-
-// Icon Image Setting
-
-- (UIImage *)getUIImageIconWithFAKFontAwesomIcon:(FAKFontAwesome *)icon withSize:(CGFloat)size withColor:(UIColor *)color{
-    
-    [icon addAttribute:NSForegroundColorAttributeName value:color];
-    UIImage *img = [icon imageWithSize:CGSizeMake(size, size)];
-    
-    return img;
-}
 
 
 // MOMO Dataset 관련 -----------------------------------//
@@ -190,10 +157,8 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_profile_image_url"];
     
     NSLog(@"removeMomoUserData : %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]);
-
+    
 }
-
-
 
 
 

@@ -25,14 +25,15 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZfR-pa-AiB" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.55289608239999999" green="0.54851245879999999" blue="0.57745069270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZfR-pa-AiB" secondAttribute="height" multiplier="2:1" id="qZ8-93-jSK"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3w-9S-Twt" userLabel="Map Btn">
-                                <rect key="frame" x="-0.5" y="0.0" width="390" height="195"/>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-dZ-bwr">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pika pika 핀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqb-1e-o3S" userLabel="Pin Name Label">
                                 <rect key="frame" x="10" y="205" width="89.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -66,20 +67,20 @@
                         <constraints>
                             <constraint firstItem="9lu-jH-Pqd" firstAttribute="top" secondItem="pqb-1e-o3S" secondAttribute="bottom" constant="5" id="7Bw-Sp-rb9"/>
                             <constraint firstItem="pqb-1e-o3S" firstAttribute="top" secondItem="ZfR-pa-AiB" secondAttribute="bottom" constant="10" id="8QY-Y8-2KJ"/>
-                            <constraint firstItem="V3w-9S-Twt" firstAttribute="centerY" secondItem="ZfR-pa-AiB" secondAttribute="centerY" id="EAx-Ir-wmB"/>
+                            <constraint firstItem="Qty-dZ-bwr" firstAttribute="centerY" secondItem="ZfR-pa-AiB" secondAttribute="centerY" id="E5d-HZ-5l7"/>
                             <constraint firstItem="2f0-ih-zMc" firstAttribute="leading" secondItem="9lu-jH-Pqd" secondAttribute="trailing" constant="5" id="FuN-99-a2k"/>
                             <constraint firstItem="ZfR-pa-AiB" firstAttribute="top" secondItem="4Ih-A0-G2a" secondAttribute="top" id="L8N-Jc-EfO"/>
-                            <constraint firstItem="V3w-9S-Twt" firstAttribute="height" secondItem="ZfR-pa-AiB" secondAttribute="height" id="N1a-VL-kRp"/>
+                            <constraint firstItem="Qty-dZ-bwr" firstAttribute="centerX" secondItem="ZfR-pa-AiB" secondAttribute="centerX" id="OCD-kb-Mbg"/>
+                            <constraint firstItem="Qty-dZ-bwr" firstAttribute="width" secondItem="ZfR-pa-AiB" secondAttribute="width" id="OID-rC-N59"/>
                             <constraint firstItem="ZfR-pa-AiB" firstAttribute="centerX" secondItem="4Ih-A0-G2a" secondAttribute="centerX" id="ZCS-ac-gTo"/>
                             <constraint firstItem="pqb-1e-o3S" firstAttribute="leading" secondItem="4Ih-A0-G2a" secondAttribute="leading" constant="10" id="aS6-Us-uFs"/>
                             <constraint firstItem="2f0-ih-zMc" firstAttribute="centerY" secondItem="9lu-jH-Pqd" secondAttribute="centerY" id="bHN-ZM-3LV"/>
-                            <constraint firstItem="V3w-9S-Twt" firstAttribute="width" secondItem="ZfR-pa-AiB" secondAttribute="width" id="cDE-st-JsZ"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="leading" secondItem="2f0-ih-zMc" secondAttribute="trailing" constant="15" id="cY2-mq-7m6"/>
                             <constraint firstAttribute="trailing" secondItem="Yra-sx-dtA" secondAttribute="trailing" constant="15" id="fCt-Tz-gGy"/>
-                            <constraint firstItem="V3w-9S-Twt" firstAttribute="centerX" secondItem="ZfR-pa-AiB" secondAttribute="centerX" id="fKn-uU-sbG"/>
                             <constraint firstItem="9lu-jH-Pqd" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.08" id="iPQ-vh-JEf"/>
                             <constraint firstItem="ZfR-pa-AiB" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" id="mY5-YK-zjr"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.25" id="nek-PX-95h"/>
+                            <constraint firstItem="Qty-dZ-bwr" firstAttribute="height" secondItem="ZfR-pa-AiB" secondAttribute="height" id="oxu-sB-89f"/>
                             <constraint firstItem="9lu-jH-Pqd" firstAttribute="leading" secondItem="pqb-1e-o3S" secondAttribute="leading" id="tXv-d0-N0O"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="centerY" secondItem="2f0-ih-zMc" secondAttribute="centerY" id="ynv-f2-F3y"/>
                         </constraints>
@@ -95,7 +96,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backView" destination="4Ih-A0-G2a" id="6in-z7-B24"/>
-                <outlet property="mapBtn" destination="V3w-9S-Twt" id="SOZ-VD-uWa"/>
                 <outlet property="mapView" destination="ZfR-pa-AiB" id="Hk9-t7-40u"/>
                 <outlet property="pinEditBtn" destination="Yra-sx-dtA" id="GH2-hy-1pj"/>
                 <outlet property="pinNameLabel" destination="pqb-1e-o3S" id="cNx-Wl-iQp"/>

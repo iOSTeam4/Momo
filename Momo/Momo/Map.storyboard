@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -68,12 +70,82 @@
                                     <constraint firstItem="ISh-gH-Z5T" firstAttribute="centerY" secondItem="caz-H9-CDx" secondAttribute="centerY" id="v4d-tr-s9i"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQP-jP-Ocj">
+                                <rect key="frame" x="0.0" y="538" width="375" height="80"/>
+                                <subviews>
+                                    <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f46-ra-rOp">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="맛집 리스트" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8S-Ah-66a">
+                                        <rect key="frame" x="15" y="5" width="78" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="맛집 리스트 입니다." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVw-qM-Xbp">
+                                        <rect key="frame" x="15" y="27.5" width="345" height="17.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2W-uj-Jug">
+                                        <rect key="frame" x="15" y="53" width="9.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="핀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Siw-Eb-TBx">
+                                        <rect key="frame" x="27.5" y="53" width="12.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoY-l3-ovB">
+                                        <rect key="frame" x="266.5" y="45.5" width="93.5" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="EoY-l3-ovB" secondAttribute="height" multiplier="10:3" id="4gA-D9-UcR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="수정하기">
+                                            <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="mapInfoViewBtnAction:" destination="5WV-cE-pnR" eventType="touchUpInside" id="F3K-4H-jmo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="a8S-Ah-66a" firstAttribute="leading" secondItem="eQP-jP-Ocj" secondAttribute="leading" constant="15" id="0pv-K0-ocu"/>
+                                    <constraint firstItem="a8S-Ah-66a" firstAttribute="top" secondItem="eQP-jP-Ocj" secondAttribute="top" constant="5" id="4F1-H3-Wgi"/>
+                                    <constraint firstItem="Y2W-uj-Jug" firstAttribute="leading" secondItem="a8S-Ah-66a" secondAttribute="leading" id="7gB-eX-MtS"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y2W-uj-Jug" secondAttribute="bottom" constant="10" id="7h7-Bb-yMe"/>
+                                    <constraint firstItem="Y2W-uj-Jug" firstAttribute="top" secondItem="VVw-qM-Xbp" secondAttribute="bottom" constant="8" id="ALi-nB-IJe"/>
+                                    <constraint firstItem="f46-ra-rOp" firstAttribute="height" secondItem="eQP-jP-Ocj" secondAttribute="height" id="FUq-Pg-9MG"/>
+                                    <constraint firstItem="VVw-qM-Xbp" firstAttribute="top" secondItem="a8S-Ah-66a" secondAttribute="bottom" constant="2" id="FfS-HH-qZF"/>
+                                    <constraint firstItem="Siw-Eb-TBx" firstAttribute="centerY" secondItem="Y2W-uj-Jug" secondAttribute="centerY" id="N21-9Y-z8A"/>
+                                    <constraint firstAttribute="trailing" secondItem="VVw-qM-Xbp" secondAttribute="trailing" constant="15" id="PBU-4j-vtO"/>
+                                    <constraint firstItem="f46-ra-rOp" firstAttribute="centerY" secondItem="eQP-jP-Ocj" secondAttribute="centerY" id="PD0-71-aqC"/>
+                                    <constraint firstItem="Siw-Eb-TBx" firstAttribute="leading" secondItem="Y2W-uj-Jug" secondAttribute="trailing" constant="3" id="R0Z-8C-TAq"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ZCg-os-8ek"/>
+                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" multiplier="0.25" id="ZWH-cS-hN9"/>
+                                    <constraint firstItem="f46-ra-rOp" firstAttribute="centerX" secondItem="eQP-jP-Ocj" secondAttribute="centerX" id="aFV-tZ-Acx"/>
+                                    <constraint firstItem="VVw-qM-Xbp" firstAttribute="leading" secondItem="a8S-Ah-66a" secondAttribute="leading" id="bke-aT-Yrg"/>
+                                    <constraint firstAttribute="trailing" secondItem="EoY-l3-ovB" secondAttribute="trailing" constant="15" id="k7t-Yz-EcS"/>
+                                    <constraint firstItem="f46-ra-rOp" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" id="pTU-Qn-qLO"/>
+                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="centerY" secondItem="Y2W-uj-Jug" secondAttribute="centerY" constant="-2" id="s6b-od-TfS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="caz-H9-CDx" firstAttribute="centerX" secondItem="kX6-0h-d80" secondAttribute="centerX" id="2L6-jV-vYr"/>
                             <constraint firstAttribute="bottom" secondItem="caz-H9-CDx" secondAttribute="bottom" id="aek-Zv-ce5"/>
+                            <constraint firstItem="caz-H9-CDx" firstAttribute="top" secondItem="eQP-jP-Ocj" secondAttribute="bottom" id="bXD-qV-zbG"/>
                             <constraint firstItem="caz-H9-CDx" firstAttribute="width" secondItem="kX6-0h-d80" secondAttribute="width" id="e9C-t5-Nxr"/>
+                            <constraint firstItem="eQP-jP-Ocj" firstAttribute="width" secondItem="kX6-0h-d80" secondAttribute="width" id="hNH-OJ-ao7"/>
+                            <constraint firstItem="eQP-jP-Ocj" firstAttribute="centerX" secondItem="kX6-0h-d80" secondAttribute="centerX" id="mUs-yD-5bU"/>
                         </constraints>
                         <connections>
                             <outlet property="delegate" destination="5WV-cE-pnR" id="edI-ty-mQU"/>
@@ -83,6 +155,11 @@
                     <connections>
                         <outlet property="cancelBtn" destination="nT2-e8-Mib" id="yPH-HR-C4j"/>
                         <outlet property="makingMarkerBtnView" destination="caz-H9-CDx" id="0oF-Gk-HQ2"/>
+                        <outlet property="mapInfoView" destination="eQP-jP-Ocj" id="4E0-vv-nHG"/>
+                        <outlet property="mapInfoViewBtn" destination="EoY-l3-ovB" id="TlU-9d-Wwx"/>
+                        <outlet property="mapInfoViewDescriptionLabel" destination="VVw-qM-Xbp" id="6zT-vu-hkI"/>
+                        <outlet property="mapInfoViewNameLabel" destination="a8S-Ah-66a" id="DlF-oA-eq5"/>
+                        <outlet property="mapInfoViewPinNumLabel" destination="Y2W-uj-Jug" id="ewP-0d-hFg"/>
                         <outlet property="mapView" destination="kX6-0h-d80" id="QEZ-8b-JZF"/>
                         <outlet property="nextBtn" destination="GVJ-bp-TgT" id="PMm-Nw-nOc"/>
                     </connections>
@@ -96,7 +173,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MapNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="n2O-kY-Doq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2D-7v-x2U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U2D-7v-x2U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
