@@ -11,7 +11,9 @@
 @interface MapMakeViewController ()
 <UITextFieldDelegate>
 
+@property (nonatomic) BOOL isEditMode;
 
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *mapNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *mapContentTextField;
@@ -22,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
 @property (weak, nonatomic) IBOutlet UISwitch *secretSwitch;
+@property (nonatomic) UIButton *deleteBtn;
 
 @end
 
@@ -34,6 +37,29 @@
     
     [self.mapNameTextField addTarget:self action:@selector(mapNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.mapContentTextField addTarget:self action:@selector(mapContentTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    
+////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
+    self.isEditMode = YES;
+
+    self.checkName = YES;
+    self.checkContent = YES;
+    [self checkMakeBtnState];
+    
+    self.mapNameTextField.text = @"2017년 여름 휴가";
+    self.mapContentTextField.text = @"모모랑 함께한 도쿄여행";
+    //////////////////////////////////////////////////////////////////
+    
+    if (self.isEditMode) {
+        [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
+        [self.view layoutIfNeeded];
+        self.deleteBtn = [[UIButton alloc] init];
+        [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
+        [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.deleteBtn];
+        [self.deleteBtn addTarget:self action:@selector(selectedDeleteMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,7 +167,11 @@
     NSLog(@"private : %d", private);
 }
 
-
+- (void)selectedDeleteMapBtn:(id)sender {
+    
+    NSLog(@"맵 지워");
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 /*
