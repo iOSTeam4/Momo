@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (weak, nonatomic) IBOutlet UIView *mapPreView;
 
+@property (weak, nonatomic) IBOutlet UIButton *setup;
 @property (weak, nonatomic) IBOutlet UILabel *pinName;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress;
 @property (weak, nonatomic) IBOutlet UILabel *pinMainText;

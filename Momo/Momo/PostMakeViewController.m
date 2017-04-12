@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
+@property (nonatomic) UIButton *deleteBtn;
+@property (nonatomic) BOOL isEditMode;
 
 @end
 
@@ -46,6 +48,26 @@
     [self.deletePhoto setImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
     [self.contentView addSubview:self.deletePhoto];
     [self.deletePhoto setHidden:YES];
+    
+    ////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
+    self.isEditMode = YES;
+    
+    self.photoImageView.hidden = NO;
+    self.checkTextField = YES;
+    
+    [self checkMakeBtnState];
+    //////////////////////////////////////////////////////////////////
+    
+    if (self.isEditMode) {
+        [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
+        [self.view layoutIfNeeded];
+        self.deleteBtn = [[UIButton alloc] init];
+        [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
+        [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.deleteBtn];
+        [self.deleteBtn addTarget:self action:@selector(selectedDeletePostBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -229,6 +251,13 @@
     
     NSLog(@"photo : %@", photo);
     NSLog(@"content : %@", content);
+}
+
+- (void)selectedDeletePostBtn:(id)sender {
+    
+    NSLog(@"포스트 지워");
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end

@@ -10,14 +10,15 @@
 
 @interface PinMakeViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *scrContentView;
+@property (nonatomic) BOOL isEditMode;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *mapCheckRefOriginY;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segmentedTopMargin;
 @property (weak, nonatomic) IBOutlet UITextField *pinNameTextField;
 
 @property (weak, nonatomic) UIButton *categoryLastSelectedBtn;
 @property (weak, nonatomic) UIButton *mapLastSelectedBtn;
-
+@property (nonatomic) UIButton *deleteBtn;
 @property (nonatomic) NSMutableArray<UIButton *> *mapCheckBtnArr;
 
 @property (nonatomic) BOOL checkName;
@@ -50,6 +51,28 @@
     self.segmentedTopMargin.constant = 30 + 44 * (myMap.count - 1);
     // 변동 constraint를 준 후 반드시 명령
     [self.view layoutIfNeeded];
+    
+    ////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
+    self.isEditMode = YES;
+    
+    self.checkName = YES;
+    self.checkCategory = YES;
+    self.checkMap = YES;
+    [self checkMakeBtnState];
+    
+    self.pinNameTextField.text = @"패스트캠퍼스";
+    //////////////////////////////////////////////////////////////////
+    
+    if (self.isEditMode) {
+        [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
+//        [self.view layoutIfNeeded];
+        //        float makeBtnCenterX = + (self.makeBtn3.frame.size.width/2)-25;
+        self.deleteBtn = [[UIButton alloc] init];
+        [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
+        [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.deleteBtn];
+        [self.deleteBtn addTarget:self action:@selector(selectedDeletePinBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
 
 }
 
@@ -72,7 +95,7 @@
     
     for (NSInteger i =0 ; i < arr.count ; i++) {
         UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(26, offsetY, self.view.frame.size.width-26, 29)];
-        [self.scrContentView addSubview:btnView];
+        [self.contentView addSubview:btnView];
         
         UIButton *mapCheckBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [mapCheckBtn setImage:[UIImage imageNamed:@"mapCheckBtn"] forState:UIControlStateNormal];
@@ -93,19 +116,22 @@
         [mapCheckBtn addTarget:self action:@selector(selectedMapCheckBtn:) forControlEvents:UIControlEventTouchUpInside];
         [mapNameBtn addTarget:self action:@selector(selectedMapCheckBtn:) forControlEvents:UIControlEventTouchUpInside];
         
+        // 자물쇠가 있을 경우
         if ([arr[i][0] isEqual:@1]) {
             [mapNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
             [mapNameBtn setContentMode:UIViewContentModeScaleAspectFit];
-            // mapName 버튼과 자물쇠 사이 spacing
-            [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+            [mapNameBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+            [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
+        } else {
+            
+            [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 36, 0, 0)];
         }
-        
         
         [btnView addSubview:mapCheckBtn];
         mapCheckBtn.frame = CGRectMake(0, 0, 29, 29);
         
         [btnView addSubview:mapNameBtn];
-        mapNameBtn.frame = CGRectMake(40, 0, btnView.frame.size.width - 40, 29);
+        mapNameBtn.frame = CGRectMake(30, 0, btnView.frame.size.width - 40, 29);
         
         offsetY += 44;
     }
@@ -255,6 +281,10 @@
     NSLog(@"mapStr : %@", mapStr);
 }
 
-
+- (void)selectedDeletePinBtn:(id)sender {
+    
+    NSLog(@"핀 지워");
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
