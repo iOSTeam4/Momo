@@ -12,7 +12,7 @@
 
 
 @interface PinViewController ()
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout      >
+<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
