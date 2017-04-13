@@ -68,9 +68,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    if ([[DataCenter sharedInstance] getUserToken] != nil) {
-        [[DataCenter sharedInstance] saveMomoUserData];     // 앱 종료 전 데이터 저장
-    }
+//    if ([DataCenter getUserToken] != nil) {
+//        [DataCenter saveMomoUserData];     // 앱 종료 전 데이터 저장
+//    }
 }
     
     

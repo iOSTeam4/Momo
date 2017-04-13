@@ -24,7 +24,7 @@
     
     [self.navigationItem setTitle:@"Main View"];
     
-    _imageView.image = [DataCenter sharedInstance].momoUserData.user_profile_image;
+    _imageView.image = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
     [self.view addSubview:_imageView];
     _imageView.frame = CGRectMake(0, 0, 30, 30);
     
@@ -44,7 +44,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.imageView setImage:[DataCenter sharedInstance].momoUserData.user_profile_image];
+    [self.imageView setImage:[[DataCenter sharedInstance].momoUserData getUserProfileImage]];
 }
 
 - (IBAction)logoutTempBtnAction:(id)sender {

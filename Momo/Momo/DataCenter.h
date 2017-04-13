@@ -15,31 +15,24 @@
 + (instancetype)sharedInstance;
 
 
-
-
-// 기본 세팅 관련 ----------------------------------------//
-
-
-
 // MOMO Dataset 관련 -----------------------------------//
 #pragma mark - MOMO Dataset 관련
 @property (nonatomic) MomoUserDataSet *momoUserData;    // Map, Pin, Post 전부 포함
-+ (NSArray<MomoMapDataSet *> *)myMapList;
-+ (NSArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex;
-+ (NSArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex;
++ (RLMArray<MomoMapDataSet *> *)myMapList;
++ (RLMArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex;
++ (RLMArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex;
+
 
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter
-- (NSString *)getUserToken;
-//- (FBSDKAccessToken *)getUserFBToken;
++ (NSString *)getUserToken;
 
 
 // User Data 저장, 불러오기, 삭제 --------------------------//
-#pragma mark - MOMO User Data 저장, 불러오기, 삭제
-- (void)saveMomoUserData;   // 저장
-//- (void)fetchMomoUserData;  // 불러오기
-- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;
-- (void)removeMomoUserData; // 삭제
+#pragma mark - MOMO User Data 저장, 패치, 삭제
++ (void)saveMomoUserData;   // 저장
++ (BOOL)fetchMomoUserData;  // 패치
++ (void)removeMomoUserData; // 삭제
 
 
 @end

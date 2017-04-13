@@ -60,6 +60,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                                 [DataCenter sharedInstance].momoUserData = momoUserData;
                                                                 
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    [DataCenter saveMomoUserData];  // DB저장
                                                                     completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
                                                                 });
                                                             }];
@@ -108,6 +109,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                                 [DataCenter sharedInstance].momoUserData = momoUserData;
                                                                 
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    [DataCenter saveMomoUserData];  // DB저장
                                                                     completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
                                                                 });
                                                             }];
@@ -136,16 +138,16 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
         NSLog(@"Facebook Log out");
         
         [FacebookModule fbLogOut];
-        [[DataCenter sharedInstance] removeMomoUserData];       // 토큰을 비롯한 유저 데이터 삭제
+        [DataCenter removeMomoUserData];       // 토큰을 비롯한 유저 데이터 삭제
 
         completionBlock(YES, nil);
         
     } else if (TRUE) {
         // 앱 재실행시 있는 토큰으로 자동 인증 및 로그인 미구현.
         // 일단 로그아웃은 서버 안거치고 무조건 토큰 삭제
-        NSLog(@"로그아웃, token : %@", [[DataCenter sharedInstance] getUserToken]);
-        [[DataCenter sharedInstance] removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
-        NSLog(@"초기화 완료 -> token : %@", [[DataCenter sharedInstance] getUserToken]);
+        NSLog(@"로그아웃, token : %@", [DataCenter getUserToken]);
+        [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
+        NSLog(@"초기화 완료 -> token : %@", [DataCenter getUserToken]);
         
         completionBlock(YES, nil);
         
@@ -160,7 +162,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         
         // 헤더 세팅
-        [request addValue:[NSString stringWithFormat:@"token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+        [request addValue:[NSString stringWithFormat:@"token %@", [DataCenter getUserToken]] forHTTPHeaderField:@"Authorization"];
         
         request.HTTPBody = [@"" dataUsingEncoding:NSUTF8StringEncoding];        // @"" 왜 넣어야하지?
         request.HTTPMethod = @"POST";
@@ -177,9 +179,9 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                             if (error == nil) {
                                                                 NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                                 
-                                                                NSLog(@"로그아웃, token : %@", [[DataCenter sharedInstance] getUserToken]);
-                                                                [[DataCenter sharedInstance] removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
-                                                                NSLog(@"초기화 완료 -> token : %@", [[DataCenter sharedInstance] getUserToken]);
+                                                                NSLog(@"로그아웃, token : %@", [DataCenter getUserToken]);
+                                                                [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
+                                                                NSLog(@"초기화 완료 -> token : %@", [DataCenter getUserToken]);
                                                                 
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     completionBlock(YES, responseDic);
@@ -208,7 +210,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
     
     // 서버로부터 유저 정보 받아와 세팅할 부분
     
-    [self getUserMapDataWithCompletionBlock:^(NSArray<MomoMapDataSet *> *user_map_list) {
+    [self getUserMapDataWithCompletionBlock:^(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list) {
         momoUserData.user_map_list = user_map_list;
         completionBlock(momoUserData);
     }];
@@ -217,7 +219,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
 
 
 // 서버로부터 유저 지도리스트 받아오는 메서드
-+ (void)getUserMapDataWithCompletionBlock:(void (^)(NSArray<MomoMapDataSet *> *user_map_list))completionBlock {
++ (void)getUserMapDataWithCompletionBlock:(void (^)(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list))completionBlock {
     NSLog(@"getUserDataWithCompletionBlock");
     
     // 서버로부터 유저 지도리스트 등 받아와 세팅할 부분
@@ -229,7 +231,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                         @[@"제주도를 가보자", @"꿀잼", @0],
                         @[@"광화문-경복궁-서촌", @"오피스 라이프를 빛내주는 곳들 :)", @0],
                         @[@"이태원 맥주집", @"준영이형 마음의 고향을 파헤쳐보자", @0],
-                        @[@"낚시", @"강태공이 될테야!", @1],
+                        @[@"낚시", @"", @1],
                         @[@"엑소 투어⚡️", @"엑소 따라 여행 간다", @0],
                         @[@"수도권 마스킹 or 와이드스크린 영화관", @"🍿", @1]];
     
@@ -244,23 +246,20 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                         @[@"화곡 2동 주민센터", @"한선이형 동네", @3, @37.531612, @126.854423],
                         @[@"나들목", @"맛있음 ㅋㅋ", @0, @37.517116, @127.023943]];
     
-    NSMutableArray<MomoMapDataSet *> *mapListArr = [[NSMutableArray alloc] init];
-    
+    MomoUserDataSet *userData = [[MomoUserDataSet alloc] init];
+
     for (NSInteger i = 0 ; i < mapArr.count ; i++) {
         MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
-        [mapListArr addObject:mapData];
+        [userData.user_map_list addObject:mapData];
         
         mapData.map_name = mapArr[i][0];
         mapData.map_description = mapArr[i][1];
         mapData.map_is_private = [(NSNumber *)mapArr[i][2] boolValue];
         
-        NSMutableArray<MomoPinDataSet *> *pinListArr = [[NSMutableArray alloc] init];
-        mapData.map_pin_list = pinListArr;
-
         for (NSInteger j = 0 ; j < pinArr.count ; j++) {
             MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
-            [pinListArr addObject:pinData];
-            
+            [mapData.map_pin_list addObject:pinData];
+                        
             pinData.pin_name = pinArr[j][0];
             pinData.pin_label = [(NSNumber *)pinArr[j][2] integerValue];
             
@@ -268,12 +267,10 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
             pinData.pin_place = placeData;
             placeData.place_lat = [(NSNumber *)pinArr[j][3] doubleValue];
             placeData.place_lng = [(NSNumber *)pinArr[j][4] doubleValue];
-            
         }
     }
-    
-    
-    completionBlock(mapListArr);
+
+    completionBlock(userData.user_map_list);
 }
 
 

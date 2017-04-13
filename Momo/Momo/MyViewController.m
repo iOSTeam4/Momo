@@ -130,8 +130,8 @@
     headerView.delegate = self;
     
     // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
-    if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
-        headerView.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+    if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
+        headerView.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
     }
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
@@ -177,8 +177,8 @@
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
         
         // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
-        if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
-            mapCell.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+        if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
+            mapCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
         }
         if ([DataCenter sharedInstance].momoUserData.user_username) {
             mapCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
@@ -193,8 +193,8 @@
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
 
         // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
-        if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
-            pinCell.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+        if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
+            pinCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
         }
         if ([DataCenter sharedInstance].momoUserData.user_username) {
             pinCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름

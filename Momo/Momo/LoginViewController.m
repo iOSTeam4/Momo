@@ -34,21 +34,11 @@
     self.signUpBtn.layer.cornerRadius = self.signUpBtn.frame.size.height/2;
 
     
-    // 앱 실행하면서, 토큰 값에 따라 유저 정보 패치
+    // 앱 실행하면서, 유저 정보 패치
     [self.indicator startAnimating];
-    
-    [[DataCenter sharedInstance] fetchMomoUserDataWithCompletionBlock:^(BOOL isSuccess) {
-        NSLog(@"fetchMomoUserDataWithCompletionBlock : %d", isSuccess);
-        
-        [self.indicator stopAnimating];
-        
-        if (isSuccess) {
-            [self autoLoginCheck];
-            
-        } else {
-            NSLog(@"토큰 정보 없음");
-        }
-    }];
+    [DataCenter fetchMomoUserData];
+    [self.indicator stopAnimating];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,9 +70,9 @@
     
     NSLog(@"autoLoginCheck");
     
-    if ([[DataCenter sharedInstance] getUserToken]) {
+    if ([DataCenter getUserToken]) {
         // Token이 없으면 nil : NO, 있으면 YES
-        NSLog(@"Token : %@", [[DataCenter sharedInstance] getUserToken]);
+        NSLog(@"Token : %@", [DataCenter getUserToken]);
         
 //        sleep(3);       // 3초 후 dismiss
 //        [self dismissViewControllerAnimated:YES completion:nil];
@@ -111,8 +101,6 @@
                   
                   if (isSuccess) {
                       NSLog(@"로그인 성공");
-                      
-                      [[DataCenter sharedInstance] saveMomoUserData];
                       
                       [self autoLoginCheck];
                       

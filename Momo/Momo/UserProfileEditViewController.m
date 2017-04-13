@@ -26,8 +26,8 @@
     // Do any additional setup after loading the view.
     
     // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
-    if ([DataCenter sharedInstance].momoUserData.user_profile_image) {
-        self.userImgView.image  = [DataCenter sharedInstance].momoUserData.user_profile_image;  // 프사
+    if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
+        self.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
     }
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         self.userNameTextField.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름

@@ -46,7 +46,6 @@
 		3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5511E88F12600B965A7 /* DataCenter.m */; };
 		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
 		3FEBB8961E97C70B006E3E77 /* PostMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */; };
-		3FF1344E1E926248003B1822 /* RealmDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1344D1E926248003B1822 /* RealmDB.m */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
@@ -121,8 +120,6 @@
 		3FD9A5561E88F35400B965A7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3FEBB8941E97C70B006E3E77 /* PostMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMakeViewController.h; sourceTree = "<group>"; };
 		3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMakeViewController.m; sourceTree = "<group>"; };
-		3FF1344C1E926248003B1822 /* RealmDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDB.h; sourceTree = "<group>"; };
-		3FF1344D1E926248003B1822 /* RealmDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDB.m; sourceTree = "<group>"; };
 		3FF685AF1E892D5300FD927D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Momo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA7EB7A879D2D5894EF998A /* Pods-Momo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momo/Pods-Momo.release.xcconfig"; sourceTree = "<group>"; };
@@ -333,8 +330,6 @@
 			children = (
 				3FD9A5501E88F12600B965A7 /* DataCenter.h */,
 				3FD9A5511E88F12600B965A7 /* DataCenter.m */,
-				3FF1344C1E926248003B1822 /* RealmDB.h */,
-				3FF1344D1E926248003B1822 /* RealmDB.m */,
 				3FC77F4C1E9B7DDA009921D5 /* MomoDataSet.h */,
 				3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */,
 			);
@@ -542,7 +537,6 @@
 				3FD9A5371E88ED3700B965A7 /* AppDelegate.m in Sources */,
 				3FEBB8961E97C70B006E3E77 /* PostMakeViewController.m in Sources */,
 				3F5D69D31E9A76E800129C90 /* UserAccountEditViewController.m in Sources */,
-				3FF1344E1E926248003B1822 /* RealmDB.m in Sources */,
 				3FD918CC1E893067005B1583 /* MapViewController.m in Sources */,
 				3FD9A5341E88ED3700B965A7 /* main.m in Sources */,
 				EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */,

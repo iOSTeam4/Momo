@@ -9,21 +9,38 @@
 #import "MomoDataSet.h"
 
 
-// User Data Set ----------------------------//
-@implementation MomoUserDataSet
+// Place Data Set ---------------------------//
+@implementation MomoPlaceDataSet
+
+//+ (NSString *)primaryKey {
+//    return @"pk";
+//}
 
 @end
 
 
+// Post Data Set ---------------------------//
+@implementation MomoPostDataSet
 
-// Map Data Set -----------------------------//
-@implementation MomoMapDataSet
+//+ (NSString *)primaryKey {
+//    return @"pk";
+//}
+
+- (UIImage *)getPostImage {
+    return [UIImage sd_imageWithData:self.post_image_data];
+}
+
 
 @end
+
 
 
 // Pin Data Set -----------------------------//
 @implementation MomoPinDataSet
+
+//+ (NSString *)primaryKey {
+//    return @"pk";
+//}
 
 - (UIColor *)labelColor {
     switch (self.pin_label) {
@@ -60,15 +77,32 @@
 @end
 
 
-// Place Data Set ---------------------------//
-@implementation MomoPlaceDataSet
+
+// Map Data Set -----------------------------//
+@implementation MomoMapDataSet
+
+//+ (NSString *)primaryKey {
+//    return @"pk";
+//}
 
 @end
 
 
-// Post Data Set ---------------------------//
-@implementation MomoPostDataSet
+
+
+// User Data Set ----------------------------//
+@implementation MomoUserDataSet
+
+//+ (NSString *)primaryKey {
+//    return @"pk";
+//}
+
+
+- (UIImage *)getUserProfileImage {
+    return [UIImage imageWithData:self.user_profile_image_data];
+}
 
 @end
+
 
 

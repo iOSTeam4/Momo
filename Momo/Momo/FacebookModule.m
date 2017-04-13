@@ -63,6 +63,7 @@
                                                               [DataCenter sharedInstance].momoUserData = momoUserData;      // set UserData
                                                               
                                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                                  [DataCenter saveMomoUserData];  // DB저장
                                                                   completionBlock(YES, result.token.tokenString);
                                                               });
                                                           }];
@@ -90,7 +91,7 @@
             }
             if ([result objectForKey:@"picture"]) {
                 momoUserData.user_profile_image_url = result[@"picture"][@"data"][@"url"];
-                momoUserData.user_profile_image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:momoUserData.user_profile_image_url]]];
+                momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:momoUserData.user_profile_image_url]];
                 NSLog(@"url : %@", result[@"picture"][@"data"][@"url"]);
             }
             if ([result objectForKey:@"email"]) {
@@ -102,7 +103,7 @@
             NSLog(@"network error : %@", error.localizedDescription);
         }
         
-        [NetworkModule getUserMapDataWithCompletionBlock:^(NSArray<MomoMapDataSet *> *user_map_list) {
+        [NetworkModule getUserMapDataWithCompletionBlock:^(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list) {
             momoUserData.user_map_list = user_map_list;
             completionBlock(momoUserData);
         }];
