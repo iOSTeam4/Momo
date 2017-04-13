@@ -78,6 +78,13 @@
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [(MainTabBarController *)self.tabBarController customTabBarSetHidden:NO];      // 탭바 Hidden 해제
+    [self.view layoutIfNeeded];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 //    NSLog(@"MapViewController : viewDidAppear");
