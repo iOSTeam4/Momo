@@ -26,6 +26,7 @@
 
 @end
 
+
 @implementation SignupPageViewController
 
 - (void)viewDidLoad {
@@ -38,18 +39,37 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"SignupPageViewController"];
+    
+    // 키보드 노티 설정
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardNoti:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardNoti:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 키보드 노티 해제
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+// TextField, 키보드 처리 ----------------------------//
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField.tag == 1) {
-        NSLog(@"textField.tag == 1");
         [self.pwTextField becomeFirstResponder];
+        
     } else if (textField.tag == 2){
         [self.emailTextField becomeFirstResponder];
+        
     } else {
         [self.emailTextField resignFirstResponder];
+        
+        // id, pw, email 셋 다 입력사항 있을 때, 회원가입 시도
+        if (self.idTextField.text && self.pwTextField.text && self.emailTextField.text) {
+            [self signupBtnAction:self.registerBtn];
+        }
     }
     
     return YES;
@@ -73,75 +93,120 @@
 }
 
 
+// 키보드 노티 처리
+- (void)keyboardNoti:(NSNotification *)keyboardNoti {
+    NSLog(@"keyboardNoti : %@", keyboardNoti.name);
+    
+    CGSize kbSize = [keyboardNoti.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // 회원가입 버튼이 기준점
+    CGFloat registerBtnY = self.registerBtn.superview.frame.origin.y + self.registerBtn.frame.origin.y + self.registerBtn.frame.size.height + 5.0f;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    
+    if (aRect.size.height < registerBtnY) {
+        // 키보드 노티에 따라 View 위 아래로 움직임
+        if([keyboardNoti.name isEqualToString:@"UIKeyboardWillShowNotification"]) {
+            
+            CGFloat moveY = registerBtnY - aRect.size.height;
+            self.view.frame = CGRectMake(0, -moveY, self.view.frame.size.width, self.view.frame.size.height);
+            
+        } else if([keyboardNoti.name isEqualToString:@"UIKeyboardWillHideNotification"]) {
+            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        }
+    }
+}
+
+
+
+
+// Button Action ---------------------------------//
+
+// 뒤로가기 버튼
+- (IBAction)backBtnAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 회원가입 버튼
 - (IBAction)signupBtnAction:(id)sender {
     
     [self.indicator startAnimating];
-    //[self.indicatorView setHidden:NO];
     [self.lastFirstResponderTextField resignFirstResponder];
     
     [NetworkModule signUpRequestWithUsername:self.idTextField.text
-                               withPassword1:self.pwTextField.text
-                               withPassword2:self.pwTextField.text
+                                withPassword:self.pwTextField.text
                                    withEmail:self.emailTextField.text
-                         withCompletionBlock:^(BOOL isSuccess, NSDictionary* result) {
+                         withCompletionBlock:^(BOOL isSuccess, NSString* result) {
                              
                              [self.indicator stopAnimating];
                             
                              if (isSuccess) {
-                                 NSLog(@"log in success %@", result);
-                                 [self.navigationController popToRootViewControllerAnimated:NO];
+                                 NSLog(@"sign up success : %@", result);
                                  
-                                 
-                             } else {
-                                 NSLog(@"system error %@", result);
-                                 
-                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                          message:@"이미 존재하는 아이디입니다. 다시 해주세요."
+                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"회원가입 완료"
+                                                                                                          message:result
                                                                                                    preferredStyle:UIAlertControllerStyleAlert];
                                  
                                  UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
                                                                                     style:UIAlertActionStyleDefault
                                                                                   handler:^(UIAlertAction * _Nonnull action) {
-                                                                                      NSLog(@"확인버튼이 클릭되었습니다");
+
+                                                                                      // 로그인뷰 페이지로 이동
+                                                                                      [self.navigationController popToRootViewControllerAnimated:YES];
                                                                                   }];
+                                 [alertController addAction:okButton];
+                                 [self presentViewController:alertController animated:YES completion:nil];
+ 
+                                 
+                             } else {
+                                 NSLog(@"error : %@", result);
+
+                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                                          message:result
+                                                                                                   preferredStyle:UIAlertControllerStyleAlert];
+                                 
+                                 UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                                    style:UIAlertActionStyleDefault
+                                                                                  handler:nil];
                                  [alertController addAction:okButton];
                                  [self presentViewController:alertController animated:YES completion:nil];
                                  
                              }
                          }];
     
-    
 }
 
+
+// 페북 버튼
 - (IBAction)fbBtnAction:(id)sender {
+    
     [self.indicator startAnimating];
     
     [FacebookModule fbLoginFromVC:self
               withCompletionBlock:^(BOOL isSuccess, NSString *token) {
-                       
+                  
                   [self.indicator stopAnimating];
                   
                   if (isSuccess) {
-                      NSLog(@"로그인 성공");
-                      [self.navigationController popToRootViewControllerAnimated:NO];
+                      NSLog(@"fb 로그인 성공");
+                      
+                      [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
+                      
+                      // 임시로 더미데이터 세팅 /////
+                      [NetworkModule fetchUserMapData];
+                      /////////////////////////
+                      
+                      
+                      // 로그인뷰 페이지로 이동
+                      [self.navigationController popToRootViewControllerAnimated:YES];
                       
                   } else {
-                      // 일단 Facebook 계정의 경우엔 Alert창을 안띄우는게 더 자연스러운 것 같아 주석처리
-                      //                           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                      //                                                                                                    message:@"로그인 실패하였습니다. 다시 해주세요."
-                      //                                                                                             preferredStyle:UIAlertControllerStyleAlert];
-                      //
-                      //                           UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                      //                                                                              style:UIAlertActionStyleDefault
-                      //                                                                            handler:^(UIAlertAction * _Nonnull action) {
-                      //                                                                                NSLog(@"확인버튼이 클릭되었습니다");
-                      //                                                                            }];
-                      //                           [alertController addAction:okButton];
-                      //
-                      //                           [self presentViewController:alertController animated:YES completion:nil];
-                      
+                      NSLog(@"fb 로그인 실패");
                   }
               }];
+
 }
 
 

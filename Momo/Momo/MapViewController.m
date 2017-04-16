@@ -51,7 +51,7 @@
 
     // MapViewController 공통 기능 기본 세팅
     [self initialSetting];
-    
+    [self initialSettingGoogleMapView];
     
     if (self.showSelectedMap) {
         // 선택 지도 보기 세팅
@@ -141,8 +141,6 @@
     self.nextBtn.layer.cornerRadius = 10;
     self.nextBtn.layer.borderWidth = 1;
     self.nextBtn.layer.borderColor = self.nextBtn.backgroundColor.CGColor;
-    
-    [self initialSetGoogleMapView];
 
 }
 
@@ -150,7 +148,7 @@
 // GoogleMaps 관련 --------------------------------------//
 
 // Google Map View 관련 객체 생성 및 초기설정
-- (void)initialSetGoogleMapView {
+- (void)initialSettingGoogleMapView {
     
     self.mapView.padding = UIEdgeInsetsMake(64, 0, 49, 0);
     

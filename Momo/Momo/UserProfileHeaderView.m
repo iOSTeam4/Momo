@@ -36,9 +36,18 @@
 }
 
 
+- (IBAction)followerBtnAction:(id)sender {
+    [self.delegate selectedFollowerBtn];
+}
+
+- (IBAction)followingBtnAction:(id)sender {
+    [self.delegate selectedFollowingBtn];
+}
+
 - (IBAction)editBtnAction:(id)sender {
     [self.delegate selectedUserEditBtn];
 }
+
 
 - (IBAction)mapPinBtnAction:(UIButton *)sender {
     

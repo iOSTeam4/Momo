@@ -7,17 +7,16 @@
 //
 
 #import "MyViewController.h"
-#import "UserProfileHeaderView.h"
+#import "FollowViewController.h"
 #import "UserAccountEditViewController.h"
 
+#import "UserProfileHeaderView.h"
 #import "MapProfileTableViewCell.h"
 #import "PinProfileTableViewCell.h"
 
 #import "MapViewController.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate>
-
-@property (nonatomic) NSArray *mapPinDataArr;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
@@ -33,15 +32,14 @@
     [self.navigationItem setTitle:@"My View"];
     
     // Navi Bar 오른쪽 설정 버튼
-    UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"lockOpen"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedNaviRightBtn)];    // 이미지 수정 필요
+    UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedNaviRightBtn)];
     [self.navigationItem setRightBarButtonItem:naviRightBtn];
+
+    
     
     [self initialTableViewCellSettingWithNib];
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
-    
-    self.mapPinDataArr = @[@[@[@"map1"], @[@"map2"], @[@"map3"], @[@"map4"]],
-                           @[@[@"pin1"], @[@"pin2"], @[@"pin3"], @[@"pin4"], @[@"pin5"], @[@"pin6"]]];
 
 }
 
@@ -66,15 +64,15 @@
     UIAlertAction *logOutBtn = [UIAlertAction actionWithTitle:@"Log Out"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                          NSLog(@"Log Out");
                                                           
                                                           [self.indicator startAnimating];
                                                           
-                                                          [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
+                                                          [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                                               [self.indicator stopAnimating];
                                                               
                                                               if (isSuccess) {
-                                                                  NSLog(@"log out success");
+                                                                  NSLog(@"log out success : %@", result);
+                                                                  
                                                                   UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
                                                                   UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
                                                                   
@@ -82,7 +80,17 @@
                                                                   [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
                                                                   
                                                               } else {
-                                                                  NSLog(@"log out fail");
+                                                                  NSLog(@"error : %@", result);
+                                                                  
+                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                                                                           message:result
+                                                                                                                                    preferredStyle:UIAlertControllerStyleAlert];
+                                                                  
+                                                                  UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                                                                     style:UIAlertActionStyleDefault
+                                                                                                                   handler:nil];
+                                                                  [alertController addAction:okButton];
+                                                                  [self presentViewController:alertController animated:YES completion:nil];
                                                               }
                                                           }];
                                                       }];
@@ -120,7 +128,7 @@
 #pragma mark - Section Header Settings
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // always 1 : MapProfile or PinProfile
+    // always 1 : userProfile
     return 1;
 }
 
@@ -227,6 +235,23 @@
 
 //  UserProfileHeaderView Delegate Methods -------------------//
 #pragma mark - UserProfileHeaderView Delegate Methods
+
+- (void)selectedFollowerBtn {
+    FollowViewController *followVC = [self.storyboard instantiateViewControllerWithIdentifier:@"FollowViewController"];
+    
+    // VC 값 세팅, 전달
+    followVC.title = @"팔로워";
+    [self.navigationController pushViewController:followVC animated:YES];
+}
+
+- (void)selectedFollowingBtn {
+    FollowViewController *followVC = [self.storyboard instantiateViewControllerWithIdentifier:@"FollowViewController"];
+
+    // VC 값 세팅, 전달
+    followVC.title = @"팔로잉";
+    [self.navigationController pushViewController:followVC animated:YES];
+
+}
 
 - (void)selectedUserEditBtn {
     [self performSegueWithIdentifier:@"userProfileEditSegue" sender:self];

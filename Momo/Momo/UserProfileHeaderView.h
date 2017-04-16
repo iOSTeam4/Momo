@@ -43,6 +43,8 @@
 
 @protocol UserProfileHeaderViewDelegate <NSObject>
 
+- (void)selectedFollowerBtn;
+- (void)selectedFollowingBtn;
 - (void)selectedUserEditBtn;
 - (void)selectedMapPinBtnWithNum:(NSInteger)num;    // 지도, 핀 버튼 선택 델리게이트 메서드
 

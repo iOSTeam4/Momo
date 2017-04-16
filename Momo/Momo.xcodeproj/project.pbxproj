@@ -29,6 +29,7 @@
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
 		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
 		3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */; };
+		3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD0B321EA3D56B00319491 /* FollowViewController.m */; };
 		3FC77F4E1E9B7DDA009921D5 /* MomoDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */; };
 		3FC77F511E9C066A009921D5 /* FacebookModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC77F501E9C066A009921D5 /* FacebookModule.m */; };
 		3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD392E41E93B59800AFBB3A /* UIColor+MMAdditions.m */; };
@@ -91,6 +92,8 @@
 		3F9C27CE1E8A48C6008DD04A /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
 		3F9C27D01E8A48D3008DD04A /* PinView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinView.storyboard; sourceTree = "<group>"; };
 		3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3FBD0B311EA3D56B00319491 /* FollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowViewController.h; sourceTree = "<group>"; };
+		3FBD0B321EA3D56B00319491 /* FollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowViewController.m; sourceTree = "<group>"; };
 		3FC77F4C1E9B7DDA009921D5 /* MomoDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomoDataSet.h; sourceTree = "<group>"; };
 		3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomoDataSet.m; sourceTree = "<group>"; };
 		3FC77F4F1E9C066A009921D5 /* FacebookModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookModule.h; sourceTree = "<group>"; };
@@ -231,18 +234,36 @@
 			name = PinView;
 			sourceTree = "<group>";
 		};
-		3FD392EC1E93C8ED00AFBB3A /* MyView */ = {
+		3FBD0B2B1EA3C3EE00319491 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
-				3FD392ED1E93C92600AFBB3A /* MyViewController.h */,
-				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
 				3F5D69D11E9A76E800129C90 /* UserAccountEditViewController.h */,
 				3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */,
 				3F5D69CB1E9A752300129C90 /* UserProfileEditViewController.h */,
 				3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */,
 				3F5D69D71E9A936D00129C90 /* UIPlaceHolderTextView */,
+			);
+			name = Edit;
+			sourceTree = "<group>";
+		};
+		3FBD0B2C1EA3C44300319491 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				3FBD0B311EA3D56B00319491 /* FollowViewController.h */,
+				3FBD0B321EA3D56B00319491 /* FollowViewController.m */,
+			);
+			name = Follow;
+			sourceTree = "<group>";
+		};
+		3FD392EC1E93C8ED00AFBB3A /* MyView */ = {
+			isa = PBXGroup;
+			children = (
+				3FD392ED1E93C92600AFBB3A /* MyViewController.h */,
+				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
 				3FD392F01E93C94400AFBB3A /* My.storyboard */,
 				3F395E591E9631F6009F082D /* HeaderView&Cell */,
+				3FBD0B2C1EA3C44300319491 /* Follow */,
+				3FBD0B2B1EA3C3EE00319491 /* Edit */,
 			);
 			name = MyView;
 			sourceTree = "<group>";
@@ -521,6 +542,7 @@
 			files = (
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
+				3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
 				3FC77F511E9C066A009921D5 /* FacebookModule.m in Sources */,
 				3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */,

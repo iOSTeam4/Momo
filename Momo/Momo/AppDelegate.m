@@ -69,7 +69,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
 //    if ([DataCenter getUserToken] != nil) {
-//        [DataCenter saveMomoUserData];     // 앱 종료 전 데이터 저장
+//        [DataCenter saveMomoUserData];     // 앱 종료 전 데이터 DB에 저장
 //    }
 }
     

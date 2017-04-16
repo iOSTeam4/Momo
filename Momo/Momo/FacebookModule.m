@@ -8,10 +8,14 @@
 
 #import "FacebookModule.h"
 
+static NSString *const API_BASE_URL         = @"https://www.yeoptest.com";
+static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
+
+
 @implementation FacebookModule
 
 // Facebook account -------------------------------//
-#pragma mark - Facebook Auth Account Methods
+#pragma mark - Facebook Server API Methods
 
 // FBSDKLoginManager Singleton Instance
 + (FBSDKLoginManager *)sharedFBLoginManeger {
@@ -34,80 +38,191 @@
 
 // Facebook Login (& Sign Up)
 + (void)fbLoginFromVC:(UIViewController *)fromVC
-  withCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock {
+  withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
     
     [[self sharedFBLoginManeger] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
                                        fromViewController:fromVC
                                                   handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                                       
-                                                      NSLog(@"%@", [FBSDKAccessToken currentAccessToken]);
+                                                      // isMainThread
                                                       
                                                       if (error) {
-                                                          NSLog(@"network error : %@", error.localizedDescription);
+                                                          NSLog(@"network error : %@", error.description);
                                                           
-                                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                                              completionBlock(NO, nil);
-                                                          });
+                                                          completionBlock(NO, nil);
+                                                          
                                                       } else if (result.isCancelled) {
                                                           NSLog(@"isCancelled");
                                                           
-                                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                                              completionBlock(NO, nil);
-                                                          });
+                                                          completionBlock(NO, nil);
+                                                          
                                                       } else {
                                                           NSLog(@"Facebook Login Success");
+                                                          NSLog(@"fb token : %@", [FBSDKAccessToken currentAccessToken]);
                                                           
-                                                          // User Info Data 받아옴
-                                                          [self getFacebookProfileInfosWithCompletionBlock:^(MomoUserDataSet *momoUserData) {
+                                                          ////////// 임시 사용 //////////
+                                                          [DataCenter sharedInstance].momoUserData.pk = 111;  // pk 111
+                                                          [DataCenter sharedInstance].momoUserData.user_token = [FBSDKAccessToken currentAccessToken].tokenString;  // fb_token token으로 할당해서 사용
+                                                          [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
                                                               
-                                                              [DataCenter sharedInstance].momoUserData = momoUserData;      // set UserData
-                                                              
-                                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                                  [DataCenter saveMomoUserData];  // DB저장
-                                                                  completionBlock(YES, result.token.tokenString);
-                                                              });
+                                                              completionBlock(YES, nil);
                                                           }];
+                                                          
+                                                          /////////////////////////////
+                                                          
+                                                          // Momo 서버 FB 로그인 API 오류 있음
+//                                                          // fb_token 정보 가지고 Momo 서버 Facebook계정 로그인
+//                                                          [self fbLoginRequestWithFBToken:[FBSDKAccessToken currentAccessToken].tokenString withCompletionBlock:^(BOOL isSuccess, BOOL newMember, NSString *result) {
+//                                                              
+//                                                              if (isSuccess) {
+//                                                                  // 페북 로그인 성공
+//                                                                  
+//                                                                  if (newMember) {
+//                                                                      // 신규 회원
+//                                                                      // Facebook id, name, profileImage, email 얻어오기
+//                                                                      [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
+//                                                                          
+//                                                                          // 서버에 페북에서 받아온 추가 정보를 보내는 부분 필요
+//                                                                          
+//                                                                          // 정보를 잘 가져왔든, 말든 로그인 성공
+//                                                                          completionBlock(YES, result);
+//
+//                                                                      }];
+//                                                                  } else {
+//                                                                      // 기존 회원
+//                                                                      completionBlock(YES, result);
+//                                                                  }
+//                                                                  
+//                                                              } else {
+//                                                                  // 페북 로그인 실패
+//                                                                  completionBlock(NO, result);
+//                                                              }
+//                                                              
+//                                                          }];
+                                                          
                                                       }
                                                   }];
+
 }
 
-// 페북 계정, 서버로부터 유저 프로필 정보들 받아오는 메서드
-+ (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock {
-    
-    MomoUserDataSet *momoUserData = [[MomoUserDataSet alloc] init];
-    
-//    momoUserData.user_fb_token = [FBSDKAccessToken currentAccessToken];
-    momoUserData.user_token = [FBSDKAccessToken currentAccessToken].tokenString;
-    momoUserData.user_id = [FBSDKAccessToken currentAccessToken].userID;
+
+
+// Facebook 서버로부터 유저 프로필 정보들 받아와 세팅하는 메서드
+// 신규 회원일 경우에만 최초로 받아오는게 맞을 듯
++ (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
     
     [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, picture.type(large), email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-
-        NSLog(@"result : %@", result);
+        
+        // isMainThread
+        NSLog(@"FBSDKGraphRequest : %@", result);
         
         if (!error) {
+            
+            // user_id
+            [DataCenter sharedInstance].momoUserData.user_id = [FBSDKAccessToken currentAccessToken].userID;
+            
+            // 이름
             if ([result objectForKey:@"name"]) {
-                momoUserData.user_username = [result objectForKey:@"name"];
-                NSLog(@"momoUserData.user_username : %@", momoUserData.user_username);
+                [DataCenter sharedInstance].momoUserData.user_username = [result objectForKey:@"name"];
+                NSLog(@"momoUserData.user_username : %@", [DataCenter sharedInstance].momoUserData.user_username);
             }
+            
+            // 프로필 사진
             if ([result objectForKey:@"picture"]) {
-                momoUserData.user_profile_image_url = result[@"picture"][@"data"][@"url"];
-                momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:momoUserData.user_profile_image_url]];
+                [DataCenter sharedInstance].momoUserData.user_profile_image_url = result[@"picture"][@"data"][@"url"];
+                [DataCenter sharedInstance].momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].momoUserData.user_profile_image_url]];
                 NSLog(@"url : %@", result[@"picture"][@"data"][@"url"]);
             }
+            
+            // 이메일
             if ([result objectForKey:@"email"]) {
-                momoUserData.user_email = [result objectForKey:@"email"];
-                NSLog(@"momoUserData.user_email : %@", momoUserData.user_email);
+                [DataCenter sharedInstance].momoUserData.user_email = [result objectForKey:@"email"];
+                NSLog(@"momoUserData.user_email : %@", [DataCenter sharedInstance].momoUserData.user_email);
             }
-
+            
+            completionBlock(YES);
+            
         } else {
-            NSLog(@"network error : %@", error.localizedDescription);
+            NSLog(@"network error : %@", error.description);
+            completionBlock(NO);
         }
-        
-        [NetworkModule getUserMapDataWithCompletionBlock:^(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list) {
-            momoUserData.user_map_list = user_map_list;
-            completionBlock(momoUserData);
-        }];
     }];
+}
+
+
+#pragma mark - Facebook Account Momo server API Methods
+
+// Momo 서버 Facebook계정 로그인
++ (void)fbLoginRequestWithFBToken:(NSString *)fbToken
+              withCompletionBlock:(void (^)(BOOL isSuccess, BOOL newMember, NSString *result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, FACEBOOK_LOGIN_URL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    request.HTTPBody = [[NSString stringWithFormat:@"access_token=%@", fbToken] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPMethod = @"POST";
+    
+    // Task
+    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
+                                                             fromData:nil
+                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                        
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                        
+                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                        
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                    // Code: 200 Success
+                                                                    
+                                                                    NSDictionary *userDic = [responseDic objectForKey:@"user"];
+                                                                    
+                                                                    NSNumber *pk = [userDic objectForKey:@"pk"];
+                                                                    NSString *token = [userDic objectForKey:@"token"];
+//                                                                    BOOL newMember = [[userDic objectForKey:@"newMember"] boolValue];
+                                                                    BOOL newMember = YES;    // 새롭게 가입한 회원
+                                                                    
+                                                                    NSLog(@"PK : %@, Token : %@", pk, token);
+                                                            
+                                                                    [DataCenter sharedInstance].momoUserData.pk = [pk integerValue];
+                                                                    [DataCenter sharedInstance].momoUserData.user_token = token;
+                                                                    [DataCenter sharedInstance].momoUserData.user_fb_token = fbToken;
+                                                                    
+                                                                    completionBlock(YES, newMember, @"fb 로그인 성공");
+                                                                    
+                                                                } else if (((NSHTTPURLResponse *)response).statusCode == 401) {
+                                                                    // Code: 401 Unauthorized
+                                                                    
+                                                                    NSLog(@"%@", [responseDic objectForKey:@"detail"]);
+                                                                    completionBlock(NO, NO, [responseDic objectForKey:@"detail"]);
+                                                                    
+                                                                } else {
+                                                                    // Code: 400 BAD REQUEST
+                                                                    
+                                                                    // error
+                                                                    NSLog(@"Code: 400 BAD REQUEST");
+                                                                    completionBlock(NO, NO, @"Code: 400 BAD REQUEST");
+                                                                    
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, NO, @"Network error");
+                                                            }
+                                                            
+                                                        });
+                                                        
+                                                    }];
+    [postTask resume];
 }
 
 

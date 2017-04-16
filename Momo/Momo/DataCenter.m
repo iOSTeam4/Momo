@@ -60,7 +60,7 @@
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter
 
-+ (NSString *)getUserToken {
+- (NSString *)getUserToken {
     // Token 없으면 nil
     return [DataCenter sharedInstance].momoUserData.user_token;
 }
@@ -69,8 +69,9 @@
 // User Data 저장, 패치, 삭제 --------------------------//
 #pragma mark - MOMO User Data 저장, 패치, 삭제
 
-// 저장
-+ (void)saveMomoUserData {
+// 초기 저장
+// 최초 객체 세팅 후, Realm에 addObject할 때만 부름
++ (void)initialSaveMomoUserData {
     NSLog(@"saveMomoUserData : %@", [DataCenter sharedInstance].momoUserData);
     
     RLMRealm *realm = [RLMRealm defaultRealm];
@@ -82,7 +83,7 @@
 }
 
 // 패치
-+ (BOOL)fetchMomoUserData {
+- (BOOL)fetchMomoUserData {
     
     // 기존 저장되어있던 기본 데이터들 패치 (페북 & 이메일 공통)
     if([MomoUserDataSet allObjects].firstObject) {     // nil이 아닐 때 불러옴
@@ -95,13 +96,15 @@
         return YES;
         
     } else {    // 토큰 없을 때
+        [DataCenter sharedInstance].momoUserData = [[MomoUserDataSet alloc] init];
+        
         return NO;
     }
 }
 
 // 삭제
 + (void)removeMomoUserData {
-    [DataCenter sharedInstance].momoUserData = nil;
+    
     NSLog(@"removeUserData %@", [DataCenter sharedInstance].momoUserData);
     NSLog(@"user_token : %@", [DataCenter sharedInstance].momoUserData.user_token);
 
@@ -109,6 +112,7 @@
     [realm transactionWithBlock:^{
         [realm deleteAllObjects];
     }];
+
 }
 
 

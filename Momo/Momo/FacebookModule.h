@@ -12,15 +12,13 @@
 @interface FacebookModule : NSObject
 
 // Facebook account -------------------------------//
-#pragma mark - Facebook Auth Account Methods
 
+// Facebook Log out
 + (void)fbLogOut;
 
 // Facebook Login (& Sign Up)
 + (void)fbLoginFromVC:(UIViewController *)fromVC
-  withCompletionBlock:(void (^)(BOOL isSuccess, NSString *token))completionBlock;
+  withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock;
 
-
-+ (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock;
 
 @end

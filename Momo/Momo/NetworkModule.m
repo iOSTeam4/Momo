@@ -8,19 +8,16 @@
 
 #import "NetworkModule.h"
 
-// 일단 이전 Network 실습에 사용한 서버 및 코드 테스트용으로 사용
 
+static NSString *const API_BASE_URL         = @"https://www.yeoptest.com";
 
-static NSString *const API_BASE_URL     = @"https://fc-ios.lhy.kr/api";
-
-static NSString *const SIGN_UP_URL      = @"/member/signup/";
-static NSString *const LOG_IN_URL       = @"/member/login/";
-static NSString *const LOG_OUT_URL      = @"/member/logout/";
-static NSString *const USER_DETAIL_URL  = @"/member/profile/";
+static NSString *const SIGN_UP_URL          = @"/api/member/signup/";
+static NSString *const LOG_IN_URL           = @"/api/member/login/";
+static NSString *const LOG_OUT_URL          = @"/api/member/logout/";
+static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id}/      user_id -> pk
 
 
 @implementation NetworkModule
-
 
 
 
@@ -29,10 +26,9 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
 
 // Sign Up
 + (void)signUpRequestWithUsername:(NSString *)username
-                    withPassword1:(NSString *)password1
-                    withPassword2:(NSString *)password2
+                     withPassword:(NSString *)password
                         withEmail:(NSString *)email
-              withCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock {
+              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -41,37 +37,52 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, SIGN_UP_URL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    request.HTTPBody = [[NSString stringWithFormat:@"username=%@&password1=%@&password2=%@&email=%@", username, password1, password2, email] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [[NSString stringWithFormat:@"username=%@&password=%@&email=%@", username, password, email] dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"POST";
     
     // Task
     NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
                                                              fromData:nil
                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                                                         
-                                                        NSLog(@"%@", [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding]);
                                                         
-                                                        if (error == nil) {
-                                                            NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                            NSLog(@"%@",[responseDic objectForKey:@"key"]);
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
                                                             
-                                                            [self getEmailUserProfileInfosWithToken:[responseDic objectForKey:@"key"] withCompletionBlock:^(MomoUserDataSet *momoUserData) {
-                                                                
-                                                                [DataCenter sharedInstance].momoUserData = momoUserData;
-                                                                
-                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    [DataCenter saveMomoUserData];  // DB저장
-                                                                    completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
-                                                                });
-                                                            }];
-                                                            
-                                                        } else {
-                                                            NSLog(@"network error : %@", error.description);
-                                                            
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                completionBlock(NO, nil);
-                                                            });
-                                                        }
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 201) {
+                                                                    // Code: 201 CREATED
+                                                                    
+                                                                    // 이메일 인증해야 아이디 사용가능
+                                                                    completionBlock(YES, @"이메일 인증을 완료해주세요");
+                                                                    
+                                                                    
+                                                                } else {
+                                                                    // Code: 400 BAD REQUEST
+                                                                    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                                    
+                                                                    if ([responseDic objectForKey:@"username"]) {
+                                                                        // momo user의 username은/는 이미 존재합니다.
+                                                                        NSLog(@"%@", [responseDic objectForKey:@"username"][0]);
+                                                                        completionBlock(NO, [responseDic objectForKey:@"username"][0]);
+                                                                        
+                                                                    } else {
+                                                                        // 유효한 이메일 주소를 입력하십시오.
+                                                                        NSLog(@"%@", [responseDic objectForKey:@"email"][0]);
+                                                                        completionBlock(NO, [responseDic objectForKey:@"email"][0]);
+                                                                    }
+                                                                    
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
+                                                            }
+                                                        });
+                                                        
                                                     }];
     
     [postTask resume];
@@ -81,7 +92,7 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
 // Login
 + (void)loginRequestWithUsername:(NSString *)username
                     withPassword:(NSString *)password
-             withCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock {
+             withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -98,129 +109,135 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                                                              fromData:nil
                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                         
-                                                        NSLog(@"%@", [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding]);
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                                                         
-                                                        if (error == nil) {
-                                                            NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                            NSLog(@"%@",[responseDic objectForKey:@"key"]);
-                                                            
-                                                            [self getEmailUserProfileInfosWithToken:[responseDic objectForKey:@"key"] withCompletionBlock:^(MomoUserDataSet *momoUserData) {
-                                                                
-                                                                [DataCenter sharedInstance].momoUserData = momoUserData;
-                                                                
-                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    [DataCenter saveMomoUserData];  // DB저장
-                                                                    completionBlock([responseDic objectForKey:@"key"]!=nil, responseDic);
-                                                                });
-                                                            }];
-                                                
-                                                        } else {
-                                                            NSLog(@"network error : %@", error.description);
-                                                            
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                completionBlock(NO, nil);
-                                                            });
-                                                        }
+                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                        
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                        
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                    // Code: 200 Success
+                                                                    
+                                                                    NSNumber *pk = [responseDic objectForKey:@"user_pk"];
+                                                                    NSString *token = [responseDic objectForKey:@"token"];
+                                                                    
+                                                                    NSLog(@"PK : %@, Token : %@", pk, token);
+                                                                    
+                                                                    [DataCenter sharedInstance].momoUserData.pk = [pk integerValue];
+                                                                    [DataCenter sharedInstance].momoUserData.user_token = token;
+                                                                    
+                                                                    completionBlock(YES, @"로그인 성공");
+                                                                    
+                                                                } else {
+                                                                    // Code: 400 BAD REQUEST
+                                                                    
+                                                                    // error
+                                                                    NSLog(@"아이디 또는 비밀번호를 다시 확인하세요.");
+                                                                    completionBlock(NO, @"아이디 또는 비밀번호를 다시 확인하세요.");
+                                                                    
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
+                                                            }
+                                                        
+                                                        });
+                                                        
                                                     }];
-    
     [postTask resume];
-    
 }
 
 
 #pragma mark - Account Common Methods
 
 // Log Out (Facebook & e-mail 계정)
-+ (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock {
++ (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
 
-    // 페북 로그인 -> 앱 종료 -> 다시 실행시 페북 로그인 재인증 아직 미구현
-    if ([FBSDKAccessToken currentAccessToken]) { // Facebook 계정
+    // Facebook 계정 처리 (fb Server)
+    if ([FBSDKAccessToken currentAccessToken]) {
         NSLog(@"Facebook Log out");
-        
         [FacebookModule fbLogOut];
-        [DataCenter removeMomoUserData];       // 토큰을 비롯한 유저 데이터 삭제
-
-        completionBlock(YES, nil);
         
-    } else if (TRUE) {
-        // 앱 재실행시 있는 토큰으로 자동 인증 및 로그인 미구현.
-        // 일단 로그아웃은 서버 안거치고 무조건 토큰 삭제
-        NSLog(@"로그아웃, token : %@", [DataCenter getUserToken]);
+        // fb 서버 api 미완성으로 임시로 페북계정 처리 //////////////////
         [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
-        NSLog(@"초기화 완료 -> token : %@", [DataCenter getUserToken]);
-        
-        completionBlock(YES, nil);
-        
-    } else {        // e-mail 계정
-        NSLog(@"e-mail account Log out");
+        completionBlock(YES, @"정상적으로 로그아웃 되었습니다");
+    }
 
-        // Session
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    else {  ////////// else 삭제 될 부분
         
-        // Request
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, LOG_OUT_URL]];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        // 헤더 세팅
-        [request addValue:[NSString stringWithFormat:@"token %@", [DataCenter getUserToken]] forHTTPHeaderField:@"Authorization"];
-        
-        request.HTTPBody = [@"" dataUsingEncoding:NSUTF8StringEncoding];        // @"" 왜 넣어야하지?
-        request.HTTPMethod = @"POST";
-        
-        // Task
-        NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
-                                                                 fromData:nil
-                                                        completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    // e-mail & 페북 계정 공통 (Momo Server)
+
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, LOG_OUT_URL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    
+    request.HTTPBody = [@"" dataUsingEncoding:NSUTF8StringEncoding];        // @"" 왜 넣어야하지?
+    request.HTTPMethod = @"POST";
+    
+    // Task
+    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
+                                                             fromData:nil
+                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                        
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                        
+                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
                                                             
-                                                            NSLog(@"%@", [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding]);
-                                                            
-                                                            // NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil]);
-                                                            
-                                                            if (error == nil) {
-                                                                NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                                
-                                                                NSLog(@"로그아웃, token : %@", [DataCenter getUserToken]);
-                                                                [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
-                                                                NSLog(@"초기화 완료 -> token : %@", [DataCenter getUserToken]);
-                                                                
-                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    completionBlock(YES, responseDic);
-                                                                });
-                                                                
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                    // Code: 200 Success
+                                                                    
+                                                                    [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
+                                                                    
+                                                                    // 정상적으로 로그아웃 되었습니다
+                                                                    completionBlock(YES, @"정상적으로 로그아웃 되었습니다");
+                                                                    
+                                                                } else {
+                                                                    // Code: 401 Unauthorized
+                                                                    
+                                                                    // 토큰이 유효하지 않습니다.
+                                                                    NSLog(@"%@", [responseDic objectForKey:@"detail"]);
+                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                    
+                                                                }
                                                             } else {
-                                                                NSLog(@"network error : %@", error.description);
-                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    completionBlock(NO, nil);
-                                                                });
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
                                                             }
-                                                        }];
+                                                            
+                                                        });
+
+                                                    }];
+    
+    [postTask resume];
         
-        [postTask resume];
+        
     }
 }
 
 
-// 이메일 계정, 서버로부터 유저 프로필 정보들 받아오는 메서드
-+ (void)getEmailUserProfileInfosWithToken:(NSString *)token withCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock {
-    NSLog(@"getUserProfileInfosWithToken, token : %@", token);
-    
-    MomoUserDataSet *momoUserData = [[MomoUserDataSet alloc] init];
-    
-    momoUserData.user_token = token;
-    
-    // 서버로부터 유저 정보 받아와 세팅할 부분
-    
-    [self getUserMapDataWithCompletionBlock:^(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list) {
-        momoUserData.user_map_list = user_map_list;
-        completionBlock(momoUserData);
-    }];
-}
 
 
 
-// 서버로부터 유저 지도리스트 받아오는 메서드
-+ (void)getUserMapDataWithCompletionBlock:(void (^)(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list))completionBlock {
-    NSLog(@"getUserDataWithCompletionBlock");
+// 서버로부터 유저 지도정보 패치하는 메서드
++ (void)fetchUserMapData {
+    NSLog(@"fetchUserMapData");
     
     // 서버로부터 유저 지도리스트 등 받아와 세팅할 부분
     // 일단 더미로 넣겠음
@@ -245,32 +262,42 @@ static NSString *const USER_DETAIL_URL  = @"/member/profile/";
                         @[@"발리 슈퍼스토어", @"준영이형의 마음의 고향", @1, @37.548755, @126.916777],
                         @[@"화곡 2동 주민센터", @"한선이형 동네", @3, @37.531612, @126.854423],
                         @[@"나들목", @"맛있음 ㅋㅋ", @0, @37.517116, @127.023943]];
+
     
-    MomoUserDataSet *userData = [[MomoUserDataSet alloc] init];
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
 
-    for (NSInteger i = 0 ; i < mapArr.count ; i++) {
-        MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
-        [userData.user_map_list addObject:mapData];
-        
-        mapData.map_name = mapArr[i][0];
-        mapData.map_description = mapArr[i][1];
-        mapData.map_is_private = [(NSNumber *)mapArr[i][2] boolValue];
-        
-        for (NSInteger j = 0 ; j < pinArr.count ; j++) {
-            MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
-            [mapData.map_pin_list addObject:pinData];
-                        
-            pinData.pin_name = pinArr[j][0];
-            pinData.pin_label = [(NSNumber *)pinArr[j][2] integerValue];
+        for (NSInteger i = 0 ; i < mapArr.count ; i++) {
+            MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
+            [[DataCenter sharedInstance].momoUserData.user_map_list addObject:mapData];
             
-            MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
-            pinData.pin_place = placeData;
-            placeData.place_lat = [(NSNumber *)pinArr[j][3] doubleValue];
-            placeData.place_lng = [(NSNumber *)pinArr[j][4] doubleValue];
+            mapData.pk = i;
+            mapData.map_name = mapArr[i][0];
+            if (![mapArr[i][1] isEqualToString:@""]) {  // 설명 비었을 경우 테스트
+                mapData.map_description = mapArr[i][1];
+            }
+            mapData.map_is_private = [(NSNumber *)mapArr[i][2] boolValue];
+            
+            if (i == 0) {
+                // 0번 지도만 핀 등록
+                for (NSInteger j = 0 ; j < pinArr.count ; j++) {
+                    MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
+                    [mapData.map_pin_list addObject:pinData];
+                    
+                    pinData.pk = j;
+                    pinData.pin_name = pinArr[j][0];
+                    pinData.pin_label = [(NSNumber *)pinArr[j][2] integerValue];
+                    
+                    MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
+                    pinData.pin_place = placeData;
+                    
+                    placeData.pk = j;
+                    placeData.place_lat = [(NSNumber *)pinArr[j][3] doubleValue];
+                    placeData.place_lng = [(NSNumber *)pinArr[j][4] doubleValue];
+                }
+            }
         }
-    }
-
-    completionBlock(userData.user_map_list);
+    }];
 }
 
 

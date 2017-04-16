@@ -20,28 +20,24 @@
 
 // Sign Up
 + (void)signUpRequestWithUsername:(NSString *)username
-                    withPassword1:(NSString *)password1
-                    withPassword2:(NSString *)password2
+                     withPassword:(NSString *)password
                         withEmail:(NSString *)email
-              withCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock;
+              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
 
 // Login
 + (void)loginRequestWithUsername:(NSString *)username
                     withPassword:(NSString *)password
-             withCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock;
+             withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
 
 
 // Common ----------------------------------------//
 
 #pragma mark - Account Common Methods
 // Log Out
-+ (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSDictionary* result))completionBlock;
++ (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
 
 
-// 서버로부터 유저 정보들 받아오는 메서드
-+ (void)getEmailUserProfileInfosWithToken:(NSString *)token withCompletionBlock:(void (^)(MomoUserDataSet *momoUserData))completionBlock;
-
-// 서버로부터 유저 지도리스트 받아오는 메서드
-+ (void)getUserMapDataWithCompletionBlock:(void (^)(RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list))completionBlock;
+// 서버로부터 유저 지도정보 패치하는 메서드
++ (void)fetchUserMapData;
 
 @end

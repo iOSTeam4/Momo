@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 @property (weak, nonatomic) UITextField *lastFirstResponderTextField;
 
-@property (weak, nonatomic) IBOutlet UIButton *signInBtn;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
@@ -27,14 +27,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.signInBtn.layer.cornerRadius = self.signInBtn.frame.size.height/2;
-
+    self.loginBtn.layer.cornerRadius = self.loginBtn.frame.size.height/2;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"LoginPageViewController"];
+    
+    // 키보드 노티 설정 (회원가입 페이지 이동도 하므로, viewWillAppear에서 설정)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardNoti:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardNoti:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 키보드 노티 해제
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+
+// TextField, 키보드 처리 ----------------------------//
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
@@ -43,11 +58,14 @@
         
     } else {
         [self.pwTextField resignFirstResponder];
+
+        // id, pw 둘 다 입력사항 있을 때, 로그인 시도
+        if (self.idTextField.text && self.pwTextField.text) {
+            [self loginBtnAction:self.loginBtn];
+        }
     }
     
-    
     return YES;
-    
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -67,6 +85,42 @@
     }
 }
 
+// 키보드 노티 처리
+- (void)keyboardNoti:(NSNotification *)keyboardNoti {
+    NSLog(@"keyboardNoti : %@", keyboardNoti.name);
+    
+    CGSize kbSize = [keyboardNoti.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // 로그인 버튼이 기준점
+    CGFloat loginBtnY = self.loginBtn.superview.frame.origin.y + self.loginBtn.frame.origin.y + self.loginBtn.frame.size.height + 5.0f;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    
+    if (aRect.size.height < loginBtnY) {
+        // 키보드 노티에 따라 View 위 아래로 움직임
+        if([keyboardNoti.name isEqualToString:@"UIKeyboardWillShowNotification"]) {
+            
+            CGFloat moveY = loginBtnY - aRect.size.height;
+            self.view.frame = CGRectMake(0, -moveY, self.view.frame.size.width, self.view.frame.size.height);
+            
+        } else if([keyboardNoti.name isEqualToString:@"UIKeyboardWillHideNotification"]) {
+            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        }
+    }
+    
+}
+
+
+// Button Action ---------------------------------//
+
+// 뒤로가기 버튼
+- (IBAction)backBtnAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 로그인 버튼
 - (IBAction)loginBtnAction:(id)sender {
     
     [self.indicator startAnimating];
@@ -74,33 +128,39 @@
     
     [NetworkModule loginRequestWithUsername:self.idTextField.text
                                withPassword:self.pwTextField.text
-                        withCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
+                        withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                             
                             [self.indicator stopAnimating];
 
                             if (isSuccess) {
-                                NSLog(@"log in success %@", result);
+                                NSLog(@"log in success : %@", result);
                                 
-                                [self.indicator stopAnimating];
-                                [self.navigationController popToRootViewControllerAnimated:NO];
+                                [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
+                                
+                                // 임시로 더미데이터 세팅 /////
+                                [NetworkModule fetchUserMapData];
+                                /////////////////////////
+                                
+
+                                // 로그인뷰 페이지로 이동
+                                [self.navigationController popToRootViewControllerAnimated:YES];
                                 
                             } else {
-                                NSLog(@"system error %@", result);
+                                NSLog(@"error : %@", result);
                                 
                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                         message:@"아이디 또는 비밀번호가 틀렸네요"
+                                                                                                         message:@"아이디 또는 비밀번호가 틀렸습니다"
                                                                                                   preferredStyle:UIAlertControllerStyleAlert];
                                 
                                 UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
                                                                                    style:UIAlertActionStyleDefault
-                                                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                                                     NSLog(@"확인버튼이 클릭되었습니다");
-                                                                                 }];
+                                                                                 handler:nil];
                                 [alertController addAction:okButton];
                                 [self presentViewController:alertController animated:YES completion:nil];
-                                    
+                                
                             }
                         }];
+    
 }
 
 

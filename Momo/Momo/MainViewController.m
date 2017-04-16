@@ -28,7 +28,6 @@
     [self.view addSubview:_imageView];
     _imageView.frame = CGRectMake(0, 0, 30, 30);
     
-    
 }
 
 
@@ -51,11 +50,12 @@
     
     [self.indicator startAnimating];
     
-    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSDictionary *result) {
+    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
         [self.indicator stopAnimating];
         
         if (isSuccess) {
-            NSLog(@"log out success");
+            NSLog(@"log out success : %@", result);
+            
             UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
             UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
             
@@ -63,7 +63,17 @@
             [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
             
         } else {
-            NSLog(@"log out fail");
+            NSLog(@"error : %@", result);
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                     message:result
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alertController addAction:okButton];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
     }];
 }

@@ -25,13 +25,13 @@
 
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter
-+ (NSString *)getUserToken;
+- (NSString *)getUserToken;
 
 
 // User Data 저장, 불러오기, 삭제 --------------------------//
 #pragma mark - MOMO User Data 저장, 패치, 삭제
-+ (void)saveMomoUserData;   // 저장
-+ (BOOL)fetchMomoUserData;  // 패치
++ (void)initialSaveMomoUserData;   // 초기 저장
+- (BOOL)fetchMomoUserData;  // 패치
 + (void)removeMomoUserData; // 삭제
 
 
