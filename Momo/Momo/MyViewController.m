@@ -136,7 +136,7 @@
     UserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"userProfileHeader"];
     headerView.delegate = self;
     
-    // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+    // 데이터 세팅
     if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
         headerView.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
     }
@@ -183,7 +183,7 @@
     if (self.mapPinNum == 0) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
         
-        // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+        // 데이터 세팅
         if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
             mapCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
         }
@@ -191,7 +191,14 @@
             mapCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
         }
         
-        mapCell.mapNameLabel.text = [DataCenter myMapList][indexPath.row].map_name;
+        [mapCell.mapNameBtn setTitle:[DataCenter myMapList][indexPath.row].map_name forState:UIControlStateNormal];
+
+        if ([DataCenter myMapList][indexPath.row].map_is_private) {  // 비밀지도일때 자물쇠 아이콘 추가
+            [mapCell.mapNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
+            [mapCell.mapNameBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
+            [mapCell.mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2.5, 0, 0)];
+        }
+        
         mapCell.mapPinNumLabel.text = [NSString stringWithFormat:@"%ld", [DataCenter myMapList][indexPath.row].map_pin_list.count];
         
         return mapCell;
@@ -199,7 +206,7 @@
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
 
-        // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+        // 데이터 세팅
         if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
             pinCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
         }

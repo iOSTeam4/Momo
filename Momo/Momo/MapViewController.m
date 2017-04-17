@@ -33,7 +33,7 @@
 
 @property (nonatomic) MomoMapDataSet *mapData;
 @property (weak, nonatomic) IBOutlet UIView *mapInfoView;
-@property (weak, nonatomic) IBOutlet UILabel *mapInfoViewNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *mapInfoViewNameBtn;
 @property (weak, nonatomic) IBOutlet UILabel *mapInfoViewDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mapInfoViewPinNumLabel;
 @property (weak, nonatomic) IBOutlet UIButton *mapInfoViewBtn;
@@ -59,7 +59,8 @@
         
     } else {
         // 사용자 모든 핀 보기
-        self.mapData = [DataCenter myMapList][0];   // 일단 더미 0번 지도 데이터
+        self.mapData = [[MomoMapDataSet alloc] init];
+        [self.mapData.map_pin_list addObjects:[MomoPinDataSet allObjects]];
     }
     [self markPinMarkers];      // 마커찍기
 }
@@ -77,6 +78,13 @@
     //    NSLog(@"viewDidLayoutSubviews");
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //    NSLog(@"MapViewController : viewDidAppear");
+    
+}
+
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -85,13 +93,10 @@
     [self.view layoutIfNeeded];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-//    NSLog(@"MapViewController : viewDidAppear");
-    
-    
-}
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
 
 
 #pragma mark - Initial Setting Methods
@@ -109,7 +114,13 @@
 - (void)mapInfoViewSetting {
     
     // 정보 세팅
-    self.mapInfoViewNameLabel.text = self.mapData.map_name;
+    [self.mapInfoViewNameBtn setTitle:self.mapData.map_name forState:UIControlStateNormal];
+    if (self.mapData.map_is_private) {  // 비밀지도일때 자물쇠 아이콘 추가
+        [self.mapInfoViewNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
+        [self.mapInfoViewNameBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [self.mapInfoViewNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2.5f, 0, 0)];
+    }
+    
     self.mapInfoViewDescriptionLabel.text = self.mapData.map_description;
     self.mapInfoViewPinNumLabel.text = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list.count];
     
@@ -182,18 +193,21 @@
 #pragma mark - Custom Methods
 
 - (void)markPinMarkers {
-    
-    for (MomoPinDataSet *pinData in self.mapData.map_pin_list) {
+    // 등록된 핀
+    for (NSInteger i=0 ; i < self.mapData.map_pin_list.count ; i++) {
         GMSMarker *marker = [[GMSMarker alloc] init];
         
-        marker.position = CLLocationCoordinate2DMake(pinData.pin_place.place_lat, pinData.pin_place.place_lng);
+        marker.position = CLLocationCoordinate2DMake(self.mapData.map_pin_list[i].pin_place.place_lat, self.mapData.map_pin_list[i].pin_place.place_lng);
         marker.appearAnimation = kGMSMarkerAnimationPop;
         
-        PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:pinData withZoomCase:self.currentZoomCase];
+        PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:self.currentZoomCase];
         marker.iconView = pinMarkerView;
         marker.map = self.mapView;
+        
+        marker.iconView.tag = i;
     }
     
+    // 생성 중인 핀 마커
     if (self.isMakingMarker) {
         self.makingMarker.map = self.mapView;
     }
@@ -236,8 +250,11 @@
         UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
+        // 핀 데이터 세팅
+        [pinVC showSelectedPinAndSetMapData:self.mapData withPinIndex:marker.iconView.tag];
+        
         [self.navigationController pushViewController:pinVC animated:YES];
-        pinVC.navigationItem.title = marker.title;
+        
     }
     
     return YES;
@@ -260,7 +277,7 @@
         self.makingMarker.map = nil;    // 이전 만들던 마커 삭제
         self.makingMarker = marker;     // 새롭게 만드는 마커 프로퍼티에 셋
         
-        marker.map = mapView;
+        marker.map = mapView;       // 마커 지도에 찍기
 
         
         // 위치등록 버튼 노출
@@ -280,9 +297,10 @@
 }
 
 
-
+// 핀 만들기
 - (void)makePinByMakePinBtn {
     // 내 위치를 중심으로 Map 띄우기
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         while([self.mapView myLocation].coordinate.latitude == 0.0f);   // 내 위치 받아오기까지 조금 시간 걸림

@@ -201,6 +201,7 @@
 				3FD918CD1E8930A2005B1583 /* MapView */,
 				3FD392F21E93D54400AFBB3A /* MakeView */,
 				3FD392EC1E93C8ED00AFBB3A /* MyView */,
+				3F9C27CC1E8A489F008DD04A /* PinView */,
 			);
 			name = "View & Controller";
 			sourceTree = "<group>";
@@ -340,7 +341,6 @@
 				3F745F621E89172C001B87F0 /* Network */,
 				3FD9A54E1E88F0EE00B965A7 /* Model */,
 				3F4C91AB1E8A0695005BF38F /* View & Controller */,
-				3F9C27CC1E8A489F008DD04A /* PinView */,
 				3FD9A5321E88ED3700B965A7 /* Supporting Files */,
 			);
 			path = Momo;

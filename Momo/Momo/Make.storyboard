@@ -383,7 +383,7 @@
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
-                                                    <action selector="selectedMapMakeView:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="32c-Rc-ryD"/>
+                                                    <action selector="selectedMakeBtn:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="L0H-pB-jzd"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 맵 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="496-zH-Mjr">
@@ -433,10 +433,10 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어떤 테마의 맵인가요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7Z-zN-snY">
-                                                <rect key="frame" x="26" y="271" width="176.5" height="30"/>
+                                                <rect key="frame" x="26" y="271" width="200" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="6Si-Po-4O1"/>
-                                                    <constraint firstAttribute="width" secondItem="I7Z-zN-snY" secondAttribute="height" multiplier="88:15" id="8UU-ko-GAP"/>
+                                                    <constraint firstAttribute="width" secondItem="I7Z-zN-snY" secondAttribute="height" multiplier="100:15" id="8UU-ko-GAP"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -479,7 +479,7 @@
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
-                                                    <action selector="selectedMapMakeView:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="mvK-R0-sBU"/>
+                                                    <action selector="selectedMakeBtn:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="VsC-1W-Aop"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WeS-GQ-jtJ">
@@ -499,7 +499,7 @@
                                                     <color key="titleColor" red="0.31593313810000001" green="0.69874501229999997" blue="0.97654020789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="selectedMapMakeView:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="MsD-lq-xRP"/>
+                                                    <action selector="selectedMakeBtn:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="H3V-74-Op8"/>
                                                 </connections>
                                             </button>
                                         </subviews>

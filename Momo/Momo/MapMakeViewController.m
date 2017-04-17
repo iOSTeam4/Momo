@@ -7,9 +7,10 @@
 //
 
 #import "MapMakeViewController.h"
+#import "MapViewController.h"
 
 @interface MapMakeViewController ()
-<UITextFieldDelegate>
+<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic) BOOL isEditMode;
 
@@ -35,20 +36,24 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     
+    // Navi Pop Gesture 활성화
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
+    
     [self.mapNameTextField addTarget:self action:@selector(mapNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.mapContentTextField addTarget:self action:@selector(mapContentTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
     
-////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
-    self.isEditMode = YES;
-
-    self.checkName = YES;
-    self.checkContent = YES;
-    [self checkMakeBtnState];
-    
-    self.mapNameTextField.text = @"2017년 여름 휴가";
-    self.mapContentTextField.text = @"모모랑 함께한 도쿄여행";
-    //////////////////////////////////////////////////////////////////
+//////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
+//    self.isEditMode = YES;
+//
+//    self.checkName = YES;
+//    self.checkContent = YES;
+//    [self checkMakeBtnState];
+//    
+//    self.mapNameTextField.text = @"2017년 여름 휴가";
+//    self.mapContentTextField.text = @"모모랑 함께한 도쿄여행";
+///////////////////////////////////////////////////////////////////
     
     if (self.isEditMode) {
         [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
@@ -62,15 +67,11 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    //NavigationBar 숨긴거 되살리기
+    // NavigationBar 숨긴거 되살리기
     [self.navigationController setNavigationBarHidden:NO];
     
 }
@@ -137,18 +138,22 @@
     }
 }
 
-- (IBAction)selectedMapMakeView:(id)sender {
+- (IBAction)selectedMakeBtn:(id)sender {
     
     NSLog(@"새맵 만들어!");
-//    [self.navigationController popViewControllerAnimated:YES];
     
-    [self makeMapWithName:self.mapNameTextField.text
-           withMapContent:self.mapContentTextField.text
-              withPrivate:self.secretSwitch.on];
+    MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithName:self.mapNameTextField.text
+                                           withMapDescription:self.mapContentTextField.text
+                                                  withPrivate:self.secretSwitch.on];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
+    MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
+    [mapVC showSelectedMapAndSetMapData:mapData];
+    
+    [self.navigationController pushViewController:mapVC animated:YES];
     
 }
+ 
 
 
 - (IBAction)flickedSecretSwitch:(id)sender {
@@ -162,9 +167,7 @@
             withPrivate:(BOOL)private {
     // 알아서 안에서 데이터 처리~~~
     
-    NSLog(@"name : %@", name);
-    NSLog(@"content : %@", content);
-    NSLog(@"private : %d", private);
+    
 }
 
 - (void)selectedDeleteMapBtn:(id)sender {

@@ -69,6 +69,28 @@
 // Map Data Set -----------------------------//
 @implementation MomoMapDataSet
 
+
+// 맵 생성 및 등록
++ (MomoMapDataSet *)makeMapWithName:(NSString *)mapName
+                 withMapDescription:(NSString *)mapDescription
+                        withPrivate:(BOOL)isPrivate {
+    
+    MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
+    
+    mapData.map_name = mapName;
+    mapData.map_description = mapDescription;
+    mapData.map_is_private = isPrivate;
+    
+    NSLog(@"name : %@, content : %@, private : %d", mapName, mapDescription, isPrivate);
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [[DataCenter myMapList] addObject:mapData];
+    }];
+    
+    return mapData;
+}
+
 @end
 
 

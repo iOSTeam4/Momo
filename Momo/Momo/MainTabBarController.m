@@ -198,6 +198,7 @@
     
     [self.makeVC.view removeFromSuperview];
     [self selectedBtn:self.mapBtn];     // 맵뷰로 이동
+    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
     [(MapViewController *)((UINavigationController *)self.selectedViewController).viewControllers[0] makePinByMakePinBtn];
 }
 

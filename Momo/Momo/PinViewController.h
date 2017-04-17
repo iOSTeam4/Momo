@@ -10,4 +10,7 @@
 
 @interface PinViewController : UIViewController
 
+// 초기 핀뷰 데이터 세팅
+- (void)showSelectedPinAndSetMapData:(MomoMapDataSet *)mapData withPinIndex:(NSInteger)pinIndex;
+
 @end

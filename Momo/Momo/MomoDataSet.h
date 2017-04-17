@@ -87,6 +87,11 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 @property RLMArray<MomoPinDataSet *><MomoPinDataSet> *map_pin_list;
 
+// 맵 생성 및 등록
++ (MomoMapDataSet *)makeMapWithName:(NSString *)mapName
+                 withMapDescription:(NSString *)mapDescription
+                        withPrivate:(BOOL)isPrivate;
+
 @end
 
 

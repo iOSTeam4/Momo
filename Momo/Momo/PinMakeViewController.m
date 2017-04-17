@@ -8,7 +8,7 @@
 
 #import "PinMakeViewController.h"
 
-@interface PinMakeViewController () <UITextFieldDelegate>
+@interface PinMakeViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic) BOOL isEditMode;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -39,6 +39,10 @@
     
     //NavigationBar 숨기기
     [self.navigationController setNavigationBarHidden:YES];
+    
+    // Navi Pop Gesture 활성화
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
     
     [self.pinNameTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     

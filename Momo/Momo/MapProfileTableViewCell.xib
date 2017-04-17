@@ -73,20 +73,14 @@
                                 <rect key="frame" x="10" y="46.5" width="245" height="245"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="pika pika map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZP4-Ug-mIP">
-                                <rect key="frame" x="10" y="296.5" width="375" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <color key="textColor" red="0.00059560901718214154" green="0.70855957269668579" blue="0.99971479177474976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1x-P1-cON">
-                                <rect key="frame" x="11" y="325.5" width="9.5" height="17"/>
+                                <rect key="frame" x="9" y="325.5" width="9.5" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="핀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-IY-K8A">
-                                <rect key="frame" x="23.5" y="325.5" width="12.5" height="17"/>
+                                <rect key="frame" x="21.5" y="325.5" width="12.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -101,33 +95,40 @@
                                     <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOC-oZ-7xj">
+                                <rect key="frame" x="10" y="293" width="375" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="pika pika map">
+                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tng-kr-UYJ" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="1EX-Xh-FmH"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="1vf-ai-PVM"/>
-                            <constraint firstItem="ZP4-Ug-mIP" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="3IU-nC-7gn"/>
-                            <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="ZP4-Ug-mIP" secondAttribute="leading" constant="1" id="6om-nf-Sug"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="centerY" secondItem="gc4-8R-2oX" secondAttribute="centerY" id="8pZ-6L-xQ4"/>
-                            <constraint firstAttribute="trailing" secondItem="ZP4-Ug-mIP" secondAttribute="trailing" constant="5" id="BvY-f5-eXY"/>
+                            <constraint firstAttribute="trailing" secondItem="mOC-oZ-7xj" secondAttribute="trailing" constant="5" id="Fvh-3q-4Si"/>
+                            <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="mOC-oZ-7xj" secondAttribute="leading" constant="-1" id="Ioj-Rt-ncn"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="Ktk-r4-CDE"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="trailing" constant="5" id="Nzn-QZ-igj"/>
                             <constraint firstAttribute="trailing" secondItem="zaC-BX-6Hc" secondAttribute="trailing" constant="15" id="Pdm-VE-vE9"/>
                             <constraint firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" constant="10" id="Qjs-gj-rSv"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="QmK-5L-Zby"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.08" id="Rah-sL-95X"/>
+                            <constraint firstItem="u1x-P1-cON" firstAttribute="top" secondItem="mOC-oZ-7xj" secondAttribute="bottom" constant="5" id="T5M-AA-lAS"/>
                             <constraint firstItem="Tng-kr-UYJ" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="VC3-fR-sIj"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="leading" secondItem="u1x-P1-cON" secondAttribute="trailing" constant="3" id="YYF-Fs-aCN"/>
-                            <constraint firstItem="u1x-P1-cON" firstAttribute="top" secondItem="ZP4-Ug-mIP" secondAttribute="bottom" constant="5" id="ag6-gz-Ved"/>
+                            <constraint firstItem="mOC-oZ-7xj" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="a37-4h-SS5"/>
                             <constraint firstItem="Tng-kr-UYJ" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="clC-HY-2H6"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
-                            <constraint firstItem="ZP4-Ug-mIP" firstAttribute="top" secondItem="6TZ-pC-QxF" secondAttribute="bottom" constant="5" id="fcV-M1-uzx"/>
                             <constraint firstItem="Tng-kr-UYJ" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="ff7-7f-LwN"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="12" id="pcJ-pd-dTD"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" id="vA8-zq-quv"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="leading" secondItem="dGm-5e-gvx" secondAttribute="leading" constant="10" id="w10-yP-sE4"/>
+                            <constraint firstItem="mOC-oZ-7xj" firstAttribute="top" secondItem="Tng-kr-UYJ" secondAttribute="bottom" constant="1.5" id="wCw-0J-MOI"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -142,7 +143,7 @@
             <connections>
                 <outlet property="backView" destination="dGm-5e-gvx" id="j8M-Kz-pC3"/>
                 <outlet property="mapEditBtn" destination="zaC-BX-6Hc" id="U6R-iq-Z9E"/>
-                <outlet property="mapNameLabel" destination="ZP4-Ug-mIP" id="wDJ-Ap-XSh"/>
+                <outlet property="mapNameBtn" destination="mOC-oZ-7xj" id="3Kq-ly-PmG"/>
                 <outlet property="mapPinNumLabel" destination="u1x-P1-cON" id="xuD-yu-Jza"/>
                 <outlet property="mapView" destination="xRf-A5-3id" id="H9O-Ka-Pv7"/>
                 <outlet property="userImgView" destination="gc4-8R-2oX" id="UlR-Ni-Udi"/>

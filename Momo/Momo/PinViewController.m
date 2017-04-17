@@ -8,15 +8,19 @@
 
 #import "PinViewController.h"
 #import "PinContentsCollectionViewCell.h"
-
+#import "PinMarkerUIView.h"
 
 
 @interface PinViewController ()
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
+
+@property (nonatomic) MomoMapDataSet *mapData;  // 접근한 지도 데이터
+@property (nonatomic) NSInteger pinIndex;       // 핀 데이터 인덱스
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
-@property (weak, nonatomic) IBOutlet UIView *mapPreView;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapPreView;
+@property (weak, nonatomic) IBOutlet UIButton *mapPreViewBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *setup;
 @property (weak, nonatomic) IBOutlet UILabel *pinName;
@@ -32,8 +36,24 @@
 
 @implementation PinViewController
 
+
+// 초기 핀 데이터 세팅 ---------------------------------------//
+
+- (void)showSelectedPinAndSetMapData:(MomoMapDataSet *)mapData withPinIndex:(NSInteger)pinIndex {
+    self.mapData = mapData;
+    self.pinIndex = pinIndex;
+}
+
+
+
+// UIViewController Basic Methods -----------------------//
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Navi Pop Gesture 활성화
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+    
     
     //collectionView size
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
@@ -41,9 +61,18 @@
     // collectionView 임시 contents
     self.dataTempArr = @[@"addPost", @"textPhoto", @"postTest1", @"postTest2", @"postTest3", @"postTest4", @"postTest5", @"postTest6"];
     
-    // pin 생성user
+    // Map 세팅
+    [self mapPreViewSetting];
+    
+    // Pin 세팅
+    self.pinName.text = self.mapData.map_pin_list[self.pinIndex].pin_name;
+    
+    // User UI, 정보 세팅
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
-    self.userProfileImage.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+    self.userProfileImage.image = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
+    self.userNameToMade.text = [DataCenter sharedInstance].momoUserData.user_username;
+    
+    
 
 }
 
@@ -51,8 +80,55 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
+    
+    // 네비바 숨기기
+    [self.navigationController setNavigationBarHidden:YES];
+    [self.view layoutIfNeeded];
 }
 
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    // 네비바 다시 노출
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.view layoutIfNeeded];
+}
+
+
+// Map Setting Methods -------------------//
+
+- (void)mapPreViewSetting {
+    
+    self.mapPreView.myLocationEnabled = YES;   // 내 위치 나타냄
+
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.mapData.map_pin_list[self.pinIndex].pin_place.place_lat
+                                                            longitude:self.mapData.map_pin_list[self.pinIndex].pin_place.place_lng
+                                                                 zoom:15.0f];
+    
+    [self.mapPreView setCamera:camera];    // 핀 중심으로 카메라 설정
+    
+    
+    // 마커찍기
+    for (NSInteger i=0 ; i < self.mapData.map_pin_list.count ; i++) {
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        
+        marker.position = CLLocationCoordinate2DMake(self.mapData.map_pin_list[i].pin_place.place_lat, self.mapData.map_pin_list[i].pin_place.place_lng);
+
+        PinMarkerUIView *pinMarkerView;
+
+        if (i == self.pinIndex) {
+            pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:PIN_MARKER_DETAIL];
+        } else {
+            pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:PIN_MARKER_CIRCLE];
+        }
+        marker.iconView = pinMarkerView;
+        marker.map = self.mapPreView;
+    }
+}
+
+
+// UICollectionViewDataSource Methods -------------------//
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
@@ -68,6 +144,9 @@
     
     return cell;
 }
+
+
+// Btn Action Methods -----------------------------------//
 
 - (IBAction)selectedContentsBtnAction:(UIButton *)sender {
     
@@ -91,10 +170,18 @@
 
 
 //- (void)inputImageData:(NSString *)data {
-//    
+//
 //    self.contentImageView.image = [UIImage imageNamed:@"Katmai"];
-//    
+//
 //}
+
+
+- (IBAction)backBtnAction:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 
 @end

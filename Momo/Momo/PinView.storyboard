@@ -30,22 +30,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-PH-Hyb" customClass="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="685"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFw-m2-4Jg">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFw-m2-4Jg" customClass="GMSMapView">
                                                 <rect key="frame" x="0.0" y="134" width="375" height="200"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapThumb" translatesAutoresizingMaskIntoConstraints="NO" id="zRf-Gx-b7R">
-                                                        <rect key="frame" x="-0.5" y="0.0" width="375" height="200"/>
-                                                    </imageView>
-                                                </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="zRf-Gx-b7R" firstAttribute="height" secondItem="dFw-m2-4Jg" secondAttribute="height" id="ITl-YY-biW"/>
-                                                    <constraint firstItem="zRf-Gx-b7R" firstAttribute="width" secondItem="dFw-m2-4Jg" secondAttribute="width" id="Pvj-Yj-qZt"/>
-                                                    <constraint firstItem="zRf-Gx-b7R" firstAttribute="centerY" secondItem="dFw-m2-4Jg" secondAttribute="centerY" id="oPB-nK-rjv"/>
                                                     <constraint firstAttribute="height" constant="200" id="pW9-po-wWq"/>
-                                                    <constraint firstItem="zRf-Gx-b7R" firstAttribute="centerX" secondItem="dFw-m2-4Jg" secondAttribute="centerX" id="wMR-Gf-QEI"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFu-xm-7Wb">
+                                                <rect key="frame" x="0.0" y="134" width="375" height="200"/>
+                                            </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jiv-fz-0H7" userLabel="head title view ">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                                                 <subviews>
@@ -56,6 +50,9 @@
                                                             <constraint firstAttribute="width" constant="44" id="gf4-XT-Axl"/>
                                                         </constraints>
                                                         <state key="normal" title="Button" image="backAndOneLineTitle"/>
+                                                        <connections>
+                                                            <action selector="backBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="YEa-Uq-wnv"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="핀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="odR-2r-Hd4">
                                                         <rect key="frame" x="26" y="60" width="31.5" height="43"/>
@@ -114,23 +111,23 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="08p-ye-2vn">
-                                                        <rect key="frame" x="86" y="150.5" width="289" height="33"/>
+                                                        <rect key="frame" x="86" y="148.5" width="289" height="38"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i.hanson.jung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lty-aA-3b4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="83.5" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="105.5" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="Yec-VD-3nP"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                 <color key="textColor" red="0.28627450980392155" green="0.28645041584968567" blue="0.28626829385757446" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017. 03. 14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flo-jA-axZ">
-                                                                <rect key="frame" x="0.0" y="21" width="100" height="12"/>
+                                                                <rect key="frame" x="0.0" y="21" width="100" height="17"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="brr-lm-8lc"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -217,12 +214,16 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             <constraint firstItem="Jiv-fz-0H7" firstAttribute="centerX" secondItem="CZA-PH-Hyb" secondAttribute="centerX" id="Eb9-Gv-rlk"/>
                                             <constraint firstItem="dFw-m2-4Jg" firstAttribute="top" secondItem="Jiv-fz-0H7" secondAttribute="bottom" id="H9r-Go-S0g"/>
                                             <constraint firstItem="dFw-m2-4Jg" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" id="HaD-C1-YfU"/>
+                                            <constraint firstItem="aFu-xm-7Wb" firstAttribute="height" secondItem="dFw-m2-4Jg" secondAttribute="height" id="JUS-DP-6eY"/>
                                             <constraint firstItem="Jiv-fz-0H7" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" id="Lid-SO-5XV"/>
                                             <constraint firstItem="dFw-m2-4Jg" firstAttribute="leading" secondItem="CZA-PH-Hyb" secondAttribute="leading" id="NUd-Br-tDk"/>
                                             <constraint firstItem="T9J-oI-jTH" firstAttribute="centerX" secondItem="CZA-PH-Hyb" secondAttribute="centerX" id="Npf-Kk-IMb"/>
                                             <constraint firstItem="Rv0-r5-Tx6" firstAttribute="top" secondItem="dFw-m2-4Jg" secondAttribute="bottom" constant="-30" id="PbU-Dv-dZg"/>
                                             <constraint firstItem="MZf-bP-nyG" firstAttribute="top" secondItem="MGT-Qm-MjQ" secondAttribute="bottom" constant="22" id="SDD-Pt-kTd"/>
                                             <constraint firstAttribute="bottom" secondItem="MZf-bP-nyG" secondAttribute="bottom" constant="66" id="Sv3-m7-7yP"/>
+                                            <constraint firstItem="aFu-xm-7Wb" firstAttribute="centerY" secondItem="dFw-m2-4Jg" secondAttribute="centerY" id="d0v-eb-drm"/>
+                                            <constraint firstItem="aFu-xm-7Wb" firstAttribute="width" secondItem="dFw-m2-4Jg" secondAttribute="width" id="k9l-SN-Dnt"/>
+                                            <constraint firstItem="aFu-xm-7Wb" firstAttribute="centerX" secondItem="dFw-m2-4Jg" secondAttribute="centerX" id="pPN-gw-iVz"/>
                                             <constraint firstItem="MZf-bP-nyG" firstAttribute="leading" secondItem="MGT-Qm-MjQ" secondAttribute="leading" id="paB-U2-PXO"/>
                                             <constraint firstItem="Rv0-r5-Tx6" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" constant="-26" id="vJY-le-5ia"/>
                                             <constraint firstItem="Rv0-r5-Tx6" firstAttribute="leading" secondItem="CZA-PH-Hyb" secondAttribute="leading" constant="26" id="yp0-jz-1Ly"/>
@@ -253,6 +254,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <outlet property="date" destination="Flo-jA-axZ" id="sNr-XO-sJx"/>
                         <outlet property="flowLayout" destination="OYv-wq-LyY" id="yXC-Bx-rb7"/>
                         <outlet property="mapPreView" destination="dFw-m2-4Jg" id="s3c-mE-eCU"/>
+                        <outlet property="mapPreViewBtn" destination="aFu-xm-7Wb" id="oRQ-p7-arn"/>
                         <outlet property="pinAddress" destination="jOt-cV-oy5" id="VRF-uH-Otl"/>
                         <outlet property="pinMainText" destination="MZf-bP-nyG" id="XQQ-Mf-CL6"/>
                         <outlet property="pinName" destination="DF6-aI-0Md" id="umW-yr-OpC"/>
@@ -592,7 +594,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KI-uc-InF">
-                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
+                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="5KI-uc-InF" secondAttribute="height" id="8oh-fm-e4S"/>
                                                         </constraints>
@@ -1268,7 +1270,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="makeCheckBtnS" width="52" height="48"/>
         <image name="mapCheckBtn" width="31" height="31"/>
         <image name="mapCheckBtnS" width="31" height="31"/>
-        <image name="mapThumb" width="640" height="620"/>
         <image name="photoBtnS" width="176" height="48"/>
         <image name="setup" width="30" height="30"/>
     </resources>
