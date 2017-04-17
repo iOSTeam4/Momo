@@ -210,10 +210,10 @@
 			children = (
 				3F745F5F1E891728001B87F0 /* NetworkModule.h */,
 				3F745F601E891728001B87F0 /* NetworkModule.m */,
-				3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */,
-				3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */,
 				3FC77F4F1E9C066A009921D5 /* FacebookModule.h */,
 				3FC77F501E9C066A009921D5 /* FacebookModule.m */,
+				3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */,
+				3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";

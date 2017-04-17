@@ -8,7 +8,7 @@
 
 #import "FacebookModule.h"
 
-static NSString *const API_BASE_URL         = @"https://www.yeoptest.com";
+static NSString *const API_BASE_URL         = @"http://eb-client.ap-northeast-2.elasticbeanstalk.com";
 static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
 
 
@@ -58,47 +58,37 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                           
                                                       } else {
                                                           NSLog(@"Facebook Login Success");
-                                                          NSLog(@"fb token : %@", [FBSDKAccessToken currentAccessToken]);
+                                                          NSLog(@"fb token : %@", [FBSDKAccessToken currentAccessToken].tokenString);
+                                                        
                                                           
-                                                          ////////// 임시 사용 //////////
-                                                          [DataCenter sharedInstance].momoUserData.pk = 111;  // pk 111
-                                                          [DataCenter sharedInstance].momoUserData.user_token = [FBSDKAccessToken currentAccessToken].tokenString;  // fb_token token으로 할당해서 사용
-                                                          [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
+                                                          // fb_token 정보 가지고 Momo 서버 Facebook계정 로그인
+                                                          [self fbLoginRequestWithFBToken:[FBSDKAccessToken currentAccessToken].tokenString withCompletionBlock:^(BOOL isSuccess, BOOL newMember, NSString *result) {
                                                               
-                                                              completionBlock(YES, nil);
+                                                              if (isSuccess) {
+                                                                  // 페북 로그인 성공
+                                                                  
+                                                                  if (newMember) {
+                                                                      // 신규 회원
+                                                                      // Facebook id, name, profileImage, email 얻어오기
+                                                                      [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
+                                                                          
+                                                                          // 서버에 페북에서 받아온 추가 정보를 보내는 부분 필요
+                                                                          
+                                                                          // 정보를 잘 가져왔든, 말든 로그인 성공
+                                                                          completionBlock(YES, result);
+
+                                                                      }];
+                                                                  } else {
+                                                                      // 기존 회원
+                                                                      completionBlock(YES, result);
+                                                                  }
+                                                                  
+                                                              } else {
+                                                                  // 페북 로그인 실패
+                                                                  completionBlock(NO, result);
+                                                              }
+                                                              
                                                           }];
-                                                          
-                                                          /////////////////////////////
-                                                          
-                                                          // Momo 서버 FB 로그인 API 오류 있음
-//                                                          // fb_token 정보 가지고 Momo 서버 Facebook계정 로그인
-//                                                          [self fbLoginRequestWithFBToken:[FBSDKAccessToken currentAccessToken].tokenString withCompletionBlock:^(BOOL isSuccess, BOOL newMember, NSString *result) {
-//                                                              
-//                                                              if (isSuccess) {
-//                                                                  // 페북 로그인 성공
-//                                                                  
-//                                                                  if (newMember) {
-//                                                                      // 신규 회원
-//                                                                      // Facebook id, name, profileImage, email 얻어오기
-//                                                                      [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
-//                                                                          
-//                                                                          // 서버에 페북에서 받아온 추가 정보를 보내는 부분 필요
-//                                                                          
-//                                                                          // 정보를 잘 가져왔든, 말든 로그인 성공
-//                                                                          completionBlock(YES, result);
-//
-//                                                                      }];
-//                                                                  } else {
-//                                                                      // 기존 회원
-//                                                                      completionBlock(YES, result);
-//                                                                  }
-//                                                                  
-//                                                              } else {
-//                                                                  // 페북 로그인 실패
-//                                                                  completionBlock(NO, result);
-//                                                              }
-//                                                              
-//                                                          }];
                                                           
                                                       }
                                                   }];
@@ -108,7 +98,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
 
 
 // Facebook 서버로부터 유저 프로필 정보들 받아와 세팅하는 메서드
-// 신규 회원일 경우에만 최초로 받아오는게 맞을 듯
+// 신규 회원일 경우만 받아옴
 + (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
     
     [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, picture.type(large), email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -162,8 +152,15 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
     // Request
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, FACEBOOK_LOGIN_URL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+
+    // 헤더 세팅
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    request.HTTPBody = [[NSString stringWithFormat:@"access_token=%@", fbToken] dataUsingEncoding:NSUTF8StringEncoding];
+    // 바디 세팅
+    NSData *paramData = [[NSString stringWithFormat:@"{\"access_token\":\"%@\"}", fbToken] dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"HTTPBody : %@", [NSString stringWithFormat:@"{\"access_token\":\"%@\"}", fbToken]);
+
+    request.HTTPBody = paramData;
     request.HTTPMethod = @"POST";
     
     // Task
@@ -175,7 +172,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                                                         
                                                         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                        
+                                                        NSLog(@"responseDic token : %@", [responseDic objectForKey:@"token"]);
                                                         
                                                         // 메인스레드로 돌려서 보냄
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -184,10 +181,8 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                                 if (((NSHTTPURLResponse *)response).statusCode == 200) {
                                                                     // Code: 200 Success
                                                                     
-                                                                    NSDictionary *userDic = [responseDic objectForKey:@"user"];
-                                                                    
-                                                                    NSNumber *pk = [userDic objectForKey:@"pk"];
-                                                                    NSString *token = [userDic objectForKey:@"token"];
+                                                                    NSNumber *pk = [responseDic objectForKey:@"pk"];
+                                                                    NSString *token = [responseDic objectForKey:@"token"];
 //                                                                    BOOL newMember = [[userDic objectForKey:@"newMember"] boolValue];
                                                                     BOOL newMember = YES;    // 새롭게 가입한 회원
                                                                     
@@ -223,6 +218,43 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                         
                                                     }];
     [postTask resume];
+    
+    // AFNetwork Ver.
+//    NSString *fbLoginURL = [NSString stringWithFormat:@"%@%@", API_BASE_URL, FACEBOOK_LOGIN_URL];
+//    NSDictionary *parameter = @{@"access_token": fbToken};
+//    
+//    NSLog(@"param : %@", parameter);
+//    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+//    
+//    [manager POST:fbLoginURL
+//       parameters:parameter
+//         progress:nil
+//          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//              NSLog(@"Code: 200 Success: %@", responseObject);
+//
+//              NSNumber *pk = [(NSDictionary *)responseObject objectForKey:@"pk"];
+//              NSString *token = [(NSDictionary *)responseObject objectForKey:@"token"];
+////              BOOL newMember = [[(NSDictionary *)responseObject objectForKey:@"newMember"] boolValue];
+//              BOOL newMember = YES;    // 새롭게 가입한 회원
+//              
+//              NSLog(@"PK : %@, Token : %@", pk, token);
+//              
+//              // 유저 데이터 세팅
+//              [DataCenter sharedInstance].momoUserData.pk = [pk integerValue];
+//              [DataCenter sharedInstance].momoUserData.user_token = token;
+//              [DataCenter sharedInstance].momoUserData.user_fb_token = fbToken;
+//
+//              completionBlock(YES, newMember, @"fb 로그인 성공");
+//              
+//          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//              NSLog(@"Facebook Login Error Code : %ld - %@", error.code, error.description);
+//              
+//              completionBlock(NO, NO, @"Facebook Login Fail");
+//          }];
 }
 
 

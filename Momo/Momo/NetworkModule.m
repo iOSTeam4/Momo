@@ -162,14 +162,8 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
     if ([FBSDKAccessToken currentAccessToken]) {
         NSLog(@"Facebook Log out");
         [FacebookModule fbLogOut];
-        
-        // fb 서버 api 미완성으로 임시로 페북계정 처리 //////////////////
-        [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
-        completionBlock(YES, @"정상적으로 로그아웃 되었습니다");
     }
 
-    else {  ////////// else 삭제 될 부분
-        
     // e-mail & 페북 계정 공통 (Momo Server)
 
     // Session
@@ -227,8 +221,6 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
     
     [postTask resume];
         
-        
-    }
 }
 
 

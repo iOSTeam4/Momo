@@ -34,7 +34,6 @@
     // Navi Bar 오른쪽 설정 버튼
     UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedNaviRightBtn)];
     [self.navigationItem setRightBarButtonItem:naviRightBtn];
-
     
     
     [self initialTableViewCellSettingWithNib];
