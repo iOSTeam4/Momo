@@ -17,6 +17,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView2;
 @property (weak, nonatomic) IBOutlet UILabel *pinName2;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress2;
-+ (void)test;
 
 @end

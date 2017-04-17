@@ -18,6 +18,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *pinName1;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress1;
 @property (weak, nonatomic) IBOutlet UILabel *pinMainText1;
-+ (void)test;
 
 @end

@@ -43,7 +43,6 @@
     
     // pin 생성user
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
-    self.userProfileImage.layer.masksToBounds = YES;
     self.userProfileImage.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
 
 }

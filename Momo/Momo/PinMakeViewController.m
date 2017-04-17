@@ -175,7 +175,7 @@
 //}
 
 - (IBAction)selecedCategoryBtn:(UIButton *)sender {
-    NSLog(@"%d", sender.tag);
+    NSLog(@"%ld", sender.tag);
     
     // Radio Button
     if (sender.tag != self.categoryLastSelectedBtn.tag) {
@@ -258,7 +258,7 @@
     // string형태로 맵체크 정보를 저장. ex. 010112
     for (NSInteger i=0 ; i < self.mapCheckBtnArr.count ; i++) {
         if (self.mapCheckBtnArr[i].selected == YES) {
-            mapStr = [NSString stringWithFormat:@"%@ %d", mapStr, i];
+            mapStr = [NSString stringWithFormat:@"%@ %ld", mapStr, i];
         }
     }
     
@@ -277,7 +277,7 @@
     // 알아서 안에서 데이터 처리~~~
     
     NSLog(@"name : %@", name);
-    NSLog(@"category : %d", category);
+    NSLog(@"category : %ld", category);
     NSLog(@"mapStr : %@", mapStr);
 }
 

@@ -96,8 +96,8 @@
     
    
 //        [cell.contentImageView setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]]];
-    
-    [self.view layoutIfNeeded];
+//    
+//    [self.view layoutIfNeeded];
     
 }
 
