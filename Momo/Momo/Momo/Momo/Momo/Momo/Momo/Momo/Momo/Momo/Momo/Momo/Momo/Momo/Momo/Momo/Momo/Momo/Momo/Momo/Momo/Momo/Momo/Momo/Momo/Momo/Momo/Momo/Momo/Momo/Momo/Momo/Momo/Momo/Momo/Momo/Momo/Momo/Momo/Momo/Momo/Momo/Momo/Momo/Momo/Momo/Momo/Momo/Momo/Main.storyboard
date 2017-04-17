@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aCl-2W-eOW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="R1D-Re-cKy">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="muX-Rm-wUg" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IWE-1l-VUA"/>
+                        <viewControllerLayoutGuide type="bottom" id="KTK-5W-dd4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dlW-hg-dLE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-2c-ZBq">
+                                <rect key="frame" x="136" y="319" width="102" height="30"/>
+                                <state key="normal" title="Log out (temp)"/>
+                                <connections>
+                                    <action selector="logoutTempBtnAction:" destination="muX-Rm-wUg" eventType="touchUpInside" id="b6u-4C-Ir7"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9yx-Rs-DZQ">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RvG-wi-TCQ">
+                                <rect key="frame" x="112.5" y="94" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="BaJ-Ye-Bkm"/>
+                                    <constraint firstAttribute="width" constant="150" id="lRy-su-3qA"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9yx-Rs-DZQ" firstAttribute="centerY" secondItem="dlW-hg-dLE" secondAttribute="centerY" id="6Od-wq-h7W"/>
+                            <constraint firstItem="RvG-wi-TCQ" firstAttribute="top" secondItem="IWE-1l-VUA" secondAttribute="bottom" constant="30" id="ADd-oa-gVC"/>
+                            <constraint firstItem="9yx-Rs-DZQ" firstAttribute="centerX" secondItem="dlW-hg-dLE" secondAttribute="centerX" id="K79-gw-3dx"/>
+                            <constraint firstItem="RvG-wi-TCQ" firstAttribute="centerX" secondItem="dlW-hg-dLE" secondAttribute="centerX" id="XI7-LK-4LR"/>
+                            <constraint firstItem="cf2-2c-ZBq" firstAttribute="centerY" secondItem="dlW-hg-dLE" secondAttribute="centerY" id="dfl-8F-ce6"/>
+                            <constraint firstItem="cf2-2c-ZBq" firstAttribute="centerX" secondItem="dlW-hg-dLE" secondAttribute="centerX" id="vIg-gk-bi3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="f02-D1-HJa"/>
+                    <connections>
+                        <outlet property="imageView" destination="RvG-wi-TCQ" id="iZN-GG-1XC"/>
+                        <outlet property="indicator" destination="9yx-Rs-DZQ" id="E0h-Du-nTk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZB-P6-wbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5109.6000000000004" y="-255.92203898050977"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="lFy-Lt-iZ6">
+            <objects>
+                <navigationController storyboardIdentifier="MainNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="RPI-Bk-JXx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="tWw-YU-um2"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="SMG-Yg-jAd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="muX-Rm-wUg" kind="relationship" relationship="rootViewController" id="cQb-rR-26B"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wQ4-1f-SNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4170.3999999999996" y="-255.92203898050977"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="O0Y-vR-9KJ">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="aCl-2W-eOW" customClass="MainTabBarController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="WnA-Vb-cSk">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="RPI-Bk-JXx" kind="relationship" relationship="viewControllers" id="Ma8-Zw-J4m"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ic3-FT-iK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3231.1999999999998" y="-255.92203898050977"/>
+        </scene>
+    </scenes>
+</document>

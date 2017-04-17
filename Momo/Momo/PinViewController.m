@@ -84,6 +84,8 @@
         
     } else {
         
+        NSLog(@"pin post selected");
+        
         [self performSegueWithIdentifier:@"pinDetailSegue" sender:self];
     }
 }

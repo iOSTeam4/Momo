@@ -592,7 +592,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KI-uc-InF">
-                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
+                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="5KI-uc-InF" secondAttribute="height" id="8oh-fm-e4S"/>
                                                         </constraints>
@@ -980,18 +980,18 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <viewControllerLayoutGuide type="bottom" id="N1s-nq-MFd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pvv-Dc-4eZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="598" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-Yh-ORF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="158" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-Yh-ORF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoTextCell" rowHeight="615" id="HaD-jw-HG3" customClass="PostTableViewCell1">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="615"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoTextCell" rowHeight="573" id="HaD-jw-HG3" customClass="PhotoTextCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="573"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HaD-jw-HG3" id="DpC-Jo-6cc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="614.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="572.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EDf-7h-Wcw">
@@ -1025,9 +1025,11 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNC-bP-L8M">
-                                                    <rect key="frame" x="24" y="522" width="327" height="68.5"/>
-                                                    <string key="text">pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁ pinM ainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ  ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ </string>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="pinMainText " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNC-bP-L8M">
+                                                    <rect key="frame" x="24" y="522" width="327" height="26.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="aRG-d4-s8F"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1042,6 +1044,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="AsG-du-Oo1" firstAttribute="top" secondItem="pMR-VS-9Rx" secondAttribute="bottom" constant="16" id="2t6-nK-dQ5"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dNC-bP-L8M" secondAttribute="bottom" constant="16" id="2yS-Q0-wGc"/>
                                                 <constraint firstItem="EDf-7h-Wcw" firstAttribute="leading" secondItem="DpC-Jo-6cc" secondAttribute="leadingMargin" constant="16" id="4jH-ba-k1a"/>
                                                 <constraint firstItem="AsG-du-Oo1" firstAttribute="leading" secondItem="DpC-Jo-6cc" secondAttribute="leadingMargin" constant="16" id="8Rf-yl-zRk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ec3-Hr-peb" secondAttribute="trailing" constant="16" id="Eff-tw-iUg"/>
@@ -1057,7 +1060,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <constraint firstItem="pMR-VS-9Rx" firstAttribute="width" secondItem="DpC-Jo-6cc" secondAttribute="width" id="Zl3-e3-Od7"/>
                                                 <constraint firstItem="ec3-Hr-peb" firstAttribute="top" secondItem="AsG-du-Oo1" secondAttribute="bottom" constant="5" id="bdC-NM-ONn"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dNC-bP-L8M" secondAttribute="trailing" constant="16" id="kEI-6g-L8P"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="dNC-bP-L8M" secondAttribute="bottom" constant="16" id="oYm-Le-gKr"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="AsG-du-Oo1" secondAttribute="trailing" constant="56" id="p6s-Bc-XWR"/>
                                                 <constraint firstItem="pMR-VS-9Rx" firstAttribute="top" secondItem="EDf-7h-Wcw" secondAttribute="bottom" constant="16" id="pUR-dI-Hb2"/>
                                                 <constraint firstItem="EDf-7h-Wcw" firstAttribute="top" secondItem="DpC-Jo-6cc" secondAttribute="topMargin" constant="16" id="q8n-Oq-T5V"/>
@@ -1072,11 +1074,11 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             <outlet property="userName1" destination="gv6-VJ-Ilh" id="1PF-ei-eyt"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" rowHeight="209" id="g0b-n8-8Df" customClass="PostTableViewCell3">
-                                        <rect key="frame" x="0.0" y="643" width="375" height="209"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" rowHeight="158" id="g0b-n8-8Df" customClass="TextCell">
+                                        <rect key="frame" x="0.0" y="601" width="375" height="158"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g0b-n8-8Df" id="SKm-9L-yH9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="208.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="157.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALz-xL-Ked">
@@ -1111,9 +1113,11 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZu-0s-Qdx">
-                                                    <rect key="frame" x="24" y="123" width="327" height="70"/>
-                                                    <string key="text">pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁ pinM ainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ  ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ pinMainText ㅁㄴㅇ ㅁㄴㅇ ㅁㄴㅇ ㅁㅇ ㅁㄴ ㅁㅇ ㅁㅇ ㅁ ㅇㅁㅇ ㅁㄴ ㅇㅁ ㅁㅇ ㅁㅇ ㅁㅇㅁㄴ </string>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="pinMainText" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZu-0s-Qdx">
+                                                    <rect key="frame" x="24" y="123" width="327" height="21.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21.5" id="9xZ-LU-Kif"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1134,12 +1138,10 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <constraint firstItem="oqs-G7-uk3" firstAttribute="leading" secondItem="hxj-30-tux" secondAttribute="trailing" constant="16" id="fW0-8B-UDa"/>
                                                 <constraint firstItem="hxj-30-tux" firstAttribute="leading" secondItem="SKm-9L-yH9" secondAttribute="leadingMargin" constant="16" id="lIB-6V-aDc"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="m1u-Ha-EF5" secondAttribute="trailing" constant="16" id="lzK-Qg-d49"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uZu-0s-Qdx" secondAttribute="bottom" constant="5" id="oJr-28-btF"/>
                                                 <constraint firstItem="gxv-jF-W7A" firstAttribute="centerY" secondItem="ALz-xL-Ked" secondAttribute="centerY" id="uOv-Oe-kVy"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="uZu-0s-Qdx" secondAttribute="bottom" constant="16" id="rfg-5P-Epn"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="pinAddress3" destination="m1u-Ha-EF5" id="7Ab-Kd-g8u"/>
                                             <outlet property="pinMainText3" destination="uZu-0s-Qdx" id="Lh5-Ry-rtz"/>
@@ -1148,8 +1150,8 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             <outlet property="userName3" destination="gxv-jF-W7A" id="Wll-n1-p91"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoCell" rowHeight="538" id="fr6-yl-GXz" customClass="PostTableViewCell2">
-                                        <rect key="frame" x="0.0" y="852" width="375" height="538"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoCell" rowHeight="538" id="fr6-yl-GXz" customClass="PhotoCell">
+                                        <rect key="frame" x="0.0" y="759" width="375" height="538"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fr6-yl-GXz" id="jV8-56-9t5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="537.5"/>
@@ -1202,6 +1204,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <constraint firstItem="cIM-dL-vDD" firstAttribute="leading" secondItem="jV8-56-9t5" secondAttribute="leadingMargin" constant="-8" id="R0A-yz-bat"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0rz-IV-ag2" secondAttribute="trailing" constant="16" id="X1F-5v-yfH"/>
                                                 <constraint firstItem="DRk-Et-v6A" firstAttribute="centerY" secondItem="8Dg-ZT-8Fs" secondAttribute="centerY" id="ayD-sA-vBX"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0rz-IV-ag2" secondAttribute="bottom" constant="4.5" id="cF9-gU-2tE"/>
                                                 <constraint firstItem="0rz-IV-ag2" firstAttribute="leading" secondItem="jV8-56-9t5" secondAttribute="leadingMargin" constant="16" id="fMy-dc-oDI"/>
                                                 <constraint firstItem="xnc-go-Lp3" firstAttribute="leading" secondItem="jV8-56-9t5" secondAttribute="leading" constant="16" id="kvA-ec-C5M"/>
                                                 <constraint firstItem="cIM-dL-vDD" firstAttribute="top" secondItem="xnc-go-Lp3" secondAttribute="bottom" constant="16" id="lF0-KQ-zxf"/>
@@ -1220,6 +1223,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="OMy-Wn-Nr3" id="nov-Rn-hdR"/>
                                     <outlet property="delegate" destination="OMy-Wn-Nr3" id="9PU-Iu-26L"/>
@@ -1236,14 +1240,14 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1500"/>
+                    <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="tableView" destination="q1a-Yh-ORF" id="c3t-uT-8G9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0e-zi-2yD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1314" y="1007"/>
+            <point key="canvasLocation" x="1080.8" y="1107.3463268365817"/>
         </scene>
     </scenes>
     <resources>
@@ -1269,6 +1273,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="setup" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nbl-e9-76j"/>
+        <segue reference="KT7-pT-DDo"/>
     </inferredMetricsTieBreakers>
 </document>
