@@ -9,26 +9,19 @@
 #import "PinPostViewController.h"
 
 
-@interface PostTableViewCell : UITableViewCell
-
-// constraint
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentImageHeight;
-
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *userName;
-@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
-@property (weak, nonatomic) IBOutlet UILabel *pinName;
-@property (weak, nonatomic) IBOutlet UILabel *pinAddress;
-@property (weak, nonatomic) IBOutlet UILabel *pinMainText;
+@implementation PostTableViewCell1
 
 @end
 
 
-@implementation PostTableViewCell
-
+@implementation PostTableViewCell2
 
 @end
 
+
+@implementation PostTableViewCell3
+
+@end
 
 //////////////////////////////////////////////////////
 
@@ -48,14 +41,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-//    self.dataTempArr = @[@"Zion", @"Yosemite", @"Sequoia", @"Rocky Mountains", @"Olympic", @"North Cascades", @"Mount Rainier", @"Mesa Verde"];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.dataTempArr = @[@"Zion", @"Yosemite", @"Sequoia", @"Rocky Mountains", @"Olympic", @"North Cascades", @"Mount Rainier", @"Mesa Verde"];
     
     self.dataTempArr2 = @[
                          @[@0, @"여기는 빵이 맛있는 곳"],
                          @[@1, @"Zion"],
                          @[@2, @"Yosemite", @"동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록"],
+                         @[@2, @"Sequoia", @"남산위의저소나무철갑을두른듯"]
                          ];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,37 +61,60 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    [cell.contentImageView setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]]];
     
-    cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
-    cell.profileImageView.layer.masksToBounds = YES;
-    cell.profileImageView.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-    if ([((NSNumber *)self.dataTempArr2[0]) integerValue] == 0) {
-        // 글만 있는 경우
-        
-        
-    } else if ([((NSNumber *)self.dataTempArr2[0]) integerValue] == 1) {
-        // 사진만 있는 경우
-        
-        
-    } else if ([((NSNumber *)self.dataTempArr2[0]) integerValue] == 2) {
+    if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 0) {
         // 글 사진 다 있는 경우
+        PostTableViewCell1 *cell = [tableView dequeueReusableCellWithIdentifier:@"photoTextCell" forIndexPath:indexPath];
+        cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
+        cell.profileImageView1.layer.masksToBounds = YES;
+        cell.profileImageView1.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.contentImageView1 setImage:[UIImage imageNamed:self.dataTempArr2[indexPath.row][1]]];
+        [cell.pinMainText1 setText:self.dataTempArr2[indexPath.row][2]];
+        return cell;
         
-        
+    } else if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] ==1) {
+        // 사진만 있는 경우
+        PostTableViewCell2 *cell = [tableView dequeueReusableCellWithIdentifier:@"photoCell" forIndexPath:indexPath];
+        cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
+        cell.profileImageView2.layer.masksToBounds = YES;
+        cell.profileImageView2.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.contentImageView2 setImage:[UIImage imageNamed:self.dataTempArr2[1][1]]];
+        return cell;
+
+    
+    } else {
+        // 글만 있는 경우
+        PostTableViewCell3 *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        //        [cell.contentImageView setHidden:YES];
+        cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
+        cell.profileImageView3.layer.masksToBounds = YES;
+        cell.profileImageView3.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.pinMainText3 setText:self.dataTempArr2[indexPath.row][1]];
+        return cell;
     }
     
-//    [cell.contentImageView setImage:[UIImage imageNamed:self.dataTempArr];
     
-    return cell;
+//    PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    
+//    cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
+//    cell.profileImageView.layer.masksToBounds = YES;
+//    cell.profileImageView.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+   
+//        [cell.contentImageView setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]]];
+    
+//    [self.view layoutIfNeeded];
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.dataTempArr.count;
+    return self.dataTempArr2.count;
+   
 }
 
 @end
