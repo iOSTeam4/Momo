@@ -149,7 +149,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        return CGSizeMake(66, 100);
+        return CGSizeMake(66, 100); // 추가버튼
     } else {
         return CGSizeMake(100, 100);
     }
