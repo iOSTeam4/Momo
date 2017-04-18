@@ -87,6 +87,10 @@
                                             <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="75p-CT-vV3">
+                                        <rect key="frame" x="14.5" y="5" width="345" height="22"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="맛집 리스트 입니다." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVw-qM-Xbp">
                                         <rect key="frame" x="15" y="28" width="345" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
@@ -125,12 +129,16 @@
                                     <constraint firstItem="VVw-qM-Xbp" firstAttribute="leading" secondItem="NT8-64-NtI" secondAttribute="leading" id="8ht-RY-9HP"/>
                                     <constraint firstItem="Y2W-uj-Jug" firstAttribute="top" secondItem="VVw-qM-Xbp" secondAttribute="bottom" constant="8" id="ALi-nB-IJe"/>
                                     <constraint firstItem="Y2W-uj-Jug" firstAttribute="leading" secondItem="NT8-64-NtI" secondAttribute="leading" id="Ac2-dH-JjY"/>
+                                    <constraint firstItem="75p-CT-vV3" firstAttribute="width" secondItem="NT8-64-NtI" secondAttribute="width" id="FB3-xe-BZw"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="height" secondItem="eQP-jP-Ocj" secondAttribute="height" id="FUq-Pg-9MG"/>
+                                    <constraint firstItem="75p-CT-vV3" firstAttribute="height" secondItem="NT8-64-NtI" secondAttribute="height" id="Jgc-cC-z03"/>
+                                    <constraint firstItem="75p-CT-vV3" firstAttribute="centerX" secondItem="NT8-64-NtI" secondAttribute="centerX" id="LCM-mc-ECx"/>
                                     <constraint firstItem="Siw-Eb-TBx" firstAttribute="centerY" secondItem="Y2W-uj-Jug" secondAttribute="centerY" id="N21-9Y-z8A"/>
                                     <constraint firstAttribute="trailing" secondItem="VVw-qM-Xbp" secondAttribute="trailing" constant="15" id="PBU-4j-vtO"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="centerY" secondItem="eQP-jP-Ocj" secondAttribute="centerY" id="PD0-71-aqC"/>
                                     <constraint firstItem="Siw-Eb-TBx" firstAttribute="leading" secondItem="Y2W-uj-Jug" secondAttribute="trailing" constant="3" id="R0Z-8C-TAq"/>
                                     <constraint firstItem="NT8-64-NtI" firstAttribute="leading" secondItem="eQP-jP-Ocj" secondAttribute="leading" constant="15" id="Tyx-Uc-TEe"/>
+                                    <constraint firstItem="75p-CT-vV3" firstAttribute="centerY" secondItem="NT8-64-NtI" secondAttribute="centerY" id="Vxb-Cg-TSX"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ZCg-os-8ek"/>
                                     <constraint firstItem="EoY-l3-ovB" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" multiplier="0.25" id="ZWH-cS-hN9"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="centerX" secondItem="eQP-jP-Ocj" secondAttribute="centerX" id="aFV-tZ-Acx"/>

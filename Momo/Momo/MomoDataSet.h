@@ -57,6 +57,7 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property MomoPlaceDataSet *pin_place;
 
 @property NSString *pin_name;
+@property NSString *pin_description;
 @property NSInteger pin_label;
 @property NSString *pin_map;
 

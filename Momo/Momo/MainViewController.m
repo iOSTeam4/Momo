@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self.navigationItem setTitle:@"Main View"];
     
     _imageView.image = [[DataCenter sharedInstance].momoUserData getUserProfileImage];

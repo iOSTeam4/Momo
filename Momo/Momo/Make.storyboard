@@ -179,7 +179,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahz-GM-dId">
-                                                        <rect key="frame" x="137" y="0.0" width="65" height="64.5"/>
+                                                        <rect key="frame" x="137" y="0.5" width="65" height="64"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ahz-GM-dId" secondAttribute="height" id="Pnw-ZC-Xxo"/>
                                                         </constraints>
@@ -345,6 +345,7 @@
                         <outlet property="mapCheckRefOriginY" destination="fDP-36-fCu" id="gH8-lv-wno"/>
                         <outlet property="pinNameTextField" destination="Wj6-vx-ubH" id="fOE-5Z-5X1"/>
                         <outlet property="segmentedTopMargin" destination="cUn-cL-Y3U" id="eOB-aa-Y94"/>
+                        <outlet property="viewTitleLabel" destination="mYK-ST-Zie" id="Z1G-Eb-jVH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52q-nU-915" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,6 +574,7 @@
                         <outlet property="mapNameTextField" destination="X7r-8Z-VJj" id="NmJ-gc-6zo"/>
                         <outlet property="scrollView" destination="TH3-0a-Fhx" id="TrN-Tc-paO"/>
                         <outlet property="secretSwitch" destination="AW9-UE-u9e" id="V3v-Yh-vkB"/>
+                        <outlet property="viewTitleLabel" destination="496-zH-Mjr" id="6bn-eg-9Bj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tk5-6K-Zy9" userLabel="First Responder" sceneMemberID="firstResponder"/>

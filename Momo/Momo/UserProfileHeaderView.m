@@ -18,7 +18,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"layoutSubviews");
+//    NSLog(@"layoutSubviews");
     
     
     // 프로필 BackView 세팅
@@ -26,7 +26,7 @@
 
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
-    NSLog(@"%f", self.userImgView.frame.size.height/2);
+//    NSLog(@"%f", self.userImgView.frame.size.height/2);
 
     // 수정하기 버튼
     [self.userEditBtn.layer setCornerRadius:5];

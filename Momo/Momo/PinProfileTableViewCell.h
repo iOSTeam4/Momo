@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PinProfileTableViewCellDelegate;
+
+
 @interface PinProfileTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) id<PinProfileTableViewCellDelegate> delegate;
+
 
 @property (weak, nonatomic) IBOutlet UIView *backView;
 
@@ -20,5 +26,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *pinEditBtn;
+
+@end
+
+
+
+// 델리게이트 프로토콜 ----------------------------//
+@protocol PinProfileTableViewCellDelegate <NSObject>
+
+- (void)selectedPinEditBtnWithIndex:(NSInteger)index;
 
 @end

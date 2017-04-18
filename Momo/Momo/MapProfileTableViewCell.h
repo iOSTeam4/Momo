@@ -36,9 +36,7 @@
 
 @protocol MapProfileTableViewCellDelegate <NSObject>
 
-
-@optional
-- (void)selectedMapEditBtn;
+- (void)selectedMapEditBtnWithIndex:(NSInteger)index;
 
 @end
 

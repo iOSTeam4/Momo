@@ -15,8 +15,13 @@
 #import "PinProfileTableViewCell.h"
 
 #import "MapViewController.h"
+#import "PinViewController.h"
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate>
+#import "MapMakeViewController.h"
+#import "PinMakeViewController.h"
+
+@interface MyViewController ()
+<UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
@@ -39,7 +44,27 @@
     [self initialTableViewCellSettingWithNib];
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
+}
 
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // 반드시 테이블 뷰 refresh 해야함
+    [self.tableView reloadData];
+}
+
+
+// NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    NSLog(@"MyViewController : gestureRecognizerShouldBegin, %ld", self.navigationController.viewControllers.count);
+    
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리 (다른 Gesture 쓰는 것 없음)
+    if(self.navigationController.viewControllers.count > 1){
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -162,12 +187,13 @@
     if (self.mapPinNum == 0) {
         return [DataCenter sharedInstance].momoUserData.user_map_list.count;
     } else {
-        return ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list.count;
+        return [MomoPinDataSet allObjects].count;
+//        return ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list.count;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"heightForRowAtIndexPath");
+//    NSLog(@"heightForRowAtIndexPath");
     
     // Cell Height 해상도 별 제대로 조정 필요
     if (self.mapPinNum == 0) {
@@ -178,10 +204,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
+//    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
     
     if (self.mapPinNum == 0) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
+        mapCell.tag = indexPath.row;    // 태그 설정
+        
+//        // 델리게이터 설정되어있는 셀인지?
+//        if (!mapCell.delegate) {
+            mapCell.delegate = self;
+//        }
+        
+
         
         // 데이터 세팅
         if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
@@ -205,7 +239,13 @@
         
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
+        pinCell.tag = indexPath.row;    // 태그 설정
 
+        // 델리게이터 설정되어있는 셀인지?
+        if (!pinCell.delegate) {
+            pinCell.delegate = self;
+        }
+        
         // 데이터 세팅
         if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
             pinCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
@@ -214,8 +254,7 @@
             pinCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
         }
         
-        // 유저의 모든 핀이 나와야 하나, 일단 0번 지도로만 고정
-        pinCell.pinNameLabel.text = [DataCenter myPinListWithMapIndex:0][indexPath.row].pin_name;
+        pinCell.pinNameLabel.text = ((MomoPinDataSet *)([MomoPinDataSet allObjects][indexPath.row])).pin_name;
         
         return pinCell;
     }
@@ -225,7 +264,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.mapPinNum == 0) {
-        
+        // 선택지도 보기
         UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
         MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
         
@@ -234,7 +273,19 @@
         [self.navigationController pushViewController:mapVC animated:YES];
         
     } else {
+        // 선택핀 보기
         
+        // 사용자 모든 핀 정보 넣어서 전달
+        MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
+        [mapData.map_pin_list addObjects:[MomoPinDataSet allObjects]];
+        
+        UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
+        PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
+        
+        // 핀 데이터 세팅
+        [pinVC showSelectedPinAndSetMapData:mapData withPinIndex:indexPath.row];
+        
+        [self.navigationController pushViewController:pinVC animated:YES];
     }
 }
 
@@ -266,6 +317,29 @@
 - (void)selectedMapPinBtnWithNum:(NSInteger)num {
     self.mapPinNum = num;
     [self.tableView reloadData];
+}
+
+
+//  MapProfileTableViewCell Delegate Methods -------------------//
+#pragma mark - MapProfileTableViewCell Delegate Methods
+
+- (void)selectedMapEditBtnWithIndex:(NSInteger)index {
+    NSLog(@"selectedMapEditBtnWithIndex, %ld", index);
+    
+    // 선택 지도 수정
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
+    MapMakeViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
+    
+    [mapMakeVC setEditModeWithMapData:[DataCenter myMapList][index]];   // 수정 모드, 데이터 세팅
+    [self.navigationController pushViewController:mapMakeVC animated:YES];
+    
+}
+
+//  PinProfileTableViewCell Delegate Methods -------------------//
+#pragma mark - PinProfileTableViewCell Delegate Methods
+
+- (void)selectedPinEditBtnWithIndex:(NSInteger)index {
+    NSLog(@"selectedPinEditBtnWithIndex, %ld", index);
 }
 
 

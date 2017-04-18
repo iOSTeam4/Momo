@@ -57,8 +57,12 @@
             
             break;
         }
-        default: {      // PIN_MARKER_SMALL_CIRCLE
+        case PIN_MARKER_SMALL_CIRCLE: {
             self.frame = CGRectMake(0, 0, PIN_MARKER_SMALL_CIRCLE_SIZE, PIN_MARKER_SMALL_CIRCLE_SIZE);
+            break;
+        }
+        default: {      // PIN_MARKER_SMALL_CIRCLE
+            self.frame = CGRectMake(0, 0, PIN_MARKER_PIN_VIEW_CIRCLE_SIZE, PIN_MARKER_PIN_VIEW_CIRCLE_SIZE);
             
             break;
         }
@@ -132,6 +136,7 @@
             break;
         }
         case PIN_MARKER_CIRCLE:
+        case PIN_MARKER_PIN_VIEW_CIRCLE:
             [self setPinMarkerZoomCaseOne];
             
         default: {    // PIN_MARKER_CIRCLE & PIN_MARKER_SMALL_CIRCLE
@@ -193,8 +198,15 @@
     UIImageView *iconimgView = [[UIImageView alloc] initWithImage:[self labelIcon]];
     [iconimgView setContentMode:UIViewContentModeScaleAspectFit];
     
-    CGFloat iconSize = PIN_MARKER_CIRCLE_SIZE - PIN_MARKER_ICON_IMAGE_MARGIN;
-    iconimgView.frame = CGRectMake(PIN_MARKER_ICON_IMAGE_MARGIN/2, PIN_MARKER_ICON_IMAGE_MARGIN/2, iconSize, iconSize);
+    if(self.zoomCase == PIN_MARKER_CIRCLE) {
+        CGFloat iconSize = PIN_MARKER_CIRCLE_SIZE - PIN_MARKER_ICON_IMAGE_MARGIN;
+        iconimgView.frame = CGRectMake(PIN_MARKER_ICON_IMAGE_MARGIN/2, PIN_MARKER_ICON_IMAGE_MARGIN/2, iconSize, iconSize);
+
+    } else {
+        CGFloat iconSize = PIN_MARKER_PIN_VIEW_CIRCLE_SIZE - PIN_MARKER_ICON_IMAGE_MARGIN * 2;
+        iconimgView.frame = CGRectMake(PIN_MARKER_ICON_IMAGE_MARGIN, PIN_MARKER_ICON_IMAGE_MARGIN, iconSize, iconSize);
+
+    }
     
     [self addSubview:iconimgView];
 }
@@ -202,6 +214,7 @@
 
 // 핀 라벨 아이콘
 - (UIImage *)labelIcon {
+    
     switch (self.pinData.pin_label) {
         case 0:
             return [UIImage imageNamed:@"0cafe"];
@@ -214,6 +227,7 @@
         default:
             return [UIImage imageNamed:@"4etc"];
     }
+
 }
 
 

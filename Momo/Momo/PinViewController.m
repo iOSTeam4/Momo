@@ -51,10 +51,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Navi Pop Gesture 활성화
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
-    
-    
     //collectionView size
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
     self.flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
@@ -66,13 +62,13 @@
     
     // Pin 세팅
     self.pinName.text = self.mapData.map_pin_list[self.pinIndex].pin_name;
+    self.pinAddress.text = self.mapData.map_pin_list[self.pinIndex].pin_place.place_address;
+    self.pinMainText.text = self.mapData.map_pin_list[self.pinIndex].pin_description;
     
     // User UI, 정보 세팅
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
     self.userProfileImage.image = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
     self.userNameToMade.text = [DataCenter sharedInstance].momoUserData.user_username;
-    
-    
 
 }
 
@@ -81,6 +77,10 @@
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
     
+    
+    // Navi Pop Gesture 활성화
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
     // 네비바 숨기기
     [self.navigationController setNavigationBarHidden:YES];
     [self.view layoutIfNeeded];
@@ -89,7 +89,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
+    
     // 네비바 다시 노출
     [self.navigationController setNavigationBarHidden:NO];
     [self.view layoutIfNeeded];
@@ -100,32 +100,26 @@
 
 - (void)mapPreViewSetting {
     
-    self.mapPreView.myLocationEnabled = YES;   // 내 위치 나타냄
-
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.mapData.map_pin_list[self.pinIndex].pin_place.place_lat
                                                             longitude:self.mapData.map_pin_list[self.pinIndex].pin_place.place_lng
-                                                                 zoom:15.0f];
+                                                                 zoom:16.0f];
     
     [self.mapPreView setCamera:camera];    // 핀 중심으로 카메라 설정
     
+
+    // 현재 보고있는 핀만 마커찍기
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.groundAnchor = CGPointMake(0.5, 0.6);        // 마커가 지도 중앙 위치에 놓일 수 있게 설정 (중앙 약간 위)
     
-    // 마커찍기
-    for (NSInteger i=0 ; i < self.mapData.map_pin_list.count ; i++) {
-        GMSMarker *marker = [[GMSMarker alloc] init];
-        
-        marker.position = CLLocationCoordinate2DMake(self.mapData.map_pin_list[i].pin_place.place_lat, self.mapData.map_pin_list[i].pin_place.place_lng);
+    marker.position = CLLocationCoordinate2DMake(self.mapData.map_pin_list[self.pinIndex].pin_place.place_lat, self.mapData.map_pin_list[self.pinIndex].pin_place.place_lng);
+    
+    PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[self.pinIndex] withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
 
-        PinMarkerUIView *pinMarkerView;
-
-        if (i == self.pinIndex) {
-            pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:PIN_MARKER_DETAIL];
-        } else {
-            pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:PIN_MARKER_CIRCLE];
-        }
-        marker.iconView = pinMarkerView;
-        marker.map = self.mapPreView;
-    }
+    marker.iconView = pinMarkerView;
+    marker.map = self.mapPreView;
+    
 }
+
 
 
 // UICollectionViewDataSource Methods -------------------//

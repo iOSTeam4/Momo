@@ -13,6 +13,9 @@
 <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic) BOOL isEditMode;
+@property (nonatomic) MomoMapDataSet *mapData;
+
+@property (weak, nonatomic) IBOutlet UILabel *viewTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -20,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *mapContentTextField;
 
 @property (nonatomic) BOOL checkName;
-@property (nonatomic) BOOL checkContent;
+
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
@@ -30,6 +33,13 @@
 @end
 
 @implementation MapMakeViewController
+
+- (void)setEditModeWithMapData:(MomoMapDataSet *)mapData {
+    self.mapData = mapData;
+    self.isEditMode = YES;
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,28 +51,32 @@
 
     
     [self.mapNameTextField addTarget:self action:@selector(mapNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-    [self.mapContentTextField addTarget:self action:@selector(mapContentTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
-    
-//////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
-//    self.isEditMode = YES;
-//
-//    self.checkName = YES;
-//    self.checkContent = YES;
-//    [self checkMakeBtnState];
-//    
-//    self.mapNameTextField.text = @"2017년 여름 휴가";
-//    self.mapContentTextField.text = @"모모랑 함께한 도쿄여행";
-///////////////////////////////////////////////////////////////////
     
     if (self.isEditMode) {
+        [self.view layoutIfNeeded];     // viewDidLoad에서 View Layout 맞추기 (삭제버튼 위치)
+        
+        // 버튼 활성화 상태로 놓음
+        [self.makeBtn1 setEnabled:YES];
+        [self.makeBtn2 setEnabled:YES];
+        [self.makeBtn3 setEnabled:YES];
+        
+        // Edit 모드에 맞게 수정
+        self.viewTitleLabel.text = @"맵 수정하기";
         [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
-        [self.view layoutIfNeeded];
+        
+        // 삭제 버튼 추가
         self.deleteBtn = [[UIButton alloc] init];
         [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
         [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.deleteBtn];
         [self.deleteBtn addTarget:self action:@selector(selectedDeleteMapBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        // 기존 지도 정보 넣기
+        self.mapNameTextField.text = self.mapData.map_name;
+        self.mapContentTextField.text = self.mapData.map_description;
+        self.secretSwitch.on = self.mapData.map_is_private;
 
     }
 }
@@ -105,29 +119,19 @@
 - (void)mapNameTextFieldEditingChanged:(UITextField *)sender {
     
     if ([sender.text isEqualToString:@""]) {
-        self.checkName = NO;
+        self.checkName = NO;                    // @"" (NO)
     } else {
-        self.checkName = (BOOL)sender.text;
+        self.checkName = (BOOL)sender.text;     // nil (NO) or Text (YES)
     }
     
     [self checkMakeBtnState];
 }
 
-- (void)mapContentTextFieldEditingChanged:(UITextField *)sender {
-    
-    if ([sender.text isEqualToString:@""]) {
-        self.checkContent = NO;
-    } else {
-        self.checkContent = (BOOL)sender.text;
-    }
-    
-    [self checkMakeBtnState];
-}
 
 // 만들기버튼 활성화 메서드 -----------//
 - (void)checkMakeBtnState {
     //모든 조건이 yes이면 makeBtn이 활성화되게
-    if (self.checkName && self.checkContent) {
+    if (self.checkName) {
         [self.makeBtn1 setEnabled:YES];
         [self.makeBtn2 setEnabled:YES];
         [self.makeBtn3 setEnabled:YES];
@@ -140,20 +144,31 @@
 
 - (IBAction)selectedMakeBtn:(id)sender {
     
-    NSLog(@"새맵 만들어!");
     
-    MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithName:self.mapNameTextField.text
-                                           withMapDescription:self.mapContentTextField.text
-                                                  withPrivate:self.secretSwitch.on];
+    if (!self.isEditMode) {     // 만들기
+        NSLog(@"새맵 만들어!");
+        
+        self.mapData = [MomoMapDataSet makeMapWithName:self.mapNameTextField.text
+                                    withMapDescription:self.mapContentTextField.text
+                                           withPrivate:self.secretSwitch.on];
+
+    } else {    // 수정하기
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm transactionWithBlock:^{
+            self.mapData.map_name = self.mapNameTextField.text;
+            self.mapData.map_description = self.mapContentTextField.text;
+            self.mapData.map_is_private = self.secretSwitch.on;
+        }];
+    }
     
-    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
-    MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
-    [mapVC showSelectedMapAndSetMapData:mapData];
+    UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
+    MapViewController *mapVC = [mapStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
+    [mapVC showSelectedMapAndSetMapData:self.mapData];
     
     [self.navigationController pushViewController:mapVC animated:YES];
-    
 }
- 
+
 
 
 - (IBAction)flickedSecretSwitch:(id)sender {
@@ -171,20 +186,15 @@
 }
 
 - (void)selectedDeleteMapBtn:(id)sender {
-    
     NSLog(@"맵 지워");
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm deleteObject:self.mapData];
+    }];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

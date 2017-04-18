@@ -10,6 +10,8 @@
 
 @interface PinMakeViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *viewTitleLabel;
+
 @property (nonatomic) BOOL isEditMode;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *mapCheckRefOriginY;

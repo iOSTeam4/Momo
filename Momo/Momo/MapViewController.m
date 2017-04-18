@@ -10,6 +10,7 @@
 #import "PinMarkerUIView.h"
 #import "PinViewController.h"
 
+#import "MapMakeViewController.h"
 
 @interface MapViewController () <GMSMapViewDelegate>
 
@@ -250,9 +251,9 @@
         UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
-        // 핀 데이터 세팅
-        [pinVC showSelectedPinAndSetMapData:self.mapData withPinIndex:marker.iconView.tag];
         
+        // 핀 데이터 세팅
+        [pinVC showSelectedPinAndSetMapData:self.mapData withPinIndex:marker.iconView.tag];        
         [self.navigationController pushViewController:pinVC animated:YES];
         
     }
@@ -310,7 +311,7 @@
             
             GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.mapView myLocation].coordinate.latitude
                                                                     longitude:[self.mapView myLocation].coordinate.longitude
-                                                                         zoom:13.5f];
+                                                                         zoom:16.0f];
             [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 내 위치 중심으로 카메라 설정
             [self mapView:(GMSMapView *)self.view didLongPressAtCoordinate:[self.mapView myLocation].coordinate];       // 마지막 내 위치로 마커찍기
         });
@@ -333,6 +334,7 @@
 #pragma mark - IBAction(UIButton) Methods
 // IBAction(버튼) 메소드 ------------------------------------//
 
+// 핀 만들기 취소 버튼 액션
 - (IBAction)cancelBtnAction:(id)sender {
     NSLog(@"cancelBtnAction");
     
@@ -350,7 +352,7 @@
     }
 }
 
-
+// 핀 만들기 다음 버튼 액션
 - (IBAction)nextBtnAction:(id)sender {
     
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
@@ -360,8 +362,16 @@
     
 }
 
+
+// 선택지도 수정/팔로우 버튼 액션
 - (IBAction)mapInfoViewBtnAction:(id)sender {
+    // 선택 지도 수정
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
+    MapMakeViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
+    [mapMakeVC setEditModeWithMapData:self.mapData];   // 수정 모드, 데이터 세팅
+    [self.navigationController pushViewController:mapMakeVC animated:YES];
+
     
 }
 

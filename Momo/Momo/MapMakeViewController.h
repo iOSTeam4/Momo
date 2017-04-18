@@ -10,4 +10,6 @@
 
 @interface MapMakeViewController : UIViewController
 
+- (void)setEditModeWithMapData:(MomoMapDataSet *)mapData;
+
 @end
