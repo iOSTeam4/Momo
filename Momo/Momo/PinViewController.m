@@ -57,9 +57,13 @@
     
     //collectionView size
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
-    self.flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
+    NSLog(@"itemWidth %f", itemWidth);
+    
+    self.flowLayout.itemSize = CGSizeMake(100, 100);
     // collectionView 임시 contents
-    self.dataTempArr = @[@"addPost", @"textPhoto", @"postTest1", @"postTest2", @"postTest3", @"postTest4", @"postTest5", @"postTest6"];
+    self.dataTempArr = @[@"addPost", @"textPhoto", @"Zion", @"Arches", @"Kenai Fjords", @"Mesa Verde", @"North Cascades", @"Great Sand Dunes"];
+    
+    
     
     // Map 세팅
     [self mapPreViewSetting];
@@ -143,6 +147,18 @@
     [cell.contentsBtn setTag:indexPath.row];
     
     return cell;
+}
+
+
+// UICollectionViewDelegateFlowLayout Methods -----------//
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        return CGSizeMake(66, 100);
+    } else {
+        return CGSizeMake(100, 100);
+    }
 }
 
 

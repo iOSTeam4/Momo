@@ -36,7 +36,7 @@
                          @[@2, @"여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해"],
                          @[@0, @"Sequoia", @"남산위의저소나무철갑을두른듯"]
                          ];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,6 +44,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 0) {
+        return 580;
+    } else if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 1) {
+        return 480;
+    } else if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 2) {
+        return 220;
+    }
+    return 0;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -54,6 +65,7 @@
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
         cell.profileImageView1.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+        cell.categoryImg1.image = [UIImage imageNamed:@"01S"];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         //    [cell.contentImageView1 setImage:[UIImage imageNamed:@"Zion"]];
@@ -68,6 +80,7 @@
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
         cell.profileImageView2.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+        cell.categoryImg2.image = [UIImage imageNamed:@"04S"];
 //        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [cell.contentImageView2 setImage:[UIImage imageNamed:self.dataTempArr2[indexPath.row][1]]];
         return cell;
@@ -80,6 +93,7 @@
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
         cell.profileImageView3.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
+        cell.categoryImg3.image = [UIImage imageNamed:@"03S"];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
        
         [cell.pinMainText3 setText:self.dataTempArr2[indexPath.row][1]];
