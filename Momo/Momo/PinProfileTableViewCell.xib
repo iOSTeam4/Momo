@@ -13,15 +13,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="300" id="KGk-i7-Jjw" customClass="PinProfileTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="295" id="KGk-i7-Jjw" customClass="PinProfileTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="298"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="299.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="297.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-A0-G2a" userLabel="BackView">
-                        <rect key="frame" x="5" y="10" width="390" height="279.5"/>
+                        <rect key="frame" x="5" y="10" width="390" height="277.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZfR-pa-AiB" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
@@ -36,6 +36,9 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pika pika 핀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqb-1e-o3S" userLabel="Pin Name Label">
                                 <rect key="frame" x="10" y="205" width="89.5" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="u6H-64-dCv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -68,6 +71,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9lu-jH-Pqd" secondAttribute="bottom" constant="16.5" id="2sq-gL-817"/>
                             <constraint firstItem="9lu-jH-Pqd" firstAttribute="top" secondItem="pqb-1e-o3S" secondAttribute="bottom" constant="5" id="7Bw-Sp-rb9"/>
                             <constraint firstItem="pqb-1e-o3S" firstAttribute="top" secondItem="ZfR-pa-AiB" secondAttribute="bottom" constant="10" id="8QY-Y8-2KJ"/>
                             <constraint firstItem="Qty-dZ-bwr" firstAttribute="centerY" secondItem="ZfR-pa-AiB" secondAttribute="centerY" id="E5d-HZ-5l7"/>
@@ -105,7 +109,7 @@
                 <outlet property="userImgView" destination="9lu-jH-Pqd" id="j0G-p1-Ugg"/>
                 <outlet property="userNameLabel" destination="2f0-ih-zMc" id="L6E-vY-EBm"/>
             </connections>
-            <point key="canvasLocation" x="40" y="262"/>
+            <point key="canvasLocation" x="40" y="261"/>
         </tableViewCell>
     </objects>
     <resources>

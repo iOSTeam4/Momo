@@ -44,6 +44,11 @@
     [self initialTableViewCellSettingWithNib];
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
+    
+    
+    // TableViewCell Height 자동 적용
+    self.tableView.estimatedRowHeight = 300;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 
@@ -192,16 +197,16 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"heightForRowAtIndexPath");
-    
-    // Cell Height 해상도 별 제대로 조정 필요
-    if (self.mapPinNum == 0) {
-        return 320;
-    } else {        // mapPinNum : 1
-        return 250;
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+////    NSLog(@"heightForRowAtIndexPath");
+//    
+//    // Cell Height 해상도 별 제대로 조정 필요
+//    if (self.mapPinNum == 0) {
+//        return 320;
+//    } else {        // mapPinNum : 1
+//        return 250;
+//    }
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);

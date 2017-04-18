@@ -34,27 +34,27 @@
                          @[@0, @"Yosemite", @"동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해물과백두산이마르고닳도록"],
                          @[@1, @"Zion"],
                          @[@2, @"여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해"],
+                         @[@2, @"여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동"],
+                         @[@2, @"여기"],
+                         @[@2, @"여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해여기는 빵이 맛있는 곳gyftfytgytgyuguygyawejflajwlkdjasfl해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해해물과백두산이마르고닳도록동해물과백두산이마르고닳도록동해"],
                          @[@0, @"Sequoia", @"남산위의저소나무철갑을두른듯"]
                          ];
-
+    
+    
+    
+    
+    self.tableView.estimatedRowHeight = 180;    // 글만 있을 때 (제일 작은 사이즈)
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.dataTempArr2.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 0) {
-        return 580;
-    } else if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 1) {
-        return 480;
-    } else if ([((NSNumber *)self.dataTempArr2[indexPath.row][0]) integerValue] == 2) {
-        return 220;
-    }
-    return 0;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -100,26 +100,8 @@
         return cell;
     }
     
-    
-//    PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-//    
-//    cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width/2;
-//    cell.profileImageView.layer.masksToBounds = YES;
-//    cell.profileImageView.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
-//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-   
-//        [cell.contentImageView setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]]];
-//    
-//    [self.view layoutIfNeeded];
-    
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   
-    return self.dataTempArr2.count;
-   
-}
 
 @end
 

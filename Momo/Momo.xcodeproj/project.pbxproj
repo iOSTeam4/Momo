@@ -231,16 +231,12 @@
 		3F9C27CC1E8A489F008DD04A /* PinView */ = {
 			isa = PBXGroup;
 			children = (
-				3FEBB8941E97C70B006E3E77 /* PostMakeViewController.h */,
-				3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */,
-				EF5A49CC1E9F51BD00A33858 /* PinPostViewController.h */,
-				EF5A49CD1E9F51BD00A33858 /* PinPostViewController.m */,
-				EF69E5821EA4A3BF00DE4C65 /* PostCell */,
+				3F9C27D01E8A48D3008DD04A /* PinView.storyboard */,
 				3F9C27CD1E8A48C6008DD04A /* PinViewController.h */,
 				3F9C27CE1E8A48C6008DD04A /* PinViewController.m */,
 				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
 				EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */,
-				3F9C27D01E8A48D3008DD04A /* PinView.storyboard */,
+				3FEEFA741EA62331003F748F /* PostView */,
 			);
 			name = PinView;
 			sourceTree = "<group>";
@@ -405,6 +401,18 @@
 				3FD9A5561E88F35400B965A7 /* Main.storyboard */,
 			);
 			name = MainView;
+			sourceTree = "<group>";
+		};
+		3FEEFA741EA62331003F748F /* PostView */ = {
+			isa = PBXGroup;
+			children = (
+				3FEBB8941E97C70B006E3E77 /* PostMakeViewController.h */,
+				3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */,
+				EF5A49CC1E9F51BD00A33858 /* PinPostViewController.h */,
+				EF5A49CD1E9F51BD00A33858 /* PinPostViewController.m */,
+				EF69E5821EA4A3BF00DE4C65 /* PostCell */,
+			);
+			name = PostView;
 			sourceTree = "<group>";
 		};
 		5BFB7AE743B07EA5BE3457CD /* Pods */ = {
