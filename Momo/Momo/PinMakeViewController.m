@@ -7,6 +7,7 @@
 //
 
 #import "PinMakeViewController.h"
+#import "PinViewController.h"
 
 @interface PinMakeViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
@@ -45,6 +46,7 @@
 - (void)setEditModeWithPinData:(MomoPinDataSet *)pinData {
     self.pinData = pinData;
     self.isEditMode = YES;
+    NSLog(@"setEditModeWithPinData : pinData주소 %@", pinData);
 }
 
 
@@ -64,14 +66,16 @@
     // 지도 데이터 설정
     [self makeMyMapCheckBtnViewWithArr:[DataCenter myMapList]];
     
-    
+    // EditMode
     if (self.isEditMode) {
+        NSLog(@"PinMakeViewController isEditMode");
+        
         [self.view layoutIfNeeded];     // viewDidLoad에서 View Layout 맞추기 (삭제버튼 위치)
         
-        // 버튼 활성화 상태로 놓음
-        [self.makeBtn1 setEnabled:YES];
-        [self.makeBtn2 setEnabled:YES];
-        [self.makeBtn3 setEnabled:YES];
+        // 수정 버튼 활성화
+        self.checkName = YES;
+        self.checkCategory = YES;
+        self.checkMap = YES;
         
         // Edit 모드에 맞게 수정
         self.viewTitleLabel.text = @"핀 수정하기";
@@ -88,25 +92,36 @@
         
         // 기존 핀 정보 넣기
         self.pinNameTextField.text = self.pinData.pin_name;     // 핀 이름
-        
-        UIButton *tempBtn = [[UIButton alloc] init];
-        tempBtn.tag = self.pinData.pin_label;
-        [self selecedCategoryBtn:tempBtn];      // 선택된 카테고리(라벨)
-        [self selecedCategoryBtn:tempBtn];      // 선택된 카테고리(라벨)
-        
+    
+        switch (self.pinData.pin_label) {               // 카테고리(라벨) 정보
+            case 0:
+                [self selecedCategoryBtn:self.categoryCafeBtn];
+                break;
+            case 1:
+                [self selecedCategoryBtn:self.categoryFoodBtn];
+                break;
+            case 2:
+                [self selecedCategoryBtn:self.categoryShopBtn];
+                break;
+            case 3:
+                [self selecedCategoryBtn:self.categoryPlaceBtn];
+                break;
+            default:
+                [self selecedCategoryBtn:self.categoryEtcBtn];
+                break;
+        }
     }
 }
 
-- (void)textFieldEditingChanged:(UITextField *)sender {
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
-    if ([sender.text isEqualToString:@""]) {
-        self.checkName = NO;
-    } else {
-        self.checkName = (BOOL)sender.text;
-    }
+    //NavigationBar 숨긴거 되살리기
+    [self.navigationController setNavigationBarHidden:NO];
     
-    [self checkMakeBtnState];
 }
+
 
 - (void)makeMyMapCheckBtnViewWithArr:(RLMArray<MomoMapDataSet *> *)mapArr {
     
@@ -120,7 +135,7 @@
         
         UIButton *mapCheckBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [mapCheckBtn setImage:[UIImage imageNamed:@"mapCheckBtn"] forState:UIControlStateNormal];
-        [mapCheckBtn setImage:[UIImage imageNamed:@"mapSelectBtn"] forState:UIControlStateSelected];
+        [mapCheckBtn setImage:[UIImage imageNamed:@"mapSelectButton"] forState:UIControlStateSelected];
         [mapCheckBtn setContentMode:UIViewContentModeScaleAspectFit];
         
         UIButton *mapNameBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -145,7 +160,6 @@
             [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
         
         } else {
-        
             [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 36, 0, 0)];
         }
         
@@ -156,6 +170,11 @@
         mapNameBtn.frame = CGRectMake(30, 0, btnView.frame.size.width - 40, 29);
         
         offsetY += 44;
+        
+        // 수정모드일 때, 등록되어있던 맵 정보 세팅 (map pk값으로 구별)
+        if (self.isEditMode && (mapArr[i].pk == self.pinData.pin_map.pk)) {
+            [self selectedMapCheckBtn:mapCheckBtn];
+        }
     }
     
     // constraint의 property를 정의해서 맵이 늘어날수록 constraint가 대응하도록 한다
@@ -165,16 +184,9 @@
 }
 
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    //NavigationBar 숨긴거 되살리기
-    [self.navigationController setNavigationBarHidden:NO];
 
-}
-
+// Back Btn Action
 - (IBAction)selectedPopViewBtn:(id)sender {
-    
     //Navigation없애고 커스텀 버튼으로 POP
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -186,89 +198,63 @@
     return YES;
 }
 
+- (void)textFieldEditingChanged:(UITextField *)sender {
+    
+    if ([sender.text isEqualToString:@""]) {
+        self.checkName = NO;
+    } else {
+        self.checkName = (BOOL)sender.text;
+    }
+    
+    [self checkMakeBtnState];
+}
+
 - (IBAction)textFieldResignTapGesture:(id)sender {
     
     [self.pinNameTextField resignFirstResponder];
 }
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    [super touchesBegan:touches withEvent:event];
-//    NSLog(@"touchesBegan");
-//    UITouch *touch = [[event allTouches] anyObject];
-//    if ([touch view] != self.pinNameTextField) {
-//        [self.pinNameTextField resignFirstResponder];
-//
-//    }
-//}
+
+
 
 - (IBAction)selecedCategoryBtn:(UIButton *)sender {
     NSLog(@"%ld", sender.tag);
     
-    sender.selected = YES;
-    self.categoryLastSelectedBtn.selected = NO;
-    self.categoryLastSelectedBtn = sender;
-    
     // Radio Button
-    if (sender.tag != self.categoryLastSelectedBtn.tag) {
+    if (sender == self.categoryLastSelectedBtn) {
+        self.categoryLastSelectedBtn.selected = !self.categoryLastSelectedBtn.selected;
         
+    } else {
         self.categoryLastSelectedBtn.selected = NO;
-        
         self.categoryLastSelectedBtn = sender;
         sender.selected = YES;
     }
     
-    self.checkCategory = YES;
+    self.checkCategory = self.categoryLastSelectedBtn.selected ? YES : NO;
     [self checkMakeBtnState];
 }
 
 
 - (void)selectedMapCheckBtn:(UIButton *)sender {
+    NSLog(@"selectedMapCheckBtn %ld", sender.tag);
 
     if (self.mapCheckBtnArr[sender.tag] == self.mapLastSelectedBtn) {
         self.mapLastSelectedBtn.selected = !self.mapLastSelectedBtn.selected;
+        
     } else {
-        // 누르면 해당 누른버튼 yes
-        self.mapCheckBtnArr[sender.tag].selected = YES;
         // 라스트버튼값은 초기화
         self.mapLastSelectedBtn.selected = NO;
         // 해당 누른버튼을 라스트버튼으로
         self.mapLastSelectedBtn = self.mapCheckBtnArr[sender.tag];
+        // 누르면 해당 누른버튼 yes
+        self.mapCheckBtnArr[sender.tag].selected = YES;
     }
     
-// 최소 한개이상의  맵체크했을 때 만들기 활성화. 삼항연산자 참이면 앞에꺼
+    // 한개의 맵 체크했을 때 만들기 활성화. 삼항연산자 참이면 앞에꺼
     self.checkMap = self.mapCheckBtnArr[sender.tag].selected ? YES : NO;
-// 같은 조건식.
-//    if (self.mapCheckBtnArr[sender.tag].selected) {
-//        // YES
-//        self.checkMap = YES;
-//    } else {
-//        // NO
-//        self.checkMap = NO;
-//    }
 
     [self checkMakeBtnState];
     
-    
-//    // 토글버튼. 체크된건 안되게, 안된건 되게
-//    self.mapCheckBtnArr[sender.tag].selected = !self.mapCheckBtnArr[sender.tag].selected;
-//    self.checkMap = NO;
-//
-//
-//    if (sender.tag != self.mapCheckBtnArr[sender.tag]) {
-//        self.mapLastSelectedBtn.selected = NO;
-//        self.mapLastSelectedBtn = sender;
-//        sender.selected = YES;
-//    }
-//    
-//
-//    for (UIButton *mapBtn in self.mapCheckBtnArr) {
-//        
-//        if (mapBtn.selected == YES) {
-//            self.checkMap = YES;
-//            break;
-//        }
-//    }
-//    [self checkMakeBtnState];
 }
 
 
@@ -284,38 +270,55 @@
     }
 }
 
+
+// Make Btn Action
 - (IBAction)selectedMakeBtn {
     
-    NSString *mapStr = [[NSString alloc] init];
-    // string형태로 맵체크 정보를 저장. ex. 010112
-    for (NSInteger i=0 ; i < self.mapCheckBtnArr.count ; i++) {
-        if (self.mapCheckBtnArr[i].selected == YES) {
-            mapStr = [NSString stringWithFormat:@"%@ %ld", mapStr, i];
-        }
+    if (!self.isEditMode) {     // 만들기
+        NSLog(@"새 핀 만들어!");
+        
+        self.pinData = [MomoPinDataSet makePinWithName:self.pinNameTextField.text
+                                          withPinLabel:self.categoryLastSelectedBtn.tag
+                                               withMap:self.mapLastSelectedBtn.tag];
+        
+    } else {    // 수정하기
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm transactionWithBlock:^{
+            self.pinData.pin_name = self.pinNameTextField.text;
+            self.pinData.pin_label = self.categoryLastSelectedBtn.tag;
+
+            
+            // 선택한 맵에 핀 새로 등록
+            [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
+
+            // 기존 맵에 핀 삭제
+            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
+            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
+            
+            // 핀 속에 지도 정보 변경
+            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
+            
+        }];
     }
     
-    [self makePinWithName:self.pinNameTextField.text
-             withCategory:self.categoryLastSelectedBtn.tag
-          withSelectedMap:mapStr];
+    UIStoryboard *pinStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
+    PinViewController *pinVC = [pinStoryBoard instantiateInitialViewController];
+    [pinVC showSelectedPinAndSetMapData:self.pinData.pin_map withPinIndex:[self.pinData.pin_map.map_pin_list indexOfObject:self.pinData]];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:pinVC animated:YES];
 }
 
 
-// 아마 데이터 센터에 추가 될 메서드 (일단 예시로 여기다 만들어놓음)
-- (void)makePinWithName:(NSString *)name
-           withCategory:(NSInteger)category
-        withSelectedMap:(NSString *)mapStr {
-    // 알아서 안에서 데이터 처리~~~
-    
-    NSLog(@"name : %@", name);
-    NSLog(@"category : %ld", category);
-    NSLog(@"mapStr : %@", mapStr);
-}
-
+// Delete Btn Action
 - (void)selectedDeletePinBtn:(id)sender {
-    
     NSLog(@"핀 지워");
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm deleteObject:self.pinData];
+    }];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

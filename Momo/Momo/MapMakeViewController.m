@@ -53,7 +53,7 @@
     
     [self.mapNameTextField addTarget:self action:@selector(mapNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
-    
+    // EditMode
     if (self.isEditMode) {
         [self.view layoutIfNeeded];     // viewDidLoad에서 View Layout 맞추기 (삭제버튼 위치)
         
@@ -91,6 +91,7 @@
     
 }
 
+// Back Btn Action
 - (IBAction)selectedPopViewBtn:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -145,9 +146,8 @@
 
 - (IBAction)selectedMakeBtn:(id)sender {
     
-    
     if (!self.isEditMode) {     // 만들기
-        NSLog(@"새맵 만들어!");
+        NSLog(@"새 맵 만들어!");
         
         self.mapData = [MomoMapDataSet makeMapWithName:self.mapNameTextField.text
                                     withMapDescription:self.mapContentTextField.text
@@ -177,14 +177,6 @@
     
 }
 
-// 아마 데이터 센터에 추가 될 메서드 (일단 예시로 여기다 만들어놓음)
-- (void)makeMapWithName:(NSString *)name
-           withMapContent:(NSString *)content
-            withPrivate:(BOOL)private {
-    // 알아서 안에서 데이터 처리~~~
-    
-    
-}
 
 - (void)selectedDeleteMapBtn:(id)sender {
     NSLog(@"맵 지워");

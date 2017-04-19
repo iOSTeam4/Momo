@@ -54,6 +54,15 @@
     [self initialSetting];
     [self initialSettingGoogleMapView];
     
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
+    NSLog(@"MapViewController : viewWillAppear");
+    
+    // 다른뷰 갔다가 와도 다시 Refresh될 수 있게 viewWillAppear에서 호출
     if (self.showSelectedMap) {
         // 선택 지도 보기 세팅
         [self mapInfoViewSetting];
@@ -63,15 +72,8 @@
         self.mapData = [[MomoMapDataSet alloc] init];
         [self.mapData.map_pin_list addObjects:[MomoPinDataSet allObjects]];
     }
-    [self markPinMarkers];      // 마커찍기
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
-//    NSLog(@"MapViewController : viewWillAppear");
-
+    
+    [self markPinMarkersWithAnimation:NO];      // 마커찍기
 }
 
 - (void)viewDidLayoutSubviews {
@@ -193,14 +195,18 @@
 
 #pragma mark - Custom Methods
 
-- (void)markPinMarkers {
+- (void)markPinMarkersWithAnimation:(BOOL)withAnimation {
+
+    [self.mapView clear];
+    
     // 등록된 핀
     for (NSInteger i=0 ; i < self.mapData.map_pin_list.count ; i++) {
         GMSMarker *marker = [[GMSMarker alloc] init];
         
         marker.position = CLLocationCoordinate2DMake(self.mapData.map_pin_list[i].pin_place.place_lat, self.mapData.map_pin_list[i].pin_place.place_lng);
-        marker.appearAnimation = kGMSMarkerAnimationPop;
-        
+        if (withAnimation) {
+            marker.appearAnimation = kGMSMarkerAnimationPop;
+        }
         PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:self.currentZoomCase];
         marker.iconView = pinMarkerView;
         marker.map = self.mapView;
@@ -233,8 +239,7 @@
     
     if (self.currentZoomCase != zoomCase) {
         self.currentZoomCase = zoomCase;
-        [mapView clear];
-        [self markPinMarkers];      // 마커찍기
+        [self markPinMarkersWithAnimation:YES];      // 마커찍기
     }
 }
 

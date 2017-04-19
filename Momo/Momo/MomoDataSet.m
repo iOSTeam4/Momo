@@ -30,6 +30,34 @@
 // Pin Data Set -----------------------------//
 @implementation MomoPinDataSet
 
+// 핀 생성 및 등록
++ (MomoPinDataSet *)makePinWithName:(NSString *)pinName
+                       withPinLabel:(NSInteger)pinLabel
+                            withMap:(NSInteger)mapIndex {
+    
+    MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
+    
+    pinData.pin_name = pinName;
+    pinData.pin_label = pinLabel;
+    pinData.pin_map = [DataCenter myMapList][mapIndex];
+    
+    MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
+    placeData.place_lat = 37.515692;
+    placeData.place_lng = 127.021302;
+    
+    pinData.pin_place = placeData;
+    
+    NSLog(@"name : %@, label : %ld, mapIndex : %ld", pinName, pinLabel, mapIndex);
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [[DataCenter myMapList][mapIndex].map_pin_list addObject:pinData];
+    }];
+    
+    return pinData;
+}
+
+
 - (UIColor *)labelColor {
     switch (self.pin_label) {
         case 0:
