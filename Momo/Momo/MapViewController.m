@@ -129,7 +129,7 @@
     
     // 수정하기 (팔로워/팔로잉) 버튼
     [self.mapInfoViewBtn.layer setCornerRadius:5];
-    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
+    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_cafe0ColorColor].CGColor];
     [self.mapInfoViewBtn.layer setBorderWidth:1];
     
     // 선택지도보기 뷰 띄우기

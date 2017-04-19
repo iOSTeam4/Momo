@@ -32,7 +32,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wx6-8B-Z3a">
                                 <rect key="frame" x="46.5" y="15.5" width="333.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.00059560901718214154" green="0.70855957269668579" blue="0.99971479177474976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6TZ-pC-QxF">
@@ -76,11 +76,15 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="pika pika map">
-                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tng-kr-UYJ">
-                                <rect key="frame" x="10" y="47" width="245" height="268.5"/>
+                                <rect key="frame" x="10" y="47" width="245" height="245"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QaG-Ge-1bw">
+                                <rect key="frame" x="10" y="302" width="375" height="13.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1x-P1-cON">
@@ -102,7 +106,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="수정하기">
-                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="mapEditBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UiW-6t-Kd9"/>
@@ -112,10 +116,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="1vf-ai-PVM"/>
+                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="6wz-iZ-MBa"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="centerY" secondItem="gc4-8R-2oX" secondAttribute="centerY" id="8pZ-6L-xQ4"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerY" secondItem="mOC-oZ-7xj" secondAttribute="centerY" id="DKR-sU-Inz"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="height" secondItem="mOC-oZ-7xj" secondAttribute="height" id="E1R-fi-Klj"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="top" secondItem="6TZ-pC-QxF" secondAttribute="bottom" constant="10" id="Efn-uF-tdC"/>
                             <constraint firstAttribute="trailing" secondItem="mOC-oZ-7xj" secondAttribute="trailing" constant="5" id="Fvh-3q-4Si"/>
-                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="bottom" secondItem="mOC-oZ-7xj" secondAttribute="bottom" id="GAM-uw-wkf"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="mOC-oZ-7xj" secondAttribute="leading" constant="1" id="Ioj-Rt-ncn"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="Ktk-r4-CDE"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="trailing" constant="5" id="Nzn-QZ-igj"/>
@@ -126,11 +132,13 @@
                             <constraint firstItem="u1x-P1-cON" firstAttribute="top" secondItem="mOC-oZ-7xj" secondAttribute="bottom" constant="8" id="T5M-AA-lAS"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="leading" secondItem="u1x-P1-cON" secondAttribute="trailing" constant="3" id="YYF-Fs-aCN"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="a37-4h-SS5"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="width" secondItem="mOC-oZ-7xj" secondAttribute="width" id="c5Q-N0-OTr"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerX" secondItem="mOC-oZ-7xj" secondAttribute="centerX" id="ckj-ia-tfd"/>
                             <constraint firstItem="Tng-kr-UYJ" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="clC-HY-2H6"/>
+                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="cnQ-oY-6i0"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
                             <constraint firstItem="Tng-kr-UYJ" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="ff7-7f-LwN"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
-                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="top" secondItem="xRf-A5-3id" secondAttribute="top" id="j5d-uW-tap"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="15" id="pcJ-pd-dTD"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" id="vA8-zq-quv"/>

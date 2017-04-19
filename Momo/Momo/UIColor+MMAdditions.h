@@ -9,6 +9,7 @@
 
 @interface UIColor (MMAdditions)
 
++ (UIColor *)mm_defaultBlackColor;
 + (UIColor *)mm_brightSkyBlueColor;
 + (UIColor *)mm_cafe0ColorColor;
 + (UIColor *)mm_orangeYellowColor;

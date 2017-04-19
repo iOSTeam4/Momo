@@ -9,10 +9,13 @@
 
 @implementation UIColor (MMAdditions)
 
++ (UIColor *)mm_defaultBlackColor {
+    return [UIColor colorWithRed:60.0 / 255.0f green:60.0f / 255.0f blue:60.0f / 255.0f alpha:1.0f];
+}
+
 + (UIColor *)mm_brightSkyBlueColor {
 	return [UIColor colorWithRed:0.0 green:181.0f / 255.0f blue:255.0f / 255.0f alpha:1.0f];
 }
-
 
 + (UIColor *)mm_orangeYellowColor {
 	return [UIColor colorWithRed:252.0f / 255.0f green:160.0f / 255.0f blue:0.0 alpha:1.0f];
@@ -24,7 +27,8 @@
 }
 
 + (UIColor *)mm_warmGreyColor {
-	return [UIColor colorWithWhite:136.0f / 255.0f alpha:1.0f];
+//	return [UIColor colorWithWhite:136.0f / 255.0f alpha:1.0f];
+    return [UIColor colorWithWhite:178.0f / 255.0f alpha:1.0f];
 }
 
 + (UIColor *)mm_paleGreyColor {

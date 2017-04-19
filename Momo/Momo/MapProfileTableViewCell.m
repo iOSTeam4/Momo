@@ -35,7 +35,7 @@
     
     // 수정하기 버튼
     [self.mapEditBtn.layer setCornerRadius:5];
-    [self.mapEditBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
+    [self.mapEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
     [self.mapEditBtn.layer setBorderWidth:1];
     
     // 전체 Cell Frame 설정

@@ -20,7 +20,7 @@
     // App 전체 tint 컬러 적용
     [self.window setTintColor:[UIColor mm_brightSkyBlueColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];        // NaviBar Background Tint Color
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor mm_brightSkyBlueColor]}];  // NaviBar Title Tint Color
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor mm_defaultBlackColor]}];  // NaviBar Title Tint Color
 
     
     // Google Analytics

@@ -30,7 +30,7 @@
 
     // 수정하기 버튼
     [self.userEditBtn.layer setCornerRadius:5];
-    [self.userEditBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
+    [self.userEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
     [self.userEditBtn.layer setBorderWidth:1];
     
 }

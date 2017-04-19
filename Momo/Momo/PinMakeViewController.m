@@ -66,6 +66,28 @@
     // 지도 데이터 설정
     [self makeMyMapCheckBtnViewWithArr:[DataCenter myMapList]];
     
+    // category button shadow
+    self.categoryCafeBtn.layer.shadowOffset = CGSizeMake(0, 7);
+    self.categoryCafeBtn.layer.shadowRadius = 8;
+    self.categoryCafeBtn.layer.shadowOpacity = 0.2;
+    self.categoryFoodBtn.layer.shadowOffset = CGSizeMake(0, 7);
+    self.categoryFoodBtn.layer.shadowRadius = 8;
+    self.categoryFoodBtn.layer.shadowOpacity = 0.2;
+    self.categoryShopBtn.layer.shadowOffset = CGSizeMake(0, 7);
+    self.categoryShopBtn.layer.shadowRadius = 8;
+    self.categoryShopBtn.layer.shadowOpacity = 0.2;
+    self.categoryPlaceBtn.layer.shadowOffset = CGSizeMake(0, 7);
+    self.categoryPlaceBtn.layer.shadowRadius = 8;
+    self.categoryPlaceBtn.layer.shadowOpacity = 0.2;
+    self.categoryEtcBtn.layer.shadowOffset = CGSizeMake(0, 7);
+    self.categoryEtcBtn.layer.shadowRadius = 8;
+    self.categoryEtcBtn.layer.shadowOpacity = 0.2;
+   
+    
+    
+    
+    
+    
     // EditMode
     if (self.isEditMode) {
         NSLog(@"PinMakeViewController isEditMode");
@@ -226,8 +248,15 @@
         
     } else {
         self.categoryLastSelectedBtn.selected = NO;
+        self.categoryLastSelectedBtn.layer.shadowOpacity = 0.2;
         self.categoryLastSelectedBtn = sender;
         sender.selected = YES;
+    }
+    
+    if (self.categoryLastSelectedBtn.selected) {
+        self.categoryLastSelectedBtn.layer.shadowOpacity = 0;
+    } else {
+        self.categoryLastSelectedBtn.layer.shadowOpacity = 0.2;
     }
     
     self.checkCategory = self.categoryLastSelectedBtn.selected ? YES : NO;
