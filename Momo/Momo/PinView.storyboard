@@ -134,7 +134,7 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="DF6-aI-0Md" firstAttribute="leading" secondItem="T9J-oI-jTH" secondAttribute="leading" constant="26" id="155-Wp-yVi"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="leading" secondItem="DF6-aI-0Md" secondAttribute="leading" id="2h5-ID-ctd"/>
@@ -152,7 +152,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rv0-r5-Tx6">
-                                                <rect key="frame" x="26" y="304" width="349" height="100"/>
+                                                <rect key="frame" x="0.0" y="304" width="375" height="100"/>
                                                 <color key="backgroundColor" red="0.33502128720283508" green="0.7186439037322998" blue="0.97653758525848389" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="J1w-Tp-W1a"/>
@@ -161,11 +161,11 @@
                                                     <size key="itemSize" width="100" height="100"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="sectionInset" minX="26" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="cell" id="Her-29-Kl2" customClass="PinContentsCollectionViewCell">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                        <rect key="frame" x="26" y="0.0" width="100" height="100"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -225,8 +225,8 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             <constraint firstItem="aFu-xm-7Wb" firstAttribute="width" secondItem="dFw-m2-4Jg" secondAttribute="width" id="k9l-SN-Dnt"/>
                                             <constraint firstItem="aFu-xm-7Wb" firstAttribute="centerX" secondItem="dFw-m2-4Jg" secondAttribute="centerX" id="pPN-gw-iVz"/>
                                             <constraint firstItem="MZf-bP-nyG" firstAttribute="leading" secondItem="MGT-Qm-MjQ" secondAttribute="leading" id="paB-U2-PXO"/>
-                                            <constraint firstItem="Rv0-r5-Tx6" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" constant="-26" id="vJY-le-5ia"/>
-                                            <constraint firstItem="Rv0-r5-Tx6" firstAttribute="leading" secondItem="CZA-PH-Hyb" secondAttribute="leading" constant="26" id="yp0-jz-1Ly"/>
+                                            <constraint firstItem="Rv0-r5-Tx6" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" id="vJY-le-5ia"/>
+                                            <constraint firstItem="Rv0-r5-Tx6" firstAttribute="leading" secondItem="CZA-PH-Hyb" secondAttribute="leading" id="yp0-jz-1Ly"/>
                                             <constraint firstItem="T9J-oI-jTH" firstAttribute="top" secondItem="dFw-m2-4Jg" secondAttribute="bottom" constant="30" id="z4C-b7-ity"/>
                                         </constraints>
                                     </view>
@@ -594,7 +594,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KI-uc-InF">
-                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
+                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="5KI-uc-InF" secondAttribute="height" id="8oh-fm-e4S"/>
                                                         </constraints>

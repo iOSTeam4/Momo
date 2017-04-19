@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mapCollectionViewCell" id="gTV-IL-0wX" customClass="MapCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="438" height="404"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="438" height="404"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="4tf-V2-sSP">
+                        <rect key="frame" x="5" y="10" width="428" height="384"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pika.png" translatesAutoresizingMaskIntoConstraints="NO" id="8BW-5s-Adc">
+                                <rect key="frame" x="10" y="10.5" width="34" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8BW-5s-Adc" secondAttribute="height" multiplier="1:1" id="zga-2x-Z5X"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIP-VL-HOu">
+                                <rect key="frame" x="49" y="17" width="369" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-jN-9EU">
+                                <rect key="frame" x="10" y="49.5" width="408" height="270.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiJ-oS-6JP" customClass="GMSMapView">
+                                        <rect key="frame" x="0.0" y="0.0" width="270.5" height="270.5"/>
+                                        <color key="backgroundColor" red="0.55289608239999999" green="0.54851245879999999" blue="0.57745069270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kiJ-oS-6JP" secondAttribute="height" multiplier="1:1" id="3Lm-SM-z2e"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BhL-9z-Ayg">
+                                        <rect key="frame" x="270.5" y="0.0" width="137.5" height="270.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUG-aD-kPr">
+                                                <rect key="frame" x="5" y="0.0" width="132.5" height="133"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="eUG-aD-kPr" secondAttribute="height" multiplier="1:1" id="N5s-MM-QNl"/>
+                                                </constraints>
+                                                <state key="normal" image="pika2.png"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLE-Rl-FQJ">
+                                                <rect key="frame" x="4.5" y="138" width="133" height="132.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="TLE-Rl-FQJ" secondAttribute="height" multiplier="1:1" id="Ox0-kb-d42"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="Great Sand Dunes"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kiJ-oS-6JP" firstAttribute="width" secondItem="Cpw-jN-9EU" secondAttribute="width" multiplier="2/3" constant="-1.6699999999999999" id="Uh0-fO-5fp"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWg-7T-015">
+                                <rect key="frame" x="10" y="330" width="413" height="13.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="pf4-iH-bD4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="pika pika map">
+                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0G-ai-kU6">
+                                <rect key="frame" x="10" y="49.5" width="270.5" height="294"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Si-6w-6Wg">
+                                <rect key="frame" x="11" y="351.5" width="9.5" height="17.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="핀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdN-Xl-Qcc">
+                                <rect key="frame" x="23.5" y="352" width="12.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UL-IB-BHT">
+                                <rect key="frame" x="306.5" y="344.5" width="106.5" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7UL-IB-BHT" secondAttribute="height" multiplier="10:3" id="SmP-yJ-YP8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="수정하기">
+                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NdN-Xl-Qcc" firstAttribute="centerY" secondItem="9Si-6w-6Wg" secondAttribute="centerY" id="0zX-cL-Hcs"/>
+                            <constraint firstItem="7UL-IB-BHT" firstAttribute="width" secondItem="4tf-V2-sSP" secondAttribute="width" multiplier="0.25" id="7qe-5c-Aah"/>
+                            <constraint firstItem="9Si-6w-6Wg" firstAttribute="leading" secondItem="yWg-7T-015" secondAttribute="leading" constant="1" id="CXe-Z5-iJK"/>
+                            <constraint firstAttribute="trailing" secondItem="CIP-VL-HOu" secondAttribute="trailing" constant="10" id="JfS-4r-fAV"/>
+                            <constraint firstItem="7UL-IB-BHT" firstAttribute="centerY" secondItem="9Si-6w-6Wg" secondAttribute="centerY" id="OOF-jr-h0i"/>
+                            <constraint firstAttribute="trailing" secondItem="7UL-IB-BHT" secondAttribute="trailing" constant="15" id="Piv-Pd-f8H"/>
+                            <constraint firstItem="yWg-7T-015" firstAttribute="top" secondItem="Cpw-jN-9EU" secondAttribute="bottom" constant="10" id="QkQ-pY-DQv"/>
+                            <constraint firstItem="Cpw-jN-9EU" firstAttribute="trailing" secondItem="CIP-VL-HOu" secondAttribute="trailing" id="SV0-zj-480"/>
+                            <constraint firstItem="CIP-VL-HOu" firstAttribute="centerY" secondItem="8BW-5s-Adc" secondAttribute="centerY" id="Ugy-wP-UPY"/>
+                            <constraint firstItem="8BW-5s-Adc" firstAttribute="width" secondItem="4tf-V2-sSP" secondAttribute="width" multiplier="0.08" id="Vb9-Xg-Tt1"/>
+                            <constraint firstItem="yWg-7T-015" firstAttribute="leading" secondItem="8BW-5s-Adc" secondAttribute="leading" id="X3i-zG-gq7"/>
+                            <constraint firstItem="8BW-5s-Adc" firstAttribute="top" secondItem="4tf-V2-sSP" secondAttribute="top" constant="10" id="Ygg-4p-SNg"/>
+                            <constraint firstItem="9Si-6w-6Wg" firstAttribute="top" secondItem="yWg-7T-015" secondAttribute="bottom" constant="8" id="YvU-hE-wAz"/>
+                            <constraint firstItem="NdN-Xl-Qcc" firstAttribute="leading" secondItem="9Si-6w-6Wg" secondAttribute="trailing" constant="3" id="e6w-Xt-7kx"/>
+                            <constraint firstItem="Cpw-jN-9EU" firstAttribute="leading" secondItem="8BW-5s-Adc" secondAttribute="leading" id="gI1-Ka-Rtd"/>
+                            <constraint firstAttribute="bottom" secondItem="9Si-6w-6Wg" secondAttribute="bottom" constant="15" id="oXA-LQ-tKN"/>
+                            <constraint firstItem="i0G-ai-kU6" firstAttribute="centerX" secondItem="kiJ-oS-6JP" secondAttribute="centerX" id="ppB-ae-pJo"/>
+                            <constraint firstItem="i0G-ai-kU6" firstAttribute="bottom" secondItem="yWg-7T-015" secondAttribute="bottom" id="q5p-Fg-E69"/>
+                            <constraint firstItem="CIP-VL-HOu" firstAttribute="leading" secondItem="8BW-5s-Adc" secondAttribute="trailing" constant="5" id="rnd-nW-txW"/>
+                            <constraint firstItem="8BW-5s-Adc" firstAttribute="leading" secondItem="4tf-V2-sSP" secondAttribute="leading" constant="10" id="tEO-Hd-vhk"/>
+                            <constraint firstItem="i0G-ai-kU6" firstAttribute="top" secondItem="kiJ-oS-6JP" secondAttribute="top" id="tKt-Br-2Ub"/>
+                            <constraint firstAttribute="trailing" secondItem="yWg-7T-015" secondAttribute="trailing" constant="5" id="wJi-mn-kpW"/>
+                            <constraint firstItem="i0G-ai-kU6" firstAttribute="width" secondItem="kiJ-oS-6JP" secondAttribute="width" id="wSZ-T9-JW4"/>
+                            <constraint firstItem="Cpw-jN-9EU" firstAttribute="top" secondItem="8BW-5s-Adc" secondAttribute="bottom" constant="5" id="wp0-Xt-gYv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="4tf-V2-sSP" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-20" id="G1B-dr-12L"/>
+                <constraint firstItem="4tf-V2-sSP" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" constant="-10" id="iJl-la-47I"/>
+                <constraint firstItem="4tf-V2-sSP" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="od2-Zo-hdr"/>
+                <constraint firstItem="4tf-V2-sSP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="xit-B6-4HW"/>
+            </constraints>
+            <size key="customSize" width="438" height="404"/>
+            <point key="canvasLocation" x="228" y="231"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Great Sand Dunes" width="375" height="250"/>
+        <image name="pika.png" width="982" height="596"/>
+        <image name="pika2.png" width="718" height="478"/>
+    </resources>
+</document>

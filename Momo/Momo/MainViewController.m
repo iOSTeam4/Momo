@@ -8,11 +8,15 @@
 
 #import "MainViewController.h"
 #import "MainTabBarController.h"
+#import "MainMapTableViewCell.h"
+#import "MainPinCollectionCell.h"
+#import "MainUserCollectionCell.h"
 
 @interface MainViewController ()
+<UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic) NSArray *mainMapArray;
+@property (nonatomic) NSArray *mainUserArray;
 
 @end
 
@@ -21,12 +25,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self.navigationItem setTitle:@"Main View"];
     
-    _imageView.image = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
-    [self.view addSubview:_imageView];
-    _imageView.frame = CGRectMake(0, 0, 30, 30);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+//    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    [self.view addSubview:tableView];
+    
+    // Nib Resister
+    UINib *mapCellNib = [UINib nibWithNibName:@"MainMapTableViewCell" bundle:nil];
+    [tableView registerNib:mapCellNib forCellReuseIdentifier:@"mapTableViewCell"];
+    
+    tableView.delegate = self;
+    tableView.dataSource = self;
     
 }
 
@@ -35,51 +46,64 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MainViewController"];
-    
-    NSLog(@"MainViewController : viewWillAppear");
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.imageView setImage:[[DataCenter sharedInstance].momoUserData getUserProfileImage]];
 }
 
-- (IBAction)logoutTempBtnAction:(id)sender {
+
+// ---------------------------------------------------------------- //
+#pragma mark - TableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    [self.indicator startAnimating];
+    return 3;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
-        [self.indicator stopAnimating];
-        
-        if (isSuccess) {
-            NSLog(@"log out success : %@", result);
-            
-            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-            UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
-            
-            [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-            
-        } else {
-            NSLog(@"error : %@", result);
-            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                     message:result
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-            [alertController addAction:okButton];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-    }];
+    return 200;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MainMapTableViewCell *mapTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"mapTableViewCell" forIndexPath:indexPath];
+    
+    return mapTableViewCell;
 }
 
 
 
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    
+//    switch (section) {
+//        case 0:
+//        {
+//            MainMapCollectionCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"MainMapCollectionCell"];
+//            mapCell.titleLabel.text = @"인기 지도";
+//            return mapCell;
+//            break;
+//        }
+//        case 1:
+//        {
+//            MainMapCollectionCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"MainMapCollectionCell"];
+//            mapCell.titleLabel.text = @"새로운 핀";
+//            return mapCell;
+//            break;
+//        }
+//        default:
+//        {
+//            MainMapCollectionCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"MainMapCollectionCell"];
+//            mapCell.titleLabel.text = @"모모 스타";
+//            return mapCell;
+//            break;
+//        }
+//    }
+//}
 
 @end
 

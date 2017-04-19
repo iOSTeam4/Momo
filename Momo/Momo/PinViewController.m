@@ -58,8 +58,12 @@
     self.flowLayout.itemSize = CGSizeMake(100, 100);
     // collectionView 임시 contents
     self.dataTempArr = @[@"addPost", @"textPhoto", @"Zion", @"Arches", @"Kenai Fjords", @"Mesa Verde", @"North Cascades", @"Great Sand Dunes"];
-    
-    
+    //collectionView shadow
+    self.collectionView.layer.shadowOffset = CGSizeMake(-5, 15);
+    self.collectionView.layer.shadowRadius = 10;
+    self.collectionView.layer.shadowOpacity = 0.3;
+    self.collectionView.layer.masksToBounds = NO;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
     
     // Map 세팅
     [self mapPreViewSetting];
@@ -150,6 +154,9 @@
     
     if (indexPath.row == 0) {
         return CGSizeMake(66, 100); // 추가버튼
+        
+        
+        
     } else {
         return CGSizeMake(100, 100);
     }

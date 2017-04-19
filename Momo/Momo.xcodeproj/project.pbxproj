@@ -55,6 +55,12 @@
 		EF69E57B1EA498A400DE4C65 /* PhotoTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E57A1EA498A400DE4C65 /* PhotoTextCell.m */; };
 		EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E57D1EA498B400DE4C65 /* PhotoCell.m */; };
 		EF69E5811EA498C100DE4C65 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E5801EA498C100DE4C65 /* TextCell.m */; };
+		EFC299251EA72D96008805A2 /* MainUserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC299241EA72D96008805A2 /* MainUserCollectionCell.m */; };
+		EFC299281EA73647008805A2 /* MainPinCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC299271EA73647008805A2 /* MainPinCollectionCell.m */; };
+		EFC2992F1EA75642008805A2 /* MainMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2992D1EA75642008805A2 /* MainMapTableViewCell.m */; };
+		EFC299301EA75642008805A2 /* MainMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFC2992E1EA75642008805A2 /* MainMapTableViewCell.xib */; };
+		EFC299401EA758CF008805A2 /* MapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2993E1EA758CF008805A2 /* MapCollectionViewCell.m */; };
+		EFC299411EA758CF008805A2 /* MapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFC2993F1EA758CF008805A2 /* MapCollectionViewCell.xib */; };
 		EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD11B9B1E8E90EF00896952 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +151,16 @@
 		EF69E57D1EA498B400DE4C65 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		EF69E57F1EA498C100DE4C65 /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCell.h; sourceTree = "<group>"; };
 		EF69E5801EA498C100DE4C65 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
+		EFC299231EA72D96008805A2 /* MainUserCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUserCollectionCell.h; sourceTree = "<group>"; };
+		EFC299241EA72D96008805A2 /* MainUserCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUserCollectionCell.m; sourceTree = "<group>"; };
+		EFC299261EA73647008805A2 /* MainPinCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPinCollectionCell.h; sourceTree = "<group>"; };
+		EFC299271EA73647008805A2 /* MainPinCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPinCollectionCell.m; sourceTree = "<group>"; };
+		EFC2992C1EA75642008805A2 /* MainMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMapTableViewCell.h; sourceTree = "<group>"; };
+		EFC2992D1EA75642008805A2 /* MainMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMapTableViewCell.m; sourceTree = "<group>"; };
+		EFC2992E1EA75642008805A2 /* MainMapTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMapTableViewCell.xib; sourceTree = "<group>"; };
+		EFC2993D1EA758CF008805A2 /* MapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCollectionViewCell.h; sourceTree = "<group>"; };
+		EFC2993E1EA758CF008805A2 /* MapCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCollectionViewCell.m; sourceTree = "<group>"; };
+		EFC2993F1EA758CF008805A2 /* MapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapCollectionViewCell.xib; sourceTree = "<group>"; };
 		EFD11B9B1E8E90EF00896952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -398,6 +414,8 @@
 				3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */,
 				3F745F5C1E8916BC001B87F0 /* MainViewController.h */,
 				3F745F5D1E8916BC001B87F0 /* MainViewController.m */,
+				EFC299311EA75752008805A2 /* MainTableViewCell */,
+				EFC299291EA73A44008805A2 /* CollectionCell */,
 				3FD9A5561E88F35400B965A7 /* Main.storyboard */,
 			);
 			name = MainView;
@@ -435,6 +453,38 @@
 				EF69E5801EA498C100DE4C65 /* TextCell.m */,
 			);
 			name = PostCell;
+			sourceTree = "<group>";
+		};
+		EFC299291EA73A44008805A2 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				EFC299261EA73647008805A2 /* MainPinCollectionCell.h */,
+				EFC299271EA73647008805A2 /* MainPinCollectionCell.m */,
+				EFC299231EA72D96008805A2 /* MainUserCollectionCell.h */,
+				EFC299241EA72D96008805A2 /* MainUserCollectionCell.m */,
+			);
+			name = CollectionCell;
+			sourceTree = "<group>";
+		};
+		EFC299311EA75752008805A2 /* MainTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EFC2992C1EA75642008805A2 /* MainMapTableViewCell.h */,
+				EFC2992D1EA75642008805A2 /* MainMapTableViewCell.m */,
+				EFC2992E1EA75642008805A2 /* MainMapTableViewCell.xib */,
+				EFC299321EA75766008805A2 /* MapCollectionViewCell */,
+			);
+			name = MainTableViewCell;
+			sourceTree = "<group>";
+		};
+		EFC299321EA75766008805A2 /* MapCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EFC2993D1EA758CF008805A2 /* MapCollectionViewCell.h */,
+				EFC2993E1EA758CF008805A2 /* MapCollectionViewCell.m */,
+				EFC2993F1EA758CF008805A2 /* MapCollectionViewCell.xib */,
+			);
+			name = MapCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,6 +549,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFC299411EA758CF008805A2 /* MapCollectionViewCell.xib in Resources */,
 				3F395E5D1E963695009F082D /* pika.png in Resources */,
 				3F395E451E95F00C009F082D /* PinProfileTableViewCell.xib in Resources */,
 				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
@@ -513,6 +564,7 @@
 				3F395E361E94B325009F082D /* Make.storyboard in Resources */,
 				3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */,
 				3F395E5E1E963695009F082D /* pika2.png in Resources */,
+				EFC299301EA75642008805A2 /* MainMapTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +625,8 @@
 			files = (
 				EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */,
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
+				EFC299401EA758CF008805A2 /* MapCollectionViewCell.m in Sources */,
+				EFC299281EA73647008805A2 /* MainPinCollectionCell.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
@@ -589,7 +643,9 @@
 				3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */,
 				EF5A49CE1E9F51BD00A33858 /* PinPostViewController.m in Sources */,
 				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
+				EFC2992F1EA75642008805A2 /* MainMapTableViewCell.m in Sources */,
 				EF69E5811EA498C100DE4C65 /* TextCell.m in Sources */,
+				EFC299251EA72D96008805A2 /* MainUserCollectionCell.m in Sources */,
 				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
 				3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */,
