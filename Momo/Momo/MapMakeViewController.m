@@ -44,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //NavigationBar 숨기기
     [self.navigationController setNavigationBarHidden:YES];
     
     // Navi Pop Gesture 활성화

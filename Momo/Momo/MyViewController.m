@@ -345,6 +345,14 @@
 
 - (void)selectedPinEditBtnWithIndex:(NSInteger)index {
     NSLog(@"selectedPinEditBtnWithIndex, %ld", index);
+    
+    // 선택 핀 수정
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
+    PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
+    
+    [pinMakeVC setEditModeWithPinData:[MomoPinDataSet allObjects][index]];   // 수정 모드, 데이터 세팅
+    [self.navigationController pushViewController:pinMakeVC animated:YES];
+    
 }
 
 

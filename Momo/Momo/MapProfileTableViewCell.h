@@ -30,8 +30,6 @@
 
 
 
-
-
 // 델리게이트 프로토콜 ----------------------------//
 
 @protocol MapProfileTableViewCellDelegate <NSObject>

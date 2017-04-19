@@ -179,7 +179,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahz-GM-dId">
-                                                        <rect key="frame" x="137" y="0.5" width="65" height="64"/>
+                                                        <rect key="frame" x="137" y="0.0" width="65" height="64.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ahz-GM-dId" secondAttribute="height" id="Pnw-ZC-Xxo"/>
                                                         </constraints>
@@ -338,6 +338,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="categoryCafeBtn" destination="3rg-dd-ygY" id="Axf-qi-tXc"/>
+                        <outlet property="categoryEtcBtn" destination="MsG-nD-nQ5" id="q8C-UE-jku"/>
+                        <outlet property="categoryFoodBtn" destination="eO0-SJ-3B7" id="vyB-FO-HBY"/>
+                        <outlet property="categoryPlaceBtn" destination="L2e-p3-fxh" id="yrd-5C-86D"/>
+                        <outlet property="categoryShopBtn" destination="ahz-GM-dId" id="PyA-Z3-83B"/>
                         <outlet property="contentView" destination="XgX-eJ-HrK" id="mCb-Z7-SkV"/>
                         <outlet property="makeBtn1" destination="SEj-XY-4NS" id="BAf-vH-LGx"/>
                         <outlet property="makeBtn2" destination="6pN-Wg-EvK" id="kte-Jt-uZa"/>

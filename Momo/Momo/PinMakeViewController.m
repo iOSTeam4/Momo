@@ -10,13 +10,21 @@
 
 @interface PinMakeViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
+@property (nonatomic) BOOL isEditMode;
+@property (nonatomic) MomoPinDataSet *pinData;
+
 @property (weak, nonatomic) IBOutlet UILabel *viewTitleLabel;
 
-@property (nonatomic) BOOL isEditMode;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *mapCheckRefOriginY;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segmentedTopMargin;
 @property (weak, nonatomic) IBOutlet UITextField *pinNameTextField;
+
+@property (weak, nonatomic) IBOutlet UIButton *categoryCafeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *categoryFoodBtn;
+@property (weak, nonatomic) IBOutlet UIButton *categoryShopBtn;
+@property (weak, nonatomic) IBOutlet UIButton *categoryPlaceBtn;
+@property (weak, nonatomic) IBOutlet UIButton *categoryEtcBtn;
 
 @property (weak, nonatomic) UIButton *categoryLastSelectedBtn;
 @property (weak, nonatomic) UIButton *mapLastSelectedBtn;
@@ -34,6 +42,11 @@
 
 @implementation PinMakeViewController
 
+- (void)setEditModeWithPinData:(MomoPinDataSet *)pinData {
+    self.pinData = pinData;
+    self.isEditMode = YES;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,41 +58,43 @@
     // Navi Pop Gesture 활성화
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
 
-    
+    // pinNameTextField에 셀렉터 추가
     [self.pinNameTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
-    NSArray *myMap = @[@[@1, @"기억할만한 장소"],
-                       @[@0, @"목동 맛집"],
-                       @[@1, @"패스트캠퍼스 맛집"]];
+    // 지도 데이터 설정
+    [self makeMyMapCheckBtnViewWithArr:[DataCenter myMapList]];
     
-    [self makeMyMapCheckBtnViewWithArr:myMap];
-    // constraint의 property를 정의해서 맵이 늘어날수록 constraint가 대응하도록 한다
-    self.segmentedTopMargin.constant = 30 + 44 * (myMap.count - 1);
-    // 변동 constraint를 준 후 반드시 명령
-    [self.view layoutIfNeeded];
-    
-    ////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
-    self.isEditMode = YES;
-    
-    self.checkName = YES;
-    self.checkCategory = YES;
-    self.checkMap = YES;
-    [self checkMakeBtnState];
-    
-    self.pinNameTextField.text = @"패스트캠퍼스";
-    //////////////////////////////////////////////////////////////////
     
     if (self.isEditMode) {
+        [self.view layoutIfNeeded];     // viewDidLoad에서 View Layout 맞추기 (삭제버튼 위치)
+        
+        // 버튼 활성화 상태로 놓음
+        [self.makeBtn1 setEnabled:YES];
+        [self.makeBtn2 setEnabled:YES];
+        [self.makeBtn3 setEnabled:YES];
+        
+        // Edit 모드에 맞게 수정
+        self.viewTitleLabel.text = @"핀 수정하기";
         [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
-//        [self.view layoutIfNeeded];
-        //        float makeBtnCenterX = + (self.makeBtn3.frame.size.width/2)-25;
+
+
+        // 삭제 버튼 추가
         self.deleteBtn = [[UIButton alloc] init];
         [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
         [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.deleteBtn];
         [self.deleteBtn addTarget:self action:@selector(selectedDeletePinBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        // 기존 핀 정보 넣기
+        self.pinNameTextField.text = self.pinData.pin_name;     // 핀 이름
+        
+        UIButton *tempBtn = [[UIButton alloc] init];
+        tempBtn.tag = self.pinData.pin_label;
+        [self selecedCategoryBtn:tempBtn];      // 선택된 카테고리(라벨)
+        [self selecedCategoryBtn:tempBtn];      // 선택된 카테고리(라벨)
+        
     }
-
 }
 
 - (void)textFieldEditingChanged:(UITextField *)sender {
@@ -93,13 +108,13 @@
     [self checkMakeBtnState];
 }
 
-- (void)makeMyMapCheckBtnViewWithArr:(NSArray *)arr {
+- (void)makeMyMapCheckBtnViewWithArr:(RLMArray<MomoMapDataSet *> *)mapArr {
     
     self.mapCheckBtnArr = [[NSMutableArray alloc] init];
     
     CGFloat offsetY = self.mapCheckRefOriginY.frame.origin.y;
     
-    for (NSInteger i =0 ; i < arr.count ; i++) {
+    for (NSInteger i =0 ; i < mapArr.count ; i++) {
         UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(26, offsetY, self.view.frame.size.width-26, 29)];
         [self.contentView addSubview:btnView];
         
@@ -110,7 +125,7 @@
         
         UIButton *mapNameBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [mapNameBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [mapNameBtn setTitle:arr[i][1] forState:UIControlStateNormal];
+        [mapNameBtn setTitle:mapArr[i].map_name forState:UIControlStateNormal];
         [mapNameBtn setTitleColor:[UIColor colorWithRed:84/255.0 green:182/255.0 blue:249/255.0 alpha:1.0] forState:UIControlStateNormal];
         [mapNameBtn.titleLabel setFont:[UIFont systemFontOfSize:20]];
         
@@ -123,13 +138,14 @@
         [mapNameBtn addTarget:self action:@selector(selectedMapCheckBtn:) forControlEvents:UIControlEventTouchUpInside];
         
         // 자물쇠가 있을 경우
-        if ([arr[i][0] isEqual:@1]) {
+        if (mapArr[i].map_is_private) {
             [mapNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
             [mapNameBtn setContentMode:UIViewContentModeScaleAspectFit];
             [mapNameBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
             [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
+        
         } else {
-            
+        
             [mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 36, 0, 0)];
         }
         
@@ -141,6 +157,11 @@
         
         offsetY += 44;
     }
+    
+    // constraint의 property를 정의해서 맵이 늘어날수록 constraint가 대응하도록 한다
+    self.segmentedTopMargin.constant = 30 + 44 * (mapArr.count - 1);
+    // 변동 constraint를 준 후 반드시 명령
+    [self.view layoutIfNeeded];
 }
 
 

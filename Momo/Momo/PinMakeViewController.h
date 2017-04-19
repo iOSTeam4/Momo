@@ -10,4 +10,6 @@
 
 @interface PinMakeViewController : UIViewController
 
+- (void)setEditModeWithPinData:(MomoPinDataSet *)pinData;
+
 @end
