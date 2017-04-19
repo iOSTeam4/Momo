@@ -197,16 +197,6 @@
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-////    NSLog(@"heightForRowAtIndexPath");
-//    
-//    // Cell Height 해상도 별 제대로 조정 필요
-//    if (self.mapPinNum == 0) {
-//        return 320;
-//    } else {        // mapPinNum : 1
-//        return 250;
-//    }
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
@@ -214,13 +204,7 @@
     if (self.mapPinNum == 0) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
         mapCell.tag = indexPath.row;    // 태그 설정
-        
-//        // 델리게이터 설정되어있는 셀인지?
-//        if (!mapCell.delegate) {
-            mapCell.delegate = self;
-//        }
-        
-
+        mapCell.delegate = self;        // 델리게이트 설정
         
         // 데이터 세팅
         if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
@@ -245,11 +229,7 @@
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
         pinCell.tag = indexPath.row;    // 태그 설정
-
-        // 델리게이터 설정되어있는 셀인지?
-        if (!pinCell.delegate) {
-            pinCell.delegate = self;
-        }
+        pinCell.delegate = self;    // 델리게이트 설정
         
         // 데이터 세팅
         if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {

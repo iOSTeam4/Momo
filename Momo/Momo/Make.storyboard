@@ -179,7 +179,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahz-GM-dId">
-                                                        <rect key="frame" x="137" y="0.0" width="65" height="64.5"/>
+                                                        <rect key="frame" x="137" y="0.5" width="65" height="64"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ahz-GM-dId" secondAttribute="height" id="Pnw-ZC-Xxo"/>
                                                         </constraints>
@@ -225,8 +225,8 @@
                                                     <constraint firstAttribute="height" constant="29" id="Lts-D6-luY"/>
                                                     <constraint firstAttribute="width" constant="29" id="ucm-9Q-Euj"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="mapCheckBtn"/>
-                                                <state key="selected" image="mapCheckBtnS"/>
+                                                <state key="normal" image="mapCheckBtn"/>
+                                                <state key="selected" image="mapSelectButton"/>
                                             </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기억할만한 장소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5o-AC-EWd">
                                                 <rect key="frame" x="85" y="447.5" width="130" height="20"/>
@@ -608,7 +608,7 @@
         <image name="makeCheckBtn" width="50" height="48"/>
         <image name="makeCheckBtnS" width="52" height="48"/>
         <image name="mapCheckBtn" width="31" height="31"/>
-        <image name="mapCheckBtnS" width="31" height="31"/>
+        <image name="mapSelectButton" width="31" height="31"/>
         <image name="tapMapWhite" width="30" height="25"/>
         <image name="tapPinWhite" width="16" height="27"/>
     </resources>

@@ -8,6 +8,12 @@
 
 #import <Realm/Realm.h>
 
+@class MomoPlaceDataSet;
+@class MomoPostDataSet;
+@class MomoPinDataSet;
+@class MomoMapDataSet;
+@class MomoUserDataSet;
+
 RLM_ARRAY_TYPE(MomoPlaceDataSet)
 RLM_ARRAY_TYPE(MomoPostDataSet)
 RLM_ARRAY_TYPE(MomoPinDataSet)
@@ -59,11 +65,16 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property NSString *pin_name;
 @property NSString *pin_description;
 @property NSInteger pin_label;
-@property NSString *pin_map;
+@property MomoMapDataSet *pin_map;
 
 @property NSString *pin_created_date;
 
 @property RLMArray<MomoPostDataSet *><MomoPostDataSet> *pin_post_list;
+
+// 핀 생성 및 등록
++ (MomoPinDataSet *)makePinWithName:(NSString *)pinName
+                       withPinLabel:(NSInteger)pinLabel
+                            withMap:(NSInteger)mapIndex;
 
 // 핀 라벨 아이콘, 색 반환 메서드
 - (UIImage *)labelIcon;

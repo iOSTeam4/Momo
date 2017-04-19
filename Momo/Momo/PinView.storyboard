@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -67,6 +67,9 @@
                                                             <constraint firstAttribute="height" constant="40" id="gPw-e2-jBx"/>
                                                         </constraints>
                                                         <state key="normal" title="Button" image="setup"/>
+                                                        <connections>
+                                                            <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="7Zm-pv-FAG"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -258,7 +261,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <outlet property="pinAddress" destination="jOt-cV-oy5" id="VRF-uH-Otl"/>
                         <outlet property="pinMainText" destination="MZf-bP-nyG" id="XQQ-Mf-CL6"/>
                         <outlet property="pinName" destination="DF6-aI-0Md" id="umW-yr-OpC"/>
-                        <outlet property="setup" destination="uHI-a5-G5x" id="rQy-0z-lBO"/>
                         <outlet property="userNameToMade" destination="lty-aA-3b4" id="lJa-C0-uwz"/>
                         <outlet property="userProfileImage" destination="MGT-Qm-MjQ" id="Wlc-Me-jfS"/>
                         <segue destination="VaS-0c-ANh" kind="show" identifier="pinModiSegue" id="jPo-46-H0b"/>

@@ -9,6 +9,7 @@
 #import "PinViewController.h"
 #import "PinContentsCollectionViewCell.h"
 #import "PinMarkerUIView.h"
+#import "PinMakeViewController.h"
 
 
 @interface PinViewController ()
@@ -22,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet GMSMapView *mapPreView;
 @property (weak, nonatomic) IBOutlet UIButton *mapPreViewBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *setup;
 @property (weak, nonatomic) IBOutlet UILabel *pinName;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress;
 @property (weak, nonatomic) IBOutlet UILabel *pinMainText;
@@ -56,8 +56,10 @@
     NSLog(@"itemWidth %f", itemWidth);
     
     self.flowLayout.itemSize = CGSizeMake(100, 100);
+
     // collectionView 임시 contents
     self.dataTempArr = @[@"addPost", @"textPhoto", @"Zion", @"Arches", @"Kenai Fjords", @"Mesa Verde", @"North Cascades", @"Great Sand Dunes"];
+
     //collectionView shadow
     self.collectionView.layer.shadowOffset = CGSizeMake(-5, 15);
     self.collectionView.layer.shadowRadius = 10;
@@ -65,6 +67,20 @@
     self.collectionView.layer.masksToBounds = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
+        
+    // Navi Pop Gesture 활성화
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
+    // 네비바 숨기기
+    [self.navigationController setNavigationBarHidden:YES];
+    [self.view layoutIfNeeded];
+
     // Map 세팅
     [self mapPreViewSetting];
     
@@ -80,19 +96,6 @@
 
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
-    
-    
-    // Navi Pop Gesture 활성화
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
-
-    // 네비바 숨기기
-    [self.navigationController setNavigationBarHidden:YES];
-    [self.view layoutIfNeeded];
-}
 
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -116,6 +119,7 @@
     
 
     // 현재 보고있는 핀만 마커찍기
+    [self.mapPreView clear];    // 기존 마커 삭제
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.groundAnchor = CGPointMake(0.5, 0.6);        // 마커가 지도 중앙 위치에 놓일 수 있게 설정 (중앙 약간 위)
     
@@ -186,12 +190,18 @@
 }
 
 
-//- (void)inputImageData:(NSString *)data {
-//
-//    self.contentImageView.image = [UIImage imageNamed:@"Katmai"];
-//
-//}
 
+
+- (IBAction)editBtnAction:(id)sender {
+    NSLog(@"editBtnAction");
+ 
+    // 핀 수정
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
+    PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
+    
+    [pinMakeVC setEditModeWithPinData:self.mapData.map_pin_list[self.pinIndex]];   // 수정 모드, 데이터 세팅
+    [self.navigationController pushViewController:pinMakeVC animated:YES];
+}
 
 - (IBAction)backBtnAction:(id)sender {
     

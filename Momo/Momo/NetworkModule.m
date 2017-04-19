@@ -282,6 +282,7 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
                     pinData.pin_name = pinArr[j][0];
                     pinData.pin_description = pinArr[j][2];
                     pinData.pin_label = [(NSNumber *)pinArr[j][3] integerValue];
+                    pinData.pin_map = mapData;
                     
                     MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
                     pinData.pin_place = placeData;
