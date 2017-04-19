@@ -594,7 +594,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KI-uc-InF">
-                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
+                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="5KI-uc-InF" secondAttribute="height" id="8oh-fm-e4S"/>
                                                         </constraints>
@@ -1287,7 +1287,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="mapCheckBtn" width="31" height="31"/>
         <image name="mapCheckBtnS" width="31" height="31"/>
         <image name="photoBtnS" width="176" height="48"/>
-        <image name="setup" width="30" height="30"/>
+        <image name="setup" width="56" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KT7-pT-DDo"/>

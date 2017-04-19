@@ -204,8 +204,13 @@
 - (IBAction)selecedCategoryBtn:(UIButton *)sender {
     NSLog(@"%ld", sender.tag);
     
+    sender.selected = YES;
+    self.categoryLastSelectedBtn.selected = NO;
+    self.categoryLastSelectedBtn = sender;
+    
     // Radio Button
     if (sender.tag != self.categoryLastSelectedBtn.tag) {
+        
         self.categoryLastSelectedBtn.selected = NO;
         
         self.categoryLastSelectedBtn = sender;
