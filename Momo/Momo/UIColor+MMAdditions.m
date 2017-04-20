@@ -39,7 +39,6 @@
 	return [UIColor colorWithWhite:140.0f / 255.0f alpha:1.0f];
 }
 
-
 // Label Color
 
 + (UIColor *)mm_cafe0ColorColor {
