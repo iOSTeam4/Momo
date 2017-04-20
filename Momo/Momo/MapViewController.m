@@ -62,7 +62,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
-    NSLog(@"MapViewController : viewWillAppear");
+//    NSLog(@"MapViewController : viewWillAppear");
     
     // 다른뷰 갔다가 와도 다시 Refresh될 수 있게 viewWillAppear에서 호출
     if (self.showSelectedMap) {
@@ -172,23 +172,64 @@
     // 나침반 설정
     self.mapView.settings.compassButton = YES;
     
-    // 내 위치를 중심으로 Map 띄우기
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        
-        while([self.mapView myLocation].coordinate.latitude == 0.0f);   // 내 위치 받아오기까지 조금 시간 걸림
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"%f, %f", [self.mapView myLocation].coordinate.latitude, [self.mapView myLocation].coordinate.longitude);
-            
-            GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.mapView myLocation].coordinate.latitude
-                                                                    longitude:[self.mapView myLocation].coordinate.longitude
-                                                                         zoom:13.5f];
-            
-            [self.mapView setCamera:camera];    // 내 위치 중심으로 카메라 설정
-        });
-    });
     
-    self.currentZoomCase = PIN_MARKER_DETAIL;
+    // 사용자 모든 핀 보기 & 비어있는 선택지도 보기
+    if (!self.showSelectedMap || (self.mapData.map_pin_list.count == 0)) {
+        // 내 위치를 중심으로 Map 띄우기
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            while([self.mapView myLocation].coordinate.latitude == 0.0f);   // 내 위치 받아오기까지 조금 시간 걸림
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"%f, %f", [self.mapView myLocation].coordinate.latitude, [self.mapView myLocation].coordinate.longitude);
+                
+                GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.mapView myLocation].coordinate.latitude
+                                                                        longitude:[self.mapView myLocation].coordinate.longitude
+                                                                             zoom:13.5f];
+                
+                [self.mapView setCamera:camera];    // 내 위치 중심으로 카메라 설정
+            });
+        });
+        
+        self.currentZoomCase = PIN_MARKER_DETAIL;
+        
+    } else {
+        // 선택지도 핀 보기
+        
+        // 최초 min, max에 0번 핀 값 넣음
+        CLLocationCoordinate2D minCoordinate = CLLocationCoordinate2DMake(self.mapData.map_pin_list[0].pin_place.place_lat, self.mapData.map_pin_list[0].pin_place.place_lng);
+        CLLocationCoordinate2D maxCoordinate = CLLocationCoordinate2DMake(self.mapData.map_pin_list[0].pin_place.place_lat, self.mapData.map_pin_list[0].pin_place.place_lng);
+        
+        for (MomoPinDataSet *pinData in self.mapData.map_pin_list) {
+            
+            // find min, max latitude
+            if (pinData.pin_place.place_lat < minCoordinate.latitude) {
+                
+                minCoordinate.latitude = pinData.pin_place.place_lat;
+                
+            } else if (pinData.pin_place.place_lat > maxCoordinate.latitude) {
+                
+                maxCoordinate.latitude = pinData.pin_place.place_lat;
+            }
+            
+            // find min, max longitude
+            if (pinData.pin_place.place_lng < minCoordinate.longitude) {
+                
+                minCoordinate.longitude = pinData.pin_place.place_lng;
+                
+            } else if (pinData.pin_place.place_lng > maxCoordinate.longitude) {
+                
+                maxCoordinate.longitude = pinData.pin_place.place_lng;
+            }
+            
+        }
+        
+        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:minCoordinate coordinate:maxCoordinate];
+        GMSCameraPosition *camera = [self.mapView cameraForBounds:bounds insets:UIEdgeInsetsMake(20, 20, 20, 20)];
+        
+        [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 카메라 최종 위치로 이동
+        
+    }
     
 }
 
@@ -230,9 +271,9 @@
     
     NSInteger zoomCase;
     
-    if(position.zoom > 13) {
+    if(position.zoom > 12) {
         zoomCase = PIN_MARKER_DETAIL;
-    } else if (position.zoom > 11) {
+    } else if (position.zoom > 8) {
         zoomCase = PIN_MARKER_CIRCLE;
     } else {
         zoomCase = PIN_MARKER_SMALL_CIRCLE;
@@ -378,7 +419,6 @@
     [mapMakeVC setEditModeWithMapData:self.mapData];   // 수정 모드, 데이터 세팅
     [self.navigationController pushViewController:mapMakeVC animated:YES];
 
-    
 }
 
 @end

@@ -18,8 +18,12 @@
 // Post Data Set ---------------------------//
 @implementation MomoPostDataSet
 
+//+ (NSArray<NSString *> *)requiredProperties {
+//    return @[@"pk"];     // + post_pin_pk
+//}
+
 - (UIImage *)getPostImage {
-    return [UIImage sd_imageWithData:self.post_image_data];
+    return [UIImage imageWithData:self.post_image_data];
 }
 
 
@@ -29,6 +33,10 @@
 
 // Pin Data Set -----------------------------//
 @implementation MomoPinDataSet
+
+//+ (NSArray<NSString *> *)requiredProperties {
+//    return @[@"pk", @"pin_name", @"pin_label"];     // + pin_map_pk
+//}
 
 // 핀 생성 및 등록
 + (MomoPinDataSet *)makePinWithName:(NSString *)pinName
@@ -97,6 +105,9 @@
 // Map Data Set -----------------------------//
 @implementation MomoMapDataSet
 
+//+ (NSArray<NSString *> *)requiredProperties {
+//    return @[@"pk", @"map_name"];
+//}
 
 // 맵 생성 및 등록
 + (MomoMapDataSet *)makeMapWithName:(NSString *)mapName
@@ -128,7 +139,7 @@
 @implementation MomoUserDataSet
 
 + (NSArray<NSString *> *)requiredProperties {
-    return @[@"user_token"];
+    return @[@"pk", @"user_token"];
 }
 
 - (UIImage *)getUserProfileImage {

@@ -73,8 +73,8 @@
 // RGB 추출 메소드
 - (void)setColorComponents {
     self.colorComponents = CGColorGetComponents([[self.pinData labelColor] CGColor]);     // Alpha는 무조건 1
-    NSLog(@"Pin name : %@, Label : %ld", self.pinData.pin_name, self.pinData.pin_label);
-    NSLog(@"Red: %.5f, Green: %.5f, Blue: %.5f",   _colorComponents[0], _colorComponents[1], _colorComponents[2]);
+//    NSLog(@"Pin name : %@, Label : %ld", self.pinData.pin_name, self.pinData.pin_label);
+//    NSLog(@"Red: %.5f, Green: %.5f, Blue: %.5f",   _colorComponents[0], _colorComponents[1], _colorComponents[2]);
 }
 
 

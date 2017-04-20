@@ -13,6 +13,9 @@
 
 @interface PinProfileTableViewCell : UITableViewCell
 
+- (void)initWithPinIndex:(NSInteger)pinIndex;
+@property (nonatomic) NSInteger pinIndex;
+
 @property (weak, nonatomic) id<PinProfileTableViewCellDelegate> delegate;
 
 

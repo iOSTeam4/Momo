@@ -48,14 +48,14 @@
     [self.contentView addSubview:self.deletePhoto];
     [self.deletePhoto setHidden:YES];
     
-    ////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
-    self.isEditMode = YES;
-    
-    self.photoImageView.hidden = NO;
-    self.checkTextField = YES;
-    
-    [self checkMakeBtnState];
-    //////////////////////////////////////////////////////////////////
+//    ////////////// 만들기 상태. 밖에서 수정하기로 들어오기 전까지 ///////////////
+//    self.isEditMode = YES;
+//    
+//    self.photoImageView.hidden = NO;
+//    self.checkTextField = YES;
+//    
+//    [self checkMakeBtnState];
+//    //////////////////////////////////////////////////////////////////
     
     if (self.isEditMode) {
         [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
@@ -99,30 +99,27 @@
         UIAlertController *alertCamera = [UIAlertController alertControllerWithTitle:nil
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+
         UIAlertAction *cameraBtn = [UIAlertAction actionWithTitle:@"Camera"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction * _Nonnull action) {
-                                                          NSLog(@"ok click!");
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              NSLog(@"Camera");
                                                           
-                                                          [self selectedCamera];
+                                                              [self selectedCamera];
         
-                                                      }];
+                                                          }];
        
         UIAlertAction *photoBtn = [UIAlertAction actionWithTitle:@"Photo Library"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction * _Nonnull action) {
-                                                          NSLog(@"ok click!");
-                                                          
-                                                          [self selectedPhoto];
-                                                      }];
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             NSLog(@"Photo Library");
+                                                             
+                                                             [self selectedPhoto];
+                                                         }];
         
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                             NSLog(@"ok click!");
-                                    
-                                                         }];
-
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:nil];
                                      
         [alertCamera addAction:cameraBtn];
         [alertCamera addAction:photoBtn];
@@ -191,7 +188,7 @@
 //    self.updateViewBackgroundPhoto.image = [info objectForKey:UIImagePickerControllerEditedImage];;
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-// 최초에 사진이 없는 상태 한번만
+    // 최초에 사진이 없는 상태 한번만
     if (self.photoImageView.hidden) {
         self.photoBtnTopSpacingConstraint.constant = self.photoImageView.frame.size.height + self.photoBtnTopSpacingConstraint.constant + 20.0;
         [self.view layoutIfNeeded];     // autolayout constraint 값을 코드로 변경한 걸 적용할 때 꼭!!!!

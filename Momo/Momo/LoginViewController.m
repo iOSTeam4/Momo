@@ -34,7 +34,7 @@
     self.signUpBtn.layer.cornerRadius = self.signUpBtn.frame.size.height/2;
 
     
-    // 앱 실행하면서, 유저 정보 패치
+    // 앱 실행하면서, Realm에 있는 유저 정보 패치
     [self.indicator startAnimating];
     [[DataCenter sharedInstance] fetchMomoUserData];
     [self.indicator stopAnimating];
@@ -43,7 +43,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"LoginViewController"];
+//    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"LoginViewController"];
 
 }
 
@@ -76,6 +76,24 @@
     if ([[DataCenter sharedInstance] getUserToken]) {
         // Token 있으면 YES, 없으면 nil(NO)
         NSLog(@"Token : %@", [[DataCenter sharedInstance] getUserToken]);
+        
+
+        // Momo Server - get User profile Infos
+        NSLog(@"getMemberProfile");
+        [self.indicator startAnimating];
+        [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+            
+            [self.indicator stopAnimating];
+            
+            if (isSuccess) {
+                
+                
+                
+            } else {
+                
+            }
+
+        }];
         
 //        sleep(3);       // 3초 후 dismiss
 //        [self dismissViewControllerAnimated:YES completion:nil];

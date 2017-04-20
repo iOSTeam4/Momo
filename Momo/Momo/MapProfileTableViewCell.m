@@ -20,15 +20,14 @@
 - (void)initWithMapIndex:(NSInteger)mapIndex {
 
     // 데이터 세팅
-    
     self.mapIndex = mapIndex;       // 지도 마커 표시를 위해 mapIndex 프로퍼티에 셋
     
-    // 프사
+    // 유저 프사
     if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
         self.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
     }
     
-    // 이름
+    // 유저 이름
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         self.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;
     }
@@ -103,7 +102,6 @@
             GMSMarker *marker = [[GMSMarker alloc] init];
             
             marker.position = CLLocationCoordinate2DMake(pinData.pin_place.place_lat, pinData.pin_place.place_lng);
-            marker.appearAnimation = kGMSMarkerAnimationPop;
             
             PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:pinData withZoomCase:PIN_MARKER_CIRCLE];
             marker.iconView = pinMarkerView;

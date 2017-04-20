@@ -8,7 +8,7 @@
 
 #import "FacebookModule.h"
 
-static NSString *const API_BASE_URL         = @"http://eb-client.ap-northeast-2.elasticbeanstalk.com";
+static NSString *const API_BASE_URL         = @"https://momo.kizmo04.com";
 static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
 
 

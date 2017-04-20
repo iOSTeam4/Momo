@@ -48,6 +48,10 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property NSString *post_comments;
 
 @property NSString *post_created_date;
+@property MomoPinDataSet *post_pin;     // 1:1
+
+@property NSInteger post_pin_pk;
+@property NSInteger post_user_pk;
 
 - (UIImage *)getPostImage;
 
@@ -65,7 +69,9 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property NSString *pin_name;
 @property NSString *pin_description;
 @property NSInteger pin_label;
-@property MomoMapDataSet *pin_map;
+@property MomoMapDataSet *pin_map;      // 1:1
+
+@property NSInteger pin_map_pk;
 
 @property NSString *pin_created_date;
 
@@ -96,6 +102,8 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 @property NSString *map_author;
 @property NSString *map_created_date;
+
+@property NSInteger map_user_pk;
 
 @property RLMArray<MomoPinDataSet *><MomoPinDataSet> *map_pin_list;
 
