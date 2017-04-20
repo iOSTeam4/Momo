@@ -32,7 +32,7 @@
     
     // 수정하기 버튼
     [self.followBtn.layer setCornerRadius:5];
-    [self.followBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
+    [self.followBtn.layer setBorderColor:[UIColor mm_cafe0ColorColor].CGColor];
     [self.followBtn.layer setBorderWidth:1];
 }
 

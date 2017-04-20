@@ -43,7 +43,7 @@
     
     // 수정하기 버튼
     [self.pinEditBtn.layer setCornerRadius:5];
-    [self.pinEditBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
+    [self.pinEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
     [self.pinEditBtn.layer setBorderWidth:1];
     
     // 전체 Cell Frame 설정

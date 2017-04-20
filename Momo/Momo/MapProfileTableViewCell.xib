@@ -32,7 +32,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wx6-8B-Z3a">
                                 <rect key="frame" x="46.5" y="15.5" width="333.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.00059560901718214154" green="0.70855957269668579" blue="0.99971479177474976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6TZ-pC-QxF">
@@ -79,9 +79,13 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="pika pika map">
-                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QaG-Ge-1bw">
+                                <rect key="frame" x="10" y="302" width="375" height="13.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1x-P1-cON">
                                 <rect key="frame" x="11" y="323.5" width="9.5" height="16"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -101,7 +105,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="수정하기">
-                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="mapEditBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UiW-6t-Kd9"/>
@@ -111,8 +115,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="1vf-ai-PVM"/>
+                            <constraint firstItem="COG-jG-Ync" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="4Jc-ge-snI"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="centerY" secondItem="gc4-8R-2oX" secondAttribute="centerY" id="8pZ-6L-xQ4"/>
-                            <constraint firstItem="COG-jG-Ync" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="C7P-7r-Ljv"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerY" secondItem="mOC-oZ-7xj" secondAttribute="centerY" id="DKR-sU-Inz"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="height" secondItem="mOC-oZ-7xj" secondAttribute="height" id="E1R-fi-Klj"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="top" secondItem="6TZ-pC-QxF" secondAttribute="bottom" constant="10" id="Efn-uF-tdC"/>
                             <constraint firstAttribute="trailing" secondItem="mOC-oZ-7xj" secondAttribute="trailing" constant="5" id="Fvh-3q-4Si"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="mOC-oZ-7xj" secondAttribute="leading" constant="1" id="Ioj-Rt-ncn"/>
@@ -127,7 +133,9 @@
                             <constraint firstItem="COG-jG-Ync" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="WkE-um-MNA"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="leading" secondItem="u1x-P1-cON" secondAttribute="trailing" constant="3" id="YYF-Fs-aCN"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="a37-4h-SS5"/>
-                            <constraint firstItem="COG-jG-Ync" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="a7C-zF-wSd"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="width" secondItem="mOC-oZ-7xj" secondAttribute="width" id="c5Q-N0-OTr"/>
+                            <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerX" secondItem="mOC-oZ-7xj" secondAttribute="centerX" id="ckj-ia-tfd"/>
+                            <constraint firstItem="COG-jG-Ync" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="cuo-K1-sjE"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
