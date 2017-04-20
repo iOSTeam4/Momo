@@ -30,9 +30,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIP-VL-HOu">
-                                <rect key="frame" x="49" y="17" width="369" height="20.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="60" y="17.5" width="358" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-jN-9EU">
@@ -74,9 +74,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="pf4-iH-bD4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <state key="normal" title="pika pika map">
-                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0G-ai-kU6">
@@ -95,25 +95,23 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UL-IB-BHT">
-                                <rect key="frame" x="306.5" y="344.5" width="106.5" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UL-IB-BHT">
+                                <rect key="frame" x="358" y="350" width="60" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7UL-IB-BHT" secondAttribute="height" multiplier="10:3" id="SmP-yJ-YP8"/>
+                                    <constraint firstAttribute="width" constant="60" id="hFB-cl-4Jw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="수정하기">
-                                    <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="setting">
+                                    <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NdN-Xl-Qcc" firstAttribute="centerY" secondItem="9Si-6w-6Wg" secondAttribute="centerY" id="0zX-cL-Hcs"/>
-                            <constraint firstItem="7UL-IB-BHT" firstAttribute="width" secondItem="4tf-V2-sSP" secondAttribute="width" multiplier="0.25" id="7qe-5c-Aah"/>
                             <constraint firstItem="9Si-6w-6Wg" firstAttribute="leading" secondItem="yWg-7T-015" secondAttribute="leading" constant="1" id="CXe-Z5-iJK"/>
                             <constraint firstAttribute="trailing" secondItem="CIP-VL-HOu" secondAttribute="trailing" constant="10" id="JfS-4r-fAV"/>
                             <constraint firstItem="7UL-IB-BHT" firstAttribute="centerY" secondItem="9Si-6w-6Wg" secondAttribute="centerY" id="OOF-jr-h0i"/>
-                            <constraint firstAttribute="trailing" secondItem="7UL-IB-BHT" secondAttribute="trailing" constant="15" id="Piv-Pd-f8H"/>
+                            <constraint firstAttribute="trailing" secondItem="7UL-IB-BHT" secondAttribute="trailing" constant="10" id="Piv-Pd-f8H"/>
                             <constraint firstItem="yWg-7T-015" firstAttribute="top" secondItem="Cpw-jN-9EU" secondAttribute="bottom" constant="10" id="QkQ-pY-DQv"/>
                             <constraint firstItem="Cpw-jN-9EU" firstAttribute="trailing" secondItem="CIP-VL-HOu" secondAttribute="trailing" id="SV0-zj-480"/>
                             <constraint firstItem="CIP-VL-HOu" firstAttribute="centerY" secondItem="8BW-5s-Adc" secondAttribute="centerY" id="Ugy-wP-UPY"/>
@@ -126,7 +124,7 @@
                             <constraint firstAttribute="bottom" secondItem="9Si-6w-6Wg" secondAttribute="bottom" constant="15" id="oXA-LQ-tKN"/>
                             <constraint firstItem="i0G-ai-kU6" firstAttribute="centerX" secondItem="kiJ-oS-6JP" secondAttribute="centerX" id="ppB-ae-pJo"/>
                             <constraint firstItem="i0G-ai-kU6" firstAttribute="bottom" secondItem="yWg-7T-015" secondAttribute="bottom" id="q5p-Fg-E69"/>
-                            <constraint firstItem="CIP-VL-HOu" firstAttribute="leading" secondItem="8BW-5s-Adc" secondAttribute="trailing" constant="5" id="rnd-nW-txW"/>
+                            <constraint firstItem="CIP-VL-HOu" firstAttribute="leading" secondItem="8BW-5s-Adc" secondAttribute="trailing" constant="16" id="rnd-nW-txW"/>
                             <constraint firstItem="8BW-5s-Adc" firstAttribute="leading" secondItem="4tf-V2-sSP" secondAttribute="leading" constant="10" id="tEO-Hd-vhk"/>
                             <constraint firstItem="i0G-ai-kU6" firstAttribute="top" secondItem="kiJ-oS-6JP" secondAttribute="top" id="tKt-Br-2Ub"/>
                             <constraint firstAttribute="trailing" secondItem="yWg-7T-015" secondAttribute="trailing" constant="5" id="wJi-mn-kpW"/>
@@ -150,5 +148,6 @@
         <image name="Great Sand Dunes" width="375" height="250"/>
         <image name="pika.png" width="982" height="596"/>
         <image name="pika2.png" width="718" height="478"/>
+        <image name="setting" width="26" height="22"/>
     </resources>
 </document>

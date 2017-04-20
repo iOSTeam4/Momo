@@ -34,3 +34,26 @@
 }
 
 @end
+
+//------ 폰트 정리 ------------
+/*
+
+핀뷰 
+타이틀 36pt / regula / 00b5ff /
+핀명 30pt / regula / 222222
+핀주소 14pt / regula / 888888
+에디터 제목 20pt / regula / 222222
+placeholder 26pt / regula / e3e3e7
+user name 18pt / regula / 222222
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+*/
+
