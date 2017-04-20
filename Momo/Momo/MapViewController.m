@@ -127,8 +127,8 @@
     self.mapInfoViewPinNumLabel.text = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list.count];
     
     // 수정하기 (팔로워/팔로잉) 버튼
-    [self.mapInfoViewBtn.layer setCornerRadius:5];
-    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_cafe0ColorColor].CGColor];
+    [self.mapInfoViewBtn.layer setCornerRadius:12];
+    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
     [self.mapInfoViewBtn.layer setBorderWidth:1];
     
     // 선택지도보기 뷰 띄우기
@@ -147,11 +147,11 @@
 - (void)initialSetting {
     
     // 새 핀 만들기 뷰의 버튼 UI세팅
-    self.cancelBtn.layer.cornerRadius = 10;
+    self.cancelBtn.layer.cornerRadius = 20;
     self.cancelBtn.layer.borderWidth = 1;
     self.cancelBtn.layer.borderColor = self.cancelBtn.titleLabel.textColor.CGColor;
     
-    self.nextBtn.layer.cornerRadius = 10;
+    self.nextBtn.layer.cornerRadius = 20;
     self.nextBtn.layer.borderWidth = 1;
     self.nextBtn.layer.borderColor = self.nextBtn.backgroundColor.CGColor;
 
