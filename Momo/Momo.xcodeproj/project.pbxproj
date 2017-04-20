@@ -24,7 +24,6 @@
 		3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */; };
 		3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */; };
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
-		3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5D1E8916BC001B87F0 /* MainViewController.m */; };
 		3F745F611E891728001B87F0 /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F601E891728001B87F0 /* NetworkModule.m */; };
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
 		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
@@ -45,7 +44,6 @@
 		3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A54A1E88F08500B965A7 /* LoginViewController.m */; };
 		3FD9A54D1E88F0A300B965A7 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A54C1E88F0A300B965A7 /* Login.storyboard */; };
 		3FD9A5521E88F12600B965A7 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9A5511E88F12600B965A7 /* DataCenter.m */; };
-		3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD9A5561E88F35400B965A7 /* Main.storyboard */; };
 		3FEBB8961E97C70B006E3E77 /* PostMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */; };
 		A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */; };
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
@@ -55,12 +53,6 @@
 		EF69E57B1EA498A400DE4C65 /* PhotoTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E57A1EA498A400DE4C65 /* PhotoTextCell.m */; };
 		EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E57D1EA498B400DE4C65 /* PhotoCell.m */; };
 		EF69E5811EA498C100DE4C65 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E5801EA498C100DE4C65 /* TextCell.m */; };
-		EFC299251EA72D96008805A2 /* MainUserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC299241EA72D96008805A2 /* MainUserCollectionCell.m */; };
-		EFC299281EA73647008805A2 /* MainPinCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC299271EA73647008805A2 /* MainPinCollectionCell.m */; };
-		EFC2992F1EA75642008805A2 /* MainMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2992D1EA75642008805A2 /* MainMapTableViewCell.m */; };
-		EFC299301EA75642008805A2 /* MainMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFC2992E1EA75642008805A2 /* MainMapTableViewCell.xib */; };
-		EFC299401EA758CF008805A2 /* MapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2993E1EA758CF008805A2 /* MapCollectionViewCell.m */; };
-		EFC299411EA758CF008805A2 /* MapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFC2993F1EA758CF008805A2 /* MapCollectionViewCell.xib */; };
 		EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD11B9B1E8E90EF00896952 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -93,8 +85,6 @@
 		3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsModule.m; sourceTree = "<group>"; };
 		3F745F591E88FF1F001B87F0 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		3F745F5C1E8916BC001B87F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		3F745F5D1E8916BC001B87F0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3F745F5F1E891728001B87F0 /* NetworkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkModule.h; sourceTree = "<group>"; };
 		3F745F601E891728001B87F0 /* NetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModule.m; sourceTree = "<group>"; };
 		3F9C27CD1E8A48C6008DD04A /* PinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinViewController.h; sourceTree = "<group>"; };
@@ -130,7 +120,6 @@
 		3FD9A54C1E88F0A300B965A7 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		3FD9A5501E88F12600B965A7 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		3FD9A5511E88F12600B965A7 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
-		3FD9A5561E88F35400B965A7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3FEBB8941E97C70B006E3E77 /* PostMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMakeViewController.h; sourceTree = "<group>"; };
 		3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMakeViewController.m; sourceTree = "<group>"; };
 		3FF685AF1E892D5300FD927D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -151,16 +140,6 @@
 		EF69E57D1EA498B400DE4C65 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		EF69E57F1EA498C100DE4C65 /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCell.h; sourceTree = "<group>"; };
 		EF69E5801EA498C100DE4C65 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
-		EFC299231EA72D96008805A2 /* MainUserCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUserCollectionCell.h; sourceTree = "<group>"; };
-		EFC299241EA72D96008805A2 /* MainUserCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUserCollectionCell.m; sourceTree = "<group>"; };
-		EFC299261EA73647008805A2 /* MainPinCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPinCollectionCell.h; sourceTree = "<group>"; };
-		EFC299271EA73647008805A2 /* MainPinCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPinCollectionCell.m; sourceTree = "<group>"; };
-		EFC2992C1EA75642008805A2 /* MainMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMapTableViewCell.h; sourceTree = "<group>"; };
-		EFC2992D1EA75642008805A2 /* MainMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMapTableViewCell.m; sourceTree = "<group>"; };
-		EFC2992E1EA75642008805A2 /* MainMapTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMapTableViewCell.xib; sourceTree = "<group>"; };
-		EFC2993D1EA758CF008805A2 /* MapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCollectionViewCell.h; sourceTree = "<group>"; };
-		EFC2993E1EA758CF008805A2 /* MapCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCollectionViewCell.m; sourceTree = "<group>"; };
-		EFC2993F1EA758CF008805A2 /* MapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapCollectionViewCell.xib; sourceTree = "<group>"; };
 		EFD11B9B1E8E90EF00896952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				3FD9A5541E88F15000B965A7 /* LoginView */,
-				3FD9A5581E88F4FA00B965A7 /* MainView */,
+				3FD9A5581E88F4FA00B965A7 /* MainTabBarController */,
 				3FD918CD1E8930A2005B1583 /* MapView */,
 				3FD392F21E93D54400AFBB3A /* MakeView */,
 				3FD392EC1E93C8ED00AFBB3A /* MyView */,
@@ -407,18 +386,13 @@
 			name = LoginView;
 			sourceTree = "<group>";
 		};
-		3FD9A5581E88F4FA00B965A7 /* MainView */ = {
+		3FD9A5581E88F4FA00B965A7 /* MainTabBarController */ = {
 			isa = PBXGroup;
 			children = (
 				3F745F591E88FF1F001B87F0 /* MainTabBarController.h */,
 				3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */,
-				3F745F5C1E8916BC001B87F0 /* MainViewController.h */,
-				3F745F5D1E8916BC001B87F0 /* MainViewController.m */,
-				EFC299311EA75752008805A2 /* MainTableViewCell */,
-				EFC299291EA73A44008805A2 /* CollectionCell */,
-				3FD9A5561E88F35400B965A7 /* Main.storyboard */,
 			);
-			name = MainView;
+			name = MainTabBarController;
 			sourceTree = "<group>";
 		};
 		3FEEFA741EA62331003F748F /* PostView */ = {
@@ -453,38 +427,6 @@
 				EF69E5801EA498C100DE4C65 /* TextCell.m */,
 			);
 			name = PostCell;
-			sourceTree = "<group>";
-		};
-		EFC299291EA73A44008805A2 /* CollectionCell */ = {
-			isa = PBXGroup;
-			children = (
-				EFC299261EA73647008805A2 /* MainPinCollectionCell.h */,
-				EFC299271EA73647008805A2 /* MainPinCollectionCell.m */,
-				EFC299231EA72D96008805A2 /* MainUserCollectionCell.h */,
-				EFC299241EA72D96008805A2 /* MainUserCollectionCell.m */,
-			);
-			name = CollectionCell;
-			sourceTree = "<group>";
-		};
-		EFC299311EA75752008805A2 /* MainTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				EFC2992C1EA75642008805A2 /* MainMapTableViewCell.h */,
-				EFC2992D1EA75642008805A2 /* MainMapTableViewCell.m */,
-				EFC2992E1EA75642008805A2 /* MainMapTableViewCell.xib */,
-				EFC299321EA75766008805A2 /* MapCollectionViewCell */,
-			);
-			name = MainTableViewCell;
-			sourceTree = "<group>";
-		};
-		EFC299321EA75766008805A2 /* MapCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				EFC2993D1EA758CF008805A2 /* MapCollectionViewCell.h */,
-				EFC2993E1EA758CF008805A2 /* MapCollectionViewCell.m */,
-				EFC2993F1EA758CF008805A2 /* MapCollectionViewCell.xib */,
-			);
-			name = MapCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,7 +491,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFC299411EA758CF008805A2 /* MapCollectionViewCell.xib in Resources */,
 				3F395E5D1E963695009F082D /* pika.png in Resources */,
 				3F395E451E95F00C009F082D /* PinProfileTableViewCell.xib in Resources */,
 				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
@@ -557,14 +498,12 @@
 				3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */,
 				3F395E551E961F72009F082D /* UserProfileHeaderView.xib in Resources */,
 				3FD9A5421E88ED3700B965A7 /* LaunchScreen.storyboard in Resources */,
-				3FD9A5571E88F35400B965A7 /* Main.storyboard in Resources */,
 				3F395E401E95EFF5009F082D /* MapProfileTableViewCell.xib in Resources */,
 				EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */,
 				3FD9A54D1E88F0A300B965A7 /* Login.storyboard in Resources */,
 				3F395E361E94B325009F082D /* Make.storyboard in Resources */,
 				3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */,
 				3F395E5E1E963695009F082D /* pika2.png in Resources */,
-				EFC299301EA75642008805A2 /* MainMapTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,8 +564,6 @@
 			files = (
 				EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */,
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
-				EFC299401EA758CF008805A2 /* MapCollectionViewCell.m in Sources */,
-				EFC299281EA73647008805A2 /* MainPinCollectionCell.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
@@ -642,10 +579,7 @@
 				3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */,
 				3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */,
 				EF5A49CE1E9F51BD00A33858 /* PinPostViewController.m in Sources */,
-				3F745F5E1E8916BC001B87F0 /* MainViewController.m in Sources */,
-				EFC2992F1EA75642008805A2 /* MainMapTableViewCell.m in Sources */,
 				EF69E5811EA498C100DE4C65 /* TextCell.m in Sources */,
-				EFC299251EA72D96008805A2 /* MainUserCollectionCell.m in Sources */,
 				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
 				3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */,

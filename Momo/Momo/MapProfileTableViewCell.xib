@@ -69,9 +69,6 @@
                                     <constraint firstItem="xRf-A5-3id" firstAttribute="width" secondItem="6TZ-pC-QxF" secondAttribute="width" multiplier="2/3" constant="-1.6699999999999999" id="G4L-km-la7"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="COG-jG-Ync">
-                                <rect key="frame" x="10" y="47" width="245" height="245"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOC-oZ-7xj">
                                 <rect key="frame" x="10" y="302" width="375" height="13.5"/>
                                 <constraints>
@@ -111,37 +108,52 @@
                                     <action selector="mapEditBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UiW-6t-Kd9"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q54-vT-wjC">
+                                <rect key="frame" x="10" y="47" width="245" height="245"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="COG-jG-Ync">
+                                        <rect key="frame" x="0.0" y="0.0" width="245" height="245"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="COG-jG-Ync" firstAttribute="width" secondItem="Q54-vT-wjC" secondAttribute="width" id="2sm-yZ-flk"/>
+                                    <constraint firstItem="COG-jG-Ync" firstAttribute="centerX" secondItem="Q54-vT-wjC" secondAttribute="centerX" id="OPF-pO-UFZ"/>
+                                    <constraint firstItem="COG-jG-Ync" firstAttribute="height" secondItem="Q54-vT-wjC" secondAttribute="height" id="Z9t-68-sDz"/>
+                                    <constraint firstItem="COG-jG-Ync" firstAttribute="centerY" secondItem="Q54-vT-wjC" secondAttribute="centerY" id="cxX-Pd-Oom"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="1vf-ai-PVM"/>
-                            <constraint firstItem="COG-jG-Ync" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="4Jc-ge-snI"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="centerY" secondItem="gc4-8R-2oX" secondAttribute="centerY" id="8pZ-6L-xQ4"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerY" secondItem="mOC-oZ-7xj" secondAttribute="centerY" id="DKR-sU-Inz"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="height" secondItem="mOC-oZ-7xj" secondAttribute="height" id="E1R-fi-Klj"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="top" secondItem="6TZ-pC-QxF" secondAttribute="bottom" constant="10" id="Efn-uF-tdC"/>
+                            <constraint firstItem="Q54-vT-wjC" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="FaM-ug-sF0"/>
                             <constraint firstAttribute="trailing" secondItem="mOC-oZ-7xj" secondAttribute="trailing" constant="5" id="Fvh-3q-4Si"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="mOC-oZ-7xj" secondAttribute="leading" constant="1" id="Ioj-Rt-ncn"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="Ktk-r4-CDE"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="trailing" constant="5" id="Nzn-QZ-igj"/>
-                            <constraint firstItem="COG-jG-Ync" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="P5j-92-oth"/>
                             <constraint firstAttribute="trailing" secondItem="zaC-BX-6Hc" secondAttribute="trailing" constant="15" id="Pdm-VE-vE9"/>
                             <constraint firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" constant="10" id="Qjs-gj-rSv"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="QmK-5L-Zby"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.08" id="Rah-sL-95X"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="top" secondItem="mOC-oZ-7xj" secondAttribute="bottom" constant="8" id="T5M-AA-lAS"/>
-                            <constraint firstItem="COG-jG-Ync" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="WkE-um-MNA"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="leading" secondItem="u1x-P1-cON" secondAttribute="trailing" constant="3" id="YYF-Fs-aCN"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="a37-4h-SS5"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="width" secondItem="mOC-oZ-7xj" secondAttribute="width" id="c5Q-N0-OTr"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerX" secondItem="mOC-oZ-7xj" secondAttribute="centerX" id="ckj-ia-tfd"/>
-                            <constraint firstItem="COG-jG-Ync" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="cuo-K1-sjE"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
+                            <constraint firstItem="Q54-vT-wjC" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="eRo-es-HAS"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
+                            <constraint firstItem="Q54-vT-wjC" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="n9W-9k-Fed"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="15" id="pcJ-pd-dTD"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" id="vA8-zq-quv"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="leading" secondItem="dGm-5e-gvx" secondAttribute="leading" constant="10" id="w10-yP-sE4"/>
+                            <constraint firstItem="Q54-vT-wjC" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="xxI-fQ-r4H"/>
                         </constraints>
                     </view>
                 </subviews>

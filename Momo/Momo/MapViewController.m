@@ -12,7 +12,7 @@
 
 #import "MapMakeViewController.h"
 
-@interface MapViewController () <GMSMapViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
+@interface MapViewController () <GMSMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
@@ -136,7 +136,7 @@
     [self.mapInfoView setHidden:NO];
     
     [self.view layoutIfNeeded];     // 지도 설명 길어졌을 때, View Height 달라짐
-    self.mapView.padding = UIEdgeInsetsMake(64, 0, 49 + self.mapInfoView.frame.size.height, 0);
+    self.mapView.padding = UIEdgeInsetsMake(20, 0, 49 + self.mapInfoView.frame.size.height, 0);
 
 }
 
@@ -145,33 +145,6 @@
 // MapViewController 초기 세팅 ----------------------------//
 
 - (void)initialSetting {
-    [self.navigationItem setTitle:@"Map View"];
-    
-    // Navi Bar & Search Feature Setting --------------------------//
-    
-    // searchController
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.hidesNavigationBarDuringPresentation = NO;        // naviBar에 searchBar 있음
-
-    self.searchController.delegate = self;
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.searchBar.delegate = self;
-
-    UITextField *searchTextField = [self.searchController.searchBar valueForKey:@"searchField"];
-    searchTextField.backgroundColor = [UIColor mm_paleGreyColor];    // searchBar backgroundColor
-    searchTextField.textColor = [UIColor mm_brightSkyBlueColor];     // searchBar textColor
-    searchTextField.font = [UIFont boldSystemFontOfSize:14];         // searchBar font
-    self.searchController.searchBar.placeholder = @"핀 또는 주소 찾아보기";    // searchBar placeholder
-    
-    self.navigationItem.titleView = self.searchController.searchBar;      // 네비바에 서치바 배치
-    
-    
-//    // RightBarButtonItem (공유버튼?)
-//    UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(selectedNaviRightBtn)];
-//    [self.navigationItem setRightBarButtonItem:naviRightBtn];
-
-    // -------------------------------------------//
-    
     
     // 새 핀 만들기 뷰의 버튼 UI세팅
     self.cancelBtn.layer.cornerRadius = 10;
@@ -190,7 +163,7 @@
 // Google Map View 관련 객체 생성 및 초기설정
 - (void)initialSettingGoogleMapView {
     
-    self.mapView.padding = UIEdgeInsetsMake(64, 0, 49, 0);
+    self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
     
     // 내 위치 정보
     self.mapView.myLocationEnabled = YES;
@@ -218,22 +191,6 @@
     self.currentZoomCase = PIN_MARKER_DETAIL;
     
 }
-
-
-#pragma mark - Searching Methods (NavigationBar)
-
-// NavigationBar ------------------------------//
-
-// UISearchControllerDelegate Methods
-
-// UISearchResultsUpdating Methods
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSLog(@"updateSearchResultsForSearchController");
-    
-}
-
-// UISearchBarDelegate Methods
-// RightBarButtonItem Selector Method
 
 
 
@@ -338,7 +295,7 @@
         if (self.showSelectedMap) {
             // 선택지도 보기 상황
             [self.mapInfoView setHidden:YES];
-            self.mapView.padding = UIEdgeInsetsMake(64, 0, 49, 0);
+            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
         }
         
         [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
@@ -397,7 +354,7 @@
     if (self.showSelectedMap) {
         // 선택지도 보기 상황
         [self.mapInfoView setHidden:NO];
-        self.mapView.padding = UIEdgeInsetsMake(64, 0, 49 + self.mapInfoView.frame.size.height, 0);
+        self.mapView.padding = UIEdgeInsetsMake(20, 0, 49 + self.mapInfoView.frame.size.height, 0);
     }
 }
 

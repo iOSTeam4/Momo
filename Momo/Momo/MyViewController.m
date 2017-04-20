@@ -34,12 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"My View"];
-    
-    // Navi Bar 오른쪽 설정 버튼
-    UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedNaviRightBtn)];
-    [self.navigationItem setRightBarButtonItem:naviRightBtn];
-    
     
     // 테이블뷰에 Nib(xib) Register
     [self initialTableViewCellSettingWithNib];

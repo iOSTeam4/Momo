@@ -40,14 +40,10 @@
 
 - (void)setViewControllers {
     
-    // 0 : 메인 뷰
-    UINavigationController *mainNaviVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainNaviViewController"];
+    // 0 : 지도 뷰
+    UINavigationController *mapNaviVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapNaviViewController"];
     
-    // 1 : 지도 뷰
-    UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
-    UINavigationController *mapNaviVC = [mapStoryBoard instantiateViewControllerWithIdentifier:@"MapNaviViewController"];
-    
-    // 2 : 지도, 새핀 만들기 뷰
+    // 1 : 지도, 새핀 만들기 뷰
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     MakeViewController *makeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MakeViewController"];
 
@@ -55,13 +51,13 @@
     self.makeVC = makeVC;
     [self addChildViewController:makeVC];
     
-    // 3 : 내 기록 뷰
+    // 2 : 내 기록 뷰
     UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:nil];
     UINavigationController *myNaviVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyNaviViewController"];
 
     
     // set ViewControllers
-    [self setViewControllers:@[mainNaviVC, mapNaviVC, makeVC, myNaviVC]];
+    [self setViewControllers:@[mapNaviVC, makeVC, myNaviVC]];
     
 }
 
@@ -84,8 +80,7 @@
     
     
     // @[<Label>, <Btn Img Name>, <Btn Selected Img Name>];
-    NSArray *tabBarItemInfoArr = @[@[@"메인"    , @"tabMain", @"tabMainS"],
-                                   @[@"지도"    , @"tabMap" , @"tabMapS" ],
+    NSArray *tabBarItemInfoArr = @[@[@"지도"    , @"tabMap" , @"tabMapS" ],
                                    @[@"핀"     , @"tabPin" , @"tabPinS" ],
                                    @[@"내 기록" , @"tabMy"  , @"tabMyS"  ]];
     
@@ -105,7 +100,6 @@
         if (i == 0) {       // 초기 첫번째 버튼이 선택되어 있음
             btn.selected = YES;
             self.lastSelectedBtn = btn;
-        } else if (i == 1) {
             self.mapBtn = btn;      // 지도 버튼 프로퍼티로 갖고있음
         }
         
@@ -155,7 +149,7 @@
 
 - (void)selectedBtn:(UIButton *)sender {
     
-    if (sender.tag == 2) {
+    if (sender.tag == 1) {
         [self.view addSubview:self.makeVC.view];
         
     } else {
@@ -198,7 +192,7 @@
     
     [self.makeVC.view removeFromSuperview];
     [self selectedBtn:self.mapBtn];     // 맵뷰로 이동
-    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
+//    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
     [(MapViewController *)((UINavigationController *)self.selectedViewController).viewControllers[0] makePinByMakePinBtn];
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1G6-Jp-tf5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1G6-Jp-tf5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -62,6 +62,7 @@
                             <constraint firstItem="bv7-Oe-FiK" firstAttribute="centerX" secondItem="QPM-xp-ZW5" secondAttribute="centerX" id="kTb-kE-BkQ"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="makeMapBtn" destination="dP9-ap-ks0" id="ZyV-5R-nen"/>
                         <outlet property="makePinBtn" destination="hAx-0m-e2R" id="6ju-AX-3qq"/>
@@ -337,6 +338,7 @@
                             <constraint firstItem="szP-4k-mIj" firstAttribute="height" secondItem="B9g-1u-eUh" secondAttribute="height" id="kqG-0i-B5m"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="categoryCafeBtn" destination="3rg-dd-ygY" id="Axf-qi-tXc"/>
                         <outlet property="categoryEtcBtn" destination="MsG-nD-nQ5" id="q8C-UE-jku"/>

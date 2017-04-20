@@ -80,7 +80,7 @@
 //        sleep(3);       // 3초 후 dismiss
 //        [self dismissViewControllerAnimated:YES completion:nil];
         
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
         UIViewController *mainTabBarController = [mainStoryboard instantiateInitialViewController];
 
         [[UIApplication sharedApplication].keyWindow setRootViewController:mainTabBarController];

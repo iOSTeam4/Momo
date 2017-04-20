@@ -77,10 +77,6 @@
     // Navi Pop Gesture 활성화
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
 
-    // 네비바 숨기기
-    [self.navigationController setNavigationBarHidden:YES];
-    [self.view layoutIfNeeded];
-
     // Map 세팅
     [self mapPreViewSetting];
     
@@ -100,10 +96,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    // 네비바 다시 노출
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.view layoutIfNeeded];
 }
 
 

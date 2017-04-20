@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="czM-gC-qge">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="czM-gC-qge">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -70,7 +70,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vV1-1v-Ffx">
-                                <rect key="frame" x="5" y="68" width="365" height="236.5"/>
+                                <rect key="frame" x="5" y="24" width="365" height="236.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pika.png" translatesAutoresizingMaskIntoConstraints="NO" id="xlX-TW-fsi">
                                         <rect key="frame" x="15" y="15" width="91.5" height="91.5"/>
@@ -157,9 +157,10 @@
         <!--Navigation Controller-->
         <scene sceneID="gvE-LE-woQ">
             <objects>
-                <navigationController storyboardIdentifier="MyNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="czM-gC-qge" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MyNaviViewController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="czM-gC-qge" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xuh-L7-ZRb">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xuh-L7-ZRb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -275,6 +276,7 @@
                             <constraint firstItem="Ff5-Tm-RTr" firstAttribute="centerX" secondItem="wSc-kG-KR8" secondAttribute="centerX" id="qDV-Tp-tWH"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zuj-Bj-VmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

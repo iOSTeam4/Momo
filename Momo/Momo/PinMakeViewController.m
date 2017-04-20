@@ -54,9 +54,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //NavigationBar 숨기기
-    [self.navigationController setNavigationBarHidden:YES];
-    
     // Navi Pop Gesture 활성화
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
 
@@ -138,10 +135,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    //NavigationBar 숨긴거 되살리기
-    [self.navigationController setNavigationBarHidden:NO];
-    
+        
 }
 
 

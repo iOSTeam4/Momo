@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n2O-kY-Doq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wgl-2W-VfX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -179,25 +179,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfg-PO-EI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892" y="84.107946026986511"/>
+            <point key="canvasLocation" x="2770.4000000000001" y="84.107946026986511"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="zxo-Bd-BCY">
+        <!--Item-->
+        <scene sceneID="fOI-IY-iPW">
             <objects>
-                <navigationController storyboardIdentifier="MapNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="n2O-kY-Doq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MapNaviViewController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="aRh-uF-NZE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="3Xp-Bg-0sk"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2D-7v-x2U">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IMO-KT-xL8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="5WV-cE-pnR" kind="relationship" relationship="rootViewController" id="hAY-9T-oWE"/>
+                        <segue destination="5WV-cE-pnR" kind="relationship" relationship="rootViewController" id="nGu-Fl-Sok"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Jd-Lp-w8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X0l-40-iAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47.200000000000003" y="84.107946026986511"/>
+            <point key="canvasLocation" x="1831.2" y="84.107946026986511"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="w2v-UM-hj6">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wgl-2W-VfX" customClass="MainTabBarController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="gUK-7A-aAX">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="aRh-uF-NZE" kind="relationship" relationship="viewControllers" id="BC3-mE-YVN"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hgd-dt-qod" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892" y="84.107946026986511"/>
         </scene>
     </scenes>
 </document>

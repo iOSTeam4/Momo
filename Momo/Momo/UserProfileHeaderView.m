@@ -33,7 +33,7 @@
     [self.userEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
     [self.userEditBtn.layer setBorderWidth:1];
     
-    self.userCommentLabel.text = @"자 이제 시작이야 내 꿈을! 내 꿈을 위한 여행 피카츄! 피카피카! 걱정따윈 없어 업서 내 친구와 함께니깐~";
+    self.userCommentLabel.text = @"자 이제 시작이야 내 꿈을!\n내 꿈을 위한 여행 피카츄! 피카피카!\n걱정따윈 없어 업서 내 친구와 함께니깐~";
     
 }
 

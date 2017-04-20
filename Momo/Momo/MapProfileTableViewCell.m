@@ -80,6 +80,7 @@
 
 - (void)mapViewSetting {
 
+    [self bringSubviewToFront:self.mapPlaceholderImgView];
     
     // Google Map View 설정
     if ([DataCenter myPinListWithMapIndex:self.mapIndex].count > 0) {
