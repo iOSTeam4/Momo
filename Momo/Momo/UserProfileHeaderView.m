@@ -22,8 +22,12 @@
     
     
     // 프로필 BackView 세팅
-    [self.backView.layer setCornerRadius:20];
+//    [self.backView.layer setCornerRadius:20];
 
+    self.backView.layer.shadowOffset = CGSizeMake(-5, 8);
+    self.backView.layer.shadowRadius = 10;
+    self.backView.layer.shadowOpacity = 0.3;
+    
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
 //    NSLog(@"%f", self.userImgView.frame.size.height/2);

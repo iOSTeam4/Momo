@@ -169,7 +169,6 @@
 				3F395E561E961FC8009F082D /* UserProfileHeaderView.h */,
 				3F395E571E961FC8009F082D /* UserProfileHeaderView.m */,
 				3F395E541E961F72009F082D /* UserProfileHeaderView.xib */,
-				3F395E3C1E95EFF5009F082D /* MapProfileTableViewCell.h */,
 				3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */,
 				3F395E3E1E95EFF5009F082D /* MapProfileTableViewCell.xib */,
 				3F395E411E95F00C009F082D /* PinProfileTableViewCell.h */,
@@ -264,6 +263,7 @@
 				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
 				3FD392F01E93C94400AFBB3A /* My.storyboard */,
 				3F395E591E9631F6009F082D /* HeaderView&Cell */,
+				3F395E3C1E95EFF5009F082D /* MapProfileTableViewCell.h */,
 				3FBD0B2C1EA3C44300319491 /* Follow */,
 				3FBD0B2B1EA3C3EE00319491 /* Edit */,
 			);

@@ -190,7 +190,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="3Xp-Bg-0sk"/>
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IMO-KT-xL8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IMO-KT-xL8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
