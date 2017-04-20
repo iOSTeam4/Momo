@@ -9,7 +9,7 @@
 #import "NetworkModule.h"
 
 
-static NSString *const API_BASE_URL         = @"https://www.yeoptest.com";
+static NSString *const API_BASE_URL         = @"https://momo.kizmo04.com";
 
 static NSString *const SIGN_UP_URL          = @"/api/member/signup/";
 static NSString *const LOG_IN_URL           = @"/api/member/login/";
@@ -223,6 +223,61 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
         
 }
 
+// Get member profile (Facebook & e-mail 계정)
++ (void)getMemberProfileRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    
+    request.HTTPMethod = @"GET";
+    
+    // Task
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                    NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                    
+                                                    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                    
+                                                    // 메인스레드로 돌려서 보냄
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        
+                                                        if (!error) {
+                                                            if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                // Code: 200 Success
+                                                                
+                                                                
+                                                                // 정상적으로 로그아웃 되었습니다
+                                                                completionBlock(YES, @"정상적으로 로그아웃 되었습니다");
+                                                                
+                                                            } else {
+                                                                // Code: 401 Unauthorized
+                                                                
+                                                                // 토큰이 유효하지 않습니다.
+                                                                NSLog(@"%@", [responseDic objectForKey:@"detail"]);
+                                                                completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                
+                                                            }
+                                                        } else {
+                                                            // Network error
+                                                            NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                            completionBlock(NO, @"Network error");
+                                                        }
+                                                        
+                                                    });
+                                                }];
+    
+    [dataTask resume];
+
+}
+
 
 
 
@@ -256,6 +311,9 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
                         @[@"나들목", @"서울특별시 강남구 논현동 5-16", @"맛있음 ㅋㅋ", @1, @37.517116, @127.023943],
                         @[@"나들목2", @"서울특별시 강남구 논현동 5-16", @"이 핀은 테스트 맛있음 ㅋㅋ", @1, @37.517126, @127.023743],
                         @[@"스타벅스 신사역점", @"서울특별시 강남구 논현동 1-3", @"좁은데, 사람도 많아..", @0, @37.516224, @127.020653]];
+    
+    
+    NSArray *postArr = @[@[@""],@[@""]];
 
     
     RLMRealm *realm = [RLMRealm defaultRealm];

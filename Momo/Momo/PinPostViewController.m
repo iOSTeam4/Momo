@@ -81,7 +81,7 @@
         cell.profileImageView2.layer.masksToBounds = YES;
         cell.profileImageView2.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
         cell.categoryImg2.image = [UIImage imageNamed:@"04S"];
-//        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [cell.contentImageView2 setImage:[UIImage imageNamed:self.dataTempArr2[indexPath.row][1]]];
         return cell;
 

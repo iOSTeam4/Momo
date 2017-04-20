@@ -206,18 +206,11 @@
         
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
+        [pinCell initWithPinIndex:indexPath.row];
+        
         pinCell.tag = indexPath.row;    // 태그 설정
         pinCell.delegate = self;    // 델리게이트 설정
         
-        // 데이터 세팅
-        if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
-            pinCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
-        }
-        if ([DataCenter sharedInstance].momoUserData.user_username) {
-            pinCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
-        }
-        
-        pinCell.pinNameLabel.text = ((MomoPinDataSet *)([MomoPinDataSet allObjects][indexPath.row])).pin_name;
         
         return pinCell;
     }
