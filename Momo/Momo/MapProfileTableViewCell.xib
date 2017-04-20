@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -69,6 +69,9 @@
                                     <constraint firstItem="xRf-A5-3id" firstAttribute="width" secondItem="6TZ-pC-QxF" secondAttribute="width" multiplier="2/3" constant="-1.6699999999999999" id="G4L-km-la7"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="COG-jG-Ync">
+                                <rect key="frame" x="10" y="47" width="245" height="245"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOC-oZ-7xj">
                                 <rect key="frame" x="10" y="302" width="375" height="13.5"/>
                                 <constraints>
@@ -79,10 +82,6 @@
                                     <color key="titleColor" red="0.00059560901719999998" green="0.70855957270000003" blue="0.9997147918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tng-kr-UYJ">
-                                <rect key="frame" x="10" y="47" width="245" height="268.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1x-P1-cON">
                                 <rect key="frame" x="11" y="323.5" width="9.5" height="16"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -113,24 +112,24 @@
                         <constraints>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="1vf-ai-PVM"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="centerY" secondItem="gc4-8R-2oX" secondAttribute="centerY" id="8pZ-6L-xQ4"/>
+                            <constraint firstItem="COG-jG-Ync" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="C7P-7r-Ljv"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="top" secondItem="6TZ-pC-QxF" secondAttribute="bottom" constant="10" id="Efn-uF-tdC"/>
                             <constraint firstAttribute="trailing" secondItem="mOC-oZ-7xj" secondAttribute="trailing" constant="5" id="Fvh-3q-4Si"/>
-                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="bottom" secondItem="mOC-oZ-7xj" secondAttribute="bottom" id="GAM-uw-wkf"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="mOC-oZ-7xj" secondAttribute="leading" constant="1" id="Ioj-Rt-ncn"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="Ktk-r4-CDE"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="trailing" constant="5" id="Nzn-QZ-igj"/>
+                            <constraint firstItem="COG-jG-Ync" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="P5j-92-oth"/>
                             <constraint firstAttribute="trailing" secondItem="zaC-BX-6Hc" secondAttribute="trailing" constant="15" id="Pdm-VE-vE9"/>
                             <constraint firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" constant="10" id="Qjs-gj-rSv"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="QmK-5L-Zby"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.08" id="Rah-sL-95X"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="top" secondItem="mOC-oZ-7xj" secondAttribute="bottom" constant="8" id="T5M-AA-lAS"/>
+                            <constraint firstItem="COG-jG-Ync" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="WkE-um-MNA"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="leading" secondItem="u1x-P1-cON" secondAttribute="trailing" constant="3" id="YYF-Fs-aCN"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="a37-4h-SS5"/>
-                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="clC-HY-2H6"/>
+                            <constraint firstItem="COG-jG-Ync" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="a7C-zF-wSd"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
-                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="ff7-7f-LwN"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
-                            <constraint firstItem="Tng-kr-UYJ" firstAttribute="top" secondItem="xRf-A5-3id" secondAttribute="top" id="j5d-uW-tap"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="15" id="pcJ-pd-dTD"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" id="vA8-zq-quv"/>
@@ -151,6 +150,7 @@
                 <outlet property="mapEditBtn" destination="zaC-BX-6Hc" id="U6R-iq-Z9E"/>
                 <outlet property="mapNameBtn" destination="mOC-oZ-7xj" id="3Kq-ly-PmG"/>
                 <outlet property="mapPinNumLabel" destination="u1x-P1-cON" id="xuD-yu-Jza"/>
+                <outlet property="mapPlaceholderImgView" destination="COG-jG-Ync" id="J4T-gn-QnB"/>
                 <outlet property="mapView" destination="xRf-A5-3id" id="H9O-Ka-Pv7"/>
                 <outlet property="userImgView" destination="gc4-8R-2oX" id="UlR-Ni-Udi"/>
                 <outlet property="userNameLabel" destination="Wx6-8B-Z3a" id="chi-Oo-kGs"/>
@@ -160,6 +160,7 @@
     </objects>
     <resources>
         <image name="Great Sand Dunes" width="375" height="250"/>
+        <image name="mapPlaceholder" width="1909" height="1262"/>
         <image name="pika.png" width="982" height="596"/>
         <image name="pika2.png" width="718" height="478"/>
     </resources>

@@ -41,14 +41,18 @@
     [self.navigationItem setRightBarButtonItem:naviRightBtn];
     
     
+    // 테이블뷰에 Nib(xib) Register
     [self initialTableViewCellSettingWithNib];
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
     
     
-    // TableViewCell Height 자동 적용
+    // TableView Header, Cell Height 자동 적용
+    self.tableView.estimatedSectionHeaderHeight = 260;
+    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
 }
 
 
@@ -180,11 +184,6 @@
     return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSLog(@"heightForHeaderInSection");
-    return 260;
-}
-
 
 #pragma mark - Rows Settings
 
@@ -203,26 +202,11 @@
     
     if (self.mapPinNum == 0) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
+        [mapCell initWithMapIndex:indexPath.row];
+        
         mapCell.tag = indexPath.row;    // 태그 설정
         mapCell.delegate = self;        // 델리게이트 설정
-        
-        // 데이터 세팅
-        if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
-            mapCell.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
-        }
-        if ([DataCenter sharedInstance].momoUserData.user_username) {
-            mapCell.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
-        }
-        
-        [mapCell.mapNameBtn setTitle:[DataCenter myMapList][indexPath.row].map_name forState:UIControlStateNormal];
 
-        if ([DataCenter myMapList][indexPath.row].map_is_private) {  // 비밀지도일때 자물쇠 아이콘 추가
-            [mapCell.mapNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
-            [mapCell.mapNameBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
-            [mapCell.mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2.5, 0, 0)];
-        }
-        
-        mapCell.mapPinNumLabel.text = [NSString stringWithFormat:@"%ld", [DataCenter myMapList][indexPath.row].map_pin_list.count];
         
         return mapCell;
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -74,11 +74,10 @@
                             <color key="textColor" red="0.55289608239999999" green="0.54851245879999999" blue="0.57745069270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="팔로워들에게 자기소개를 해보세요 :0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnD-av-G4c">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="팔로워들에게 자기소개를 해보세요 :0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnD-av-G4c">
                             <rect key="frame" x="15" y="155" width="335" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="20" id="BLB-bA-8BW"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="20" id="FzW-NP-PyR"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="BLB-bA-8BW"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -144,10 +143,9 @@
                         <constraint firstItem="dnD-av-G4c" firstAttribute="top" secondItem="2aR-3M-yop" secondAttribute="bottom" constant="17" id="14R-Bz-GkS"/>
                         <constraint firstItem="ucb-jo-xka" firstAttribute="top" secondItem="Zec-gh-XT0" secondAttribute="bottom" constant="5" id="33M-Aj-Hpf"/>
                         <constraint firstItem="MSu-gd-9mD" firstAttribute="leading" secondItem="NdR-tf-O6X" secondAttribute="leading" constant="15" id="4eA-xT-j2y"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="260" id="5pr-KA-RR0"/>
                         <constraint firstItem="fTt-OC-bDx" firstAttribute="width" secondItem="fTt-OC-bDx" secondAttribute="height" multiplier="10:3" id="8SK-2G-OL0"/>
                         <constraint firstItem="MFE-2i-3G2" firstAttribute="top" secondItem="33w-V8-FN6" secondAttribute="top" id="9IH-Ka-kzF"/>
-                        <constraint firstAttribute="height" constant="260" id="9wq-5I-SPR"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="260" id="9wq-5I-SPR"/>
                         <constraint firstAttribute="trailing" secondItem="Zec-gh-XT0" secondAttribute="trailing" constant="15" id="ANG-ba-wLF"/>
                         <constraint firstItem="33w-V8-FN6" firstAttribute="centerX" secondItem="NdR-tf-O6X" secondAttribute="centerX" multiplier="0.6" id="CWY-ha-iQZ"/>
                         <constraint firstItem="33w-V8-FN6" firstAttribute="width" secondItem="NdR-tf-O6X" secondAttribute="width" multiplier="0.3" id="Cpu-jZ-vYB"/>

@@ -186,7 +186,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MapNaviViewController" automaticallyAdjustsScrollViewInsets="NO" id="n2O-kY-Doq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U2D-7v-x2U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2D-7v-x2U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

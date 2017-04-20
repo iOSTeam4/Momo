@@ -13,7 +13,9 @@
 #import "MainUserCollectionCell.h"
 
 @interface MainViewController ()
-<UITableViewDelegate, UITableViewDataSource>
+<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+
+@property (nonatomic) UISearchBar *searchBar;
 
 @property (nonatomic) NSArray *mainMapArray;
 @property (nonatomic) NSArray *mainUserArray;
@@ -26,6 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"Main View"];
+    
+    [self initialNaviBarSetting];               // NaviBar 초기세팅
+    [self initialSearchBarSetting];             // SearchBar 초기세팅
+
+    
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame];
 //    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -51,6 +58,49 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+}
+
+// NaviBar, SearchBar 세팅 ----------------------------//
+
+- (void)initialNaviBarSetting {
+    
+    // Navi Bar 오른쪽 설정 버튼
+    UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(selectedNaviRightBtn)];
+    [self.navigationItem setRightBarButtonItem:naviRightBtn];
+}
+
+- (void)initialSearchBarSetting {
+
+    // UISearchBar
+    self.searchBar = [[UISearchBar alloc] init];
+    self.searchBar.delegate = self;
+    
+    UITextField *searchTextField = [self.searchBar valueForKey:@"searchField"];
+    searchTextField.backgroundColor = [UIColor mm_paleGreyColor];    // searchBar backgroundColor
+    searchTextField.textColor = [UIColor mm_brightSkyBlueColor];     // searchBar textColor
+    searchTextField.font = [UIFont boldSystemFontOfSize:14];         // searchBar font
+    self.searchBar.placeholder = @"지도 또는 사람 찾아보기";               // searchBar placeholder
+    
+}
+
+// NaviBar right Btn Selector Method
+- (void)selectedNaviRightBtn {
+    
+    self.navigationItem.titleView = self.searchBar;      // 네비바에 서치바 배치
+    
+    // Navi Bar 오른쪽 취소 버튼
+    UIBarButtonItem *searchBarCancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(searchBarCancelBtn)];
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationItem setRightBarButtonItem:searchBarCancelBtn];
+
+}
+
+// 취소버튼 눌렀을 때
+- (void)searchBarCancelBtn {
+    
+    self.navigationItem.titleView = nil;    // 서치바 없애기
+    self.navigationItem.rightBarButtonItem = nil;
+    [self initialNaviBarSetting];           // 다시 초기 네비바 버튼들 세팅
 }
 
 

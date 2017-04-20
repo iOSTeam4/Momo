@@ -12,12 +12,14 @@
 
 #import "MapMakeViewController.h"
 
-@interface MapViewController () <GMSMapViewDelegate>
+@interface MapViewController () <GMSMapViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) NSInteger currentZoomCase;
+
+@property (nonatomic) UISearchController *searchController;
 
 
 // 롱 프레스 새 핀 생성, 등록
@@ -49,7 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // MapViewController 공통 기능 기본 세팅
     [self initialSetting];
     [self initialSettingGoogleMapView];
@@ -87,8 +89,6 @@
     
 }
 
-
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -102,10 +102,9 @@
 }
 
 
-#pragma mark - Initial Setting Methods
+#pragma mark - Show Selected Map Mode Methods
 
 // 선택 지도 보기 세팅
-
 - (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData {
     NSLog(@"showSelectedMapAndSetMapIndex : %@", mapData.map_name);
     
@@ -113,7 +112,7 @@
     self.mapData = mapData;
 }
 
-
+// 선택 지도뷰 세팅
 - (void)mapInfoViewSetting {
     
     // 정보 세팅
@@ -141,13 +140,40 @@
 
 }
 
-
+#pragma mark - Initial Setting Methods
 
 // MapViewController 초기 세팅 ----------------------------//
 
 - (void)initialSetting {
     [self.navigationItem setTitle:@"Map View"];
     
+    // Navi Bar & Search Feature Setting --------------------------//
+    
+    // searchController
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.hidesNavigationBarDuringPresentation = NO;        // naviBar에 searchBar 있음
+
+    self.searchController.delegate = self;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.delegate = self;
+
+    UITextField *searchTextField = [self.searchController.searchBar valueForKey:@"searchField"];
+    searchTextField.backgroundColor = [UIColor mm_paleGreyColor];    // searchBar backgroundColor
+    searchTextField.textColor = [UIColor mm_brightSkyBlueColor];     // searchBar textColor
+    searchTextField.font = [UIFont boldSystemFontOfSize:14];         // searchBar font
+    self.searchController.searchBar.placeholder = @"핀 또는 주소 찾아보기";    // searchBar placeholder
+    
+    self.navigationItem.titleView = self.searchController.searchBar;      // 네비바에 서치바 배치
+    
+    
+//    // RightBarButtonItem (공유버튼?)
+//    UIBarButtonItem *naviRightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(selectedNaviRightBtn)];
+//    [self.navigationItem setRightBarButtonItem:naviRightBtn];
+
+    // -------------------------------------------//
+    
+    
+    // 새 핀 만들기 뷰의 버튼 UI세팅
     self.cancelBtn.layer.cornerRadius = 10;
     self.cancelBtn.layer.borderWidth = 1;
     self.cancelBtn.layer.borderColor = self.cancelBtn.titleLabel.textColor.CGColor;
@@ -192,6 +218,24 @@
     self.currentZoomCase = PIN_MARKER_DETAIL;
     
 }
+
+
+#pragma mark - Searching Methods (NavigationBar)
+
+// NavigationBar ------------------------------//
+
+// UISearchControllerDelegate Methods
+
+// UISearchResultsUpdating Methods
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"updateSearchResultsForSearchController");
+    
+}
+
+// UISearchBarDelegate Methods
+// RightBarButtonItem Selector Method
+
+
 
 #pragma mark - Custom Methods
 

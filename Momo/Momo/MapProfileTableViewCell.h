@@ -13,6 +13,9 @@
 
 @interface MapProfileTableViewCell : UITableViewCell
 
+- (void)initWithMapIndex:(NSInteger)mapIndex;
+@property (nonatomic) NSInteger mapIndex;
+
 @property (weak, nonatomic) id<MapProfileTableViewCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *backView;
@@ -21,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIImageView *mapPlaceholderImgView;
 @property (weak, nonatomic) IBOutlet UIButton *mapNameBtn;
 @property (weak, nonatomic) IBOutlet UILabel *mapPinNumLabel;
 
