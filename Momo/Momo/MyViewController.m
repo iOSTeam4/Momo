@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
 
+@property (nonatomic) UIRefreshControl *tableViewRefreshControl;
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end
@@ -35,17 +37,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 테이블뷰에 Nib(xib) Register
+    // TableView Settings -------------------//
+
+    // TableView Nib(xib) Register
     [self initialTableViewCellSettingWithNib];
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
-    
     
     // TableView Header, Cell Height 자동 적용
     self.tableView.estimatedSectionHeaderHeight = 260;
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    // TableView RefreshControl 설정
+    self.tableViewRefreshControl = [[UIRefreshControl alloc] init];
+    [self.tableView addSubview:self.tableViewRefreshControl];
+    [self.tableViewRefreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
 
 }
 
@@ -135,6 +143,15 @@
 }
 
 
+
+- (void)refreshTableView {
+    [self.tableViewRefreshControl endRefreshing];
+    
+    // 서버 네트웍 통신 들어갈 부분
+    [self.tableView reloadData];
+}
+
+
 // TableView Methods -------------------------------------------//
 
 - (void)initialTableViewCellSettingWithNib {
@@ -172,9 +189,9 @@
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
     }
-    if ([DataCenter sharedInstance].momoUserData.user_id) {
-        headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
-    }
+//    if ([DataCenter sharedInstance].momoUserData.user_id) {
+//        headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
+//    }
     
     return headerView;
 }

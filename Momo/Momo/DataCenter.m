@@ -83,7 +83,7 @@
 }
 
 // 패치
-- (BOOL)fetchMomoUserData {
+- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
     
     // 기존 저장되어있던 기본 데이터들 패치 (페북 & 이메일 공통)
     if([MomoUserDataSet allObjects].firstObject) {     // nil이 아닐 때 불러옴
@@ -91,14 +91,27 @@
 
         NSLog(@"token : %@, count : %ld =? %ld", [DataCenter sharedInstance].momoUserData.user_token, [MomoUserDataSet allObjectsInRealm:[RLMRealm defaultRealm]].count, [MomoUserDataSet allObjects].count);
         
-        // 서버랑 변동사항 없나 확인 절차 필요
-        
-        return YES;
+        [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+            
+            if (isSuccess) {
+                NSLog(@"get Member Profile success : %@", result);
+
+                completionBlock(YES);
+                
+            } else {
+                NSLog(@"get Member Profile Request error : %@", result);
+                [DataCenter removeMomoUserData];
+                [DataCenter sharedInstance].momoUserData = [[MomoUserDataSet alloc] init];
+                
+                completionBlock(NO);
+                
+            }
+        }];
         
     } else {    // 토큰 없을 때
         [DataCenter sharedInstance].momoUserData = [[MomoUserDataSet alloc] init];
         
-        return NO;
+        completionBlock(NO);
     }
 }
 
@@ -116,6 +129,57 @@
 }
 
 
++ (void)momogetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic {
+    
+    // realm transaction
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+
+        // 추가 User 정보
+        [DataCenter sharedInstance].momoUserData.user_username = [responseDic objectForKey:@"username"];
+        
+        if ([responseDic objectForKey:@"email"]) {
+            [DataCenter sharedInstance].momoUserData.user_email = [responseDic objectForKey:@"email"];
+        }
+        if ([[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]) {
+            [DataCenter sharedInstance].momoUserData.user_profile_image_url = [[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
+        }
+
+        // 기존 데이터, 새로 생성된 데이터 구별했으나, 어차피 다른 디바이스에서 같은 계정으로 데이터 삭제 되있었을 때
+        // 삭제에 관한 부분(RLMArray 해당 index 삭제까지) 복잡하게 처리할 바에야 그냥 전부 데이터 받아오니, 다시 세팅하는 방식으로 함
+        // 추후, create_date기반으로 update 된 부분만 서버에서 보내주는 API가 나온다면 전부 삭제하는 로직 없앨 것.
+        [[DataCenter myMapList] removeAllObjects];
+        [realm deleteObjects:[MomoMapDataSet allObjects]];
+        [realm deleteObjects:[MomoPinDataSet allObjects]];
+        [realm deleteObjects:[MomoPostDataSet allObjects]];
+        
+        // Map 데이터 파싱 및 저장(업데이트)
+        for (NSDictionary *mapDic in ((NSArray *)[responseDic objectForKey:@"map_list"])) {
+            MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];
+            
+            [realm addOrUpdateObject:mapData];              // map 데이터 add or update
+            [[DataCenter myMapList] addObject:mapData];     // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
+            
+            
+            // Pin 데이터 파싱 및 저장(업데이트)
+            for (NSDictionary *pinDic in ((NSArray *)[mapDic objectForKey:@"pin_list"])) {
+                MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];
+                
+                [realm addOrUpdateObject:pinData];              // pin 데이터 add or update
+                [mapData.map_pin_list addObject:pinData];       // map의 pin_list에 pin 추가
+                
+                
+                // Post 데이터 파싱 및 저장(업데이트)
+                for (NSDictionary *postDic in ((NSArray *)[pinDic objectForKey:@"post_list"])) {
+                    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];
+                    
+                    [realm addOrUpdateObject:postData];             // post 데이터 add or update
+                    [pinData.pin_post_list addObject:postData];     // pin의 post_list에 post 추가
+                }
+            }
+        }
+    }];
+}
 
 @end
 

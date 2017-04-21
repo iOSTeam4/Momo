@@ -83,7 +83,7 @@
     // Pin 세팅
     self.pinName.text = self.mapData.map_pin_list[self.pinIndex].pin_name;
     self.pinAddress.text = self.mapData.map_pin_list[self.pinIndex].pin_place.place_address;
-    self.pinMainText.text = self.mapData.map_pin_list[self.pinIndex].pin_description;
+//    self.pinMainText.text = self.mapData.map_pin_list[self.pinIndex].pin_description;
     
     // User UI, 정보 세팅
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;

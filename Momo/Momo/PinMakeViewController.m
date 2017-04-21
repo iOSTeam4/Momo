@@ -188,7 +188,7 @@
         offsetY += 44;
         
         // 수정모드일 때, 등록되어있던 맵 정보 세팅 (map pk값으로 구별)
-        if (self.isEditMode && (mapArr[i].pk == self.pinData.pin_map.pk)) {
+        if (self.isEditMode && (mapArr[i].pk == self.pinData.pin_map_pk)) {
             [self selectedMapCheckBtn:mapCheckBtn];
         }
     }
@@ -315,19 +315,19 @@
             // 선택한 맵에 핀 새로 등록
             [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
 
-            // 기존 맵에 핀 삭제
-            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
-            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
-            
-            // 핀 속에 지도 정보 변경
-            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
+//            // 기존 맵에 핀 삭제
+//            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
+//            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
+//            
+//            // 핀 속에 지도 정보 변경
+//            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
             
         }];
     }
     
     UIStoryboard *pinStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
     PinViewController *pinVC = [pinStoryBoard instantiateInitialViewController];
-    [pinVC showSelectedPinAndSetMapData:self.pinData.pin_map withPinIndex:[self.pinData.pin_map.map_pin_list indexOfObject:self.pinData]];
+//    [pinVC showSelectedPinAndSetMapData:self.pinData.pin_map withPinIndex:[self.pinData.pin_map.map_pin_list indexOfObject:self.pinData]];
     
     [self.navigationController pushViewController:pinVC animated:YES];
 }

@@ -253,14 +253,21 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
                                                             if (((NSHTTPURLResponse *)response).statusCode == 200) {
                                                                 // Code: 200 Success
                                                                 
-                                                                
-                                                                // 정상적으로 로그아웃 되었습니다
-                                                                completionBlock(YES, @"정상적으로 로그아웃 되었습니다");
+                                                                // 데이터 파싱, 세팅
+                                                                [DataCenter momogetMemberProfileDicParsingAndUpdate:responseDic];
+
+                                                                completionBlock(YES, nil);
                                                                 
                                                             } else {
-                                                                // Code: 401 Unauthorized
+                                                                // Code: 400 ???
                                                                 
+                                                                // Code: 401 Unauthorized
                                                                 // 토큰이 유효하지 않습니다.
+                                                                // 자격 인증데이터(authentication credentials)가 제공되지 않았습니다.
+                                                                
+                                                                // Code: 404 Not found
+                                                                // 해당 pk의 user가 존재하지 않습니다.
+                                                                
                                                                 NSLog(@"%@", [responseDic objectForKey:@"detail"]);
                                                                 completionBlock(NO, [responseDic objectForKey:@"detail"]);
                                                                 
@@ -280,81 +287,167 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
 
 
 
+//// 서버로부터 유저 지도정보 패치하는 메서드
+//+ (void)fetchUserMapData {
+//    NSLog(@"fetchUserMapData");
+//    
+//    // 서버로부터 유저 지도리스트 등 받아와 세팅할 부분
+//    // 일단 더미로 넣겠음
+//
+//    NSArray *mapArr = @[@[@"지도명", @"지도 설명", @1],   // 지도명, 지도설명, 공개설정(0: 공개 , 1 : 비공개)
+//                        @[@"패캠 주변 맛집", @"가로수길 근천데 맛집 잘 없는거 같은건 기분탓인가??????????????????????", @0],
+//                        @[@"서울 맛집 리스트", @"yummy yummy👍", @1],
+//                        @[@"제주도를 가보자", @"꿀잼", @0],
+//                        @[@"광화문-경복궁-서촌", @"오피스 라이프를 빛내주는 곳들 :)", @0],
+//                        @[@"이태원 맥주집", @"준영이형 마음의 고향을 파헤쳐보자", @0],
+//                        @[@"낚시", @"", @1],
+//                        @[@"엑소 투어⚡️", @"엑소 따라 여행 간다", @0],
+//                        @[@"수도권 마스킹 or 와이드스크린 영화관", @"🍿", @1]];
+//    
+//
+//    
+//    NSArray *pinArr = @[@[@"핀명", @"핀주소", @"핀설명", @4, @37.517181f, @127.028488f],   // 핀명, 핀주소, 핀설명, 라벨(0~5), 위도, 경도
+//                        @[@"패스트캠퍼스", @"서울특별시 강남구 논현1동", @"패캠패캠", @3, @37.515602, @127.021402],
+//                        @[@"이케아", @"경기도 광명시 소하2동 일직로 17", @"이케아 👍", @2, @37.423480, @126.882591],
+//                        @[@"롯데월드", @"서울특별시 송파구 잠실3동 올림픽로 240", @"꿀잼", @3, @37.511120, @127.098328],
+//                        @[@"강남역", @"서울특별시 역삼1동", @"항상 사람 많은듯", @3, @37.498023, @127.027417],
+//                        @[@"발리 슈퍼스토어", @"서울특별시 마포구 서교동 양화로6길 45", @"준영이형의 마음의 고향", @1, @37.548755, @126.916777],
+//                        @[@"화곡 2동 주민센터", @"서울특별시 강서구 화곡2동 곰달래로37길 13", @"한선이형 동네", @3, @37.531612, @126.854423],
+//                        @[@"나들목", @"서울특별시 강남구 논현동 5-16", @"맛있음 ㅋㅋ", @1, @37.517116, @127.023943],
+//                        @[@"나들목2", @"서울특별시 강남구 논현동 5-16", @"이 핀은 테스트 맛있음 ㅋㅋ", @1, @37.517126, @127.023743],
+//                        @[@"스타벅스 신사역점", @"서울특별시 강남구 논현동 1-3", @"좁은데, 사람도 많아..", @0, @37.516224, @127.020653]];
+//    
+//    
+//    
+//    RLMRealm *realm = [RLMRealm defaultRealm];
+//    [realm transactionWithBlock:^{
+//
+//        for (NSInteger i = 0 ; i < mapArr.count ; i++) {
+//            MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
+//            [[DataCenter sharedInstance].momoUserData.user_map_list addObject:mapData];
+//            
+//            mapData.pk = i;
+//            mapData.map_name = mapArr[i][0];
+//            if (![mapArr[i][1] isEqualToString:@""]) {  // 설명 비었을 경우 테스트
+//                mapData.map_description = mapArr[i][1];
+//            }
+//            mapData.map_is_private = [(NSNumber *)mapArr[i][2] boolValue];
+//            
+//            if (i == 0) {
+//                // 0번 지도만 핀 등록
+//                for (NSInteger j = 0 ; j < pinArr.count ; j++) {
+//                    MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
+//                    [mapData.map_pin_list addObject:pinData];
+//                    
+//                    pinData.pk = j;
+//                    pinData.pin_name = pinArr[j][0];
+////                    pinData.pin_description = pinArr[j][2];
+//                    pinData.pin_label = [(NSNumber *)pinArr[j][3] integerValue];
+//                    pinData.pin_map_pk = mapData.pk;
+//                    
+//                    MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
+//                    pinData.pin_place = placeData;
+//                    
+//                    placeData.pk = j;
+//                    placeData.place_address = pinArr[j][1];
+//                    placeData.place_lat = [(NSNumber *)pinArr[j][4] doubleValue];
+//                    placeData.place_lng = [(NSNumber *)pinArr[j][5] doubleValue];
+//                }
+//            }
+//        }
+//    }];
+//}
 
 
-// 서버로부터 유저 지도정보 패치하는 메서드
-+ (void)fetchUserMapData {
-    NSLog(@"fetchUserMapData");
+// Patch member profile update
++ (void)patchMemberProfileUpdateWithUsername:(NSString *)username
+                              withProfileImg:(NSData *)imgData
+                         withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
-    // 서버로부터 유저 지도리스트 등 받아와 세팅할 부분
-    // 일단 더미로 넣겠음
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 
-    NSArray *mapArr = @[@[@"지도명", @"지도 설명", @1],   // 지도명, 지도설명, 공개설정(0: 공개 , 1 : 비공개)
-                        @[@"패캠 주변 맛집", @"가로수길 근천데 맛집 잘 없는거 같은건 기분탓인가??????????????????????", @0],
-                        @[@"서울 맛집 리스트", @"yummy yummy👍", @1],
-                        @[@"제주도를 가보자", @"꿀잼", @0],
-                        @[@"광화문-경복궁-서촌", @"오피스 라이프를 빛내주는 곳들 :)", @0],
-                        @[@"이태원 맥주집", @"준영이형 마음의 고향을 파헤쳐보자", @0],
-                        @[@"낚시", @"", @1],
-                        @[@"엑소 투어⚡️", @"엑소 따라 여행 간다", @0],
-                        @[@"수도권 마스킹 or 와이드스크린 영화관", @"🍿", @1]];
-    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
 
-    
-    NSArray *pinArr = @[@[@"핀명", @"핀주소", @"핀설명", @4, @37.517181f, @127.028488f],   // 핀명, 핀주소, 핀설명, 라벨(0~5), 위도, 경도
-                        @[@"패스트캠퍼스", @"서울특별시 강남구 논현1동", @"패캠패캠", @3, @37.515602, @127.021402],
-                        @[@"이케아", @"경기도 광명시 소하2동 일직로 17", @"이케아 👍", @2, @37.423480, @126.882591],
-                        @[@"롯데월드", @"서울특별시 송파구 잠실3동 올림픽로 240", @"꿀잼", @3, @37.511120, @127.098328],
-                        @[@"강남역", @"서울특별시 역삼1동", @"항상 사람 많은듯", @3, @37.498023, @127.027417],
-                        @[@"발리 슈퍼스토어", @"서울특별시 마포구 서교동 양화로6길 45", @"준영이형의 마음의 고향", @1, @37.548755, @126.916777],
-                        @[@"화곡 2동 주민센터", @"서울특별시 강서구 화곡2동 곰달래로37길 13", @"한선이형 동네", @3, @37.531612, @126.854423],
-                        @[@"나들목", @"서울특별시 강남구 논현동 5-16", @"맛있음 ㅋㅋ", @1, @37.517116, @127.023943],
-                        @[@"나들목2", @"서울특별시 강남구 논현동 5-16", @"이 핀은 테스트 맛있음 ㅋㅋ", @1, @37.517126, @127.023743],
-                        @[@"스타벅스 신사역점", @"서울특별시 강남구 논현동 1-3", @"좁은데, 사람도 많아..", @0, @37.516224, @127.020653]];
-    
-    
-    NSArray *postArr = @[@[@""],@[@""]];
+    // 바디 세팅
+    if (username && imgData) {
+        // 유저네임 & 사진 Update
+        request.HTTPBody = [[NSString stringWithFormat:@"username=%@&profile_img=%@", username, imgData] dataUsingEncoding:NSUTF8StringEncoding];
 
+    } else if (imgData) {
+        // 사진만 Update
+        request.HTTPBody = [[NSString stringWithFormat:@"profile_img=%@", imgData] dataUsingEncoding:NSUTF8StringEncoding];
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-
-        for (NSInteger i = 0 ; i < mapArr.count ; i++) {
-            MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
-            [[DataCenter sharedInstance].momoUserData.user_map_list addObject:mapData];
-            
-            mapData.pk = i;
-            mapData.map_name = mapArr[i][0];
-            if (![mapArr[i][1] isEqualToString:@""]) {  // 설명 비었을 경우 테스트
-                mapData.map_description = mapArr[i][1];
-            }
-            mapData.map_is_private = [(NSNumber *)mapArr[i][2] boolValue];
-            
-            if (i == 0) {
-                // 0번 지도만 핀 등록
-                for (NSInteger j = 0 ; j < pinArr.count ; j++) {
-                    MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
-                    [mapData.map_pin_list addObject:pinData];
-                    
-                    pinData.pk = j;
-                    pinData.pin_name = pinArr[j][0];
-                    pinData.pin_description = pinArr[j][2];
-                    pinData.pin_label = [(NSNumber *)pinArr[j][3] integerValue];
-                    pinData.pin_map = mapData;
-                    
-                    MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
-                    pinData.pin_place = placeData;
-                    
-                    placeData.pk = j;
-                    placeData.place_address = pinArr[j][1];
-                    placeData.place_lat = [(NSNumber *)pinArr[j][4] doubleValue];
-                    placeData.place_lng = [(NSNumber *)pinArr[j][5] doubleValue];
-                }
-            }
-        }
-    }];
+    } else {
+        // 유저네임 Update (잘못 호출하는 경우 없다고 가정)
+        request.HTTPBody = [[NSString stringWithFormat:@"username=%@", username] dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    request.HTTPMethod = @"PATCH";
+    
+    // Task
+    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
+                                                             fromData:nil
+                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                        
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                        
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                    // Code: 200 Success
+                                                                    completionBlock(YES, @"Code: 200 Success");
+                                                                    
+                                                                } else {
+                                                                    // Code: 413 Request Entity Too Large
+                                                                    // Code: 500 BAD REQUEST
+                                                                    
+                                                                    completionBlock(NO, @"BAD REQUEST");
+                                                                    
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
+                                                            }
+                                                        });
+                                                        
+                                                    }];
+    
+    [postTask resume];
+    
+    
+//    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    NSData *data = UIImageJPEGRepresentation(image, 0.2);
+//    //    if(data.length >)...사진 용량에 대한 분기를 나눠야 함...용량이 2mb 정도 수준임...
+//    if (data.length >1000000) {
+//        NSLog(@"이미지가 너무 큼");
+//        NSLog(@"data length : %lu", data.length);
+//    }else{
+//        [[GODataCenter sharedInstance] updatingUserDetailImage:data completion:^(BOOL isSuccess, id respons) {
+//            if (isSuccess) {
+//                NSLog(@"유저인포컨트롤러 이미지피커 활성화");
+//                [self.updateUserPictureDataButton setBackgroundImage:image forState:UIControlStateNormal];
+//                [picker dismissViewControllerAnimated:YES completion:nil];
+//                
+//            }else{
+//                NSLog(@"유저인포컨트롤러 이미지피커 활성화 안됨");
+//            }
+//            
+//            
+//        }];
+//        //    NSString *name = @"UploadedImage.png";
+//    }
 }
-
 
 
 @end

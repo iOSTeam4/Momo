@@ -8,6 +8,7 @@
 
 #import <Realm/Realm.h>
 
+@class MomoAuthorDataSet;
 @class MomoPlaceDataSet;
 @class MomoPostDataSet;
 @class MomoPinDataSet;
@@ -21,14 +22,27 @@ RLM_ARRAY_TYPE(MomoMapDataSet)
 RLM_ARRAY_TYPE(MomoUserDataSet)
 
 
+// Author Data Set ---------------------------//
+@interface MomoAuthorDataSet : RLMObject
+
+@property NSInteger pk;
+@property NSString *username;
+@property (nonatomic) NSString *profile_img_url;
+@property NSData *profile_img_data;
+
+- (UIImage *)getAuthorProfileImg;
+
+@end
+
+
 // Place Data Set ---------------------------//
 @interface MomoPlaceDataSet : RLMObject
 @property NSInteger pk;
 
 // place_<key>
 @property NSString *place_name;
-@property NSString *place_id;
 @property NSString *place_address;
+@property NSString *place_googlepid;       //googlepid
 
 @property CGFloat place_lat;      // latitude
 @property CGFloat place_lng;      // longitude
@@ -41,19 +55,27 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property NSInteger pk;
 
 // post_<key>
-@property NSString *post_pin_name;
-@property NSString *post_pin_address;
+@property NSInteger post_pin_pk;
+@property MomoAuthorDataSet *post_author;
 
-@property NSData *post_image_data;
-@property NSString *post_comments;
+// photo
+@property (nonatomic) NSString *post_photo_url;
+@property (nonatomic) NSString *post_photo_thumbnail_url;
+@property NSData *post_photo_data;
+@property NSData *post_photo_thumbnail_data;
+
+
+// 포스트 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
++ (MomoPostDataSet *)makePostWithDic:(NSDictionary *)postDic;
+
+- (UIImage *)getPostPhotoThumbnail;
+- (UIImage *)getPostPhoto;
+
+// description
+@property NSString *post_description;
 
 @property NSString *post_created_date;
-@property MomoPinDataSet *post_pin;     // 1:1
 
-@property NSInteger post_pin_pk;
-@property NSInteger post_user_pk;
-
-- (UIImage *)getPostImage;
 
 @end
 
@@ -63,19 +85,22 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property NSInteger pk;
 
 // pin_<key>
-@property NSString *pin_author;
-@property MomoPlaceDataSet *pin_place;
-
-@property NSString *pin_name;
-@property NSString *pin_description;
-@property NSInteger pin_label;
-@property MomoMapDataSet *pin_map;      // 1:1
-
 @property NSInteger pin_map_pk;
-
+@property NSString *pin_name;
+@property NSInteger pin_label;
 @property NSString *pin_created_date;
 
+@property MomoAuthorDataSet *pin_author;
+
+@property MomoPlaceDataSet *pin_place;
 @property RLMArray<MomoPostDataSet *><MomoPostDataSet> *pin_post_list;
+
+/////////////////
+//@property NSString *pin_description;
+/////////////////
+
+// 핀 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
++ (MomoPinDataSet *)makePinWithDic:(NSDictionary *)pinDic;
 
 // 핀 생성 및 등록
 + (MomoPinDataSet *)makePinWithName:(NSString *)pinName
@@ -93,19 +118,20 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 // Map Data Set -----------------------------//
 @interface MomoMapDataSet : RLMObject
-@property NSInteger pk;
+@property NSInteger pk;     // id
 
 // map_<key>
 @property NSString *map_name;
 @property NSString *map_description;
+@property NSString *map_created_date;
 @property BOOL map_is_private;
 
-@property NSString *map_author;
-@property NSString *map_created_date;
-
-@property NSInteger map_user_pk;
+@property MomoAuthorDataSet *map_author;
 
 @property RLMArray<MomoPinDataSet *><MomoPinDataSet> *map_pin_list;
+
+// 맵 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
++ (MomoMapDataSet *)makeMapWithDic:(NSDictionary *)mapDic;
 
 // 맵 생성 및 등록
 + (MomoMapDataSet *)makeMapWithName:(NSString *)mapName
@@ -123,11 +149,13 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property NSString *user_token;
 @property NSString *user_fb_token;
 
-@property NSString *user_id;
 @property NSString *user_username;
-@property NSData *user_profile_image_data;
-@property NSString *user_profile_image_url;
+
 @property NSString *user_email;
+
+@property (nonatomic) NSString *user_profile_image_url;
+@property NSData *user_profile_image_data;
+- (UIImage *)getUserProfileImage;
 
 
 @property RLMArray<MomoUserDataSet *><MomoUserDataSet> *user_follower_list;
@@ -135,7 +163,6 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 @property RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list;
 
-- (UIImage *)getUserProfileImage;
 
 @end
 

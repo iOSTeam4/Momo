@@ -107,10 +107,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
         NSLog(@"FBSDKGraphRequest : %@", result);
         
         if (!error) {
-            
-            // user_id
-            [DataCenter sharedInstance].momoUserData.user_id = [FBSDKAccessToken currentAccessToken].userID;
-            
+    
             // 이름
             if ([result objectForKey:@"name"]) {
                 [DataCenter sharedInstance].momoUserData.user_username = [result objectForKey:@"name"];
@@ -120,7 +117,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
             // 프로필 사진
             if ([result objectForKey:@"picture"]) {
                 [DataCenter sharedInstance].momoUserData.user_profile_image_url = result[@"picture"][@"data"][@"url"];
-                [DataCenter sharedInstance].momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].momoUserData.user_profile_image_url]];
+//                [DataCenter sharedInstance].momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].momoUserData.user_profile_image_url]];
                 NSLog(@"url : %@", result[@"picture"][@"data"][@"url"]);
             }
             
@@ -183,7 +180,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                                     
                                                                     NSNumber *pk = [responseDic objectForKey:@"pk"];
                                                                     NSString *token = [responseDic objectForKey:@"token"];
-//                                                                    BOOL newMember = [[userDic objectForKey:@"newMember"] boolValue];
+//                                                                    BOOL newMember = [[userDic objectForKey:@"is_created"] boolValue];
                                                                     BOOL newMember = YES;    // 새롭게 가입한 회원
                                                                     
                                                                     NSLog(@"PK : %@, Token : %@", pk, token);

@@ -7,7 +7,7 @@
 //
 
 #import "LoginPageViewController.h"
-#import "NetworkModule.h"
+#import "LoginViewController.h"
 
 @interface LoginPageViewController ()
 <UITextFieldDelegate>
@@ -130,22 +130,45 @@
                                withPassword:self.pwTextField.text
                         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                             
-                            [self.indicator stopAnimating];
-
                             if (isSuccess) {
                                 NSLog(@"log in success : %@", result);
                                 
                                 [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
                                 
-                                // 임시로 더미데이터 세팅 /////
-                                [NetworkModule fetchUserMapData];
-                                /////////////////////////
+//                                // 임시로 더미데이터 세팅 /////
+//                                [NetworkModule fetchUserMapData];
+//                                /////////////////////////
                                 
+                                [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
-                                // 로그인뷰 페이지로 이동
-                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                    [self.indicator stopAnimating];
+                                    
+                                    if (isSuccess) {
+                                        NSLog(@"get Member Profile success : %@", result);
+
+                                        // 로그인 체킹
+                                        [LoginViewController autoLoginCheck];
+
+
+                                    } else {
+                                        NSLog(@"error : %@", result);
+                                        
+                                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                                                 message:result
+                                                                                                          preferredStyle:UIAlertControllerStyleAlert];
+                                        
+                                        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                                           style:UIAlertActionStyleDefault
+                                                                                         handler:nil];
+                                        [alertController addAction:okButton];
+                                        [self presentViewController:alertController animated:YES completion:nil];
+                                    }
+                                    
+                                }];
                                 
                             } else {
+                                [self.indicator stopAnimating];
+
                                 NSLog(@"error : %@", result);
                                 
                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"

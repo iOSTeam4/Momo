@@ -38,7 +38,13 @@
 // Get member profile
 + (void)getMemberProfileRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
 
-// 서버로부터 유저 지도정보 패치하는 메서드
-+ (void)fetchUserMapData;
+// Patch member profile update
++ (void)patchMemberProfileUpdateWithUsername:(NSString *)username
+                              withProfileImg:(NSData *)imgData
+                         withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
+
+//// 서버로부터 유저 지도정보 패치하는 메서드
+//+ (void)fetchUserMapData;
 
 @end

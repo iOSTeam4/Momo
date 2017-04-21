@@ -32,9 +32,9 @@
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         self.userNameTextField.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
     }
-    if ([DataCenter sharedInstance].momoUserData.user_id) {
-        self.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
-    }
+//    if ([DataCenter sharedInstance].momoUserData.user_id) {
+//        self.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

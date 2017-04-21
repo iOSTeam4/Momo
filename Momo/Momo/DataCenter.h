@@ -30,9 +30,9 @@
 
 // User Data 저장, 불러오기, 삭제 --------------------------//
 #pragma mark - MOMO User Data 저장, 패치, 삭제
++ (void)momogetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic;
 + (void)initialSaveMomoUserData;   // 초기 저장
-- (BOOL)fetchMomoUserData;  // 패치
+- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;  // 패치
 + (void)removeMomoUserData; // 삭제
-
 
 @end
