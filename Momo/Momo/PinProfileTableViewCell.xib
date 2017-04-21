@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-A0-G2a" userLabel="BackView">
-                        <rect key="frame" x="5" y="10" width="390" height="277.5"/>
+                        <rect key="frame" x="15" y="10" width="390" height="277.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZfR-pa-AiB" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
@@ -98,7 +98,7 @@
                     <constraint firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" constant="10" id="Jim-aF-EFs"/>
                     <constraint firstItem="4Ih-A0-G2a" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fw1-3N-wNK"/>
                     <constraint firstAttribute="height" secondItem="4Ih-A0-G2a" secondAttribute="height" constant="20" id="jgk-03-6Cn"/>
-                    <constraint firstItem="4Ih-A0-G2a" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="kYM-Rn-D9L"/>
+                    <constraint firstItem="4Ih-A0-G2a" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="10" id="kYM-Rn-D9L"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

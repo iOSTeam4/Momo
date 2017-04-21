@@ -33,6 +33,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *mapBtn;
 @property (weak, nonatomic) IBOutlet UIButton *pinBtn;
+@property (weak, nonatomic) IBOutlet UIButton *mapBtnTap;
+@property (weak, nonatomic) IBOutlet UIButton *pinBtnTap;
 
 @end
 

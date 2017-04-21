@@ -143,6 +143,7 @@
     UINib *userProfileHeaderNib = [UINib nibWithNibName:@"UserProfileHeaderView" bundle:nil];
     [self.tableView registerNib:userProfileHeaderNib forHeaderFooterViewReuseIdentifier:@"userProfileHeader"];
 
+    
     // User Map & Pin Cells
     UINib *mapCellNib = [UINib nibWithNibName:@"MapProfileTableViewCell" bundle:nil];
     [self.tableView registerNib:mapCellNib forCellReuseIdentifier:@"mapProfileCell"];
