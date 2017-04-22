@@ -129,7 +129,8 @@
 }
 
 
-+ (void)momogetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic {
+// 유저 전체 데이터 파싱 및 저장
++ (void)momoGetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic {
     
     // realm transaction
     RLMRealm *realm = [RLMRealm defaultRealm];
@@ -180,6 +181,83 @@
         }
     }];
 }
+
+
+#pragma mark - MOMO Map
+// 맵 생성
++ (void)createMapWithMomoMapCreateDic:(NSDictionary *)mapDic {
+    
+    MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm addOrUpdateObject:mapData];
+        [[DataCenter myMapList] addObject:mapData];
+    }];
+}
+
+// 맵 수정
++ (void)updateMapWithMomoMapCreateDic:(NSDictionary *)mapDic {
+    
+    MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm addOrUpdateObject:mapData];
+    }];
+}
+
+
+// 맵 삭제
++ (void)deleteMapData:(MomoMapDataSet *)mapData {
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [[DataCenter myMapList] removeObjectAtIndex:[[DataCenter myMapList] indexOfObject:mapData]];
+        [realm deleteObject:mapData];
+    }];
+}
+
+
+#pragma mark - MOMO Pin
+// 핀 생성
++ (void)createPinWithMomoPinCreateDic:(NSDictionary *)pinDic {
+    
+    MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm addOrUpdateObject:pinData];
+        
+        MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pin_map_pk]][0];
+        [mapData.map_pin_list addObject:pinData];
+    }];
+}
+
+// 핀 수정
++ (void)updatePinWithMomoPinCreateDic:(NSDictionary *)pinDic {
+    
+    MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        // 속한 map 변경했을 때, 처리해야 함
+        [realm addOrUpdateObject:pinData];
+    }];
+}
+
+
+// 핀 삭제
++ (void)deletePinData:(MomoPinDataSet *)pinData {
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [[DataCenter myPinListWithMapIndex:pinData.pk] removeObjectAtIndex:[[DataCenter myPinListWithMapIndex:pinData.pk] indexOfObject:pinData]];
+        [realm deleteObject:pinData];
+    }];
+}
+
+
 
 @end
 

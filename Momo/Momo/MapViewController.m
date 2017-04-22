@@ -11,6 +11,7 @@
 #import "PinViewController.h"
 
 #import "MapMakeViewController.h"
+#import "PinMakeViewController.h"
 
 @interface MapViewController () <GMSMapViewDelegate>
 
@@ -47,6 +48,13 @@
 
 @implementation MapViewController
 
+
+- (void)successCreatePin {
+    self.isMakingMarker = NO;
+}
+
+
+
 #pragma mark - ViewController Methods
 
 - (void)viewDidLoad {
@@ -64,6 +72,23 @@
 //    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
 //    NSLog(@"MapViewController : viewWillAppear");
     
+    // 마커 만들기 중이었나?
+    if (self.isMakingMarker) {
+        // 위치등록 버튼 노출
+        [self.makingMarkerBtnView setHidden:NO];
+        
+        [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
+        
+        if (self.showSelectedMap) {
+            // 선택지도 보기 상황
+            [self.mapInfoView setHidden:YES];
+            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
+        }
+        
+        [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
+        [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
+    }
+    
     // 다른뷰 갔다가 와도 다시 Refresh될 수 있게 viewWillAppear에서 호출
     if (self.showSelectedMap) {
         // 선택 지도 보기 세팅
@@ -72,7 +97,9 @@
     } else {
         // 사용자 모든 핀 보기
         self.mapData = [[MomoMapDataSet alloc] init];
-        [self.mapData.map_pin_list addObjects:[MomoPinDataSet allObjects]];
+        for (MomoMapDataSet *mapData in [DataCenter myMapList]) {
+            [self.mapData.map_pin_list addObjects:mapData.map_pin_list];
+        }
     }
     
     [self markPinMarkersWithAnimation:NO];      // 마커찍기
@@ -403,10 +430,12 @@
 - (IBAction)nextBtnAction:(id)sender {
     
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
-    UIViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
+    PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
     
-    [self.navigationController pushViewController:pinMakeVC animated:YES];
+    [pinMakeVC setLat:self.makingMarker.position.latitude
+              withLng:self.makingMarker.position.longitude];
     
+    [self presentViewController:pinMakeVC animated:YES completion:nil];
 }
 
 

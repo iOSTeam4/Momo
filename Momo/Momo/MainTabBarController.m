@@ -19,7 +19,6 @@
 @property (nonatomic, weak) UIButton *lastSelectedBtn;
 @property (nonatomic, weak) MakeViewController *makeVC;
 
-
 @end
 
 @implementation MainTabBarController
@@ -184,7 +183,7 @@
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     UIViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
-    [(UINavigationController *)self.selectedViewController pushViewController:mapMakeVC animated:YES];
+    [((UINavigationController *)self.selectedViewController).visibleViewController presentViewController:mapMakeVC animated:YES completion:nil];
 }
 
 - (void)selectedMakePinBtn:(UIButton *)sender {
@@ -192,7 +191,7 @@
     
     [self.makeVC.view removeFromSuperview];
     [self selectedBtn:self.mapBtn];     // 맵뷰로 이동
-//    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
+    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
     [(MapViewController *)((UINavigationController *)self.selectedViewController).viewControllers[0] makePinByMakePinBtn];
 }
 

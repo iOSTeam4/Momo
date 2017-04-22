@@ -133,11 +133,6 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 // 맵 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoMapDataSet *)makeMapWithDic:(NSDictionary *)mapDic;
 
-// 맵 생성 및 등록
-+ (MomoMapDataSet *)makeMapWithName:(NSString *)mapName
-                 withMapDescription:(NSString *)mapDescription
-                        withPrivate:(BOOL)isPrivate;
-
 @end
 
 
@@ -164,6 +159,8 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list;
 
 
+//@property NSString *user_id;
+//@property NSString *user_description
 @end
 
 

@@ -17,8 +17,17 @@ static NSString *const LOG_OUT_URL          = @"/api/member/logout/";
 static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id}/      user_id -> pk
 
 
+static NSString *const MAP_URL              = @"/api/map/";
+static NSString *const PIN_URL              = @"/api/pin/";
+
+
+
 @implementation NetworkModule
 
+
+//********************************************************//
+//                       Member API                       //
+//********************************************************//
 
 
 // E-mail account ---------------------------------//
@@ -254,7 +263,7 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
                                                                 // Code: 200 Success
                                                                 
                                                                 // 데이터 파싱, 세팅
-                                                                [DataCenter momogetMemberProfileDicParsingAndUpdate:responseDic];
+                                                                [DataCenter momoGetMemberProfileDicParsingAndUpdate:responseDic];
 
                                                                 completionBlock(YES, nil);
                                                                 
@@ -362,7 +371,7 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
 // Patch member profile update
 + (void)patchMemberProfileUpdateWithUsername:(NSString *)username
                               withProfileImg:(NSData *)imgData
-                         withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+                         withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -372,23 +381,93 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 
     // 헤더 세팅
-    [request addValue:[NSString stringWithFormat:@"token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+
+    // 바디 세팅 : Update username & profile_img
+    request.HTTPBody = [[NSString stringWithFormat:@"username=%@&profile_img=%@", username, imgData] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPMethod = @"PATCH";
+    
+    // Task
+    NSURLSessionUploadTask *patchTask = [session uploadTaskWithRequest:request
+                                                              fromData:nil
+                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                         
+                                                         NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                         
+                                                         // 메인스레드로 돌려서 보냄
+                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                             
+                                                             if (!error) {
+                                                                 if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                     // Code: 200 Success
+                                                                     
+                                                                     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                                     
+                                                                     // realm transaction
+                                                                     RLMRealm *realm = [RLMRealm defaultRealm];
+                                                                     [realm transactionWithBlock:^{
+                                                                         if ([responseDic objectForKey:@"username"]) {
+                                                                             [DataCenter sharedInstance].momoUserData.user_username = [responseDic objectForKey:@"username"];
+                                                                         }
+                                                                         if ([[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]) {
+                                                                             [DataCenter sharedInstance].momoUserData.user_profile_image_url = [[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
+                                                                         }
+                                                                     }];
+                                                                     
+                                                                     completionBlock(YES, @"Code: 200 Success");
+                                                                     
+                                                                 } else {
+                                                                     // Code: 413 Request Entity Too Large
+                                                                     // Code: 500 BAD REQUEST
+                                                                     
+                                                                     completionBlock(NO, @"BAD REQUEST");
+                                                                     
+                                                                 }
+                                                             } else {
+                                                                 // Network error
+                                                                 NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                 completionBlock(NO, @"Network error");
+                                                             }
+                                                         });
+                                                         
+                                                     }];
+    
+    [patchTask resume];
+}
+
+
+
+
+
+
+
+
+
+//********************************************************//
+//                        Map API                         //
+//********************************************************//
+
+
+// Map Create
++ (void)createMapRequestWithMapname:(NSString *)mapname
+                    withDescription:(NSString *)description
+                      withIsPrivate:(BOOL)is_private
+                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, MAP_URL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
 
     // 바디 세팅
-    if (username && imgData) {
-        // 유저네임 & 사진 Update
-        request.HTTPBody = [[NSString stringWithFormat:@"username=%@&profile_img=%@", username, imgData] dataUsingEncoding:NSUTF8StringEncoding];
-
-    } else if (imgData) {
-        // 사진만 Update
-        request.HTTPBody = [[NSString stringWithFormat:@"profile_img=%@", imgData] dataUsingEncoding:NSUTF8StringEncoding];
-    
-    } else {
-        // 유저네임 Update (잘못 호출하는 경우 없다고 가정)
-        request.HTTPBody = [[NSString stringWithFormat:@"username=%@", username] dataUsingEncoding:NSUTF8StringEncoding];
-    }
-    
-    request.HTTPMethod = @"PATCH";
+    request.HTTPBody = [[NSString stringWithFormat:@"map_name=%@&description=%@&is_private=%d", mapname, description, is_private] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPMethod = @"POST";
     
     // Task
     NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
@@ -398,20 +477,28 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
                                                         NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                                                         
+                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+
                                                         
                                                         // 메인스레드로 돌려서 보냄
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             
                                                             if (!error) {
-                                                                if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                                                                    // Code: 200 Success
-                                                                    completionBlock(YES, @"Code: 200 Success");
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 201) {
+                                                                    // Code: 201 CREATED
+                                                                    NSLog(@"Map Create Success");
+                                                                    
+                                                                    // 맵 데이터 파싱 및 저장
+                                                                    [DataCenter createMapWithMomoMapCreateDic:responseDic];
+                                                                    
+                                                                    completionBlock(YES, nil);
+                                                                    
                                                                     
                                                                 } else {
-                                                                    // Code: 413 Request Entity Too Large
-                                                                    // Code: 500 BAD REQUEST
+                                                                    // Code: 400 BAD REQUEST
+                                                                    NSLog(@"Map Create Fail");
                                                                     
-                                                                    completionBlock(NO, @"BAD REQUEST");
+                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
                                                                     
                                                                 }
                                                             } else {
@@ -424,30 +511,336 @@ static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id
                                                     }];
     
     [postTask resume];
-    
-    
-//    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    NSData *data = UIImageJPEGRepresentation(image, 0.2);
-//    //    if(data.length >)...사진 용량에 대한 분기를 나눠야 함...용량이 2mb 정도 수준임...
-//    if (data.length >1000000) {
-//        NSLog(@"이미지가 너무 큼");
-//        NSLog(@"data length : %lu", data.length);
-//    }else{
-//        [[GODataCenter sharedInstance] updatingUserDetailImage:data completion:^(BOOL isSuccess, id respons) {
-//            if (isSuccess) {
-//                NSLog(@"유저인포컨트롤러 이미지피커 활성화");
-//                [self.updateUserPictureDataButton setBackgroundImage:image forState:UIControlStateNormal];
-//                [picker dismissViewControllerAnimated:YES completion:nil];
-//                
-//            }else{
-//                NSLog(@"유저인포컨트롤러 이미지피커 활성화 안됨");
-//            }
-//            
-//            
-//        }];
-//        //    NSString *name = @"UploadedImage.png";
-//    }
 }
+
+// Map Update
++ (void)updateMapRequestWithMapPK:(NSInteger)map_pk
+                      withMapname:(NSString *)mapname
+                  withDescription:(NSString *)description
+                    withIsPrivate:(BOOL)is_private
+              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MAP_URL, map_pk]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    
+    // 바디 세팅
+    request.HTTPBody = [[NSString stringWithFormat:@"map_name=%@&description=%@&is_private=%d", mapname, description, is_private] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPMethod = @"PATCH";
+    
+    // Task
+    NSURLSessionUploadTask *patchTask = [session uploadTaskWithRequest:request
+                                                              fromData:nil
+                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                         
+                                                         NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                         
+                                                         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                         
+                                                         
+                                                         // 메인스레드로 돌려서 보냄
+                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                             
+                                                             if (!error) {
+                                                                 if (((NSHTTPURLResponse *)response).statusCode == 201) {
+                                                                     // Code: 201 CREATED
+                                                                     NSLog(@"Map Create Success");
+                                                                     
+                                                                     // 맵 수정
+                                                                     [DataCenter updateMapWithMomoMapCreateDic:responseDic];
+                                                                     
+                                                                     completionBlock(YES, nil);
+                                                                     
+                                                                     
+                                                                 } else {
+                                                                     // Code: 400 BAD REQUEST
+                                                                     NSLog(@"Map Create Fail");
+                                                                     
+                                                                     completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                     
+                                                                 }
+                                                             } else {
+                                                                 // Network error
+                                                                 NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                 completionBlock(NO, @"Network error");
+                                                             }
+                                                         });
+                                                         
+                                                     }];
+    
+    [patchTask resume];
+}
+
+
+
+// Map Delete
++ (void)deleteMapRequestWithMapData:(MomoMapDataSet *)mapData
+                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MAP_URL, mapData.pk]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    
+    request.HTTPMethod = @"DELETE";
+    
+    // Task
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                    
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);                                                        
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 204) {
+                                                                    // Code: 204 No Content
+                                                                    NSLog(@"Map Delete Success");
+                                                                    
+                                                                    // 맵 삭제
+                                                                    [DataCenter deleteMapData:mapData];
+                                                                    completionBlock(YES, nil);
+                                                                    
+                                                                    
+                                                                } else {
+                                                                    NSLog(@"Map Delete Fail");
+                                                                    
+                                                                    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                                    
+                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
+                                                            }
+                                                        });
+                                                        
+                                                    }];
+    
+    [dataTask resume];
+}
+
+
+//********************************************************//
+//                        Pin API                         //
+//********************************************************//
+
+
+// Pin Create
++ (void)createPinRequestWithPinname:(NSString *)pinname
+                          withMapPK:(NSInteger)map_pk
+                          withLabel:(NSInteger)pinLabel
+                            withLat:(CGFloat)lat
+                            withLng:(CGFloat)lng
+                    withDescription:(NSString *)description
+                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, PIN_URL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    // 바디 세팅
+    NSString *pinJson = [NSString stringWithFormat:@"\"pin\":{\"pin_name\":\"%@\",\"map\":\"%ld\",\"pin_label\":\"%ld\"}", pinname, map_pk, pinLabel];
+    NSString *placeJson = [NSString stringWithFormat:@"\"place\":{\"lat\":\"%lf\",\"lng\":\"%lf\"}", lat, lng];
+    NSData *paramData = [[NSString stringWithFormat:@"{%@,%@}", pinJson, placeJson] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSLog(@"pin Json data : %@", [NSString stringWithFormat:@"{%@,%@}", pinJson, placeJson]);
+
+    request.HTTPBody = paramData;
+    request.HTTPMethod = @"POST";
+    
+    // Task
+    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
+                                                             fromData:nil
+                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                        
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                        
+                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                        
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 201) {
+                                                                    // Code: 201 CREATED
+                                                                    NSLog(@"Pin Create Success");
+                                                                    
+                                                                    // 핀 데이터 파싱 및 저장
+                                                                    [DataCenter createPinWithMomoPinCreateDic:responseDic];
+                                                                    
+                                                                    completionBlock(YES, nil);
+                                                                    
+                                                                    
+                                                                } else {
+                                                                    // Code: 400 BAD REQUEST
+                                                                    NSLog(@"Pin Create Fail");
+                                                                    
+                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                    
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
+                                                            }
+                                                        });
+                                                        
+                                                    }];
+    
+    [postTask resume];
+}
+
+// Pin Update
++ (void)updatePinRequestWithMapPK:(NSInteger)map_pk
+                      withMapname:(NSString *)mapname
+                  withDescription:(NSString *)description
+                    withIsPrivate:(BOOL)is_private
+              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MAP_URL, map_pk]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    
+    // 바디 세팅
+    request.HTTPBody = [[NSString stringWithFormat:@"map_name=%@&description=%@&is_private=%d", mapname, description, is_private] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPMethod = @"PATCH";
+    
+    // Task
+    NSURLSessionUploadTask *patchTask = [session uploadTaskWithRequest:request
+                                                              fromData:nil
+                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                         
+                                                         NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                         
+                                                         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                         
+                                                         
+                                                         // 메인스레드로 돌려서 보냄
+                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                             
+                                                             if (!error) {
+                                                                 if (((NSHTTPURLResponse *)response).statusCode == 201) {
+                                                                     // Code: 201 CREATED
+                                                                     NSLog(@"Map Create Success");
+                                                                     
+                                                                     // 맵 수정
+                                                                     [DataCenter updateMapWithMomoMapCreateDic:responseDic];
+                                                                     
+                                                                     completionBlock(YES, nil);
+                                                                     
+                                                                     
+                                                                 } else {
+                                                                     // Code: 400 BAD REQUEST
+                                                                     NSLog(@"Map Create Fail");
+                                                                     
+                                                                     completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                     
+                                                                 }
+                                                             } else {
+                                                                 // Network error
+                                                                 NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                 completionBlock(NO, @"Network error");
+                                                             }
+                                                         });
+                                                         
+                                                     }];
+    
+    [patchTask resume];
+}
+
+
+
+// Pin Delete
++ (void)deletePinRequestWithMapData:(MomoMapDataSet *)mapData
+                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MAP_URL, mapData.pk]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // 헤더 세팅
+    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    
+    request.HTTPMethod = @"DELETE";
+    
+    // Task
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                    
+                                                    NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                    
+                                                    // 메인스레드로 돌려서 보냄
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        
+                                                        if (!error) {
+                                                            if (((NSHTTPURLResponse *)response).statusCode == 204) {
+                                                                // Code: 204 No Content
+                                                                NSLog(@"Map Delete Success");
+                                                                
+                                                                // 맵 삭제
+                                                                [DataCenter deleteMapData:mapData];
+                                                                completionBlock(YES, nil);
+                                                                
+                                                                
+                                                            } else {
+                                                                NSLog(@"Map Delete Fail");
+                                                                
+                                                                NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                                
+                                                                completionBlock(NO, [responseDic objectForKey:@"detail"]);
+                                                                
+                                                            }
+                                                        } else {
+                                                            // Network error
+                                                            NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                            completionBlock(NO, @"Network error");
+                                                        }
+                                                    });
+                                                    
+                                                }];
+    
+    [dataTask resume];
+}
+
+
+
 
 
 @end

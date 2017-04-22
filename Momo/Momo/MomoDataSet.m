@@ -11,9 +11,9 @@
 // Author Data Set ---------------------------//
 @implementation MomoAuthorDataSet
 
-//+ (NSString *)primaryKey {
-//    return @"pk";
-//}
++ (NSString *)primaryKey {
+    return @"pk";
+}
 
 - (void)setProfile_img_url:(NSString *)profile_img_url {
     NSLog(@"setProfile_img_url setter %@", profile_img_url);
@@ -48,9 +48,9 @@
 // Place Data Set ---------------------------//
 @implementation MomoPlaceDataSet
 
-//+ (NSString *)primaryKey {
-//    return @"pk";
-//}
++ (NSString *)primaryKey {
+    return @"pk";
+}
 
 
 // Place 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
@@ -263,28 +263,6 @@
     
     // map_author
     mapData.map_author = [MomoAuthorDataSet makeAuthorWithDic:[mapDic objectForKey:@"author"]];
-    
-    return mapData;
-}
-
-
-// 맵 생성 및 등록
-+ (MomoMapDataSet *)makeMapWithName:(NSString *)mapName
-                 withMapDescription:(NSString *)mapDescription
-                        withPrivate:(BOOL)isPrivate {
-    
-    MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
-    
-    mapData.map_name = mapName;
-    mapData.map_description = mapDescription;
-    mapData.map_is_private = isPrivate;
-    
-    NSLog(@"name : %@, content : %@, private : %d", mapName, mapDescription, isPrivate);
-    
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [[DataCenter myMapList] addObject:mapData];
-    }];
     
     return mapData;
 }

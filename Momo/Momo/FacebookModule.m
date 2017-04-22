@@ -155,7 +155,6 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
     
     // 바디 세팅
     NSData *paramData = [[NSString stringWithFormat:@"{\"access_token\":\"%@\"}", fbToken] dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"HTTPBody : %@", [NSString stringWithFormat:@"{\"access_token\":\"%@\"}", fbToken]);
 
     request.HTTPBody = paramData;
     request.HTTPMethod = @"POST";

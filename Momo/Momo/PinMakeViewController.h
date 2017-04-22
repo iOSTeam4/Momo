@@ -10,6 +10,9 @@
 
 @interface PinMakeViewController : UIViewController
 
+- (void)setLat:(CGFloat)lat
+       withLng:(CGFloat)lng;
+
 - (void)setEditModeWithPinData:(MomoPinDataSet *)pinData;
 
 @end

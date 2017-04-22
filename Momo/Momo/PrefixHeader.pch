@@ -22,6 +22,7 @@
 #import "GoogleAnalyticsModule.h"
 
 #import "MainTabBarController.h"
+#import "UtilityCenter.h"
 
 // Pods -----------------------------------------//
 #import <Google/Analytics.h>

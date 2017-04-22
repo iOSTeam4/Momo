@@ -30,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *secretSwitch;
 @property (nonatomic) UIButton *deleteBtn;
 
+@property (weak, nonatomic) UIActivityIndicatorView *indicator;
+
 @end
 
 @implementation MapMakeViewController
@@ -44,10 +46,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Navi Pop Gesture 활성화
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
-
+    // 스토리보드로 옮길 것 --------------------//
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.center = self.view.center;
+    indicator.hidesWhenStopped = YES;
+    [self.view addSubview:indicator];
+    self.indicator = indicator;
+    //------------------------------------//
     
+    
+    // 맵 이름 텍스트필드 셀렉터 추가
     [self.mapNameTextField addTarget:self action:@selector(mapNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
     // EditMode
@@ -70,7 +78,6 @@
         [self.contentView addSubview:self.deleteBtn];
         [self.deleteBtn addTarget:self action:@selector(selectedDeleteMapBtn:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         // 기존 지도 정보 넣기
         self.mapNameTextField.text = self.mapData.map_name;
         self.mapContentTextField.text = self.mapData.map_description;
@@ -87,8 +94,8 @@
 
 // Back Btn Action
 - (IBAction)selectedPopViewBtn:(id)sender {
-    
-    [self.navigationController popViewControllerAnimated:YES];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -114,10 +121,10 @@
 // 핀이름 textfield에 space 입력했을때를 걸러내려고 --------------//
 - (void)mapNameTextFieldEditingChanged:(UITextField *)sender {
     
-    if ([sender.text isEqualToString:@""]) {
-        self.checkName = NO;                    // @"" (NO)
+    if ([sender.text length] > 0) {
+        self.checkName = YES;       // Text (YES)
     } else {
-        self.checkName = (BOOL)sender.text;     // nil (NO) or Text (YES)
+        self.checkName = NO;        // nil, @"" (NO)
     }
     
     [self checkMakeBtnState];
@@ -128,40 +135,76 @@
 - (void)checkMakeBtnState {
     //모든 조건이 yes이면 makeBtn이 활성화되게
     if (self.checkName) {
-        [self.makeBtn1 setEnabled:YES];
-        [self.makeBtn2 setEnabled:YES];
-        [self.makeBtn3 setEnabled:YES];
+        for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:YES];
     } else {
-        [self.makeBtn1 setEnabled:NO];
-        [self.makeBtn2 setEnabled:NO];
-        [self.makeBtn3 setEnabled:NO];
+        for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:NO];
     }
 }
 
 - (IBAction)selectedMakeBtn:(id)sender {
     
+    [self.indicator startAnimating];
+    
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 맵 만들어!");
-        
-        self.mapData = [MomoMapDataSet makeMapWithName:self.mapNameTextField.text
-                                    withMapDescription:self.mapContentTextField.text
-                                           withPrivate:self.secretSwitch.on];
+
+        [NetworkModule createMapRequestWithMapname:self.mapNameTextField.text
+                                   withDescription:self.mapContentTextField.text
+                                     withIsPrivate:self.secretSwitch.on
+                               withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                   
+                                   [self.indicator stopAnimating];
+                                   
+                                   if (isSuccess) {
+                                       self.mapData = [[DataCenter myMapList] lastObject];      // 새로 생성된 데이터가 lastObject
+                                       [self showMapView];
+                                       
+                                   } else {                                       
+                                       [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                   }
+                                   
+                               }];
 
     } else {    // 수정하기
+        NSLog(@"맵 수정해!");
         
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        [realm transactionWithBlock:^{
-            self.mapData.map_name = self.mapNameTextField.text;
-            self.mapData.map_description = self.mapContentTextField.text;
-            self.mapData.map_is_private = self.secretSwitch.on;
-        }];
+        [NetworkModule updateMapRequestWithMapPK:self.mapData.pk
+                                     withMapname:self.mapNameTextField.text
+                                 withDescription:self.mapContentTextField.text
+                                   withIsPrivate:self.secretSwitch.on
+                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                 
+                                [self.indicator stopAnimating];
+                                 
+                                 if (isSuccess) {
+                                     [self showMapView];
+                                     
+                                 } else {
+                                     [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                 }
+                                 
+                             }];
+        
+        
+        
+        
+//        RLMRealm *realm = [RLMRealm defaultRealm];
+//        [realm transactionWithBlock:^{
+//            self.mapData.map_name = self.mapNameTextField.text;
+//            self.mapData.map_description = self.mapContentTextField.text;
+//            self.mapData.map_is_private = self.secretSwitch.on;
+//        }];
+        
     }
-    
+}
+
+- (void)showMapView {
     UIStoryboard *mapStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
     MapViewController *mapVC = [mapStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
     [mapVC showSelectedMapAndSetMapData:self.mapData];
     
-    [self.navigationController pushViewController:mapVC animated:YES];
+    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:mapVC animated:NO];        // 만들어진 맵으로 먼저 Push
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -175,12 +218,22 @@
 - (void)selectedDeleteMapBtn:(id)sender {
     NSLog(@"맵 지워");
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [realm deleteObject:self.mapData];
-    }];
+    [self.indicator startAnimating];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [NetworkModule deleteMapRequestWithMapData:self.mapData
+                           withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+
+                               [self.indicator stopAnimating];
+                               
+                               if (isSuccess) {
+                                   [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동
+                                   [self dismissViewControllerAnimated:YES completion:nil];
+                                   
+                               } else {
+                                   [UtilityCenter presentCommonAlertController:self withMessage:result];
+                               }
+                           }];
+    
 }
 
 
