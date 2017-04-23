@@ -67,7 +67,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                               if (isSuccess) {
                                                                   // 페북 로그인 성공
                                                                   
-                                                                  if (newMember) {
+//                                                                  if (newMember) {
                                                                       // 신규 회원
                                                                       // Facebook id, name, profileImage, email 얻어오기
                                                                       [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
@@ -78,10 +78,10 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                                           completionBlock(YES, result);
 
                                                                       }];
-                                                                  } else {
-                                                                      // 기존 회원
-                                                                      completionBlock(YES, result);
-                                                                  }
+//                                                                  } else {
+//                                                                      // 기존 회원
+//                                                                      completionBlock(YES, result);
+//                                                                  }
                                                                   
                                                               } else {
                                                                   // 페북 로그인 실패
@@ -178,9 +178,8 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                                     // Code: 200 Success
                                                                     
                                                                     NSNumber *pk = [responseDic objectForKey:@"pk"];
-                                                                    NSString *token = [responseDic objectForKey:@"token"];
-//                                                                    BOOL newMember = [[userDic objectForKey:@"is_created"] boolValue];
-                                                                    BOOL newMember = YES;    // 새롭게 가입한 회원
+                                                                    NSString *token = [responseDic objectForKey:@"auth_token"];
+                                                                    BOOL newMember = [[responseDic objectForKey:@"is_created"] boolValue];
                                                                     
                                                                     NSLog(@"PK : %@, Token : %@", pk, token);
                                                             

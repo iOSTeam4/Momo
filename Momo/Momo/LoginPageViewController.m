@@ -129,15 +129,11 @@
     [NetworkModule loginRequestWithUsername:self.idTextField.text
                                withPassword:self.pwTextField.text
                         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                            
+                            NSLog(@"Username : %@, Password : %@", self.idTextField.text, self.pwTextField.text);
                             if (isSuccess) {
                                 NSLog(@"log in success : %@", result);
-                                
+                            
                                 [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
-                                
-//                                // 임시로 더미데이터 세팅 /////
-//                                [NetworkModule fetchUserMapData];
-//                                /////////////////////////
                                 
                                 [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
@@ -152,16 +148,7 @@
 
                                     } else {
                                         NSLog(@"error : %@", result);
-                                        
-                                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                                 message:result
-                                                                                                          preferredStyle:UIAlertControllerStyleAlert];
-                                        
-                                        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                                           style:UIAlertActionStyleDefault
-                                                                                         handler:nil];
-                                        [alertController addAction:okButton];
-                                        [self presentViewController:alertController animated:YES completion:nil];
+                                        [UtilityCenter presentCommonAlertController:self withMessage:result];
                                     }
                                     
                                 }];

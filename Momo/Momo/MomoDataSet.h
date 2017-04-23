@@ -95,9 +95,9 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property MomoPlaceDataSet *pin_place;
 @property RLMArray<MomoPostDataSet *><MomoPostDataSet> *pin_post_list;
 
-/////////////////
-//@property NSString *pin_description;
-/////////////////
+///////////////
+@property NSString *pin_description;
+///////////////
 
 // 핀 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoPinDataSet *)makePinWithDic:(NSDictionary *)pinDic;
@@ -159,8 +159,9 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 @property RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list;
 
 
-//@property NSString *user_id;
-//@property NSString *user_description
+@property NSString *user_id;
+@property NSString *user_description;
+
 @end
 
 

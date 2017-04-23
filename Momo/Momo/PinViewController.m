@@ -10,13 +10,16 @@
 #import "PinContentsCollectionViewCell.h"
 #import "PinMarkerUIView.h"
 #import "PinMakeViewController.h"
+#import "MapViewController.h"
+
+#import "PostMakeViewController.h"
+#import "PinPostViewController.h"
 
 
 @interface PinViewController ()
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
+<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
 
-@property (nonatomic) MomoMapDataSet *mapData;  // 접근한 지도 데이터
-@property (nonatomic) NSInteger pinIndex;       // 핀 데이터 인덱스
+@property (nonatomic) MomoPinDataSet *pinData;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
@@ -39,11 +42,9 @@
 
 // 초기 핀 데이터 세팅 ---------------------------------------//
 
-- (void)showSelectedPinAndSetMapData:(MomoMapDataSet *)mapData withPinIndex:(NSInteger)pinIndex {
-    self.mapData = mapData;
-    self.pinIndex = pinIndex;
+- (void)showSelectedPinAndSetPinData:(MomoPinDataSet *)pinData {
+    self.pinData = pinData;
 }
-
 
 
 // UIViewController Basic Methods -----------------------//
@@ -51,14 +52,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 지도 위, 투명 버튼 셀렉터 메서드 세팅 (IBAction으로 바꿀 것)
+    [self.mapPreViewBtn addTarget:self action:@selector(mapPreViewBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    
     //collectionView size
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
     NSLog(@"itemWidth %f", itemWidth);
     
     self.flowLayout.itemSize = CGSizeMake(100, 100);
-
-    // collectionView 임시 contents
-    self.dataTempArr = @[@"addPost", @"textPhoto", @"Zion", @"Arches", @"Kenai Fjords", @"Mesa Verde", @"North Cascades", @"Great Sand Dunes"];
 
     //collectionView shadow
     self.collectionView.layer.shadowOffset = CGSizeMake(-5, 15);
@@ -73,17 +74,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
-        
-    // Navi Pop Gesture 활성화
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
-
+    
     // Map 세팅
     [self mapPreViewSetting];
     
     // Pin 세팅
-    self.pinName.text = self.mapData.map_pin_list[self.pinIndex].pin_name;
-    self.pinAddress.text = self.mapData.map_pin_list[self.pinIndex].pin_place.place_address;
-//    self.pinMainText.text = self.mapData.map_pin_list[self.pinIndex].pin_description;
+    self.pinName.text = self.pinData.pin_name;
+    self.pinAddress.text = self.pinData.pin_place.place_address;
+    self.pinMainText.text = self.pinData.pin_description;
     
     // User UI, 정보 세팅
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
@@ -93,9 +91,18 @@
 }
 
 
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+// 지도 버튼 액션
+- (void)mapPreViewBtnAction {
+    // 선택 핀 중심으로 지도 보기
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
+    MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
+    
+    MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", self.pinData.pin_map_pk]][0];
+    
+    [mapVC showSelectedMapAndSetMapData:mapData
+                    withFocusingPinData:self.pinData];
+    
+    [self.navigationController pushViewController:mapVC animated:YES];
 }
 
 
@@ -103,8 +110,8 @@
 
 - (void)mapPreViewSetting {
     
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.mapData.map_pin_list[self.pinIndex].pin_place.place_lat
-                                                            longitude:self.mapData.map_pin_list[self.pinIndex].pin_place.place_lng
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.pinData.pin_place.place_lat
+                                                            longitude:self.pinData.pin_place.place_lng
                                                                  zoom:16.0f];
     
     [self.mapPreView setCamera:camera];    // 핀 중심으로 카메라 설정
@@ -115,9 +122,9 @@
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.groundAnchor = CGPointMake(0.5, 0.6);        // 마커가 지도 중앙 위치에 놓일 수 있게 설정 (중앙 약간 위)
     
-    marker.position = CLLocationCoordinate2DMake(self.mapData.map_pin_list[self.pinIndex].pin_place.place_lat, self.mapData.map_pin_list[self.pinIndex].pin_place.place_lng);
+    marker.position = CLLocationCoordinate2DMake(self.pinData.pin_place.place_lat, self.pinData.pin_place.place_lng);
     
-    PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[self.pinIndex] withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
+    PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.pinData withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
 
     marker.iconView = pinMarkerView;
     marker.map = self.mapPreView;
@@ -130,15 +137,31 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.dataTempArr.count;
+    return 1 + self.pinData.pin_post_list.count;        // 작성버튼 + pin_post_list.count
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     PinContentsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    cell.contentsBtn.tag = indexPath.row;
     
-    [cell.contentsBtn setImage:[UIImage imageNamed:self.dataTempArr[indexPath.row]] forState:UIControlStateNormal];
-    [cell.contentsBtn setTag:indexPath.row];
+    if (indexPath.row == 0) {       // * 작성 버튼 때문에 실제 데이터는 row에 -1 씩 계산 필요함 *
+        // 포스트 작성 버튼
+        [cell.contentsBtn setImage:[UIImage imageNamed:@"addPost"] forState:UIControlStateNormal];
+
+    } else if ([self.pinData.pin_post_list[indexPath.row - 1] getPostPhotoThumbnail]) {
+        // 사진이 있는 경우
+        [cell.contentsBtn setImage:[self.pinData.pin_post_list[indexPath.row - 1] getPostPhotoThumbnail] forState:UIControlStateNormal];
+
+    } else {
+        // 글만 있는 경우
+        [cell.contentsBtn setBackgroundColor:[UIColor whiteColor]];
+        [cell.contentsBtn setTitle:self.pinData.pin_post_list[indexPath.row - 1].post_description forState:UIControlStateNormal];
+        [cell.contentsBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
+        [cell.contentsBtn.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+        [cell.contentsBtn setTitleEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+        [cell.contentsBtn.titleLabel setNumberOfLines:3];
+    }
     
     return cell;
 }
@@ -151,33 +174,53 @@
     if (indexPath.row == 0) {
         return CGSizeMake(66, 100); // 추가버튼
         
-        
-        
     } else {
         return CGSizeMake(100, 100);
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"didSelectItemAtIndexPath row = %ld", indexPath.row);
+    
+    if (indexPath.row == 0) {
+        // Make Post
+        PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+        [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
+        [self presentViewController:postMakeVC animated:YES completion:nil];
+        
+    } else {
+        // Post View
+        PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[indexPath.row - 1]];     // 실제 데이터는 row - 1
+        [self.navigationController pushViewController:postVC animated:YES];
+    }
+    
+}
 
-// Btn Action Methods -----------------------------------//
 
+// 각각의 Cell 속 Btn Action Method
 - (IBAction)selectedContentsBtnAction:(UIButton *)sender {
     
     NSLog(@"버튼 눌림 tag = %ld", sender.tag);
     
     if (sender.tag == 0) {
-//        PinModificationViewController *pinModiVC = [[PinModificationViewController alloc] init];
+        // Make Post
         
-//        PinModificationViewController *pinModiVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinModificationViewController"];
-//        [self.navigationController pushViewController:pinModiVC animated:YES];
+        PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+        [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
+        [self presentViewController:postMakeVC animated:YES completion:nil];
         
-        [self performSegueWithIdentifier:@"pinModiSegue" sender:self];
-        
+        // Segue 지울 것
+//        [self performSegueWithIdentifier:@"pinModiSegue" sender:self];
     } else {
+        // Post View
         
-        NSLog(@"pin post selected");
+        PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag - 1]];     // 실제 데이터는 row - 1
+        [self.navigationController pushViewController:postVC animated:YES];
         
-        [self performSegueWithIdentifier:@"pinDetailSegue" sender:self];
+        // Segue 지울 것
+//        [self performSegueWithIdentifier:@"pinDetailSegue" sender:self];
     }
 }
 
@@ -191,8 +234,8 @@
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
     
-    [pinMakeVC setEditModeWithPinData:self.mapData.map_pin_list[self.pinIndex]];   // 수정 모드, 데이터 세팅
-    [self.navigationController pushViewController:pinMakeVC animated:YES];
+    [pinMakeVC setEditModeWithPinData:self.pinData];   // 수정 모드, 데이터 세팅
+    [self presentViewController:pinMakeVC animated:YES completion:nil];
 }
 
 - (IBAction)backBtnAction:(id)sender {

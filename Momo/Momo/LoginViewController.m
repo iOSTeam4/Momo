@@ -65,7 +65,7 @@
 // NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
-    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리 (다른 Gesture 쓰는 것 없음)
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리
     if(self.navigationController.viewControllers.count > 1){
         return YES;
     }
@@ -114,10 +114,6 @@
                       NSLog(@"fb 로그인 성공");
                       
                       [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
-
-//                      // 임시로 더미데이터 세팅 /////
-//                      [NetworkModule fetchUserMapData];
-//                      /////////////////////////
                       
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
@@ -131,16 +127,7 @@
                               
                           } else {
                               NSLog(@"error : %@", result);
-                              
-                              UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                       message:result
-                                                                                                preferredStyle:UIAlertControllerStyleAlert];
-                              
-                              UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                                 style:UIAlertActionStyleDefault
-                                                                               handler:nil];
-                              [alertController addAction:okButton];
-                              [self presentViewController:alertController animated:YES completion:nil];
+                              [UtilityCenter presentCommonAlertController:self withMessage:result];
                           }
                           
                       }];

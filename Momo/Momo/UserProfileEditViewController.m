@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) UIButton *editDoneBtn;
 @property (weak, nonatomic) UIButton *backBtn;
+@property (weak, nonatomic) UIButton *logOutBtn;
 
 @property (weak, nonatomic) UIActivityIndicatorView *indicator;
 
@@ -64,6 +65,15 @@
     [backBtn addTarget:self action:@selector(backBtnAtciton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];
     self.backBtn = backBtn;
+    
+    UIButton *logOutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    logOutBtn.frame = CGRectMake(self.view.center.x-25, self.view.center.y, 50, 50);
+    [logOutBtn setTitle:@"logout" forState:UIControlStateNormal];
+    [logOutBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
+    [logOutBtn addTarget:self action:@selector(logOutBtnAtciton) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:logOutBtn];
+    self.logOutBtn = logOutBtn;
+    [logOutBtn sizeToFit];
     
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.hidesWhenStopped = YES;
@@ -230,19 +240,7 @@
 - (void)editDoneBtnAtciton {
     NSLog(@"editDoneBtnAtciton");
     
-
-    
-    // 이미지 리사이징 ------------//
-    // 이미지 데이터 압축, 허용 용량 약 2.5mb정도
-    // Point가 아닌, Pixel 사이즈로 조정됨 : 약 25kb img
-    CGSize imgSize = CGSizeMake(500.0f, 500.0f);
-    
-    UIGraphicsBeginImageContext(imgSize);
-    [self.userImgView.image drawInRect:CGRectMake(0,0,imgSize.width,imgSize.height)];
-    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    NSData *profileImgdata = UIImageJPEGRepresentation(resizedImage, 1);
+    NSData *profileImgdata = [UtilityCenter imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
     if (profileImgdata.length > 1024*1024) {
         // 들어갈리가 없으나, 일단 예외 상황 로그 수집하기 위해 만들어 둠
@@ -270,10 +268,44 @@
                                                 [UtilityCenter presentCommonAlertController:self withMessage:result];
                                             }
                                         }];
+        
     }
-    
 }
 
 
+
+// 로그아웃
+- (void)logOutBtnAtciton {
+    NSLog(@"logOutBtnAtciton");
+    [self.indicator startAnimating];
+    
+    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+        
+        [self.indicator stopAnimating];
+        
+        if (isSuccess) {
+            NSLog(@"log out success : %@", result);
+            
+            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+            UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+            
+            [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+            
+        } else {
+            NSLog(@"error : %@", result);
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                     message:result
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alertController addAction:okButton];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
+}
 
 @end

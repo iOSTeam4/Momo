@@ -47,4 +47,11 @@
 + (void)deletePinData:(MomoPinDataSet *)pinData;                // 핀 삭제
 
 
+#pragma mark - MOMO Post
++ (void)createPostWithMomoPostCreateDic:(NSDictionary *)postDic;    // 포스트 생성
++ (void)updatePostWithMomoPostCreateDic:(NSDictionary *)postDic;    // 포스트 수정
++ (void)deletePostData:(MomoPostDataSet *)postData;                 // 포스트 삭제
+    
+
+
 @end

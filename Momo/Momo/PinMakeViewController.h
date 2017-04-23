@@ -14,5 +14,6 @@
        withLng:(CGFloat)lng;
 
 - (void)setEditModeWithPinData:(MomoPinDataSet *)pinData;
+@property BOOL wasPinView;      // 핀뷰에서 수정했는지?
 
 @end

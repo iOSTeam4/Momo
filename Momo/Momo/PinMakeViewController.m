@@ -60,7 +60,6 @@
 - (void)setEditModeWithPinData:(MomoPinDataSet *)pinData {
     self.pinData = pinData;
     self.isEditMode = YES;
-    NSLog(@"setEditModeWithPinData : pinData주소 %@", pinData);
 }
 
 
@@ -82,25 +81,11 @@
     [self makeMyMapCheckBtnViewWithArr:[DataCenter myMapList]];
     
     // category button shadow
-    self.categoryCafeBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryCafeBtn.layer.shadowRadius = 8;
-    self.categoryCafeBtn.layer.shadowOpacity = 0.2;
-    self.categoryFoodBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryFoodBtn.layer.shadowRadius = 8;
-    self.categoryFoodBtn.layer.shadowOpacity = 0.2;
-    self.categoryShopBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryShopBtn.layer.shadowRadius = 8;
-    self.categoryShopBtn.layer.shadowOpacity = 0.2;
-    self.categoryPlaceBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryPlaceBtn.layer.shadowRadius = 8;
-    self.categoryPlaceBtn.layer.shadowOpacity = 0.2;
-    self.categoryEtcBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryEtcBtn.layer.shadowRadius = 8;
-    self.categoryEtcBtn.layer.shadowOpacity = 0.2;
-   
-    
-    
-    
+    for (UIButton *labelBtn in @[self.categoryCafeBtn, self.categoryFoodBtn, self.categoryShopBtn, self.categoryPlaceBtn, self.categoryEtcBtn]) {
+        labelBtn.layer.shadowOffset = CGSizeMake(0, 7);
+        labelBtn.layer.shadowRadius = 8;
+        labelBtn.layer.shadowOpacity = 0.2;
+    }
     
     
     // EditMode
@@ -113,6 +98,7 @@
         self.checkName = YES;
         self.checkCategory = YES;
         self.checkMap = YES;
+        
         
         // Edit 모드에 맞게 수정
         self.viewTitleLabel.text = @"핀 수정하기";
@@ -341,25 +327,48 @@
         
     } else {    // 수정하기
 
-        [self.indicator stopAnimating];
+        [NetworkModule updatePinRequestWithPinPK:self.pinData.pk
+                                     withPinname:self.pinNameTextField.text
+                                       withLabel:self.categoryLastSelectedBtn.tag
+                                       withMapPK:self.pinData.pin_map_pk
+                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                 
+                                 [self.indicator stopAnimating];
+                                 
+                                 if (isSuccess) {
+                                     
+                                     // 핀 뷰에서 수정했을 때
+                                     if (self.wasPinView) {
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                     } else {
+                                         [self showPinView];    // 수정된 핀 뷰로 이동
+                                     }
+                                     
+                                 } else {
+                                     [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                 }
+                                 
+                                 
+                             }];
         
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        [realm transactionWithBlock:^{
-            self.pinData.pin_name = self.pinNameTextField.text;
-            self.pinData.pin_label = self.categoryLastSelectedBtn.tag;
-
-            
-            // 선택한 맵에 핀 새로 등록
-            [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
-
+        
+//        RLMRealm *realm = [RLMRealm defaultRealm];
+//        [realm transactionWithBlock:^{
+//            self.pinData.pin_name = self.pinNameTextField.text;
+//            self.pinData.pin_label = self.categoryLastSelectedBtn.tag;
+//
+//            
+//            // 선택한 맵에 핀 새로 등록
+//            [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
+//
 //            // 기존 맵에 핀 삭제
 //            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
 //            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
 //            
 //            // 핀 속에 지도 정보 변경
 //            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
-            
-        }];
+//            
+//        }];
     }
 }
 
@@ -368,8 +377,7 @@
     PinViewController *pinVC = [pinStoryBoard instantiateInitialViewController];
     
     // 핀뷰 이동 전, 데이터 세팅
-    [pinVC showSelectedPinAndSetMapData:[DataCenter myMapList][self.mapLastSelectedBtn.tag] withPinIndex:[[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list indexOfObject:self.pinData]];
-    
+    [pinVC showSelectedPinAndSetPinData:self.pinData];
 
     // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
     [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];
@@ -387,12 +395,22 @@
 - (void)selectedDeletePinBtn:(id)sender {
     NSLog(@"핀 지워");
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [realm deleteObject:self.pinData];
-    }];
+    [self.indicator startAnimating];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [NetworkModule deletePinRequestWithPinData:self.pinData
+                           withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                               
+                               [self.indicator stopAnimating];
+                               
+                               if (isSuccess) {
+                                   [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (삭제된 핀 뷰로 다시 돌아가면 안되므로)
+                                   [self dismissViewControllerAnimated:YES completion:nil];
+                                   
+                               } else {
+                                   [UtilityCenter presentCommonAlertController:self withMessage:result];
+                               }
+                           }];
+    
 }
 
 @end

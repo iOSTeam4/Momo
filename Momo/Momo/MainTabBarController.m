@@ -33,6 +33,11 @@
 }
 
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    // 테더링 등, 높이 조정 제대로 안되어있다가, Refresh 될 때 탭바 위치 재조정
+    self.customTabBar.frame = CGRectMake(0, self.view.bounds.size.height-TAB_BAR_HEIGHT, self.view.bounds.size.width, TAB_BAR_HEIGHT);
+}
 
 
 // TabBarController Setting -----------------------------------//
@@ -149,6 +154,7 @@
 - (void)selectedBtn:(UIButton *)sender {
     
     if (sender.tag == 1) {
+        [self.makeVC pinBtnEnableCheck];    // 핀 만들기 버튼 활성화 체크 및 세팅
         [self.view addSubview:self.makeVC.view];
         
     } else {

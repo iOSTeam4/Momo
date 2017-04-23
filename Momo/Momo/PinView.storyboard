@@ -275,7 +275,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <!--Post Make View Controller-->
         <scene sceneID="ryN-gb-CZS">
             <objects>
-                <viewController id="VaS-0c-ANh" customClass="PostMakeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostMakeViewController" id="VaS-0c-ANh" customClass="PostMakeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Sg-9Z-QdR"/>
                         <viewControllerLayoutGuide type="bottom" id="nQ7-0F-YVz"/>
@@ -327,7 +327,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </constraints>
                                                 <state key="normal" title="Button" image="photoBtnS"/>
                                                 <connections>
-                                                    <action selector="selectedPhotoUplaodBtn:" destination="VaS-0c-ANh" eventType="touchUpInside" id="Rrg-Uu-qE5"/>
+                                                    <action selector="selectedPhotoUploadBtn:" destination="VaS-0c-ANh" eventType="touchUpInside" id="97D-S0-jhI"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="글 남기기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-cZ-xnL">
@@ -482,6 +482,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <outlet property="photoBtnTopSpacingConstraint" destination="kWt-JM-VpO" id="thz-Mn-bgk"/>
                         <outlet property="photoUploadBtn" destination="YMw-x6-zU1" id="F4z-TS-64a"/>
                         <outlet property="scrollView" destination="PPw-Te-pgI" id="itp-6a-G6Z"/>
+                        <outlet property="viewTitleLabel" destination="WXE-Ts-voj" id="CiS-C8-kfR"/>
                         <segue destination="OMy-Wn-Nr3" kind="show" identifier="pinDetailSegue" id="nbl-e9-76j"/>
                     </connections>
                 </viewController>
@@ -981,7 +982,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <!--Pin Post View Controller-->
         <scene sceneID="1vM-uc-Aku">
             <objects>
-                <viewController id="OMy-Wn-Nr3" customClass="PinPostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinPostViewController" id="OMy-Wn-Nr3" customClass="PinPostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZdN-SS-1wz"/>
                         <viewControllerLayoutGuide type="bottom" id="N1s-nq-MFd"/>
@@ -1295,6 +1296,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="setup" width="56" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nbl-e9-76j"/>
+        <segue reference="KT7-pT-DDo"/>
     </inferredMetricsTieBreakers>
 </document>

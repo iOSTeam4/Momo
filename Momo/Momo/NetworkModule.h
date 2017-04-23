@@ -29,8 +29,9 @@
              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
 
 
-// Common ----------------------------------------//
 
+
+// Common ----------------------------------------//
 #pragma mark - Account Common Methods
 // Log Out
 + (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
@@ -82,6 +83,42 @@
                             withLng:(CGFloat)lng
                     withDescription:(NSString *)description
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
+// Pin Update
++ (void)updatePinRequestWithPinPK:(NSInteger)pin_pk
+                      withPinname:(NSString *)pinname
+                        withLabel:(NSInteger)pinLabel
+                        withMapPK:(NSInteger)map_pk
+              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
+// Pin Delete
++ (void)deletePinRequestWithPinData:(MomoPinDataSet *)pinData
+                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
+
+
+//********************************************************//
+//                        Post API                        //
+//********************************************************//
+
+
+// Post Create
++ (void)createPostRequestWithPinPK:(NSInteger)pin_pk
+                     withPhotoData:(NSData *)photoData
+                   withDescription:(NSString *)description
+               withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
+// Post Update
++ (void)updatePostRequestWithPostPK:(NSInteger)post_pk
+                          WithPinPK:(NSInteger)pin_pk
+                      withPhotoData:(NSData *)photoData
+                    withDescription:(NSString *)description
+                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
+// Post Delete
++ (void)deletePostRequestWithPostData:(MomoPostDataSet *)postData
+                  withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
 
 
 @end

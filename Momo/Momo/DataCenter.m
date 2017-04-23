@@ -131,20 +131,24 @@
 
 // 유저 전체 데이터 파싱 및 저장
 + (void)momoGetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic {
-    
+        
     // realm transaction
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
 
         // 추가 User 정보
         [DataCenter sharedInstance].momoUserData.user_username = [responseDic objectForKey:@"username"];
+        [DataCenter sharedInstance].momoUserData.user_id = [responseDic objectForKey:@"userid"];
+//        [DataCenter sharedInstance].momoUserData.user_description = [responseDic objectForKey:@"description"];    // String 값으로 바꿔 전달해달라해야함
         
         if ([responseDic objectForKey:@"email"]) {
             [DataCenter sharedInstance].momoUserData.user_email = [responseDic objectForKey:@"email"];
         }
         if ([[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]) {
             [DataCenter sharedInstance].momoUserData.user_profile_image_url = [[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
+            [DataCenter sharedInstance].momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]]];      // setter 왜 안불리지?
         }
+        
 
         // 기존 데이터, 새로 생성된 데이터 구별했으나, 어차피 다른 디바이스에서 같은 계정으로 데이터 삭제 되있었을 때
         // 삭제에 관한 부분(RLMArray 해당 index 삭제까지) 복잡하게 처리할 바에야 그냥 전부 데이터 받아오니, 다시 세팅하는 방식으로 함
@@ -211,6 +215,10 @@
 // 맵 삭제
 + (void)deleteMapData:(MomoMapDataSet *)mapData {
     
+    for (MomoPinDataSet *pinData in mapData.map_pin_list) {
+        [DataCenter deletePinData:pinData];     // 지도 내부에 속한 핀들도 전부 삭제
+    }
+    
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
         [[DataCenter myMapList] removeObjectAtIndex:[[DataCenter myMapList] indexOfObject:mapData]];
@@ -241,8 +249,24 @@
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-        // 속한 map 변경했을 때, 처리해야 함
+        // 이전에 속했던 map의 pin_list에서 핀 제거할 수 있게 세팅
+        MomoPinDataSet *previousPinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pk]][0];
+        MomoMapDataSet *previousMapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", previousPinData.pin_map_pk]][0];
+        NSInteger previousPinIndex = [previousMapData.map_pin_list indexOfObject:previousPinData];
+
+        // 핀 정보 업데이트
         [realm addOrUpdateObject:pinData];
+        
+        // 속한 지도를 변경했을 때
+        if (previousPinData.pin_map_pk != pinData.pin_map_pk) {
+            // 이전에 속했던 map의 pin_list에서 핀 제거
+            [previousMapData.map_pin_list removeObjectAtIndex:previousPinIndex];
+            
+            // 속한 맵의 pin_list에 핀 추가
+            MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pin_map_pk]][0];
+            [mapData.map_pin_list addObject:pinData];
+        }
+        
     }];
 }
 
@@ -250,12 +274,57 @@
 // 핀 삭제
 + (void)deletePinData:(MomoPinDataSet *)pinData {
     
+    // 포스트 삭제 필요
+    
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-        [[DataCenter myPinListWithMapIndex:pinData.pk] removeObjectAtIndex:[[DataCenter myPinListWithMapIndex:pinData.pk] indexOfObject:pinData]];
+        MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pin_map_pk]][0];  // pin이 속한 map
+        [mapData.map_pin_list removeObjectAtIndex:[mapData.map_pin_list indexOfObject:pinData]];        // map의 pin_list에서 삭제
         [realm deleteObject:pinData];
     }];
 }
+
+
+
+#pragma mark - MOMO Post
+// 포스트 생성
++ (void)createPostWithMomoPostCreateDic:(NSDictionary *)postDic {
+    
+    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm addOrUpdateObject:postData];
+        
+        MomoPinDataSet *pinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", postData.post_pin_pk]][0];
+        [pinData.pin_post_list addObject:postData];
+    }];
+}
+
+// 포스트 수정
++ (void)updatePostWithMomoPostCreateDic:(NSDictionary *)postDic {
+    
+    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        // 포스트 정보 업데이트
+        [realm addOrUpdateObject:postData];
+    }];
+}
+
+
+// 포스트 삭제
++ (void)deletePostData:(MomoPostDataSet *)postData {
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        MomoPinDataSet *pinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", postData.post_pin_pk]][0];  // post가 속한 pin
+        [pinData.pin_post_list removeObjectAtIndex:[pinData.pin_post_list indexOfObject:postData]];        // pin의 post_list에서 삭제
+        [realm deleteObject:postData];
+    }];
+}
+
 
 
 

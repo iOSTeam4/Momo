@@ -10,7 +10,12 @@
 
 @interface UtilityCenter : NSObject
 
+// 일반 얼럿 뷰컨트롤러
 + (void)presentCommonAlertController:(UIViewController *)fromVC
                          withMessage:(NSString *)message;
+
+
+// 이미지 리사이징 데이터
++ (NSData *)imgResizing:(UIImage *)img;
 
 @end

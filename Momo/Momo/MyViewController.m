@@ -21,7 +21,7 @@
 #import "PinMakeViewController.h"
 
 @interface MyViewController ()
-<UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate>
+<UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
@@ -36,6 +36,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
     
     // TableView Settings -------------------//
 
@@ -71,7 +75,7 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     NSLog(@"MyViewController : gestureRecognizerShouldBegin, %ld", self.navigationController.viewControllers.count);
     
-    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리 (다른 Gesture 쓰는 것 없음)
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리
     if(self.navigationController.viewControllers.count > 1){
         return YES;
     }
@@ -257,7 +261,7 @@
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
         // 핀 데이터 세팅
-        [pinVC showSelectedPinAndSetMapData:mapData withPinIndex:indexPath.row];
+        [pinVC showSelectedPinAndSetPinData:[MomoPinDataSet allObjects][indexPath.row]];
         
         [self.navigationController pushViewController:pinVC animated:YES];
     }
@@ -305,7 +309,7 @@
     MapMakeViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
     [mapMakeVC setEditModeWithMapData:[DataCenter myMapList][index]];   // 수정 모드, 데이터 세팅
-    [self.navigationController pushViewController:mapMakeVC animated:YES];
+    [self presentViewController:mapMakeVC animated:YES completion:nil];
     
 }
 
@@ -320,7 +324,7 @@
     PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
     
     [pinMakeVC setEditModeWithPinData:[MomoPinDataSet allObjects][index]];   // 수정 모드, 데이터 세팅
-    [self.navigationController pushViewController:pinMakeVC animated:YES];
+    [self presentViewController:pinMakeVC animated:YES completion:nil];
     
 }
 

@@ -13,7 +13,12 @@
 #import "MapMakeViewController.h"
 #import "PinMakeViewController.h"
 
-@interface MapViewController () <GMSMapViewDelegate>
+
+#define SELECTED_MAP_MODE            1
+#define SELECTED_MAP_MODE_WITH_PIN   2
+
+
+@interface MapViewController () <GMSMapViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
@@ -33,7 +38,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
 // 선택 지도 보기
-@property (nonatomic) BOOL showSelectedMap;
+@property (nonatomic) NSInteger showSelectedMap;
+@property (nonatomic) MomoPinDataSet *pinData;
+@property (nonatomic) GMSMarker *focusingPinMarker;
 
 @property (nonatomic) MomoMapDataSet *mapData;
 @property (weak, nonatomic) IBOutlet UIView *mapInfoView;
@@ -60,6 +67,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
+    
     // MapViewController 공통 기능 기본 세팅
     [self initialSetting];
     [self initialSettingGoogleMapView];
@@ -69,13 +80,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
-//    NSLog(@"MapViewController : viewWillAppear");
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
+    NSLog(@"MapViewController : viewWillAppear");
     
-    // 마커 만들기 중이었나?
+    // 다른뷰 갔다가 와도 다시 Refresh될 수 있게 viewWillAppear에서 호출
+    
     if (self.isMakingMarker) {
-        // 위치등록 버튼 노출
-        [self.makingMarkerBtnView setHidden:NO];
+        // 핀 마커 만들기 중, 뒤로 돌아왔을 때
+        [self.makingMarkerBtnView setHidden:NO];            // 위치등록 버튼 노출
         
         [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
         
@@ -85,17 +97,16 @@
             self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
         }
         
-        [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
+        [self.view layoutIfNeeded];                                     // 탭바 뺀, Constraints 다시 적용
         [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
-    }
     
-    // 다른뷰 갔다가 와도 다시 Refresh될 수 있게 viewWillAppear에서 호출
-    if (self.showSelectedMap) {
-        // 선택 지도 보기 세팅
+        
+    } else if (self.showSelectedMap) {          // SELECTED_MAP_MODE or SELECTED_MAP_MODE_WITH_PIN
+        // 선택지도 보기
         [self mapInfoViewSetting];
         
     } else {
-        // 사용자 모든 핀 보기
+        // 사용자 모든 핀 보기 (default)
         self.mapData = [[MomoMapDataSet alloc] init];
         for (MomoMapDataSet *mapData in [DataCenter myMapList]) {
             [self.mapData.map_pin_list addObjects:mapData.map_pin_list];
@@ -103,18 +114,33 @@
     }
     
     [self markPinMarkersWithAnimation:NO];      // 마커찍기
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    //    NSLog(@"viewDidLayoutSubviews");
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    //    NSLog(@"MapViewController : viewDidAppear");
     
+    
+    // 선택 핀 중심으로 이동, (선택지도 보기)
+    if (self.showSelectedMap == SELECTED_MAP_MODE_WITH_PIN) {
+    
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+            sleep(1);       // 1초 후 이동
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"선택 핀을 중심으로 카메라 이동");
+                
+                GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.focusingPinMarker.position.latitude
+                                                                        longitude:self.focusingPinMarker.position.longitude
+                                                                             zoom:13.5f];
+                [CATransaction begin];
+                [CATransaction setValue:[NSNumber numberWithFloat: 2.0f] forKey:kCATransactionAnimationDuration];
+                
+                [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 선택된 핀 중심으로 카메라 이동
+                
+                [CATransaction commit];
+            });
+        });
+    }
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -124,22 +150,41 @@
 }
 
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+// NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    NSLog(@"MyViewController : gestureRecognizerShouldBegin, %ld", self.navigationController.viewControllers.count);
+    
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리
+    if(self.navigationController.viewControllers.count > 1){
+        return YES;
+    }
+    return NO;
 }
+
 
 
 #pragma mark - Show Selected Map Mode Methods
 
-// 선택 지도 보기 세팅
+// 선택지도 보기 세팅
 - (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData {
-    NSLog(@"showSelectedMapAndSetMapIndex : %@", mapData.map_name);
+    NSLog(@"showSelectedMapAndSetMapData : %@", mapData.map_name);
     
-    self.showSelectedMap = YES;
+    self.showSelectedMap = SELECTED_MAP_MODE;
     self.mapData = mapData;
 }
 
-// 선택 지도뷰 세팅
+// 선택지도 보기, 지도, 중심 핀 데이터 세팅
+- (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData
+                 withFocusingPinData:(MomoPinDataSet *)pinData {
+    NSLog(@"showSelectedMapAndSetMapData : %@ withFocusingPinData : %@", mapData.map_name, pinData.pin_name);
+    
+    self.showSelectedMap = SELECTED_MAP_MODE_WITH_PIN;
+    self.mapData = mapData;
+    self.pinData = pinData;
+}
+
+
+// 선택지도 뷰 세팅
 - (void)mapInfoViewSetting {
     
     // 정보 세팅
@@ -254,7 +299,7 @@
         GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:minCoordinate coordinate:maxCoordinate];
         GMSCameraPosition *camera = [self.mapView cameraForBounds:bounds insets:UIEdgeInsetsMake(20, 20, 20, 20)];
         
-        [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 카메라 최종 위치로 이동
+        [self.mapView setCamera:camera];    // 선택지도, 핀들 전부 보이는 위치로 이동
         
     }
     
@@ -281,6 +326,12 @@
         marker.map = self.mapView;
         
         marker.iconView.tag = i;
+        
+        if (self.showSelectedMap == SELECTED_MAP_MODE_WITH_PIN) {
+            if (i == [self.mapData.map_pin_list indexOfObject:self.pinData]) {
+                self.focusingPinMarker = marker;            // 중심에 놓을 핀 마커 프로퍼티에 세팅
+            }
+        }
     }
     
     // 생성 중인 핀 마커
@@ -325,9 +376,8 @@
         UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
-        
         // 핀 데이터 세팅
-        [pinVC showSelectedPinAndSetMapData:self.mapData withPinIndex:marker.iconView.tag];        
+        [pinVC showSelectedPinAndSetPinData:self.mapData.map_pin_list[marker.iconView.tag]];        
         [self.navigationController pushViewController:pinVC animated:YES];
         
     }
@@ -446,7 +496,7 @@
     MapMakeViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
     [mapMakeVC setEditModeWithMapData:self.mapData];   // 수정 모드, 데이터 세팅
-    [self.navigationController pushViewController:mapMakeVC animated:YES];
+    [self presentViewController:mapMakeVC animated:YES completion:nil];
 
 }
 
