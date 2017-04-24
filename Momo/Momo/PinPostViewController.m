@@ -11,6 +11,7 @@
 #import "PhotoCell.h"
 #import "TextCell.h"
 #import "PhotoTextCell.h"
+#import "PostMakeViewController.h"
 
 @interface PinPostViewController ()
 <UITableViewDataSource, UITableViewDelegate>
@@ -133,9 +134,30 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
-
-
+- (IBAction)selectedContentsBtnAction:(UIButton *)sender {
+    
+    NSLog(@"버튼 눌림 tag = %ld", sender.tag);
+    
+    if (sender.tag == 0) {
+        // Make Post
+        
+        PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+        [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
+        [self presentViewController:postMakeVC animated:YES completion:nil];
+        
+        // Segue 지울 것
+        //        [self performSegueWithIdentifier:@"pinModiSegue" sender:self];
+    } else {
+        // Post View
+        
+        PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag - 1]];     // 실제 데이터는 row - 1
+        [self.navigationController pushViewController:postVC animated:YES];
+        
+        // Segue 지울 것
+        //        [self performSegueWithIdentifier:@"pinDetailSegue" sender:self];
+    }
+}
 
 - (NSString *)categoryLabelText {
     

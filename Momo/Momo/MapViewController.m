@@ -41,6 +41,7 @@
 @property (nonatomic) NSInteger showSelectedMap;
 @property (nonatomic) MomoPinDataSet *pinData;
 @property (nonatomic) GMSMarker *focusingPinMarker;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
 @property (nonatomic) MomoMapDataSet *mapData;
 @property (weak, nonatomic) IBOutlet UIView *mapInfoView;
@@ -139,6 +140,10 @@
             });
         });
     }
+    [self.view bringSubviewToFront:self.backBtn];
+    self.backBtn.layer.shadowOffset = CGSizeMake(0, 0);
+    self.backBtn.layer.shadowRadius = 2;
+    self.backBtn.layer.shadowOpacity = 0.7;
 }
 
 

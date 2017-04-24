@@ -31,13 +31,16 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zec-gh-XT0">
-                            <rect key="frame" x="111" y="30" width="182" height="29"/>
+                            <rect key="frame" x="111" y="30" width="182" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="ugw-mX-VlS"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@pikapika" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-jo-xka">
-                            <rect key="frame" x="111" y="64" width="182" height="17"/>
+                            <rect key="frame" x="111" y="69" width="182" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -56,7 +59,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="153" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aR-3M-yop">
-                            <rect key="frame" x="111" y="91" width="30.5" height="30"/>
+                            <rect key="frame" x="111" y="96" width="30.5" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="eTn-su-Tui"/>
                             </constraints>
@@ -65,7 +68,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXS-Ev-vQ1">
-                            <rect key="frame" x="111" y="91" width="79.5" height="30"/>
+                            <rect key="frame" x="111" y="96" width="79.5" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                             <state key="normal" title="팔로워">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,13 +78,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="53" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNW-HS-z55">
-                            <rect key="frame" x="205.5" y="91" width="22" height="30"/>
+                            <rect key="frame" x="205.5" y="96" width="22" height="30"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjJ-W0-Jpu">
-                            <rect key="frame" x="205" y="91" width="71" height="30"/>
+                            <rect key="frame" x="205" y="96" width="71" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                             <state key="normal" title="팔로잉">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,7 +94,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="팔로워들에게 자기소개를 해보세요 :0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnD-av-G4c">
-                            <rect key="frame" x="15" y="138" width="278" height="63.5"/>
+                            <rect key="frame" x="84.5" y="143" width="206" height="58.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="BLB-bA-8BW"/>
                             </constraints>
@@ -175,9 +178,8 @@
                         <constraint firstAttribute="trailing" secondItem="fTt-OC-bDx" secondAttribute="trailing" constant="26" id="P5g-Dl-WQB"/>
                         <constraint firstItem="MFE-2i-3G2" firstAttribute="centerX" secondItem="NdR-tf-O6X" secondAttribute="centerX" multiplier="1.4" id="PDC-iq-UeB"/>
                         <constraint firstItem="KXS-Ev-vQ1" firstAttribute="width" secondItem="2aR-3M-yop" secondAttribute="width" constant="49" id="QVJ-78-qaf"/>
+                        <constraint firstItem="dnD-av-G4c" firstAttribute="centerX" secondItem="ocM-qE-B8k" secondAttribute="centerX" id="SYc-E4-oO2"/>
                         <constraint firstItem="kNW-HS-z55" firstAttribute="leading" secondItem="KXS-Ev-vQ1" secondAttribute="trailing" constant="15" id="XoS-dz-mlX"/>
-                        <constraint firstItem="dnD-av-G4c" firstAttribute="leading" secondItem="MSu-gd-9mD" secondAttribute="leading" id="dHz-nj-s16"/>
-                        <constraint firstItem="dnD-av-G4c" firstAttribute="trailing" secondItem="Zec-gh-XT0" secondAttribute="trailing" id="dpv-Zt-a0e"/>
                         <constraint firstItem="ocM-qE-B8k" firstAttribute="width" secondItem="NdR-tf-O6X" secondAttribute="width" id="gq8-xa-saF"/>
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="width" secondItem="33w-V8-FN6" secondAttribute="width" id="hZA-Ts-5m9"/>
                         <constraint firstItem="MFE-2i-3G2" firstAttribute="height" secondItem="33w-V8-FN6" secondAttribute="height" id="iCw-Mu-ZiE"/>
