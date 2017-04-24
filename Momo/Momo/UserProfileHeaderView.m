@@ -57,14 +57,23 @@
     
     if (sender.tag == 0) {
         self.pinBtn.selected = NO;
-        [self.pinBtnTap setHidden:YES];
-        [self.mapBtnTap setHidden:NO];
         
+        self.selectedMapTabViewConstraint.priority = 999.0f; // 1000은 필수 최대값이라 코드로 설정하면 에러
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            [self layoutIfNeeded];
+        }];
+
         [self.delegate selectedMapPinBtnWithNum:0];
     } else {
         self.mapBtn.selected = NO;
-        [self.mapBtnTap setHidden:YES];
-        [self.pinBtnTap setHidden:NO];
+
+        self.selectedMapTabViewConstraint.priority = 780.0f; // pin선택 priority는 800
+
+        [UIView animateWithDuration:0.2 animations:^{
+            [self layoutIfNeeded];
+        }];
+
         [self.delegate selectedMapPinBtnWithNum:1];
     }
 }

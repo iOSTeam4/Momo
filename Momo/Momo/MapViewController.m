@@ -317,7 +317,7 @@
         // 마커 드래그 아닐 때, 새 핀마커 생성 (하나씩만 만들 수 있게)
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = coordinatee;
-        marker.icon = [UIImage imageNamed:@"tabPinS"];
+        marker.icon = [UIImage imageNamed:@"mapPinS"];
         marker.draggable = YES;     // 드래그 가능
         
         self.isMakingMarker = YES;  // 핀 마커 만드는 중

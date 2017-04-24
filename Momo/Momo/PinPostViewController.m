@@ -16,6 +16,7 @@
 <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
 @property (nonatomic) NSArray *dataTempArr;
 @property (nonatomic) NSArray *dataTempArr2;
@@ -65,7 +66,8 @@
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
         cell.profileImageView1.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
-        cell.categoryImg1.image = [UIImage imageNamed:@"01S"];
+        cell.categoryColorView1.backgroundColor = [UIColor colorWithRed:45.0f / 255.0f green:204.0f / 255.0f blue:178.0f / 255.0f alpha:1.0f];
+        cell.categoryColorView1.layer.cornerRadius = cell.categoryColorView1.frame.size.width/2;
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         //    [cell.contentImageView1 setImage:[UIImage imageNamed:@"Zion"]];
@@ -80,7 +82,9 @@
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
         cell.profileImageView2.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
-        cell.categoryImg2.image = [UIImage imageNamed:@"04S"];
+        cell.categoryColorView2.backgroundColor = [UIColor colorWithRed:45.0f / 255.0f green:204.0f / 255.0f blue:178.0f / 255.0f alpha:1.0f];
+        cell.categoryColorView2.layer.cornerRadius = cell.categoryColorView2.frame.size.width/2;
+//        cell.categoryImg2.image = [UIImage imageNamed:@"04S"];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [cell.contentImageView2 setImage:[UIImage imageNamed:self.dataTempArr2[indexPath.row][1]]];
         return cell;
@@ -93,7 +97,8 @@
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
         cell.profileImageView3.image = [UIImage imageNamed:@"DeadpoolShocked.jpg"];
-        cell.categoryImg3.image = [UIImage imageNamed:@"03S"];
+        cell.categoryColorView3.backgroundColor = [UIColor colorWithRed:45.0f / 255.0f green:204.0f / 255.0f blue:178.0f / 255.0f alpha:1.0f];
+        cell.categoryColorView3.layer.cornerRadius = cell.categoryColorView3.frame.size.width/2;
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
        
         [cell.pinMainText3 setText:self.dataTempArr2[indexPath.row][1]];
@@ -102,6 +107,12 @@
     
 }
 
+// Back Btn Action
+- (IBAction)selectedPopViewBtn:(id)sender {
+    //Navigation없애고 커스텀 버튼으로 POP
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 @end
 
