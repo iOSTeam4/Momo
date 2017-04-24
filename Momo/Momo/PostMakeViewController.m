@@ -18,6 +18,8 @@
 @property (nonatomic) MomoPostDataSet *postData;
 
 @property (weak, nonatomic) IBOutlet UILabel *viewTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pinNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pinAddressLabel;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -51,6 +53,7 @@
 // 수정할 때, 미리 부르는 메서드
 - (void)setEditModeWithPostData:(MomoPostDataSet *)postData {
     self.postData = postData;
+    self.pin_pk = postData.post_pin_pk;
     self.isEditMode = YES;
 }
 
@@ -65,6 +68,12 @@
     [self.view addSubview:indicator];
     self.indicator = indicator;
     //------------------------------------//
+    
+    
+    // 핀 정보 세팅
+    MomoPinDataSet *pinData = [DataCenter findPinDataWithPinPK:self.pin_pk];
+    self.pinNameLabel.text = pinData.pin_name;
+    self.pinAddressLabel.text = pinData.pin_place.place_address;
     
     // TextField EditingChanged Event
     [self.contentTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -300,6 +309,9 @@
 // Make Btn Action
 - (IBAction)selectedMakeBtn {
     
+    // 키보드 내리기
+    [self.contentTextField resignFirstResponder];
+    
     NSData *photodata = [UtilityCenter imgResizing:self.photoImageView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
     if (photodata.length > 1024*1024) {
@@ -315,14 +327,13 @@
             NSLog(@"새 포스트 만들어!");
             
             [NetworkModule createPostRequestWithPinPK:self.pin_pk
-                                        withPhotoData:photodata
+                                        withPhotoData:UIImageJPEGRepresentation(self.photoImageView.image, 0.3)
                                       withDescription:self.contentTextField.text
                                   withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                       
                                       [self.indicator stopAnimating];
                                       
                                       if (isSuccess) {
-                                          NSLog(@"Post Create Success");
                                           
                                           self.postData = [[MomoPostDataSet allObjects] lastObject];      // 새로 생성된 데이터가 lastObject
 
@@ -338,6 +349,24 @@
             
 
         } else {    // 수정하기
+            NSLog(@"포스트 수정해!");
+            
+            [NetworkModule updatePostRequestWithPostPK:self.postData.pk
+                                             WithPinPK:self.pin_pk
+                                         withPhotoData:photodata
+                                       withDescription:self.contentTextField.text
+                                   withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                       
+                                       [self.indicator stopAnimating];
+                                       
+                                       if (isSuccess) {
+                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                           
+                                       } else {
+                                           [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                       }
+
+                                   }];
             
         }
     }
@@ -355,9 +384,36 @@
 
 // Delete Btn Action
 - (void)selectedDeletePostBtn:(id)sender {
-    
     NSLog(@"포스트 지워");
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+    // 키보드 내리기
+    [self.contentTextField resignFirstResponder];
+    
+    [self.indicator startAnimating];
+    
+    [NetworkModule deletePostRequestWithPostData:self.postData
+                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+        
+                                 [self.indicator stopAnimating];
+                                 
+                                 if (isSuccess) {
+                                     
+                                     if ([DataCenter findPinDataWithPinPK:self.pin_pk].pin_post_list.count != 0) {
+                                         // 남은 포스트 양이 1개 이상 남아있을 때, 테이블 뷰로 돌아감
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+
+                                     } else {
+                                         [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popViewControllerAnimated:NO];   // 테이블 뷰에서 빠져나와 PinView로 먼저 이동
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                     }
+                                     
+                                     
+                                 } else {
+                                     [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                 }
+
+
+                             }];
     
 }
 

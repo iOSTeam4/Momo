@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -481,6 +481,8 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <outlet property="makeBtn3" destination="iEn-cC-sNL" id="BH1-KT-dOZ"/>
                         <outlet property="photoBtnTopSpacingConstraint" destination="kWt-JM-VpO" id="thz-Mn-bgk"/>
                         <outlet property="photoUploadBtn" destination="YMw-x6-zU1" id="F4z-TS-64a"/>
+                        <outlet property="pinAddressLabel" destination="zoT-PG-aZ5" id="I0O-Cf-Yiu"/>
+                        <outlet property="pinNameLabel" destination="2LV-Lj-Keu" id="JVa-HU-m4M"/>
                         <outlet property="scrollView" destination="PPw-Te-pgI" id="itp-6a-G6Z"/>
                         <outlet property="viewTitleLabel" destination="WXE-Ts-voj" id="CiS-C8-kfR"/>
                         <segue destination="OMy-Wn-Nr3" kind="show" identifier="pinDetailSegue" id="nbl-e9-76j"/>
@@ -598,7 +600,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KI-uc-InF">
-                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
+                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="5KI-uc-InF" secondAttribute="height" id="8oh-fm-e4S"/>
                                                         </constraints>
@@ -1095,6 +1097,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <state key="normal" title="Button" image="setup"/>
                                                     <connections>
                                                         <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="OO8-1D-jEQ"/>
+                                                        <action selector="editBtnAction:" destination="HaD-jw-HG3" eventType="touchUpInside" id="ZCh-oh-W8m"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1242,6 +1245,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     </constraints>
                                                     <state key="normal" title="Button" image="setup"/>
                                                     <connections>
+                                                        <action selector="editBtnAction:" destination="g0b-n8-8Df" eventType="touchUpInside" id="DWv-sW-xl7"/>
                                                         <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="WeH-aa-UUF"/>
                                                     </connections>
                                                 </button>
@@ -1349,6 +1353,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <state key="normal" title="Button" image="setup"/>
                                                     <connections>
                                                         <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="Lt1-FV-NNz"/>
+                                                        <action selector="editBtnAction:" destination="fr6-yl-GXz" eventType="touchUpInside" id="fBA-41-Dac"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1444,6 +1449,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="setup" width="56" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KT7-pT-DDo"/>
+        <segue reference="nbl-e9-76j"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -22,7 +22,6 @@
 		3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */; };
 		3F5D69CD1E9A752300129C90 /* UserProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */; };
 		3F5D69D31E9A76E800129C90 /* UserAccountEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */; };
-		3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */; };
 		3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */; };
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F611E891728001B87F0 /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F601E891728001B87F0 /* NetworkModule.m */; };
@@ -82,8 +81,6 @@
 		3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileEditViewController.m; sourceTree = "<group>"; };
 		3F5D69D11E9A76E800129C90 /* UserAccountEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountEditViewController.h; sourceTree = "<group>"; };
 		3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountEditViewController.m; sourceTree = "<group>"; };
-		3F5D69D41E9A913D00129C90 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
-		3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		3F7254E31E92370F007001F2 /* GoogleAnalyticsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsModule.h; sourceTree = "<group>"; };
 		3F7254E41E92370F007001F2 /* GoogleAnalyticsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsModule.m; sourceTree = "<group>"; };
 		3F745F591E88FF1F001B87F0 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -196,21 +193,8 @@
 			children = (
 				3FD9A5541E88F15000B965A7 /* LoginView */,
 				3FD9A5581E88F4FA00B965A7 /* MainTabBarController */,
-				3FD918CD1E8930A2005B1583 /* MapView */,
-				3FD392F21E93D54400AFBB3A /* MakeView */,
-				3FD392EC1E93C8ED00AFBB3A /* MyView */,
-				3F9C27CC1E8A489F008DD04A /* PinView */,
 			);
 			name = "View & Controller";
-			sourceTree = "<group>";
-		};
-		3F5D69D71E9A936D00129C90 /* UIPlaceHolderTextView */ = {
-			isa = PBXGroup;
-			children = (
-				3F5D69D41E9A913D00129C90 /* UIPlaceHolderTextView.h */,
-				3F5D69D51E9A913D00129C90 /* UIPlaceHolderTextView.m */,
-			);
-			name = UIPlaceHolderTextView;
 			sourceTree = "<group>";
 		};
 		3F745F621E89172C001B87F0 /* Network */ = {
@@ -235,8 +219,6 @@
 				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
 				EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */,
 				3FEEFA741EA62331003F748F /* PostView */,
-				3F3068F31EAB9D0300B451E6 /* UtilityCenter.h */,
-				3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */,
 			);
 			name = PinView;
 			sourceTree = "<group>";
@@ -248,7 +230,6 @@
 				3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */,
 				3F5D69CB1E9A752300129C90 /* UserProfileEditViewController.h */,
 				3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */,
-				3F5D69D71E9A936D00129C90 /* UIPlaceHolderTextView */,
 			);
 			name = Edit;
 			sourceTree = "<group>";
@@ -308,6 +289,7 @@
 				3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */,
 				3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */,
 				3FD918CE1E8930BF005B1583 /* Map.storyboard */,
+				3F9C27CC1E8A489F008DD04A /* PinView */,
 			);
 			name = MapView;
 			sourceTree = "<group>";
@@ -345,6 +327,8 @@
 		3FD9A5321E88ED3700B965A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3F3068F31EAB9D0300B451E6 /* UtilityCenter.h */,
+				3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */,
 				3FD392FB1E93D70700AFBB3A /* DesignGuide */,
 				3F395E5A1E96367F009F082D /* Imges */,
 				EFD11B9B1E8E90EF00896952 /* Assets.xcassets */,
@@ -396,6 +380,9 @@
 			children = (
 				3F745F591E88FF1F001B87F0 /* MainTabBarController.h */,
 				3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */,
+				3FD918CD1E8930A2005B1583 /* MapView */,
+				3FD392F21E93D54400AFBB3A /* MakeView */,
+				3FD392EC1E93C8ED00AFBB3A /* MyView */,
 			);
 			name = MainTabBarController;
 			sourceTree = "<group>";
@@ -574,7 +561,6 @@
 				3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */,
 				3FD9A54B1E88F08500B965A7 /* LoginViewController.m in Sources */,
 				3FC77F511E9C066A009921D5 /* FacebookModule.m in Sources */,
-				3F5D69D61E9A913D00129C90 /* UIPlaceHolderTextView.m in Sources */,
 				3FC77F4E1E9B7DDA009921D5 /* MomoDataSet.m in Sources */,
 				EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */,
 				3F395E581E961FC8009F082D /* UserProfileHeaderView.m in Sources */,

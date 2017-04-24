@@ -12,8 +12,10 @@
 #import "TextCell.h"
 #import "PhotoTextCell.h"
 
+#import "PostMakeViewController.h"
+
 @interface PinPostViewController ()
-<UITableViewDataSource, UITableViewDelegate>
+<UITableViewDataSource, UITableViewDelegate, PhotoTextCellDelegate, TextCellDelegate, PhotoCellDelegate>
 
 @property (nonatomic) MomoPostDataSet *postData;
 @property (nonatomic) MomoPinDataSet *pinData;
@@ -29,7 +31,7 @@
 // 초기 포스트뷰 데이터 세팅
 - (void)showSelectedPostAndSetPostData:(MomoPostDataSet *)postData {
     self.postData = postData;
-    self.pinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", postData.post_pin_pk]][0];  // post가 속한 pin
+    self.pinData = [DataCenter findPinDataWithPinPK:postData.post_pin_pk];          // post가 속한 pin
     self.selectedPostIndex = [self.pinData.pin_post_list indexOfObject:postData];
 }
 
@@ -51,7 +53,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
+    // 반드시 테이블 뷰 refresh 해야함
+    [self.tableView reloadData];
 }
 
 
@@ -68,12 +72,14 @@
         // 글 사진 다 있는 경우
         PhotoTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoTextCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        cell.tag = indexPath.row;
+        cell.delegate = self;
         
-        cell.profileImageView1.image = [self.postData.post_author getAuthorProfileImg];
+        cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
 
-        cell.userName1.text = self.postData.post_author.username;
+        cell.userName1.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
         cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
 
         cell.categoryLabel1.text = [self categoryLabelText];
@@ -89,12 +95,14 @@
         // 사진만 있는 경우
         PhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        cell.tag = indexPath.row;
+        cell.delegate = self;
         
-        cell.profileImageView2.image = [self.postData.post_author getAuthorProfileImg];
+        cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
 
-        cell.userName2.text = self.postData.post_author.username;
+        cell.userName2.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
         cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
 
         cell.categoryLabel2.text = [self categoryLabelText];
@@ -109,12 +117,14 @@
         // 글만 있는 경우
         TextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        cell.tag = indexPath.row;
+        cell.delegate = self;
         
-        cell.profileImageView3.image = [self.postData.post_author getAuthorProfileImg];
+        cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
 
-        cell.userName3.text = self.postData.post_author.username;
+        cell.userName3.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
         cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         
         cell.categoryLabel3.text = [self categoryLabelText];
@@ -127,16 +137,8 @@
     }
 }
 
-// Back Btn Action
-- (IBAction)selectedPopViewBtn:(id)sender {
-    //Navigation없애고 커스텀 버튼으로 POP
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
 
-
-
-
+// 카테고리 라벨 Text 메서드
 - (NSString *)categoryLabelText {
     
     switch (self.pinData.pin_label) {
@@ -152,6 +154,32 @@
             return @"기타";
     }
 }
+
+
+
+// Btn Action ------------------------------//
+
+// Back Btn Action
+- (IBAction)selectedPopViewBtn:(id)sender {
+    //Navigation없애고 커스텀 버튼으로 POP
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+// Edit Btn Action
+- (void)editBtnAction:(NSInteger)index {
+    NSLog(@"editBtnAction");
+    
+    // 포스트 수정
+    PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+    
+    [postMakeVC setEditModeWithPostData:self.pinData.pin_post_list[index]];   // 수정 모드, 데이터 세팅
+    [self presentViewController:postMakeVC animated:YES completion:nil];
+    
+}
+
+
 
 @end
 

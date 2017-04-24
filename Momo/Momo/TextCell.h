@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TextCellDelegate;
+
 @interface TextCell : UITableViewCell
+
+@property (weak, nonatomic) id<TextCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView3;
 @property (weak, nonatomic) IBOutlet UILabel *userName3;
@@ -21,6 +25,14 @@
 
 @end
 
+
+// 델리게이트 프로토콜 ----------------------------//
+
+@protocol TextCellDelegate <NSObject>
+
+- (void)editBtnAction:(NSInteger)index;
+
+@end
 
 
 

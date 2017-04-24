@@ -55,6 +55,19 @@
 }
 
 
++ (MomoMapDataSet *)findMapDataWithMapPK:(NSInteger)map_pk {
+    return [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", map_pk]][0];
+}
+
++ (MomoPinDataSet *)findPinDataWithPinPK:(NSInteger)pin_pk {
+    return [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pin_pk]][0];
+}
+
++ (MomoPostDataSet *)findPostDataWithPostPK:(NSInteger)post_pk {
+    return [MomoPostDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", post_pk]][0];
+}
+
+
 
 
 // Account Token 자동로그인 ------------------------------//
@@ -237,7 +250,7 @@
     [realm transactionWithBlock:^{
         [realm addOrUpdateObject:pinData];
         
-        MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pin_map_pk]][0];
+        MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];
         [mapData.map_pin_list addObject:pinData];
     }];
 }
@@ -250,8 +263,8 @@
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
         // 이전에 속했던 map의 pin_list에서 핀 제거할 수 있게 세팅
-        MomoPinDataSet *previousPinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pk]][0];
-        MomoMapDataSet *previousMapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", previousPinData.pin_map_pk]][0];
+        MomoPinDataSet *previousPinData = [DataCenter findPinDataWithPinPK:pinData.pk];
+        MomoMapDataSet *previousMapData = [DataCenter findMapDataWithMapPK:previousPinData.pin_map_pk];
         NSInteger previousPinIndex = [previousMapData.map_pin_list indexOfObject:previousPinData];
 
         // 핀 정보 업데이트
@@ -263,7 +276,7 @@
             [previousMapData.map_pin_list removeObjectAtIndex:previousPinIndex];
             
             // 속한 맵의 pin_list에 핀 추가
-            MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pin_map_pk]][0];
+            MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];
             [mapData.map_pin_list addObject:pinData];
         }
         
@@ -278,7 +291,7 @@
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-        MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pin_map_pk]][0];  // pin이 속한 map
+        MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];                 // pin이 속한 map
         [mapData.map_pin_list removeObjectAtIndex:[mapData.map_pin_list indexOfObject:pinData]];        // map의 pin_list에서 삭제
         [realm deleteObject:pinData];
     }];
@@ -296,7 +309,7 @@
     [realm transactionWithBlock:^{
         [realm addOrUpdateObject:postData];
         
-        MomoPinDataSet *pinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", postData.post_pin_pk]][0];
+        MomoPinDataSet *pinData = [DataCenter findPinDataWithPinPK:postData.post_pin_pk];
         [pinData.pin_post_list addObject:postData];
     }];
 }
@@ -319,8 +332,8 @@
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-        MomoPinDataSet *pinData = [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", postData.post_pin_pk]][0];  // post가 속한 pin
-        [pinData.pin_post_list removeObjectAtIndex:[pinData.pin_post_list indexOfObject:postData]];        // pin의 post_list에서 삭제
+        MomoPinDataSet *pinData = [DataCenter findPinDataWithPinPK:postData.post_pin_pk];                   // post가 속한 pin
+        [pinData.pin_post_list removeObjectAtIndex:[pinData.pin_post_list indexOfObject:postData]];         // pin의 post_list에서 삭제
         [realm deleteObject:postData];
     }];
 }

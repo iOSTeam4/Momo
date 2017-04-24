@@ -27,4 +27,11 @@
     // Configure the view for the selected state
 }
 
+
+- (IBAction)editBtnAction:(id)sender {
+    
+    [self.delegate editBtnAction:self.tag];
+    
+}
+
 @end

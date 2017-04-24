@@ -144,6 +144,9 @@
 
 - (IBAction)selectedMakeBtn:(id)sender {
     
+    // 키보드 내리기
+    for (UIView *view in @[self.mapNameTextField, self.mapContentTextField]) [view resignFirstResponder];
+    
     [self.indicator startAnimating];
     
     if (!self.isEditMode) {     // 만들기
@@ -215,15 +218,11 @@
 }
 
 
-
-- (IBAction)flickedSecretSwitch:(id)sender {
-    NSLog(@"비밀지도 switch");
-    
-}
-
-
 - (void)selectedDeleteMapBtn:(id)sender {
     NSLog(@"맵 지워");
+    
+    // 키보드 내리기
+    for (UIView *view in @[self.mapNameTextField, self.mapContentTextField]) [view resignFirstResponder];
     
     [self.indicator startAnimating];
     

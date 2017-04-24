@@ -75,6 +75,9 @@
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
     
+    // 반드시 컬렉션 뷰 refresh 해야함
+    [self.collectionView reloadData];
+    
     // Map 세팅
     [self mapPreViewSetting];
     
@@ -97,7 +100,7 @@
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
     MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
     
-    MomoMapDataSet *mapData = [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", self.pinData.pin_map_pk]][0];
+    MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:self.pinData.pin_map_pk];
     
     [mapVC showSelectedMapAndSetMapData:mapData
                     withFocusingPinData:self.pinData];
@@ -147,14 +150,20 @@
     
     if (indexPath.row == 0) {       // * 작성 버튼 때문에 실제 데이터는 row에 -1 씩 계산 필요함 *
         // 포스트 작성 버튼
+        [cell.contentsBtn setTitle:nil forState:UIControlStateNormal];  // 글 삭제 (초기화)
+        
         [cell.contentsBtn setImage:[UIImage imageNamed:@"addPost"] forState:UIControlStateNormal];
 
-    } else if ([self.pinData.pin_post_list[indexPath.row - 1] getPostPhotoThumbnail]) {
+    } else if ([self.pinData.pin_post_list[indexPath.row - 1] getPostPhoto]) {
         // 사진이 있는 경우
-        [cell.contentsBtn setImage:[self.pinData.pin_post_list[indexPath.row - 1] getPostPhotoThumbnail] forState:UIControlStateNormal];
+        [cell.contentsBtn setTitle:nil forState:UIControlStateNormal];  // 글 삭제 (초기화)
+
+        [cell.contentsBtn setImage:[self.pinData.pin_post_list[indexPath.row - 1] getPostPhoto] forState:UIControlStateNormal];
 
     } else {
         // 글만 있는 경우
+        [cell.contentsBtn setImage:nil forState:UIControlStateNormal];  // 사진 삭제 (초기화)
+        
         [cell.contentsBtn setBackgroundColor:[UIColor whiteColor]];
         [cell.contentsBtn setTitle:self.pinData.pin_post_list[indexPath.row - 1].post_description forState:UIControlStateNormal];
         [cell.contentsBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];

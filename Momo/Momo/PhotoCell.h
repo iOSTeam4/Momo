@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PhotoCellDelegate;
+
 @interface PhotoCell : UITableViewCell
+
+@property (weak, nonatomic) id<PhotoCellDelegate> delegate;
 
 // constraint
 
@@ -22,3 +26,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress2;
 
 @end
+
+
+// 델리게이트 프로토콜 ----------------------------//
+
+@protocol PhotoCellDelegate <NSObject>
+
+- (void)editBtnAction:(NSInteger)index;
+
+@end
+

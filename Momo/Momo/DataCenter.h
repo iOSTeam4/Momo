@@ -22,6 +22,10 @@
 + (RLMArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex;
 + (RLMArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex;
 
++ (MomoMapDataSet *)findMapDataWithMapPK:(NSInteger)map_pk;
++ (MomoPinDataSet *)findPinDataWithPinPK:(NSInteger)pin_pk;
++ (MomoPostDataSet *)findPostDataWithPostPK:(NSInteger)post_pk;
+
 
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter

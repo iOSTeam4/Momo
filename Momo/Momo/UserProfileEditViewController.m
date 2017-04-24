@@ -7,7 +7,6 @@
 //
 
 #import "UserProfileEditViewController.h"
-#import "UIPlaceHolderTextView.h"
 
 @interface UserProfileEditViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -203,12 +202,21 @@
 - (IBAction)backBtnAtciton {
     NSLog(@"backBtnAtciton");
     
+    // 키보드 처리
+    [self.userNameTextField resignFirstResponder];
+    [self.userCommentTextView resignFirstResponder];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // 수정하기
 - (IBAction)editDoneBtnAtciton {
     NSLog(@"editDoneBtnAtciton");
+    
+    // 키보드 처리
+    [self.userNameTextField resignFirstResponder];
+    [self.userCommentTextView resignFirstResponder];
+
     
     NSData *profileImgdata = [UtilityCenter imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
@@ -247,6 +255,12 @@
 // 로그아웃
 - (IBAction)logOutBtnAtciton {
     NSLog(@"logOutBtnAtciton");
+    
+    // 키보드 처리
+    [self.userNameTextField resignFirstResponder];
+    [self.userCommentTextView resignFirstResponder];
+
+    
     [self.indicator startAnimating];
     
     [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {

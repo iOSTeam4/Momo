@@ -150,7 +150,7 @@
     CGFloat offsetY = self.mapCheckRefOriginY.frame.origin.y;
     
     for (NSInteger i =0 ; i < mapArr.count ; i++) {
-        UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(26, offsetY, self.view.frame.size.width-26, 29)];
+        UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(26, offsetY, self.view.frame.size.width-52, 29)];
         [self.contentView addSubview:btnView];
         
         UIButton *mapCheckBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -163,6 +163,7 @@
         [mapNameBtn setTitle:mapArr[i].map_name forState:UIControlStateNormal];
         [mapNameBtn setTitleColor:[UIColor colorWithRed:84/255.0 green:182/255.0 blue:249/255.0 alpha:1.0] forState:UIControlStateNormal];
         [mapNameBtn.titleLabel setFont:[UIFont systemFontOfSize:20]];
+        [mapNameBtn.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         mapCheckBtn.tag = i;
         mapNameBtn.tag = i;
@@ -187,8 +188,15 @@
         mapCheckBtn.frame = CGRectMake(0, 0, 29, 29);
         
         [btnView addSubview:mapNameBtn];
-        CGSize mapNameSize = [mapNameBtn.currentTitle sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
-        mapNameBtn.frame = CGRectMake(30, 0, mapNameSize.width, 29);
+        CGSize mapNameTitleSize = [mapNameBtn.currentTitle sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
+        CGFloat mapNameBtnWidth = mapNameTitleSize.width + 36;
+        CGFloat mapNameBtnWidthMax = btnView.frame.size.width - (mapCheckBtn.frame.size.width + 1);
+        
+        if (mapNameBtnWidth > mapNameBtnWidthMax) {         // 지도명이 너무 길 때
+            mapNameBtn.frame = CGRectMake(30, 0, mapNameBtnWidthMax, 29);
+        } else {
+            mapNameBtn.frame = CGRectMake(30, 0, mapNameBtnWidth, 29);
+        }
         
         offsetY += 44;
         
@@ -295,12 +303,14 @@
 
 // Make Btn Action
 - (IBAction)selectedMakeBtn {
+    
+    // 키보드 내리기
+    [self.pinNameTextField resignFirstResponder];
 
     [self.indicator startAnimating];
     
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 핀 만들어!");
-        
         
         [NetworkModule createPinRequestWithPinname:self.pinNameTextField.text
                                          withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
@@ -327,7 +337,8 @@
 
         
     } else {    // 수정하기
-
+        NSLog(@"핀 수정해!");
+        
         [NetworkModule updatePinRequestWithPinPK:self.pinData.pk
                                      withPinname:self.pinNameTextField.text
                                        withLabel:self.categoryLastSelectedBtn.tag
@@ -395,6 +406,10 @@
 // Delete Btn Action
 - (void)selectedDeletePinBtn:(id)sender {
     NSLog(@"핀 지워");
+    
+    // 키보드 내리기
+    [self.pinNameTextField resignFirstResponder];
+
     
     [self.indicator startAnimating];
     

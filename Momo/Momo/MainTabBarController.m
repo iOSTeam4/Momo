@@ -184,7 +184,7 @@
                 } else if (sender.tag == MY_VIEW) {
                     // 2 MyView : 테이블 뷰 맨 위로 이동
                     NSLog(@"MyView : 테이블 뷰 맨 위로 이동");
-                    [((MyViewController *)((UINavigationController *)self.selectedViewController).visibleViewController).tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+                    [((MyViewController *)((UINavigationController *)self.selectedViewController).visibleViewController).tableView setContentOffset:CGPointMake(0, -20) animated:YES];      // status bar 20pt
                 }
             }
         }

@@ -111,6 +111,11 @@ static NSString *const POST_URL             = @"/api/post/";
     // Request
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, LOG_IN_URL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    
+    
+//    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+//    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     
     request.HTTPBody = [[NSString stringWithFormat:@"username=%@&password=%@", username, password] dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"POST";
@@ -301,78 +306,6 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 
-//// 서버로부터 유저 지도정보 패치하는 메서드
-//+ (void)fetchUserMapData {
-//    NSLog(@"fetchUserMapData");
-//    
-//    // 서버로부터 유저 지도리스트 등 받아와 세팅할 부분
-//    // 일단 더미로 넣겠음
-//
-//    NSArray *mapArr = @[@[@"지도명", @"지도 설명", @1],   // 지도명, 지도설명, 공개설정(0: 공개 , 1 : 비공개)
-//                        @[@"패캠 주변 맛집", @"가로수길 근천데 맛집 잘 없는거 같은건 기분탓인가??????????????????????", @0],
-//                        @[@"서울 맛집 리스트", @"yummy yummy👍", @1],
-//                        @[@"제주도를 가보자", @"꿀잼", @0],
-//                        @[@"광화문-경복궁-서촌", @"오피스 라이프를 빛내주는 곳들 :)", @0],
-//                        @[@"이태원 맥주집", @"준영이형 마음의 고향을 파헤쳐보자", @0],
-//                        @[@"낚시", @"", @1],
-//                        @[@"엑소 투어⚡️", @"엑소 따라 여행 간다", @0],
-//                        @[@"수도권 마스킹 or 와이드스크린 영화관", @"🍿", @1]];
-//    
-//
-//    
-//    NSArray *pinArr = @[@[@"핀명", @"핀주소", @"핀설명", @4, @37.517181f, @127.028488f],   // 핀명, 핀주소, 핀설명, 라벨(0~5), 위도, 경도
-//                        @[@"패스트캠퍼스", @"서울특별시 강남구 논현1동", @"패캠패캠", @3, @37.515602, @127.021402],
-//                        @[@"이케아", @"경기도 광명시 소하2동 일직로 17", @"이케아 👍", @2, @37.423480, @126.882591],
-//                        @[@"롯데월드", @"서울특별시 송파구 잠실3동 올림픽로 240", @"꿀잼", @3, @37.511120, @127.098328],
-//                        @[@"강남역", @"서울특별시 역삼1동", @"항상 사람 많은듯", @3, @37.498023, @127.027417],
-//                        @[@"발리 슈퍼스토어", @"서울특별시 마포구 서교동 양화로6길 45", @"준영이형의 마음의 고향", @1, @37.548755, @126.916777],
-//                        @[@"화곡 2동 주민센터", @"서울특별시 강서구 화곡2동 곰달래로37길 13", @"한선이형 동네", @3, @37.531612, @126.854423],
-//                        @[@"나들목", @"서울특별시 강남구 논현동 5-16", @"맛있음 ㅋㅋ", @1, @37.517116, @127.023943],
-//                        @[@"나들목2", @"서울특별시 강남구 논현동 5-16", @"이 핀은 테스트 맛있음 ㅋㅋ", @1, @37.517126, @127.023743],
-//                        @[@"스타벅스 신사역점", @"서울특별시 강남구 논현동 1-3", @"좁은데, 사람도 많아..", @0, @37.516224, @127.020653]];
-//    
-//    
-//    
-//    RLMRealm *realm = [RLMRealm defaultRealm];
-//    [realm transactionWithBlock:^{
-//
-//        for (NSInteger i = 0 ; i < mapArr.count ; i++) {
-//            MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
-//            [[DataCenter sharedInstance].momoUserData.user_map_list addObject:mapData];
-//            
-//            mapData.pk = i;
-//            mapData.map_name = mapArr[i][0];
-//            if (![mapArr[i][1] isEqualToString:@""]) {  // 설명 비었을 경우 테스트
-//                mapData.map_description = mapArr[i][1];
-//            }
-//            mapData.map_is_private = [(NSNumber *)mapArr[i][2] boolValue];
-//            
-//            if (i == 0) {
-//                // 0번 지도만 핀 등록
-//                for (NSInteger j = 0 ; j < pinArr.count ; j++) {
-//                    MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
-//                    [mapData.map_pin_list addObject:pinData];
-//                    
-//                    pinData.pk = j;
-//                    pinData.pin_name = pinArr[j][0];
-////                    pinData.pin_description = pinArr[j][2];
-//                    pinData.pin_label = [(NSNumber *)pinArr[j][3] integerValue];
-//                    pinData.pin_map_pk = mapData.pk;
-//                    
-//                    MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
-//                    pinData.pin_place = placeData;
-//                    
-//                    placeData.pk = j;
-//                    placeData.place_address = pinArr[j][1];
-//                    placeData.place_lat = [(NSNumber *)pinArr[j][4] doubleValue];
-//                    placeData.place_lng = [(NSNumber *)pinArr[j][5] doubleValue];
-//                }
-//            }
-//        }
-//    }];
-//}
-
-
 // Patch member profile update
 + (void)patchMemberProfileUpdateWithUsername:(NSString *)username
                               withProfileImg:(NSData *)imgData
@@ -387,10 +320,12 @@ static NSString *const POST_URL             = @"/api/post/";
 
     // 헤더 세팅
     [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];     // form-data 아님??
 
     // 바디 세팅 : Update username & profile_img
     request.HTTPBody = [[NSString stringWithFormat:@"username=%@&profile_img=%@", username, imgData] dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"PATCH";
+
     
     // Task
     NSURLSessionUploadTask *patchTask = [session uploadTaskWithRequest:request
@@ -1007,7 +942,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 // Post Delete
 + (void)deletePostRequestWithPostData:(MomoPostDataSet *)postData
-                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+                  withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];

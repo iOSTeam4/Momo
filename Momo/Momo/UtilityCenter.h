@@ -19,3 +19,16 @@
 + (NSData *)imgResizing:(UIImage *)img;
 
 @end
+
+
+
+// UIPlaceHolderTextView
+IB_DESIGNABLE
+@interface UIPlaceHolderTextView : UITextView
+
+@property (nonatomic, retain) IBInspectable NSString *placeholder;
+@property (nonatomic, retain) IBInspectable UIColor *placeholderColor;
+
+- (void)textChanged:(NSNotification*)notification;
+
+@end
