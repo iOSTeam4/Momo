@@ -37,6 +37,18 @@
     // Target이 parentViewController(Main Tab Bar Controller)
     [self.makeMapBtn addTarget:(MainTabBarController *)self.parentViewController action:@selector(selectedMakeMapBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.makePinBtn addTarget:(MainTabBarController *)self.parentViewController action:@selector(selectedMakePinBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)pinBtnEnableCheck {
+    // 지도가 1개 이상 있을 때, 핀 생성 버튼 활성화
+    if ([DataCenter myMapList].count > 0) {
+        self.makePinBtn.enabled = YES;
+        [self.makePinBtn setBackgroundColor:[UIColor mm_brightSkyBlueColor]];
+    } else {
+        self.makePinBtn.enabled = NO;
+        [self.makePinBtn setBackgroundColor:[UIColor lightGrayColor]];
+    }
 }
 
 

@@ -60,7 +60,7 @@
                                     <constraint firstItem="5N4-oB-wut" firstAttribute="width" secondItem="1cC-c8-Clb" secondAttribute="width" id="uaD-PM-DuB"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtC-TH-XLK" userLabel="LoginBtnView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtC-TH-XLK" userLabel="LoginBtnView">
                                 <rect key="frame" x="24" y="407" width="272" height="109"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbM-xJ-izl">
@@ -614,6 +614,6 @@
         <image name="pinSymbol" width="142" height="154"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Xh-vs-jWX"/>
+        <segue reference="0O6-SJ-YEB"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -36,8 +36,18 @@
     
     // 앱 실행하면서, Realm에 있는 유저 정보 패치
     [self.indicator startAnimating];
-    [[DataCenter sharedInstance] fetchMomoUserData];
-    [self.indicator stopAnimating];
+    [[DataCenter sharedInstance] fetchMomoUserDataWithCompletionBlock:^(BOOL isSuccess) {
+        [self.indicator stopAnimating];
+        
+        if (isSuccess) {
+            // 자동로그인
+            [LoginViewController autoLoginCheck];
+        } else {
+            // 로그인 버튼 노출
+            [self.loginBtnView setHidden:NO];
+        }
+    }];
+
 
 }
 
@@ -49,15 +59,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    [self autoLoginCheck];  // 자동 로그인 체크
 }
 
 
 // NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
-    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리 (다른 Gesture 쓰는 것 없음)
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리
     if(self.navigationController.viewControllers.count > 1){
         return YES;
     }
@@ -69,31 +77,13 @@
 
 // Auto Login Check Method -----------------------------------//
 
-- (void)autoLoginCheck {
++ (void)autoLoginCheck {
     
     NSLog(@"autoLoginCheck");
     
     if ([[DataCenter sharedInstance] getUserToken]) {
         // Token 있으면 YES, 없으면 nil(NO)
         NSLog(@"Token : %@", [[DataCenter sharedInstance] getUserToken]);
-        
-
-        // Momo Server - get User profile Infos
-        NSLog(@"getMemberProfile");
-        [self.indicator startAnimating];
-        [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
-            
-            [self.indicator stopAnimating];
-            
-            if (isSuccess) {
-                
-                
-                
-            } else {
-                
-            }
-
-        }];
         
 //        sleep(3);       // 3초 후 dismiss
 //        [self dismissViewControllerAnimated:YES completion:nil];
@@ -120,21 +110,30 @@
     [FacebookModule fbLoginFromVC:self
               withCompletionBlock:^(BOOL isSuccess, NSString *token) {
                   
-                  [self.indicator stopAnimating];
-                  
                   if (isSuccess) {
                       NSLog(@"fb 로그인 성공");
                       
                       [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
                       
-                      // 임시로 더미데이터 세팅 /////
-                      [NetworkModule fetchUserMapData];
-                      /////////////////////////
-                      
-                      
-                      [self autoLoginCheck];
+                      [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+
+                          [self.indicator stopAnimating];
+
+                          if (isSuccess) {
+                              NSLog(@"get Member Profile success : %@", result);
+
+                              // 로그인 체킹
+                              [LoginViewController autoLoginCheck];
+                              
+                          } else {
+                              NSLog(@"error : %@", result);
+                              [UtilityCenter presentCommonAlertController:self withMessage:result];
+                          }
+                          
+                      }];
                       
                   } else {
+                      [self.indicator stopAnimating];
                       NSLog(@"fb 로그인 실패");
                   }
               }];

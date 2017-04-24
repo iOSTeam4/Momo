@@ -11,5 +11,6 @@
 @interface MapMakeViewController : UIViewController
 
 - (void)setEditModeWithMapData:(MomoMapDataSet *)mapData;
+@property BOOL wasMapView;      // 맵뷰에서 수정했는지?
 
 @end

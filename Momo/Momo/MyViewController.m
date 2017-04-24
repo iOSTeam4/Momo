@@ -21,10 +21,12 @@
 #import "PinMakeViewController.h"
 
 @interface MyViewController ()
-<UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate>
+<UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
+
+@property (nonatomic) UIRefreshControl *tableViewRefreshControl;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
@@ -35,17 +37,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 테이블뷰에 Nib(xib) Register
+    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
+    
+    // TableView Settings -------------------//
+
+    // TableView Nib(xib) Register
     [self initialTableViewCellSettingWithNib];
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
-    
     
     // TableView Header, Cell Height 자동 적용
     self.tableView.estimatedSectionHeaderHeight = 260;
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    // TableView RefreshControl 설정
+    self.tableViewRefreshControl = [[UIRefreshControl alloc] init];
+    [self.tableView addSubview:self.tableViewRefreshControl];
+    [self.tableViewRefreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
 
 }
 
@@ -63,7 +75,7 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     NSLog(@"MyViewController : gestureRecognizerShouldBegin, %ld", self.navigationController.viewControllers.count);
     
-    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리 (다른 Gesture 쓰는 것 없음)
+    // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리
     if(self.navigationController.viewControllers.count > 1){
         return YES;
     }
@@ -135,6 +147,15 @@
 }
 
 
+
+- (void)refreshTableView {
+    [self.tableViewRefreshControl endRefreshing];
+    
+    // 서버 네트웍 통신 들어갈 부분
+    [self.tableView reloadData];
+}
+
+
 // TableView Methods -------------------------------------------//
 
 - (void)initialTableViewCellSettingWithNib {
@@ -172,9 +193,9 @@
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
     }
-    if ([DataCenter sharedInstance].momoUserData.user_id) {
-        headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
-    }
+//    if ([DataCenter sharedInstance].momoUserData.user_id) {
+//        headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
+//    }
     
     return headerView;
 }
@@ -240,7 +261,7 @@
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
         // 핀 데이터 세팅
-        [pinVC showSelectedPinAndSetMapData:mapData withPinIndex:indexPath.row];
+        [pinVC showSelectedPinAndSetPinData:[MomoPinDataSet allObjects][indexPath.row]];
         
         [self.navigationController pushViewController:pinVC animated:YES];
     }
@@ -288,7 +309,7 @@
     MapMakeViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
     [mapMakeVC setEditModeWithMapData:[DataCenter myMapList][index]];   // 수정 모드, 데이터 세팅
-    [self.navigationController pushViewController:mapMakeVC animated:YES];
+    [self presentViewController:mapMakeVC animated:YES completion:nil];
     
 }
 
@@ -303,7 +324,7 @@
     PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
     
     [pinMakeVC setEditModeWithPinData:[MomoPinDataSet allObjects][index]];   // 수정 모드, 데이터 세팅
-    [self.navigationController pushViewController:pinMakeVC animated:YES];
+    [self presentViewController:pinMakeVC animated:YES completion:nil];
     
 }
 

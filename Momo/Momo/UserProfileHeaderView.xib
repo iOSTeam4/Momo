@@ -31,13 +31,13 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zec-gh-XT0">
-                            <rect key="frame" x="111" y="30" width="249" height="29"/>
+                            <rect key="frame" x="111" y="30" width="182" height="29"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@pikapika" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-jo-xka">
-                            <rect key="frame" x="111" y="64" width="249" height="17"/>
+                            <rect key="frame" x="111" y="64" width="182" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -91,7 +91,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="팔로워들에게 자기소개를 해보세요 :0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnD-av-G4c">
-                            <rect key="frame" x="15" y="138" width="345" height="63.5"/>
+                            <rect key="frame" x="15" y="138" width="278" height="63.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="BLB-bA-8BW"/>
                             </constraints>
@@ -160,7 +160,6 @@
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="centerX" secondItem="33w-V8-FN6" secondAttribute="centerX" priority="999" id="99y-LN-BJR"/>
                         <constraint firstItem="MFE-2i-3G2" firstAttribute="top" secondItem="33w-V8-FN6" secondAttribute="top" id="9IH-Ka-kzF"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="260" id="9wq-5I-SPR"/>
-                        <constraint firstAttribute="trailing" secondItem="Zec-gh-XT0" secondAttribute="trailing" constant="15" id="ANG-ba-wLF"/>
                         <constraint firstItem="33w-V8-FN6" firstAttribute="centerX" secondItem="NdR-tf-O6X" secondAttribute="centerX" multiplier="0.6" id="CWY-ha-iQZ"/>
                         <constraint firstItem="33w-V8-FN6" firstAttribute="width" secondItem="NdR-tf-O6X" secondAttribute="width" multiplier="0.34" id="Cpu-jZ-vYB"/>
                         <constraint firstItem="GjJ-W0-Jpu" firstAttribute="centerY" secondItem="kNW-HS-z55" secondAttribute="centerY" id="Ghq-5B-CQa"/>
@@ -187,6 +186,7 @@
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="centerX" secondItem="MFE-2i-3G2" secondAttribute="centerX" priority="800" id="j5W-ri-l7i"/>
                         <constraint firstItem="kNW-HS-z55" firstAttribute="centerY" secondItem="KXS-Ev-vQ1" secondAttribute="centerY" id="jaz-Z2-hXE"/>
                         <constraint firstItem="kNW-HS-z55" firstAttribute="height" secondItem="2aR-3M-yop" secondAttribute="height" id="keT-53-R5F"/>
+                        <constraint firstItem="fTt-OC-bDx" firstAttribute="leading" secondItem="Zec-gh-XT0" secondAttribute="trailing" constant="16" id="qbA-Sb-6LF"/>
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="bottom" secondItem="ocM-qE-B8k" secondAttribute="bottom" id="tff-Uj-bLv"/>
                         <constraint firstItem="GjJ-W0-Jpu" firstAttribute="width" secondItem="kNW-HS-z55" secondAttribute="width" constant="49" id="wG6-Zg-rrx"/>
                         <constraint firstItem="ocM-qE-B8k" firstAttribute="centerY" secondItem="NdR-tf-O6X" secondAttribute="centerY" id="x1m-kR-j9R"/>

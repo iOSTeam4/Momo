@@ -49,7 +49,7 @@
                                                             <constraint firstAttribute="height" constant="44" id="ZGf-iw-HzM"/>
                                                             <constraint firstAttribute="width" constant="44" id="gf4-XT-Axl"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="modallyBtn"/>
+                                                        <state key="normal" title="Button" image="backBtn"/>
                                                         <connections>
                                                             <action selector="backBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="YEa-Uq-wnv"/>
                                                         </connections>
@@ -275,7 +275,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <!--Post Make View Controller-->
         <scene sceneID="ryN-gb-CZS">
             <objects>
-                <viewController id="VaS-0c-ANh" customClass="PostMakeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostMakeViewController" id="VaS-0c-ANh" customClass="PostMakeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Sg-9Z-QdR"/>
                         <viewControllerLayoutGuide type="bottom" id="nQ7-0F-YVz"/>
@@ -327,7 +327,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </constraints>
                                                 <state key="normal" title="Button" image="photoBtnS"/>
                                                 <connections>
-                                                    <action selector="selectedPhotoUplaodBtn:" destination="VaS-0c-ANh" eventType="touchUpInside" id="Rrg-Uu-qE5"/>
+                                                    <action selector="selectedPhotoUploadBtn:" destination="VaS-0c-ANh" eventType="touchUpInside" id="97D-S0-jhI"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="글 남기기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-cZ-xnL">
@@ -482,6 +482,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <outlet property="photoBtnTopSpacingConstraint" destination="kWt-JM-VpO" id="thz-Mn-bgk"/>
                         <outlet property="photoUploadBtn" destination="YMw-x6-zU1" id="F4z-TS-64a"/>
                         <outlet property="scrollView" destination="PPw-Te-pgI" id="itp-6a-G6Z"/>
+                        <outlet property="viewTitleLabel" destination="WXE-Ts-voj" id="CiS-C8-kfR"/>
                         <segue destination="OMy-Wn-Nr3" kind="show" identifier="pinDetailSegue" id="nbl-e9-76j"/>
                     </connections>
                 </viewController>
@@ -597,7 +598,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KI-uc-InF">
-                                                        <rect key="frame" x="141" y="0.5" width="67" height="66"/>
+                                                        <rect key="frame" x="141" y="0.0" width="67" height="66.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="5KI-uc-InF" secondAttribute="height" id="8oh-fm-e4S"/>
                                                         </constraints>
@@ -981,7 +982,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <!--Pin Post View Controller-->
         <scene sceneID="1vM-uc-Aku">
             <objects>
-                <viewController id="OMy-Wn-Nr3" customClass="PinPostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinPostViewController" id="OMy-Wn-Nr3" customClass="PinPostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZdN-SS-1wz"/>
                         <viewControllerLayoutGuide type="bottom" id="N1s-nq-MFd"/>
@@ -999,7 +1000,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             <constraint firstAttribute="height" constant="44" id="6BM-GL-DtR"/>
                                             <constraint firstAttribute="width" constant="44" id="oLE-21-8Em"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="modallyBtn"/>
+                                        <state key="normal" title="Button" image="backBtn"/>
                                         <connections>
                                             <action selector="selectedPopViewBtn:" destination="OMy-Wn-Nr3" eventType="touchUpInside" id="KqS-Zo-4mp"/>
                                             <action selector="selectedPopViewBtn:" destination="oTe-Hh-2bY" eventType="touchUpInside" id="OYf-gM-oyG"/>
@@ -1126,6 +1127,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="categoryColorView1" destination="gcs-1H-Qti" id="lmX-Ro-wpk"/>
+                                            <outlet property="categoryLabel1" destination="bPY-s9-z4v" id="31o-hc-VJV"/>
                                             <outlet property="contentImageView1" destination="pMR-VS-9Rx" id="AN2-KU-Ngq"/>
                                             <outlet property="editBtn1" destination="bse-vf-Ai6" id="PHw-xG-60A"/>
                                             <outlet property="pinAddress1" destination="ec3-Hr-peb" id="tyT-oE-VLg"/>
@@ -1431,6 +1433,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="05On" width="67" height="67"/>
         <image name="05S" width="67" height="67"/>
         <image name="DeadpoolShocked" width="720" height="480"/>
+        <image name="backBtn" width="13" height="22"/>
         <image name="lockBtnClose" width="16" height="19"/>
         <image name="makeCheckBtn" width="50" height="48"/>
         <image name="makeCheckBtnS" width="52" height="48"/>
@@ -1441,6 +1444,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="setup" width="56" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nbl-e9-76j"/>
+        <segue reference="KT7-pT-DDo"/>
     </inferredMetricsTieBreakers>
 </document>

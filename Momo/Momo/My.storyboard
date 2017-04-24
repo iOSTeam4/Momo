@@ -50,7 +50,7 @@
                     <connections>
                         <outlet property="indicator" destination="8zB-FZ-0L1" id="4V5-7v-9SR"/>
                         <outlet property="tableView" destination="HwH-KB-0lW" id="L15-91-kPY"/>
-                        <segue destination="7ra-oB-aUB" kind="show" identifier="userProfileEditSegue" id="QJq-Yx-Gk8"/>
+                        <segue destination="7ra-oB-aUB" kind="presentation" identifier="userProfileEditSegue" id="QJq-Yx-Gk8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWt-SO-YZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -87,6 +87,9 @@
                                             <constraint firstAttribute="height" constant="44" id="hkY-17-MXC"/>
                                         </constraints>
                                         <state key="normal" image="modallyBtn"/>
+                                        <connections>
+                                            <action selector="backBtnAtciton" destination="7ra-oB-aUB" eventType="touchUpInside" id="VQp-B9-zsP"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Pikachu" placeholder="User Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0wn-OF-MgH">
                                         <rect key="frame" x="116.5" y="75" width="233.5" height="29"/>
@@ -125,13 +128,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-kP-FmJ">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-kP-FmJ">
                                         <rect key="frame" x="306" y="11.5" width="43.5" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="0lA-NZ-BBj"/>
                                             <constraint firstAttribute="width" secondItem="Inb-kP-FmJ" secondAttribute="height" multiplier="50:47" id="Btt-r8-DFr"/>
                                         </constraints>
-                                        <state key="normal" image="makeCheckBtn"/>
+                                        <state key="normal" image="makeCheckBtnS"/>
+                                        <state key="disabled" image="makeCheckBtn"/>
+                                        <connections>
+                                            <action selector="editDoneBtnAtciton" destination="7ra-oB-aUB" eventType="touchUpInside" id="Z80-io-FaA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvZ-zN-uPJ">
                                         <rect key="frame" x="264.5" y="308" width="85" height="30"/>
@@ -140,6 +147,9 @@
                                             <constraint firstAttribute="height" constant="30" id="ci7-qZ-Qic"/>
                                         </constraints>
                                         <state key="normal" image="logout"/>
+                                        <connections>
+                                            <action selector="logOutBtnAtciton" destination="7ra-oB-aUB" eventType="touchUpInside" id="Ozi-Aq-Ads"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,6 +185,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="editDoneBtn" destination="Inb-kP-FmJ" id="miX-kX-WRm"/>
                         <outlet property="userCommentTextView" destination="dKa-sP-NUY" id="32P-3V-uX3"/>
                         <outlet property="userIDLabel" destination="PwP-u4-4OU" id="hsa-A1-zrI"/>
                         <outlet property="userImgView" destination="xlX-TW-fsi" id="xGy-uY-zYi"/>
@@ -317,6 +328,7 @@
     <resources>
         <image name="logout" width="136" height="48"/>
         <image name="makeCheckBtn" width="50" height="48"/>
+        <image name="makeCheckBtnS" width="52" height="48"/>
         <image name="modallyBtn" width="22" height="13"/>
         <image name="pika.png" width="982" height="596"/>
     </resources>

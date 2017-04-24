@@ -12,6 +12,7 @@
 
 // constraint
 
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel1;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView1;
 @property (weak, nonatomic) IBOutlet UIView *categoryColorView1;
 @property (weak, nonatomic) IBOutlet UILabel *userName1;

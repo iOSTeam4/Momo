@@ -7,9 +7,13 @@
 //
 
 #import "PinMakeViewController.h"
+#import "MapViewController.h"
 #import "PinViewController.h"
 
 @interface PinMakeViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
+
+@property (nonatomic) CGFloat lat;
+@property (nonatomic) CGFloat lng;
 
 @property (nonatomic) BOOL isEditMode;
 @property (nonatomic) MomoPinDataSet *pinData;
@@ -39,24 +43,37 @@
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
 
+@property (weak, nonatomic) UIActivityIndicatorView *indicator;
+
 @end
 
 @implementation PinMakeViewController
 
+// 미리 핀의 위도, 경도 값 세팅하는 메서드
+- (void)setLat:(CGFloat)lat
+       withLng:(CGFloat)lng {
+    self.lat = lat;
+    self.lng = lng;
+}
+
+// 수정할 때, 미리 부르는 메서드
 - (void)setEditModeWithPinData:(MomoPinDataSet *)pinData {
     self.pinData = pinData;
     self.isEditMode = YES;
-    NSLog(@"setEditModeWithPinData : pinData주소 %@", pinData);
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    // Navi Pop Gesture 활성화
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
 
+    // 스토리보드로 옮길 것 --------------------//
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.center = self.view.center;
+    indicator.hidesWhenStopped = YES;
+    [self.view addSubview:indicator];
+    self.indicator = indicator;
+    //------------------------------------//
+    
     // pinNameTextField에 셀렉터 추가
     [self.pinNameTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
@@ -64,25 +81,11 @@
     [self makeMyMapCheckBtnViewWithArr:[DataCenter myMapList]];
     
     // category button shadow
-    self.categoryCafeBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryCafeBtn.layer.shadowRadius = 8;
-    self.categoryCafeBtn.layer.shadowOpacity = 0.2;
-    self.categoryFoodBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryFoodBtn.layer.shadowRadius = 8;
-    self.categoryFoodBtn.layer.shadowOpacity = 0.2;
-    self.categoryShopBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryShopBtn.layer.shadowRadius = 8;
-    self.categoryShopBtn.layer.shadowOpacity = 0.2;
-    self.categoryPlaceBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryPlaceBtn.layer.shadowRadius = 8;
-    self.categoryPlaceBtn.layer.shadowOpacity = 0.2;
-    self.categoryEtcBtn.layer.shadowOffset = CGSizeMake(0, 7);
-    self.categoryEtcBtn.layer.shadowRadius = 8;
-    self.categoryEtcBtn.layer.shadowOpacity = 0.2;
-   
-    
-    
-    
+    for (UIButton *labelBtn in @[self.categoryCafeBtn, self.categoryFoodBtn, self.categoryShopBtn, self.categoryPlaceBtn, self.categoryEtcBtn]) {
+        labelBtn.layer.shadowOffset = CGSizeMake(0, 7);
+        labelBtn.layer.shadowRadius = 8;
+        labelBtn.layer.shadowOpacity = 0.2;
+    }
     
     
     // EditMode
@@ -95,6 +98,7 @@
         self.checkName = YES;
         self.checkCategory = YES;
         self.checkMap = YES;
+        
         
         // Edit 모드에 맞게 수정
         self.viewTitleLabel.text = @"핀 수정하기";
@@ -183,12 +187,13 @@
         mapCheckBtn.frame = CGRectMake(0, 0, 29, 29);
         
         [btnView addSubview:mapNameBtn];
-        mapNameBtn.frame = CGRectMake(30, 0, btnView.frame.size.width - 40, 29);
+        CGSize mapNameSize = [mapNameBtn.currentTitle sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
+        mapNameBtn.frame = CGRectMake(30, 0, mapNameSize.width, 29);
         
         offsetY += 44;
         
         // 수정모드일 때, 등록되어있던 맵 정보 세팅 (map pk값으로 구별)
-        if (self.isEditMode && (mapArr[i].pk == self.pinData.pin_map.pk)) {
+        if (self.isEditMode && (mapArr[i].pk == self.pinData.pin_map_pk)) {
             [self selectedMapCheckBtn:mapCheckBtn];
         }
     }
@@ -203,9 +208,7 @@
 
 // Back Btn Action
 - (IBAction)selectedPopViewBtn:(id)sender {
-    //Navigation없애고 커스텀 버튼으로 POP
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -283,66 +286,132 @@
 
 - (void)checkMakeBtnState {
     if (self.checkName && self.checkCategory && self.checkMap) {
-        [self.makeBtn1 setEnabled:YES];
-        [self.makeBtn2 setEnabled:YES];
-        [self.makeBtn3 setEnabled:YES];
+        for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:YES];
     } else {
-        [self.makeBtn1 setEnabled:NO];
-        [self.makeBtn2 setEnabled:NO];
-        [self.makeBtn3 setEnabled:NO];
+        for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:NO];
     }
 }
 
 
 // Make Btn Action
 - (IBAction)selectedMakeBtn {
+
+    [self.indicator startAnimating];
     
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 핀 만들어!");
         
-        self.pinData = [MomoPinDataSet makePinWithName:self.pinNameTextField.text
-                                          withPinLabel:self.categoryLastSelectedBtn.tag
-                                               withMap:self.mapLastSelectedBtn.tag];
+        
+        [NetworkModule createPinRequestWithPinname:self.pinNameTextField.text
+                                         withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
+                                         withLabel:self.categoryLastSelectedBtn.tag
+                                           withLat:self.lat
+                                           withLng:self.lng
+                                   withDescription:@"추후 생길 필드값입니다."
+                               withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                   
+                                   [self.indicator stopAnimating];
+                                   
+                                   if (isSuccess) {
+                                       
+                                       self.pinData = [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list lastObject];      // 새로 생성된 데이터가 lastObject
+                                       [self showPinView];
+
+                                   } else {
+                                       [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                   }
+                               }];
+        
+        
+        
+
         
     } else {    // 수정하기
+
+        [NetworkModule updatePinRequestWithPinPK:self.pinData.pk
+                                     withPinname:self.pinNameTextField.text
+                                       withLabel:self.categoryLastSelectedBtn.tag
+                                       withMapPK:self.pinData.pin_map_pk
+                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                 
+                                 [self.indicator stopAnimating];
+                                 
+                                 if (isSuccess) {
+                                     
+                                     // 핀 뷰에서 수정했을 때
+                                     if (self.wasPinView) {
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                     } else {
+                                         [self showPinView];    // 수정된 핀 뷰로 이동
+                                     }
+                                     
+                                 } else {
+                                     [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                 }
+                                 
+                                 
+                             }];
         
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        [realm transactionWithBlock:^{
-            self.pinData.pin_name = self.pinNameTextField.text;
-            self.pinData.pin_label = self.categoryLastSelectedBtn.tag;
-
-            
-            // 선택한 맵에 핀 새로 등록
-            [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
-
-            // 기존 맵에 핀 삭제
-            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
-            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
-            
-            // 핀 속에 지도 정보 변경
-            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
-            
-        }];
+        
+//        RLMRealm *realm = [RLMRealm defaultRealm];
+//        [realm transactionWithBlock:^{
+//            self.pinData.pin_name = self.pinNameTextField.text;
+//            self.pinData.pin_label = self.categoryLastSelectedBtn.tag;
+//
+//            
+//            // 선택한 맵에 핀 새로 등록
+//            [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
+//
+//            // 기존 맵에 핀 삭제
+//            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
+//            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
+//            
+//            // 핀 속에 지도 정보 변경
+//            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
+//            
+//        }];
     }
-    
+}
+
+- (void)showPinView {
     UIStoryboard *pinStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
     PinViewController *pinVC = [pinStoryBoard instantiateInitialViewController];
-    [pinVC showSelectedPinAndSetMapData:self.pinData.pin_map withPinIndex:[self.pinData.pin_map.map_pin_list indexOfObject:self.pinData]];
     
-    [self.navigationController pushViewController:pinVC animated:YES];
+    // 핀뷰 이동 전, 데이터 세팅
+    [pinVC showSelectedPinAndSetPinData:self.pinData];
+
+    // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
+    [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];
+      
+
+    // 만들어진 핀으로 먼저 Push
+    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:pinVC animated:NO];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 
 // Delete Btn Action
 - (void)selectedDeletePinBtn:(id)sender {
     NSLog(@"핀 지워");
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [realm deleteObject:self.pinData];
-    }];
+    [self.indicator startAnimating];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [NetworkModule deletePinRequestWithPinData:self.pinData
+                           withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                               
+                               [self.indicator stopAnimating];
+                               
+                               if (isSuccess) {
+                                   [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (삭제된 핀 뷰로 다시 돌아가면 안되므로)
+                                   [self dismissViewControllerAnimated:YES completion:nil];
+                                   
+                               } else {
+                                   [UtilityCenter presentCommonAlertController:self withMessage:result];
+                               }
+                           }];
+    
 }
 
 @end

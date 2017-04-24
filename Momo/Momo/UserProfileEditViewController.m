@@ -17,41 +17,74 @@
 
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *userCommentTextView;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *editDoneBtn;
+
+@property (weak, nonatomic) UIActivityIndicatorView *indicator;
+
 @end
 
 @implementation UserProfileEditViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    // 데이터 세팅   (일단 데이터가 없어 이쁘지 않으니, 이렇게라도..)
+    // 수정하기 버튼 활성화 관련 selector 추가
+    
+    // UserImgView TapGestureRecognizer 추가
+    UITapGestureRecognizer *userImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImgView)];
+    [self.userImgView setUserInteractionEnabled:YES];
+    [self.userImgView addGestureRecognizer:userImgTap];
+
+    // UserNameTextField userNameEditChanged 추가
+    [self.userNameTextField addTarget:self action:@selector(userNameEditChanged) forControlEvents:UIControlEventEditingChanged];
+    
+    // UIPlaceHolderTextView descriptionEditChanged noti 추가
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(descriptionEditChanged:) name:UITextViewTextDidChangeNotification object:nil];
+    
+    
+    // 임시 indicator ----------------------//
+    
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.hidesWhenStopped = YES;
+    indicator.center = self.view.center;
+    self.indicator = indicator;
+    [self.view addSubview:indicator];
+    
+    //---------------------------------------------//
+    
+    
+    // 데이터 세팅
     if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
         self.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
     }
     if ([DataCenter sharedInstance].momoUserData.user_username) {
         self.userNameTextField.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
     }
-    if ([DataCenter sharedInstance].momoUserData.user_id) {
-        self.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
-    }
+//    if ([DataCenter sharedInstance].momoUserData.user_id) {
+//        self.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
+//    }
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self initialSetting];  // UI 관련 설정들 있어서, viewWillAppear에서 호출
-                            // 그럼에도 피카츄 찌그러짐.. 시점 이슈 해결 필요
+    [self subviewSetting];  // UI 관련 설정들 있어서, viewWillAppear에서 호출
+    
 }
 
-- (void)initialSetting {
+- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
+    
+    // 노티 nil 처리 필요
+}
+
+- (void)subviewSetting {
     
     // 프로필 사진
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];      // 프사 동그랗게
-    
-    UITapGestureRecognizer *userImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImgView)];
-    [self.userImgView setUserInteractionEnabled:YES];
-    [self.userImgView addGestureRecognizer:userImgTap];
     
     // 프로필 소개 TextView
     self.userCommentTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -61,14 +94,12 @@
 
 
 
-
+// Camera, Photo Methods -----------------------------------------------//
 
 // Img 탭했을 때, 불리는 메서드
 - (void)tapImgView {
     NSLog(@"tapImgView");
     self.userImgView.image = [UIImage imageNamed:@"pika2.png"];
-    
-    
     
     // 얼럿, 카메라 부분 모듈화 정리 필요!
     
@@ -130,11 +161,14 @@
     self.userImgView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.editDoneBtn setEnabled:YES];      // 수정하기 버튼 활성화
 }
 
 
-// TextField, TextView 키보드 처리
+// Keyboard 처리 ----------------------------//
 
+// 화면 터치시 keyboard 내려가게
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     NSLog(@"touchesBegan");
@@ -147,12 +181,101 @@
     }
 }
 
+// Return keyboard 내려가게
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];
     return YES;
 }
 
+// UserNameTextField EditChanged Selector Method
+- (void)userNameEditChanged {
+    [self.editDoneBtn setEnabled:YES];      // 수정하기 버튼 활성화
+}
 
+
+
+
+
+// UI Btn Action ---------------------------//
+
+// 뒤로가기
+- (IBAction)backBtnAtciton {
+    NSLog(@"backBtnAtciton");
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// 수정하기
+- (IBAction)editDoneBtnAtciton {
+    NSLog(@"editDoneBtnAtciton");
+    
+    NSData *profileImgdata = [UtilityCenter imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
+    
+    if (profileImgdata.length > 1024*1024) {
+        // 들어갈리가 없으나, 일단 예외 상황 로그 수집하기 위해 만들어 둠
+        NSLog(@"Img Size Too Large");
+        NSLog(@"Size of Image(bytes): %ld", profileImgdata.length);
+        
+    } else {
+        
+        [self.indicator startAnimating];
+        
+        [NetworkModule patchMemberProfileUpdateWithUsername:self.userNameTextField.text
+                                             withProfileImg:profileImgdata
+                                        withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                            
+                                            NSLog(@"finish updateMemberProfileWithUsername");
+                                            
+                                            [self.indicator stopAnimating];
+                                            
+                                            if (isSuccess) {
+                                                NSLog(@"프로필 수정 완료");
+                                                [self dismissViewControllerAnimated:YES completion:nil];
+                                                
+                                            } else {
+                                                
+                                                [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                            }
+                                        }];
+        
+    }
+}
+
+
+
+// 로그아웃
+- (IBAction)logOutBtnAtciton {
+    NSLog(@"logOutBtnAtciton");
+    [self.indicator startAnimating];
+    
+    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+        
+        [self.indicator stopAnimating];
+        
+        if (isSuccess) {
+            NSLog(@"log out success : %@", result);
+            
+            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+            UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
+            
+            [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+            
+        } else {
+            NSLog(@"error : %@", result);
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                     message:result
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alertController addAction:okButton];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
+}
 
 @end

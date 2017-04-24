@@ -30,9 +30,28 @@
 
 // User Data 저장, 불러오기, 삭제 --------------------------//
 #pragma mark - MOMO User Data 저장, 패치, 삭제
++ (void)momoGetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic;
 + (void)initialSaveMomoUserData;   // 초기 저장
-- (BOOL)fetchMomoUserData;  // 패치
+- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;  // 패치
 + (void)removeMomoUserData; // 삭제
+
+#pragma mark - MOMO Map
++ (void)createMapWithMomoMapCreateDic:(NSDictionary *)mapDic;   // 맵 생성
++ (void)updateMapWithMomoMapCreateDic:(NSDictionary *)mapDic;   // 맵 수정
++ (void)deleteMapData:(MomoMapDataSet *)mapData;                // 맵 삭제
+
+
+#pragma mark - MOMO Pin
++ (void)createPinWithMomoPinCreateDic:(NSDictionary *)pinDic;   // 핀 생성
++ (void)updatePinWithMomoPinCreateDic:(NSDictionary *)pinDic;   // 핀 수정
++ (void)deletePinData:(MomoPinDataSet *)pinData;                // 핀 삭제
+
+
+#pragma mark - MOMO Post
++ (void)createPostWithMomoPostCreateDic:(NSDictionary *)postDic;    // 포스트 생성
++ (void)updatePostWithMomoPostCreateDic:(NSDictionary *)postDic;    // 포스트 수정
++ (void)deletePostData:(MomoPostDataSet *)postData;                 // 포스트 삭제
+    
 
 
 @end

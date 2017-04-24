@@ -19,7 +19,6 @@
 @property (nonatomic, weak) UIButton *lastSelectedBtn;
 @property (nonatomic, weak) MakeViewController *makeVC;
 
-
 @end
 
 @implementation MainTabBarController
@@ -34,6 +33,11 @@
 }
 
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    // 테더링 등, 높이 조정 제대로 안되어있다가, Refresh 될 때 탭바 위치 재조정
+    self.customTabBar.frame = CGRectMake(0, self.view.bounds.size.height-TAB_BAR_HEIGHT, self.view.bounds.size.width, TAB_BAR_HEIGHT);
+}
 
 
 // TabBarController Setting -----------------------------------//
@@ -150,6 +154,7 @@
 - (void)selectedBtn:(UIButton *)sender {
     
     if (sender.tag == 1) {
+        [self.makeVC pinBtnEnableCheck];    // 핀 만들기 버튼 활성화 체크 및 세팅
         [self.view addSubview:self.makeVC.view];
         
     } else {
@@ -184,7 +189,7 @@
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     UIViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
-    [(UINavigationController *)self.selectedViewController pushViewController:mapMakeVC animated:YES];
+    [((UINavigationController *)self.selectedViewController).visibleViewController presentViewController:mapMakeVC animated:YES completion:nil];
 }
 
 - (void)selectedMakePinBtn:(UIButton *)sender {
@@ -192,7 +197,7 @@
     
     [self.makeVC.view removeFromSuperview];
     [self selectedBtn:self.mapBtn];     // 맵뷰로 이동
-//    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
+    [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
     [(MapViewController *)((UINavigationController *)self.selectedViewController).viewControllers[0] makePinByMakePinBtn];
 }
 

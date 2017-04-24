@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface PinPostViewController : UIViewController
+
+// 초기 포스트뷰 데이터 세팅
+- (void)showSelectedPostAndSetPostData:(MomoPostDataSet *)postData;
 
 @end

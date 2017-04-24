@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3068F51EAB9D0300B451E6 /* UtilityCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */; };
 		3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E331E94B25C009F082D /* MapMakeViewController.m */; };
 		3F395E361E94B325009F082D /* Make.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E351E94B325009F082D /* Make.storyboard */; };
 		3F395E3F1E95EFF5009F082D /* MapProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */; };
@@ -57,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F3068F31EAB9D0300B451E6 /* UtilityCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityCenter.h; sourceTree = "<group>"; };
+		3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityCenter.m; sourceTree = "<group>"; };
 		3F395E321E94B25C009F082D /* MapMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMakeViewController.h; sourceTree = "<group>"; };
 		3F395E331E94B25C009F082D /* MapMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMakeViewController.m; sourceTree = "<group>"; };
 		3F395E351E94B325009F082D /* Make.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Make.storyboard; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 				3F395E561E961FC8009F082D /* UserProfileHeaderView.h */,
 				3F395E571E961FC8009F082D /* UserProfileHeaderView.m */,
 				3F395E541E961F72009F082D /* UserProfileHeaderView.xib */,
+				3F395E3C1E95EFF5009F082D /* MapProfileTableViewCell.h */,
 				3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */,
 				3F395E3E1E95EFF5009F082D /* MapProfileTableViewCell.xib */,
 				3F395E411E95F00C009F082D /* PinProfileTableViewCell.h */,
@@ -231,6 +235,8 @@
 				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
 				EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */,
 				3FEEFA741EA62331003F748F /* PostView */,
+				3F3068F31EAB9D0300B451E6 /* UtilityCenter.h */,
+				3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */,
 			);
 			name = PinView;
 			sourceTree = "<group>";
@@ -263,7 +269,6 @@
 				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
 				3FD392F01E93C94400AFBB3A /* My.storyboard */,
 				3F395E591E9631F6009F082D /* HeaderView&Cell */,
-				3F395E3C1E95EFF5009F082D /* MapProfileTableViewCell.h */,
 				3FBD0B2C1EA3C44300319491 /* Follow */,
 				3FBD0B2B1EA3C3EE00319491 /* Edit */,
 			);
@@ -563,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */,
+				3F3068F51EAB9D0300B451E6 /* UtilityCenter.m in Sources */,
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */,

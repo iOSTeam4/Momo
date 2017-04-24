@@ -10,4 +10,6 @@
 
 @interface MakeViewController : UIViewController
 
+- (void)pinBtnEnableCheck;  // 핀 만들기 버튼 활성화 체크 및 세팅
+
 @end
