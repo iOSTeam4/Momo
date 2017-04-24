@@ -9,9 +9,12 @@
 #import "PostMakeViewController.h"
 #import "PinPostViewController.h"
 
-@interface PostMakeViewController ()
-<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@class UIPlaceHolderTextView;
 
+@interface PostMakeViewController ()
+<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *userCommentTextView;
 @property (nonatomic) NSInteger pin_pk;
 
 @property (nonatomic) BOOL isEditMode;
@@ -29,9 +32,9 @@
 @property (nonatomic) NSLayoutConstraint *originphotoBtnTopSpacingConstraintY;
 @property (weak, nonatomic) IBOutlet UIButton *photoUploadBtn;
 @property (weak, nonatomic) UIButton *deletePhoto;
-@property (weak, nonatomic) IBOutlet UITextField *contentTextField;
+//@property (weak, nonatomic) IBOutlet UITextView *contentTextField;
 
-@property (nonatomic) BOOL checkTextField;
+@property (nonatomic) BOOL checkTextView;
 
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
@@ -70,13 +73,15 @@
     //------------------------------------//
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
+    
     // 핀 정보 세팅
     MomoPinDataSet *pinData = [DataCenter findPinDataWithPinPK:self.pin_pk];
     self.pinNameLabel.text = pinData.pin_name;
     self.pinAddressLabel.text = pinData.pin_place.place_address;
     
-    // TextField EditingChanged Event
-    [self.contentTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    // TextView EditingChanged Event
+//    [self.userCommentTextView addTarget:self action:@selector(textViewEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     
     // Photo ImgView Setting
     // 사진불러올 이미지뷰를 생성만 해놓고 hidden. 실제 사진을 불러오면 그때 아래 버튼이하 항목들을 밀어낸다.
@@ -132,48 +137,70 @@
         
         // 글
         if ([self.postData.post_description length]) {
-            self.contentTextField.text = self.postData.post_description;
-            self.checkTextField = YES;
+            self.userCommentTextView.text = self.postData.post_description;
+            self.checkTextView = YES;
         }
         
         [self checkMakeBtnState];
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    // 텍스트뷰 노티 해제
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 // Discription(글) 관련 ----------------------------------//
 
 // 스크롤 처리
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
     if (self.photoImageView.hidden) {
         [self.scrollView setContentOffset:CGPointMake(0,150) animated:YES];
     } else {
         [self.scrollView setContentOffset:CGPointMake(0,450) animated:YES];
     }
+    
 }
 
-- (void)textFieldEditingChanged:(UITextField *)sender {
-    NSLog(@"textFieldEditingChanged %ld, %d", [sender.text length], ([sender.text length] > 0));
+//- (void)textViewEditingChanged:(UIPlaceHolderTextView *)sender {
+//    NSLog(@"textViewEditingChanged %ld, %d", [sender.text length], ([sender.text length] > 0));
+//    
+//    if ([sender.text length] > 0) {
+//        self.checkTextView = YES;
+//    } else {
+//        self.checkTextView = NO;       // nil or @""
+//    }
+//    
+//    [self checkMakeBtnState];
+//}
+
+- (void)textChanged:(NSNotification*)notification {
     
-    if ([sender.text length] > 0) {
-        self.checkTextField = YES;
+    if ([self.userCommentTextView.text length] > 0) {
+        self.checkTextView = YES;
     } else {
-        self.checkTextField = NO;       // nil or @""
+        self.checkTextView = NO;
     }
     
     [self checkMakeBtnState];
 }
 
-// Return 처리
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.contentTextField resignFirstResponder];
-    
-    return YES;
-}
+//- (void)textFieldEditingChanged:(UITextField *)sender {
+//    
+//    if ([sender.text isEqualToString:@""]) {
+//        self.checkTextField = NO;
+//    } else {
+//        self.checkTextField = (BOOL)sender.text;
+//    }
+//    
+//    [self checkMakeBtnState];
+//}
 
 // 터치하면 텍스트필드 resign되게
-- (IBAction)textFiedlResignTapGesture:(id)sender {
-    [self.contentTextField resignFirstResponder];
+- (IBAction)textViewResignTapGesture:(id)sender {
+    [self.userCommentTextView resignFirstResponder];
 }
 
 
@@ -287,7 +314,7 @@
 
 - (void)checkMakeBtnState {
     
-    if (!self.photoImageView.hidden || self.checkTextField) {
+    if (!self.photoImageView.hidden || self.checkTextView) {
         for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:YES];
     } else {
         for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:NO];
@@ -310,7 +337,7 @@
 - (IBAction)selectedMakeBtn {
     
     // 키보드 내리기
-    [self.contentTextField resignFirstResponder];
+    [self.userCommentTextView resignFirstResponder];
     
     NSData *photodata = [UtilityCenter imgResizing:self.photoImageView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
@@ -328,7 +355,7 @@
             
             [NetworkModule createPostRequestWithPinPK:self.pin_pk
                                         withPhotoData:UIImageJPEGRepresentation(self.photoImageView.image, 0.3)
-                                      withDescription:self.contentTextField.text
+                                      withDescription:self.userCommentTextView.text
                                   withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                       
                                       [self.indicator stopAnimating];
@@ -359,7 +386,7 @@
             [NetworkModule updatePostRequestWithPostPK:self.postData.pk
                                              WithPinPK:self.pin_pk
                                          withPhotoData:photodata
-                                       withDescription:self.contentTextField.text
+                                       withDescription:self.userCommentTextView.text
                                    withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                        
                                        [self.indicator stopAnimating];
@@ -392,7 +419,7 @@
     NSLog(@"포스트 지워");
 
     // 키보드 내리기
-    [self.contentTextField resignFirstResponder];
+    [self.userCommentTextView resignFirstResponder];
     
     [self.indicator startAnimating];
     
