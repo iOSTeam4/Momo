@@ -10,6 +10,8 @@
 
 @interface PostMakeViewController : UIViewController
 
+@property (nonatomic) BOOL wasPostView;      // 포스트뷰에서 수정했는지?
+
 // 생성할 때, 미리 부르는 메서드
 - (void)setMakeModeWithPinPK:(NSInteger)pin_pk;
 

@@ -11,6 +11,7 @@
 #import "PhotoCell.h"
 #import "TextCell.h"
 #import "PhotoTextCell.h"
+#import "PostMakeViewController.h"
 
 #import "PostMakeViewController.h"
 
@@ -135,6 +136,17 @@
 
         return cell;
     }
+}
+
+- (IBAction)addPostBtnAction:(UIButton *)sender {
+    NSLog(@"addPostBtnAction");
+    
+    // Make Post
+    PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+    [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
+    postMakeVC.wasPostView = YES;    // post뷰에서 이동
+    [self presentViewController:postMakeVC animated:YES completion:nil];
+    
 }
 
 

@@ -44,24 +44,24 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhD-eq-zWc">
-                                                        <rect key="frame" x="26" y="0.0" width="44" height="44"/>
+                                                        <rect key="frame" x="0.0" y="10" width="70" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="ZGf-iw-HzM"/>
-                                                            <constraint firstAttribute="width" constant="44" id="gf4-XT-Axl"/>
+                                                            <constraint firstAttribute="width" constant="70" id="gf4-XT-Axl"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="backBtn"/>
+                                                        <state key="normal" image="backBtn"/>
                                                         <connections>
                                                             <action selector="backBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="YEa-Uq-wnv"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="핀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="odR-2r-Hd4">
-                                                        <rect key="frame" x="26" y="44" width="31.5" height="43"/>
+                                                        <rect key="frame" x="26" y="54" width="29" height="43"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                                         <color key="textColor" red="0.33502128720283508" green="0.7186439037322998" blue="0.97653758525848389" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHI-a5-G5x">
-                                                        <rect key="frame" x="319" y="7" width="40" height="40"/>
+                                                        <rect key="frame" x="319" y="17" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="0UQ-G5-BiA"/>
                                                             <constraint firstAttribute="height" constant="40" id="gPw-e2-jBx"/>
@@ -74,12 +74,12 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="PhD-eq-zWc" firstAttribute="top" secondItem="Jiv-fz-0H7" secondAttribute="top" id="4hd-ga-fRh"/>
+                                                    <constraint firstItem="PhD-eq-zWc" firstAttribute="top" secondItem="Jiv-fz-0H7" secondAttribute="top" constant="10" id="4hd-ga-fRh"/>
                                                     <constraint firstAttribute="height" constant="110" id="5ds-AX-qoh"/>
                                                     <constraint firstItem="odR-2r-Hd4" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" constant="26" id="D1U-FJ-1MM"/>
                                                     <constraint firstItem="odR-2r-Hd4" firstAttribute="top" secondItem="PhD-eq-zWc" secondAttribute="bottom" id="Gxk-kh-kaF"/>
                                                     <constraint firstAttribute="trailing" secondItem="uHI-a5-G5x" secondAttribute="trailing" constant="16" id="MG9-aa-ThY"/>
-                                                    <constraint firstItem="PhD-eq-zWc" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" constant="26" id="cav-G5-CRQ"/>
+                                                    <constraint firstItem="PhD-eq-zWc" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" id="cav-G5-CRQ"/>
                                                     <constraint firstAttribute="width" secondItem="Jiv-fz-0H7" secondAttribute="height" multiplier="75:22" id="dnT-Ca-Mz0"/>
                                                     <constraint firstItem="uHI-a5-G5x" firstAttribute="centerY" secondItem="PhD-eq-zWc" secondAttribute="centerY" constant="5" id="mG1-H5-jtK"/>
                                                 </constraints>
@@ -249,7 +249,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                             <constraint firstItem="KsD-nZ-eG3" firstAttribute="centerY" secondItem="GEd-LT-dA7" secondAttribute="centerY" id="39Q-Z3-nzS"/>
                             <constraint firstItem="KsD-nZ-eG3" firstAttribute="leading" secondItem="GEd-LT-dA7" secondAttribute="leading" id="Sa8-S4-TLV"/>
                             <constraint firstItem="KsD-nZ-eG3" firstAttribute="width" secondItem="GEd-LT-dA7" secondAttribute="width" id="jmD-9o-JWx"/>
-                            <constraint firstItem="odR-2r-Hd4" firstAttribute="width" secondItem="GEd-LT-dA7" secondAttribute="width" multiplier="1:12" id="mfk-4l-938"/>
+                            <constraint firstItem="odR-2r-Hd4" firstAttribute="width" secondItem="GEd-LT-dA7" secondAttribute="width" multiplier="1:13" id="mfk-4l-938"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -264,8 +264,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <outlet property="pinName" destination="DF6-aI-0Md" id="umW-yr-OpC"/>
                         <outlet property="userNameToMade" destination="lty-aA-3b4" id="lJa-C0-uwz"/>
                         <outlet property="userProfileImage" destination="MGT-Qm-MjQ" id="Wlc-Me-jfS"/>
-                        <segue destination="VaS-0c-ANh" kind="show" identifier="pinModiSegue" id="jPo-46-H0b"/>
-                        <segue destination="OMy-Wn-Nr3" kind="show" identifier="pinDetailSegue" id="KT7-pT-DDo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="70O-pd-O50" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,22 +285,22 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPw-Te-pgI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLT-B4-hTP" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="583"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLT-B4-hTP" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-dI-Zq6">
-                                                <rect key="frame" x="26" y="0.0" width="44" height="44"/>
+                                                <rect key="frame" x="0.0" y="20" width="70" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="cNy-Pc-f18"/>
-                                                    <constraint firstAttribute="width" constant="44" id="sVE-iW-8fK"/>
+                                                    <constraint firstAttribute="width" constant="70" id="sVE-iW-8fK"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="modallyBtn"/>
+                                                <state key="normal" image="modallyBtn"/>
                                                 <connections>
                                                     <action selector="selectedBackBtn:" destination="VaS-0c-ANh" eventType="touchUpInside" id="tF2-Gd-jKM"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starbucks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LV-Lj-Keu">
-                                                <rect key="frame" x="26" y="120" width="339" height="25"/>
+                                                <rect key="frame" x="26" y="143" width="339" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="s6j-eQ-ewV"/>
                                                 </constraints>
@@ -311,7 +309,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대한민국 서울특별시 강남구 논현동 34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zoT-PG-aZ5">
-                                                <rect key="frame" x="26" y="149" width="339" height="17"/>
+                                                <rect key="frame" x="26" y="172" width="339" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="xVK-DX-2nG"/>
                                                 </constraints>
@@ -320,7 +318,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMw-x6-zU1">
-                                                <rect key="frame" x="26" y="186" width="230" height="48"/>
+                                                <rect key="frame" x="26" y="229" width="230" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="flu-HP-XFe"/>
                                                     <constraint firstAttribute="width" constant="230" id="jBQ-de-Iu6"/>
@@ -331,7 +329,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="글 남기기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-cZ-xnL">
-                                                <rect key="frame" x="26" y="264" width="208.5" height="25"/>
+                                                <rect key="frame" x="26" y="307" width="214.5" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="CwD-hL-U45"/>
                                                 </constraints>
@@ -340,7 +338,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55F-JN-18i" userLabel="textFieldBackView">
-                                                <rect key="frame" x="26" y="299" width="339" height="100"/>
+                                                <rect key="frame" x="26" y="342" width="339" height="100"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGo-lI-C6z" userLabel="textFieldBackView2">
                                                         <rect key="frame" x="1" y="1" width="337" height="98"/>
@@ -359,7 +357,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="이곳에 어떤 이야기가 있나요?" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CjX-rb-hIV">
-                                                <rect key="frame" x="36" y="304" width="329" height="90"/>
+                                                <rect key="frame" x="36" y="347" width="329" height="90"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -368,7 +366,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUb-id-PaA" userLabel="makeBtnTop">
-                                                <rect key="frame" x="310" y="62" width="41" height="39"/>
+                                                <rect key="frame" x="310" y="66" width="41" height="39"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="39" id="Feb-Wk-MzS"/>
                                                     <constraint firstAttribute="width" constant="41" id="V1A-6n-RwX"/>
@@ -380,13 +378,13 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 포스트 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WXE-Ts-voj">
-                                                <rect key="frame" x="26" y="60" width="208.5" height="43"/>
+                                                <rect key="frame" x="26" y="64" width="214.5" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                                 <color key="textColor" red="0.33502128720283508" green="0.7186439037322998" blue="0.97653758525848389" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-cC-sNL" userLabel="makeBtnBottom">
-                                                <rect key="frame" x="310" y="431.5" width="41" height="39"/>
+                                                <rect key="frame" x="310" y="474.5" width="41" height="39"/>
                                                 <state key="normal" title="Button" image="makeCheckBtnS"/>
                                                 <state key="disabled" image="makeCheckBtn"/>
                                                 <connections>
@@ -394,7 +392,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVx-Qp-GJe">
-                                                <rect key="frame" x="190" y="429" width="120" height="44"/>
+                                                <rect key="frame" x="190" y="472" width="120" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="bQg-YZ-Loq"/>
                                                 </constraints>
@@ -419,31 +417,30 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         <constraints>
                                             <constraint firstItem="iEn-cC-sNL" firstAttribute="height" secondItem="xUb-id-PaA" secondAttribute="height" id="0NT-2M-iBs"/>
                                             <constraint firstItem="iEn-cC-sNL" firstAttribute="width" secondItem="xUb-id-PaA" secondAttribute="width" id="0dW-lV-VEs"/>
-                                            <constraint firstItem="WXE-Ts-voj" firstAttribute="width" secondItem="KLT-B4-hTP" secondAttribute="width" multiplier="1:1.8" id="6F6-cr-scn"/>
+                                            <constraint firstItem="WXE-Ts-voj" firstAttribute="top" secondItem="a7v-dI-Zq6" secondAttribute="bottom" id="6Ao-aU-ACi"/>
                                             <constraint firstItem="CjX-rb-hIV" firstAttribute="width" secondItem="55F-JN-18i" secondAttribute="width" constant="-10" id="6bQ-iQ-JUY"/>
                                             <constraint firstItem="iEn-cC-sNL" firstAttribute="trailing" secondItem="xUb-id-PaA" secondAttribute="trailing" id="8Tj-y3-52j"/>
                                             <constraint firstItem="iEn-cC-sNL" firstAttribute="leading" secondItem="mVx-Qp-GJe" secondAttribute="trailing" id="EQS-md-Zkg"/>
                                             <constraint firstItem="CjX-rb-hIV" firstAttribute="trailing" secondItem="55F-JN-18i" secondAttribute="trailing" id="EX2-Ck-gE6"/>
                                             <constraint firstItem="2LV-Lj-Keu" firstAttribute="width" secondItem="KLT-B4-hTP" secondAttribute="width" constant="-36" id="EdQ-4k-OC3"/>
-                                            <constraint firstAttribute="bottom" secondItem="mVx-Qp-GJe" secondAttribute="bottom" constant="110" id="Fbu-a2-frt"/>
-                                            <constraint firstItem="xUb-id-PaA" firstAttribute="top" secondItem="KLT-B4-hTP" secondAttribute="top" constant="62" id="Gti-vN-xqc"/>
+                                            <constraint firstAttribute="bottom" secondItem="mVx-Qp-GJe" secondAttribute="bottom" constant="80" id="Fbu-a2-frt"/>
                                             <constraint firstItem="2LV-Lj-Keu" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="GuN-r2-cr0"/>
                                             <constraint firstItem="zoT-PG-aZ5" firstAttribute="width" secondItem="2LV-Lj-Keu" secondAttribute="width" id="JVP-0B-tlz"/>
                                             <constraint firstItem="zoT-PG-aZ5" firstAttribute="top" secondItem="2LV-Lj-Keu" secondAttribute="bottom" constant="4" id="PaZ-ko-F3g"/>
+                                            <constraint firstItem="WXE-Ts-voj" firstAttribute="width" secondItem="KLT-B4-hTP" secondAttribute="width" multiplier="4:7" id="QBl-RM-zCe"/>
                                             <constraint firstItem="55F-JN-18i" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="SlF-Ls-P2w"/>
                                             <constraint firstItem="CjX-rb-hIV" firstAttribute="height" secondItem="55F-JN-18i" secondAttribute="height" constant="-10" id="UL2-yM-yOi"/>
                                             <constraint firstAttribute="trailing" secondItem="xUb-id-PaA" secondAttribute="trailing" constant="24" id="Zg9-fH-cbb"/>
                                             <constraint firstItem="zoT-PG-aZ5" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="apW-eu-TPS"/>
                                             <constraint firstItem="YMw-x6-zU1" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="bvd-at-SsP"/>
-                                            <constraint firstItem="2LV-Lj-Keu" firstAttribute="top" secondItem="WXE-Ts-voj" secondAttribute="bottom" constant="17" id="eEQ-SL-oDL"/>
+                                            <constraint firstItem="2LV-Lj-Keu" firstAttribute="top" secondItem="WXE-Ts-voj" secondAttribute="bottom" constant="36" id="eEQ-SL-oDL"/>
                                             <constraint firstItem="55F-JN-18i" firstAttribute="top" secondItem="YG1-cZ-xnL" secondAttribute="bottom" constant="10" id="f8A-16-66Z"/>
                                             <constraint firstAttribute="trailing" secondItem="55F-JN-18i" secondAttribute="trailing" constant="10" id="gYe-xn-K8d"/>
-                                            <constraint firstItem="a7v-dI-Zq6" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="iQ3-Dt-Nr0"/>
-                                            <constraint firstItem="WXE-Ts-voj" firstAttribute="top" secondItem="KLT-B4-hTP" secondAttribute="top" constant="60" id="j9m-Ca-gIe"/>
+                                            <constraint firstItem="a7v-dI-Zq6" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" id="iQ3-Dt-Nr0"/>
                                             <constraint firstItem="YG1-cZ-xnL" firstAttribute="leading" secondItem="KLT-B4-hTP" secondAttribute="leading" constant="26" id="kTh-c5-y9h"/>
-                                            <constraint firstItem="YMw-x6-zU1" firstAttribute="top" secondItem="zoT-PG-aZ5" secondAttribute="bottom" constant="20" id="kWt-JM-VpO"/>
+                                            <constraint firstItem="YMw-x6-zU1" firstAttribute="top" secondItem="zoT-PG-aZ5" secondAttribute="bottom" constant="40" id="kWt-JM-VpO"/>
                                             <constraint firstItem="mVx-Qp-GJe" firstAttribute="top" secondItem="55F-JN-18i" secondAttribute="bottom" constant="30" id="mTi-h4-Qgj"/>
-                                            <constraint firstItem="a7v-dI-Zq6" firstAttribute="top" secondItem="KLT-B4-hTP" secondAttribute="top" id="mkY-kF-Gu9"/>
+                                            <constraint firstItem="a7v-dI-Zq6" firstAttribute="top" secondItem="KLT-B4-hTP" secondAttribute="top" constant="20" id="mkY-kF-Gu9"/>
                                             <constraint firstItem="xUb-id-PaA" firstAttribute="centerY" secondItem="WXE-Ts-voj" secondAttribute="centerY" id="nC3-3p-0h9"/>
                                             <constraint firstItem="YG1-cZ-xnL" firstAttribute="top" secondItem="YMw-x6-zU1" secondAttribute="bottom" constant="30" id="rO7-VV-HZv"/>
                                             <constraint firstItem="CjX-rb-hIV" firstAttribute="centerY" secondItem="55F-JN-18i" secondAttribute="centerY" id="u9e-lo-nOx"/>
@@ -516,12 +513,12 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="602.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elK-md-bik" userLabel="back">
-                                                <rect key="frame" x="26" y="0.0" width="44" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="44"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="44" id="0by-fe-t7D"/>
+                                                    <constraint firstAttribute="width" constant="70" id="0by-fe-t7D"/>
                                                     <constraint firstAttribute="height" constant="44" id="qzM-aV-GNv"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="modallyBtn"/>
+                                                <state key="normal" image="modallyBtn"/>
                                                 <connections>
                                                     <action selector="selectedPopViewBtn:" destination="oTe-Hh-2bY" eventType="touchUpInside" id="sbv-ex-Xu4"/>
                                                 </connections>
@@ -695,7 +692,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         <constraints>
                                             <constraint firstItem="li3-6n-uiT" firstAttribute="leading" secondItem="Xsv-o6-r75" secondAttribute="leading" constant="26" id="0j6-jT-IDl"/>
                                             <constraint firstItem="XHM-Zk-sD0" firstAttribute="leading" secondItem="Hhg-9y-lin" secondAttribute="trailing" constant="10" id="1O9-1k-OJO"/>
-                                            <constraint firstItem="elK-md-bik" firstAttribute="leading" secondItem="Xsv-o6-r75" secondAttribute="leading" constant="26" id="1bI-y4-Qfe"/>
+                                            <constraint firstItem="elK-md-bik" firstAttribute="leading" secondItem="Xsv-o6-r75" secondAttribute="leading" id="1bI-y4-Qfe"/>
                                             <constraint firstItem="jfj-Yw-1uH" firstAttribute="leading" secondItem="BYk-Pb-Ugq" secondAttribute="leading" id="2Oh-tl-EJS"/>
                                             <constraint firstItem="ihA-5w-2dZ" firstAttribute="top" secondItem="Xsv-o6-r75" secondAttribute="top" constant="60" id="2Tx-xO-vYQ"/>
                                             <constraint firstItem="BQ2-hR-3NT" firstAttribute="centerY" secondItem="ihA-5w-2dZ" secondAttribute="centerY" id="438-N7-LHM"/>
@@ -834,12 +831,12 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjG-Uf-1cY" userLabel="back">
-                                                <rect key="frame" x="26" y="0.0" width="44" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="5Mp-GT-3yh"/>
-                                                    <constraint firstAttribute="width" constant="44" id="bEJ-K4-mgC"/>
+                                                    <constraint firstAttribute="width" constant="70" id="bEJ-K4-mgC"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="modallyBtn"/>
+                                                <state key="normal" image="modallyBtn"/>
                                                 <connections>
                                                     <action selector="selectedPopViewBtn:" destination="oTe-Hh-2bY" eventType="touchUpInside" id="hWu-gx-2kq"/>
                                                 </connections>
@@ -935,7 +932,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             <constraint firstItem="4Lr-Bd-4qv" firstAttribute="width" secondItem="qNe-5u-MwY" secondAttribute="height" multiplier="29:12" id="Ycz-eA-rv7"/>
                                             <constraint firstAttribute="trailing" secondItem="YPr-e7-qEP" secondAttribute="trailing" constant="-2" id="YpU-uz-OUT"/>
                                             <constraint firstAttribute="trailing" secondItem="jXW-mC-fT2" secondAttribute="trailing" constant="24" id="Zlg-gH-D8J"/>
-                                            <constraint firstItem="tjG-Uf-1cY" firstAttribute="leading" secondItem="u5G-8o-FK0" secondAttribute="leading" constant="26" id="b11-L1-eWr"/>
+                                            <constraint firstItem="tjG-Uf-1cY" firstAttribute="leading" secondItem="u5G-8o-FK0" secondAttribute="leading" id="b11-L1-eWr"/>
                                             <constraint firstItem="qZw-pS-7rX" firstAttribute="leading" secondItem="qNe-5u-MwY" secondAttribute="leading" id="dL9-B8-YBy"/>
                                             <constraint firstItem="4Lr-Bd-4qv" firstAttribute="leading" secondItem="qNe-5u-MwY" secondAttribute="leading" id="hhd-vP-VPg"/>
                                             <constraint firstItem="jXW-mC-fT2" firstAttribute="height" secondItem="CXA-vL-Lbs" secondAttribute="height" id="jts-nl-qNA"/>
@@ -994,30 +991,57 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIe-BH-KhG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-Os-o0S" userLabel="Line">
+                                        <rect key="frame" x="0.0" y="79" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="wiw-Ae-YFf"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5G-88-RtB" userLabel="back">
-                                        <rect key="frame" x="26" y="16" width="44" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="70" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="6BM-GL-DtR"/>
-                                            <constraint firstAttribute="width" constant="44" id="oLE-21-8Em"/>
+                                            <constraint firstAttribute="width" constant="70" id="oLE-21-8Em"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="backBtn"/>
+                                        <state key="normal" image="backBtn"/>
                                         <connections>
                                             <action selector="selectedPopViewBtn:" destination="OMy-Wn-Nr3" eventType="touchUpInside" id="KqS-Zo-4mp"/>
                                             <action selector="selectedPopViewBtn:" destination="oTe-Hh-2bY" eventType="touchUpInside" id="OYf-gM-oyG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFa-Th-cN4">
+                                        <rect key="frame" x="236" y="28" width="123" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="rW8-UH-vvc"/>
+                                            <constraint firstAttribute="width" constant="123" id="zLK-j3-z1Q"/>
+                                        </constraints>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="32" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="98" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="새 포스트 " image="addBtn">
+                                            <color key="titleColor" red="0.33502128720000002" green="0.71864390369999998" blue="0.97653758530000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPostBtnAction:" destination="OMy-Wn-Nr3" eventType="touchUpInside" id="EMe-ox-5JM"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="o5G-88-RtB" firstAttribute="leading" secondItem="fIe-BH-KhG" secondAttribute="leading" constant="26" id="PwT-1k-aAk"/>
-                                    <constraint firstAttribute="height" constant="64" id="TlP-Np-rX7"/>
-                                    <constraint firstItem="o5G-88-RtB" firstAttribute="top" secondItem="fIe-BH-KhG" secondAttribute="top" constant="16" id="pXd-bK-F2H"/>
+                                    <constraint firstAttribute="trailing" secondItem="yFa-Th-cN4" secondAttribute="trailing" constant="16" id="PAu-ol-ZeX"/>
+                                    <constraint firstItem="yFa-Th-cN4" firstAttribute="centerY" secondItem="o5G-88-RtB" secondAttribute="centerY" id="PZE-dp-TWu"/>
+                                    <constraint firstItem="o5G-88-RtB" firstAttribute="leading" secondItem="fIe-BH-KhG" secondAttribute="leading" id="PwT-1k-aAk"/>
+                                    <constraint firstItem="kgY-Os-o0S" firstAttribute="centerX" secondItem="fIe-BH-KhG" secondAttribute="centerX" id="TQp-13-TzW"/>
+                                    <constraint firstAttribute="height" constant="80" id="TlP-Np-rX7"/>
+                                    <constraint firstItem="kgY-Os-o0S" firstAttribute="width" secondItem="fIe-BH-KhG" secondAttribute="width" id="b44-98-x2S"/>
+                                    <constraint firstAttribute="bottom" secondItem="kgY-Os-o0S" secondAttribute="bottom" id="dQT-jc-FWK"/>
+                                    <constraint firstItem="o5G-88-RtB" firstAttribute="top" secondItem="fIe-BH-KhG" secondAttribute="top" constant="28" id="pXd-bK-F2H"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="580" sectionHeaderHeight="16" sectionFooterHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-Yh-ORF">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1372"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="1340"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoTextCell" rowHeight="570" id="HaD-jw-HG3" customClass="PhotoTextCell">
@@ -1096,7 +1120,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     </constraints>
                                                     <state key="normal" title="Button" image="setup"/>
                                                     <connections>
-                                                        <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="OO8-1D-jEQ"/>
                                                         <action selector="editBtnAction:" destination="HaD-jw-HG3" eventType="touchUpInside" id="ZCh-oh-W8m"/>
                                                     </connections>
                                                 </button>
@@ -1246,7 +1269,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <state key="normal" title="Button" image="setup"/>
                                                     <connections>
                                                         <action selector="editBtnAction:" destination="g0b-n8-8Df" eventType="touchUpInside" id="DWv-sW-xl7"/>
-                                                        <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="WeH-aa-UUF"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1352,7 +1374,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     </constraints>
                                                     <state key="normal" title="Button" image="setup"/>
                                                     <connections>
-                                                        <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="Lt1-FV-NNz"/>
                                                         <action selector="editBtnAction:" destination="fr6-yl-GXz" eventType="touchUpInside" id="fBA-41-Dac"/>
                                                     </connections>
                                                 </button>
@@ -1438,6 +1459,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="05On" width="67" height="67"/>
         <image name="05S" width="67" height="67"/>
         <image name="DeadpoolShocked" width="720" height="480"/>
+        <image name="addBtn" width="23" height="23"/>
         <image name="backBtn" width="13" height="22"/>
         <image name="lockBtnClose" width="16" height="19"/>
         <image name="makeCheckBtn" width="50" height="48"/>
@@ -1448,7 +1470,4 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
         <image name="photoBtnS" width="176" height="48"/>
         <image name="setup" width="56" height="48"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="nbl-e9-76j"/>
-    </inferredMetricsTieBreakers>
 </document>

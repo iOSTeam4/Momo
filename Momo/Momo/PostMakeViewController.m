@@ -336,8 +336,13 @@
                                       if (isSuccess) {
                                           
                                           self.postData = [[MomoPostDataSet allObjects] lastObject];      // 새로 생성된 데이터가 lastObject
-
-                                          [self showPostView];
+                                          
+                                          if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                              
+                                          } else {
+                                              [self showPostView];
+                                          }
                                           
                                       } else {
                                           
@@ -417,16 +422,5 @@
     
 }
 
-
-
-
-// 아마 데이터 센터에 추가 될 메서드 (일단 예시로 여기다 만들어놓음)
-- (void)makeNewPostWithPhoto:(UIImage *)photo
-                 withContent:(NSString *)content {
-    // 알아서 안에서 데이터 처리~~~
-    
-    NSLog(@"photo : %@", photo);
-    NSLog(@"content : %@", content);
-}
 
 @end

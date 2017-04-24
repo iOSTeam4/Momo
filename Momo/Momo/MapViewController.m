@@ -27,6 +27,7 @@
 
 @property (nonatomic) UISearchController *searchController;
 
+@property (weak, nonatomic) IBOutlet UIButton *naviBackBtn;
 
 // 롱 프레스 새 핀 생성, 등록
 @property (nonatomic) BOOL isMakingMarker;
@@ -41,6 +42,7 @@
 @property (nonatomic) NSInteger showSelectedMap;
 @property (nonatomic) MomoPinDataSet *pinData;
 @property (nonatomic) GMSMarker *focusingPinMarker;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
 @property (nonatomic) MomoMapDataSet *mapData;
 @property (weak, nonatomic) IBOutlet UIView *mapInfoView;
@@ -105,6 +107,9 @@
         // 선택지도 보기
         [self mapInfoViewSetting];
         
+        [self.naviBackBtn setHidden:NO];    // Navi Back 버튼 나타내기
+        [self.view bringSubviewToFront:self.naviBackBtn];
+        
     } else {
         // 사용자 모든 핀 보기 (default)
         self.mapData = [[MomoMapDataSet alloc] init];
@@ -139,6 +144,10 @@
             });
         });
     }
+    [self.view bringSubviewToFront:self.backBtn];
+    self.backBtn.layer.shadowOffset = CGSizeMake(0, 0);
+    self.backBtn.layer.shadowRadius = 2;
+    self.backBtn.layer.shadowOpacity = 0.7;
 }
 
 
@@ -512,6 +521,14 @@
     [mapMakeVC setEditModeWithMapData:self.mapData];   // 수정 모드, 데이터 세팅
     [self presentViewController:mapMakeVC animated:YES completion:nil];
 
+}
+
+
+// 뒤로가기 버튼 (navi push구조로 지도 넘어왔을 때)
+- (IBAction)backBtnAction:(id)sender {
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end
