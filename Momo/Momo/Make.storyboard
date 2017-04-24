@@ -96,7 +96,7 @@
                                                     <constraint firstAttribute="height" constant="44" id="Jdw-OW-uut"/>
                                                     <constraint firstAttribute="width" constant="44" id="Z8c-yN-fgP"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="backAndOneLineTitle"/>
+                                                <state key="normal" title="Button" image="modallyBtn"/>
                                                 <connections>
                                                     <action selector="selectedPopViewBtn:" destination="7Os-gD-gL4" eventType="touchUpInside" id="HCf-Pc-Vpw"/>
                                                 </connections>
@@ -435,7 +435,7 @@
                                                     <constraint firstAttribute="width" constant="44" id="Pq8-uq-xVY"/>
                                                     <constraint firstAttribute="height" constant="44" id="SWC-GT-nRg"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="backAndOneLineTitle"/>
+                                                <state key="normal" title="Button" image="modallyBtn"/>
                                                 <connections>
                                                     <action selector="selectedPopViewBtn:" destination="Ppv-D8-ji0" eventType="touchUpInside" id="cdS-KP-Ffv"/>
                                                 </connections>
@@ -605,12 +605,12 @@
         <image name="04S" width="66" height="67"/>
         <image name="05On" width="67" height="67"/>
         <image name="05S" width="67" height="67"/>
-        <image name="backAndOneLineTitle" width="25" height="22"/>
         <image name="lockBtnClose" width="16" height="19"/>
         <image name="makeCheckBtn" width="50" height="48"/>
         <image name="makeCheckBtnS" width="52" height="48"/>
         <image name="mapCheckBtn" width="31" height="31"/>
         <image name="mapSelectButton" width="31" height="31"/>
+        <image name="modallyBtn" width="22" height="13"/>
         <image name="tapMapWhite" width="30" height="25"/>
         <image name="tapPinWhite" width="16" height="27"/>
     </resources>

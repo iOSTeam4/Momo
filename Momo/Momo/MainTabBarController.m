@@ -90,7 +90,7 @@
     
     
     // @[<Label>, <Btn Img Name>, <Btn Selected Img Name>];
-    NSArray *tabBarItemInfoArr = @[@[@"지도"    , @"tabMap" , @"tabMapS" ],
+    NSArray *tabBarItemInfoArr = @[@[@"지도"    , @"tabMapGray" , @"tabMapS" ],
                                    @[@"핀"     , @"tabPin" , @"tabPinS" ],
                                    @[@"내 기록" , @"tabMy"  , @"tabMyS"  ]];
     

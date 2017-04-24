@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="czM-gC-qge">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="czM-gC-qge">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -70,17 +70,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vV1-1v-Ffx">
-                                <rect key="frame" x="5" y="24" width="365" height="236.5"/>
+                                <rect key="frame" x="5" y="24" width="365" height="346.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pika.png" translatesAutoresizingMaskIntoConstraints="NO" id="xlX-TW-fsi">
-                                        <rect key="frame" x="15" y="15" width="91.5" height="91.5"/>
+                                        <rect key="frame" x="15" y="70" width="91.5" height="91.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="91.5" id="el9-2z-3fL"/>
                                             <constraint firstAttribute="width" secondItem="xlX-TW-fsi" secondAttribute="height" multiplier="1:1" id="r2n-3h-z8n"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee7-TN-RXc">
+                                        <rect key="frame" x="26" y="10" width="44" height="44"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="3Xy-lQ-mJR"/>
+                                            <constraint firstAttribute="height" constant="44" id="hkY-17-MXC"/>
+                                        </constraints>
+                                        <state key="normal" image="modallyBtn"/>
+                                        <connections>
+                                            <action selector="backBtnAtciton" destination="7ra-oB-aUB" eventType="touchUpInside" id="VQp-B9-zsP"/>
+                                        </connections>
+                                    </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Pikachu" placeholder="User Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0wn-OF-MgH">
-                                        <rect key="frame" x="116.5" y="20" width="233.5" height="29"/>
+                                        <rect key="frame" x="116.5" y="75" width="233.5" height="29"/>
                                         <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -89,20 +101,20 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dk-XL-QOq" userLabel="LineView">
-                                        <rect key="frame" x="116" y="51" width="233.5" height="1"/>
+                                        <rect key="frame" x="116" y="106" width="233.5" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="Hkd-nb-c7G"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@pikapika" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwP-u4-4OU">
-                                        <rect key="frame" x="116.5" y="54" width="66" height="17"/>
+                                        <rect key="frame" x="116.5" y="109" width="66" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKa-sP-NUY" customClass="UIPlaceHolderTextView">
-                                        <rect key="frame" x="15" y="121" width="335" height="100.5"/>
+                                        <rect key="frame" x="15" y="176" width="335" height="100.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="TgZ-SD-Mw1"/>
@@ -116,22 +128,51 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-kP-FmJ">
+                                        <rect key="frame" x="306" y="11.5" width="43.5" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="0lA-NZ-BBj"/>
+                                            <constraint firstAttribute="width" secondItem="Inb-kP-FmJ" secondAttribute="height" multiplier="50:47" id="Btt-r8-DFr"/>
+                                        </constraints>
+                                        <state key="normal" image="makeCheckBtnS"/>
+                                        <state key="disabled" image="makeCheckBtn"/>
+                                        <connections>
+                                            <action selector="editDoneBtnAtciton" destination="7ra-oB-aUB" eventType="touchUpInside" id="Z80-io-FaA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvZ-zN-uPJ">
+                                        <rect key="frame" x="264.5" y="308" width="85" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="GzI-jb-NTb"/>
+                                            <constraint firstAttribute="height" constant="30" id="ci7-qZ-Qic"/>
+                                        </constraints>
+                                        <state key="normal" image="logout"/>
+                                        <connections>
+                                            <action selector="logOutBtnAtciton" destination="7ra-oB-aUB" eventType="touchUpInside" id="Ozi-Aq-Ads"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Ee7-TN-RXc" firstAttribute="leading" secondItem="vV1-1v-Ffx" secondAttribute="leading" constant="26" id="2JU-A5-h5w"/>
+                                    <constraint firstItem="Ee7-TN-RXc" firstAttribute="top" secondItem="vV1-1v-Ffx" secondAttribute="top" constant="10" id="3dr-Yn-HgX"/>
                                     <constraint firstItem="dKa-sP-NUY" firstAttribute="leading" secondItem="xlX-TW-fsi" secondAttribute="leading" id="4AT-EY-Lq2"/>
                                     <constraint firstItem="1Dk-XL-QOq" firstAttribute="top" secondItem="0wn-OF-MgH" secondAttribute="bottom" constant="2" id="5J3-L2-Zdd"/>
+                                    <constraint firstItem="VvZ-zN-uPJ" firstAttribute="trailing" secondItem="1Dk-XL-QOq" secondAttribute="trailing" id="7Fv-bC-u6P"/>
                                     <constraint firstItem="dKa-sP-NUY" firstAttribute="trailing" secondItem="0wn-OF-MgH" secondAttribute="trailing" id="Az7-EJ-3xU"/>
-                                    <constraint firstAttribute="bottom" secondItem="dKa-sP-NUY" secondAttribute="bottom" constant="15" id="BnL-gf-l0e"/>
+                                    <constraint firstAttribute="bottom" secondItem="dKa-sP-NUY" secondAttribute="bottom" constant="70" id="BnL-gf-l0e"/>
+                                    <constraint firstItem="Inb-kP-FmJ" firstAttribute="trailing" secondItem="1Dk-XL-QOq" secondAttribute="trailing" id="Dw6-E8-1Cr"/>
                                     <constraint firstItem="1Dk-XL-QOq" firstAttribute="width" secondItem="0wn-OF-MgH" secondAttribute="width" id="Hpm-hq-7Fu"/>
                                     <constraint firstItem="0wn-OF-MgH" firstAttribute="leading" secondItem="xlX-TW-fsi" secondAttribute="trailing" constant="10" id="JSj-KK-6en"/>
                                     <constraint firstItem="xlX-TW-fsi" firstAttribute="leading" secondItem="vV1-1v-Ffx" secondAttribute="leading" constant="15" id="K8M-yo-8gk"/>
                                     <constraint firstAttribute="trailing" secondItem="0wn-OF-MgH" secondAttribute="trailing" constant="15" id="KFC-h4-TwP"/>
                                     <constraint firstItem="PwP-u4-4OU" firstAttribute="top" secondItem="0wn-OF-MgH" secondAttribute="bottom" constant="5" id="MRs-4c-zlF"/>
+                                    <constraint firstItem="Inb-kP-FmJ" firstAttribute="centerY" secondItem="Ee7-TN-RXc" secondAttribute="centerY" id="Nan-R0-nUg"/>
                                     <constraint firstItem="1Dk-XL-QOq" firstAttribute="centerX" secondItem="0wn-OF-MgH" secondAttribute="centerX" id="T0H-ak-ObH"/>
                                     <constraint firstItem="PwP-u4-4OU" firstAttribute="leading" secondItem="0wn-OF-MgH" secondAttribute="leading" id="UVI-Qc-fo2"/>
                                     <constraint firstItem="0wn-OF-MgH" firstAttribute="top" secondItem="xlX-TW-fsi" secondAttribute="top" constant="5" id="XGb-kA-YYi"/>
-                                    <constraint firstItem="xlX-TW-fsi" firstAttribute="top" secondItem="vV1-1v-Ffx" secondAttribute="top" constant="15" id="sCS-b4-w5a"/>
+                                    <constraint firstAttribute="bottom" secondItem="VvZ-zN-uPJ" secondAttribute="bottom" constant="8.5" id="kzh-vd-aLw"/>
+                                    <constraint firstItem="xlX-TW-fsi" firstAttribute="top" secondItem="vV1-1v-Ffx" secondAttribute="top" constant="70" id="sCS-b4-w5a"/>
                                     <constraint firstItem="dKa-sP-NUY" firstAttribute="top" secondItem="xlX-TW-fsi" secondAttribute="bottom" constant="15" id="wny-by-UmL"/>
                                 </constraints>
                             </view>
@@ -144,6 +185,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="editDoneBtn" destination="Inb-kP-FmJ" id="miX-kX-WRm"/>
                         <outlet property="userCommentTextView" destination="dKa-sP-NUY" id="32P-3V-uX3"/>
                         <outlet property="userIDLabel" destination="PwP-u4-4OU" id="hsa-A1-zrI"/>
                         <outlet property="userImgView" destination="xlX-TW-fsi" id="xGy-uY-zYi"/>
@@ -152,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpv-pX-Vs4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1945" y="-384"/>
+            <point key="canvasLocation" x="1944.8" y="-384.55772113943033"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gvE-LE-woQ">
@@ -284,6 +326,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="logout" width="136" height="48"/>
+        <image name="makeCheckBtn" width="50" height="48"/>
+        <image name="makeCheckBtnS" width="52" height="48"/>
+        <image name="modallyBtn" width="22" height="13"/>
         <image name="pika.png" width="982" height="596"/>
     </resources>
 </document>

@@ -20,6 +20,7 @@
 @property (nonatomic) NSInteger selectedPostIndex;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
 @end
 
@@ -68,11 +69,16 @@
         PhotoTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoTextCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
+        cell.profileImageView1.image = [self.postData.post_author getAuthorProfileImg];
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
+
+        cell.userName1.text = self.postData.post_author.username;
         cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
-        
-        cell.categoryImg1.image = [self.pinData labelIcon];
+
+        cell.categoryLabel1.text = [self categoryLabelText];
+        cell.categoryColorView1.backgroundColor = [self.pinData labelColor];
+        cell.categoryColorView1.layer.cornerRadius = cell.categoryColorView1.frame.size.width/2;
         
         [cell.contentImageView1 setImage:[self.pinData.pin_post_list[indexPath.row] getPostPhoto]];     // 사진
         [cell.pinMainText1 setText:self.pinData.pin_post_list[indexPath.row].post_description];         // 글
@@ -84,11 +90,16 @@
         PhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
+        cell.profileImageView2.image = [self.postData.post_author getAuthorProfileImg];
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
+
+        cell.userName2.text = self.postData.post_author.username;
         cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
-        
-        cell.categoryImg2.image = [self.pinData labelIcon];
+
+        cell.categoryLabel2.text = [self categoryLabelText];
+        cell.categoryColorView2.backgroundColor = [self.pinData labelColor];
+        cell.categoryColorView2.layer.cornerRadius = cell.categoryColorView2.frame.size.width/2;
         
         [cell.contentImageView2 setImage:[self.pinData.pin_post_list[indexPath.row] getPostPhoto]];     // 사진
 
@@ -99,18 +110,48 @@
         TextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
+        cell.profileImageView3.image = [self.postData.post_author getAuthorProfileImg];
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
-        cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
 
-        cell.categoryImg3.image = [self.pinData labelIcon];
-       
+        cell.userName3.text = self.postData.post_author.username;
+        cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
+        
+        cell.categoryLabel3.text = [self categoryLabelText];
+        cell.categoryColorView3.backgroundColor = [self.pinData labelColor];
+        cell.categoryColorView3.layer.cornerRadius = cell.categoryColorView3.frame.size.width/2;
+        
         [cell.pinMainText3 setText:self.pinData.pin_post_list[indexPath.row].post_description];         // 글
 
         return cell;
     }
 }
 
+// Back Btn Action
+- (IBAction)selectedPopViewBtn:(id)sender {
+    //Navigation없애고 커스텀 버튼으로 POP
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+
+
+- (NSString *)categoryLabelText {
+    
+    switch (self.pinData.pin_label) {
+        case 0:
+            return @"카페";
+        case 1:
+            return @"음식";
+        case 2:
+            return @"쇼핑";
+        case 3:
+            return @"장소";
+        default:    // 4
+            return @"기타";
+    }
+}
 
 @end
 

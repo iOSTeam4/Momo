@@ -33,8 +33,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *mapBtn;
 @property (weak, nonatomic) IBOutlet UIButton *pinBtn;
-@property (weak, nonatomic) IBOutlet UIButton *mapBtnTap;
-@property (weak, nonatomic) IBOutlet UIButton *pinBtnTap;
+@property (weak, nonatomic) IBOutlet UIView *mapBtnTapView;
+
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectedMapTabViewConstraint;
+
 
 @end
 

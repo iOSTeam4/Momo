@@ -10,6 +10,7 @@
 
 @interface TextCell ()
 
+
 @end
 
 @implementation TextCell

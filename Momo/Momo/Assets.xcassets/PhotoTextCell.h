@@ -12,9 +12,11 @@
 
 // constraint
 
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel1;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView1;
-@property (weak, nonatomic) IBOutlet UIImageView *categoryImg1;
+@property (weak, nonatomic) IBOutlet UIView *categoryColorView1;
 @property (weak, nonatomic) IBOutlet UILabel *userName1;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn1;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView1;
 @property (weak, nonatomic) IBOutlet UILabel *pinName1;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress1;

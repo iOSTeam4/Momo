@@ -68,7 +68,7 @@
 //    NSLog(@"cell width : %f , userImgView.frame.size.height/2 : %f", self.frame.size.width, self.userImgView.frame.size.height/2);
     
     // 수정하기 버튼
-    [self.mapEditBtn.layer setCornerRadius:10];
+    [self.mapEditBtn.layer setCornerRadius:12];
     [self.mapEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
     [self.mapEditBtn.layer setBorderWidth:1];
     

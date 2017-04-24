@@ -18,9 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *userCommentTextView;
 
 
-@property (weak, nonatomic) UIButton *editDoneBtn;
-@property (weak, nonatomic) UIButton *backBtn;
-@property (weak, nonatomic) UIButton *logOutBtn;
+@property (weak, nonatomic) IBOutlet UIButton *editDoneBtn;
 
 @property (weak, nonatomic) UIActivityIndicatorView *indicator;
 
@@ -45,35 +43,7 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(descriptionEditChanged:) name:UITextViewTextDidChangeNotification object:nil];
     
     
-    // 임시 완료 버튼, indicator ----------------------//
-    
-    UIButton *editDoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    editDoneBtn.frame = CGRectMake(self.view.frame.size.width-100, self.view.center.y, 50, 50);
-    [editDoneBtn setTitle:@"완료" forState:UIControlStateNormal];
-    [editDoneBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
-    [editDoneBtn setTitle:@"완료" forState:UIControlStateDisabled];
-    [editDoneBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    [editDoneBtn addTarget:self action:@selector(editDoneBtnAtciton) forControlEvents:UIControlEventTouchUpInside];
-    [editDoneBtn setEnabled:NO];    // 기본은 비활성화
-    [self.view addSubview:editDoneBtn];
-    self.editDoneBtn = editDoneBtn;
-    
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(50, self.view.center.y, 50, 50);
-    [backBtn setTitle:@"뒤로" forState:UIControlStateNormal];
-    [backBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(backBtnAtciton) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backBtn];
-    self.backBtn = backBtn;
-    
-    UIButton *logOutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    logOutBtn.frame = CGRectMake(self.view.center.x-25, self.view.center.y, 50, 50);
-    [logOutBtn setTitle:@"logout" forState:UIControlStateNormal];
-    [logOutBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
-    [logOutBtn addTarget:self action:@selector(logOutBtnAtciton) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:logOutBtn];
-    self.logOutBtn = logOutBtn;
-    [logOutBtn sizeToFit];
+    // 임시 indicator ----------------------//
     
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.hidesWhenStopped = YES;
@@ -230,14 +200,14 @@
 // UI Btn Action ---------------------------//
 
 // 뒤로가기
-- (void)backBtnAtciton {
+- (IBAction)backBtnAtciton {
     NSLog(@"backBtnAtciton");
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // 수정하기
-- (void)editDoneBtnAtciton {
+- (IBAction)editDoneBtnAtciton {
     NSLog(@"editDoneBtnAtciton");
     
     NSData *profileImgdata = [UtilityCenter imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
@@ -275,7 +245,7 @@
 
 
 // 로그아웃
-- (void)logOutBtnAtciton {
+- (IBAction)logOutBtnAtciton {
     NSLog(@"logOutBtnAtciton");
     [self.indicator startAnimating];
     

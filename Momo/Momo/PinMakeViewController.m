@@ -187,7 +187,8 @@
         mapCheckBtn.frame = CGRectMake(0, 0, 29, 29);
         
         [btnView addSubview:mapNameBtn];
-        mapNameBtn.frame = CGRectMake(30, 0, btnView.frame.size.width - 40, 29);
+        CGSize mapNameSize = [mapNameBtn.currentTitle sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
+        mapNameBtn.frame = CGRectMake(30, 0, mapNameSize.width, 29);
         
         offsetY += 44;
         
