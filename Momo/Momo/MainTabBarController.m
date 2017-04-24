@@ -9,8 +9,14 @@
 #import "MainTabBarController.h"
 #import "MakeViewController.h"
 #import "MapViewController.h"
+#import "MyViewController.h"
 
 #define TAB_BAR_HEIGHT 49.0f   // UITabBar 49pt, border 0.25pt
+
+#define MAP_VIEW 0
+#define MAKE_VIEW 1
+#define MY_VIEW 2
+
 
 @interface MainTabBarController ()
 
@@ -153,11 +159,11 @@
 
 - (void)selectedBtn:(UIButton *)sender {
     
-    if (sender.tag == 1) {
+    if (sender.tag == MAKE_VIEW) {
         [self.makeVC pinBtnEnableCheck];    // 핀 만들기 버튼 활성화 체크 및 세팅
         [self.view addSubview:self.makeVC.view];
         
-    } else {
+    } else {    // 0: MapView, 2: MyView
         if (sender.tag != self.lastSelectedBtn.tag) {
             self.lastSelectedBtn.selected = NO;     // 이전 선택된 버튼 set deselect
             sender.selected = YES;                  // 선택된 버튼 set select
@@ -166,7 +172,21 @@
             self.selectedIndex = sender.tag;        // 선택된 버튼에 맞춰 View appear
 
         } else {    // 이미 선택된 탭바 버튼, 다시 한번 더 탭
-            [self.selectedViewController popToRootViewControllerAnimated:YES];  // 해당 버튼의 맨 처음 뷰로 pop 이동
+            if (((UINavigationController *)self.selectedViewController).viewControllers.count > 1) {
+                // pop할 VieWControllers가 있을 때
+                [self.selectedViewController popToRootViewControllerAnimated:YES];  // 해당 버튼의 맨 처음 뷰로 pop 이동
+            } else {
+                
+                if (sender.tag == MAP_VIEW) {
+                    // 0 MapView : 내 위치 이동
+                    [((MapViewController *)((UINavigationController *)self.selectedViewController).visibleViewController) moveToMyLocationWithCompletionBlock:nil];
+                    
+                } else if (sender.tag == MY_VIEW) {
+                    // 2 MyView : 테이블 뷰 맨 위로 이동
+                    NSLog(@"MyView : 테이블 뷰 맨 위로 이동");
+                    [((MyViewController *)((UINavigationController *)self.selectedViewController).visibleViewController).tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+                }
+            }
         }
     }
 }

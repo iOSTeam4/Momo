@@ -22,4 +22,7 @@
 // 새 핀 생성 완성 후 부르는 메서드
 - (void)successCreatePin;
 
+// 내 위치로 이동
+- (void)moveToMyLocationWithCompletionBlock:(void (^)())completionBlock;
+
 @end

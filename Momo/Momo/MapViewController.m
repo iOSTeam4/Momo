@@ -426,6 +426,16 @@
 - (void)makePinByMakePinBtn {
     // 내 위치를 중심으로 Map 띄우기
     
+    [self moveToMyLocationWithCompletionBlock:^{
+        NSLog(@"내 위치를 중심으로 Map 띄우기");
+        [self mapView:(GMSMapView *)self.view didLongPressAtCoordinate:[self.mapView myLocation].coordinate];       // 마지막 내 위치로 마커찍기
+    }];
+}
+
+// 내 위치로 이동
+- (void)moveToMyLocationWithCompletionBlock:(void (^)())completionBlock {
+
+    // 내 위치를 중심으로 Map 띄우기
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         while([self.mapView myLocation].coordinate.latitude == 0.0f);   // 내 위치 받아오기까지 조금 시간 걸림
@@ -437,9 +447,13 @@
                                                                     longitude:[self.mapView myLocation].coordinate.longitude
                                                                          zoom:16.0f];
             [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 내 위치 중심으로 카메라 설정
-            [self mapView:(GMSMapView *)self.view didLongPressAtCoordinate:[self.mapView myLocation].coordinate];       // 마지막 내 위치로 마커찍기
+            
+            if (completionBlock != nil) {
+                completionBlock();
+            }
         });
     });
+    
 }
 
 

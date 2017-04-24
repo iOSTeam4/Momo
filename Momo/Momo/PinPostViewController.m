@@ -70,7 +70,7 @@
         
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
-        cell.profileImageView1.image = [self.pinData.pin_author getAuthorProfileImg];
+        cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         
         cell.categoryImg1.image = [self.pinData labelIcon];
         
@@ -86,7 +86,7 @@
         
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
-        cell.profileImageView2.image = [self.pinData.pin_author getAuthorProfileImg];
+        cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         
         cell.categoryImg2.image = [self.pinData labelIcon];
         
@@ -101,7 +101,7 @@
         
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
-        cell.profileImageView3.image = [self.pinData.pin_author getAuthorProfileImg];
+        cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
 
         cell.categoryImg3.image = [self.pinData labelIcon];
        

@@ -23,7 +23,6 @@
 @interface MyViewController ()
 <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate, UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger mapPinNum;
 
 @property (nonatomic) UIRefreshControl *tableViewRefreshControl;
