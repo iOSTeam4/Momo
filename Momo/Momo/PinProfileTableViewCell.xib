@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,29 +13,29 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="295" id="KGk-i7-Jjw" customClass="PinProfileTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="298"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="300" id="KGk-i7-Jjw" customClass="PinProfileTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="421" height="303"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="297.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="421" height="302.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-A0-G2a" userLabel="BackView">
-                        <rect key="frame" x="15" y="10" width="390" height="277.5"/>
+                        <rect key="frame" x="15" y="10" width="411" height="282.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZfR-pa-AiB" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
+                                <rect key="frame" x="0.0" y="0.0" width="411" height="205.5"/>
                                 <color key="backgroundColor" red="0.55289608239999999" green="0.54851245879999999" blue="0.57745069270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZfR-pa-AiB" secondAttribute="height" multiplier="2:1" id="qZ8-93-jSK"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-dZ-bwr">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
+                                <rect key="frame" x="0.0" y="0.0" width="411" height="205.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pika pika 핀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqb-1e-o3S" userLabel="Pin Name Label">
-                                <rect key="frame" x="10" y="205" width="89.5" height="21"/>
+                                <rect key="frame" x="10" y="215.5" width="89.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="u6H-64-dCv"/>
                                 </constraints>
@@ -44,19 +44,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pika.png" translatesAutoresizingMaskIntoConstraints="NO" id="9lu-jH-Pqd">
-                                <rect key="frame" x="10" y="230.5" width="30.5" height="30.5"/>
+                                <rect key="frame" x="10" y="241" width="25" height="25"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="5L0-BQ-tdk"/>
                                     <constraint firstAttribute="width" secondItem="9lu-jH-Pqd" secondAttribute="height" multiplier="1:1" id="pWx-sB-Kb0"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f0-ih-zMc">
-                                <rect key="frame" x="45.5" y="235.5" width="217" height="21"/>
+                                <rect key="frame" x="40" y="243.5" width="238.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-sx-dtA">
-                                <rect key="frame" x="277.5" y="232" width="97.5" height="29"/>
+                                <rect key="frame" x="293.5" y="238" width="102.5" height="30.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Yra-sx-dtA" secondAttribute="height" multiplier="10:3" id="BHu-T3-HYB"/>
                                 </constraints>
@@ -84,7 +85,6 @@
                             <constraint firstItem="2f0-ih-zMc" firstAttribute="centerY" secondItem="9lu-jH-Pqd" secondAttribute="centerY" id="bHN-ZM-3LV"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="leading" secondItem="2f0-ih-zMc" secondAttribute="trailing" constant="15" id="cY2-mq-7m6"/>
                             <constraint firstAttribute="trailing" secondItem="Yra-sx-dtA" secondAttribute="trailing" constant="15" id="fCt-Tz-gGy"/>
-                            <constraint firstItem="9lu-jH-Pqd" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.08" id="iPQ-vh-JEf"/>
                             <constraint firstItem="ZfR-pa-AiB" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" id="mY5-YK-zjr"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.25" id="nek-PX-95h"/>
                             <constraint firstItem="Qty-dZ-bwr" firstAttribute="height" secondItem="ZfR-pa-AiB" secondAttribute="height" id="oxu-sB-89f"/>
@@ -109,7 +109,7 @@
                 <outlet property="userImgView" destination="9lu-jH-Pqd" id="j0G-p1-Ugg"/>
                 <outlet property="userNameLabel" destination="2f0-ih-zMc" id="L6E-vY-EBm"/>
             </connections>
-            <point key="canvasLocation" x="40" y="261"/>
+            <point key="canvasLocation" x="50.5" y="263.5"/>
         </tableViewCell>
     </objects>
     <resources>

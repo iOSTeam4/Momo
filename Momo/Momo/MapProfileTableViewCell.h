@@ -24,11 +24,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIImageView *mapPlaceholderImgView;
+@property (weak, nonatomic) IBOutlet UIButton *mapPlaceholderImgView;
 @property (weak, nonatomic) IBOutlet UIButton *mapNameBtn;
 @property (weak, nonatomic) IBOutlet UILabel *mapPinNumLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *mapEditBtn;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *labelBtnView;
+@property (weak, nonatomic) IBOutlet UIButton *postBtnView;
 
 @end
 

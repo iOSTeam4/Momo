@@ -27,8 +27,6 @@
 
 @property (nonatomic) UISearchController *searchController;
 
-@property (weak, nonatomic) IBOutlet UIButton *naviBackBtn;
-
 // 롱 프레스 새 핀 생성, 등록
 @property (nonatomic) BOOL isMakingMarker;
 @property (nonatomic) BOOL isDragingMarker;
@@ -93,11 +91,11 @@
         
         [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
         
-        if (self.showSelectedMap) {
-            // 선택지도 보기 상황
-            [self.mapInfoView setHidden:YES];
-            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
-        }
+//        if (self.showSelectedMap) {
+//            // 선택지도 보기 상황
+//            [self.mapInfoView setHidden:YES];
+//            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
+//        }
         
         [self.view layoutIfNeeded];                                     // 탭바 뺀, Constraints 다시 적용
         [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
@@ -106,9 +104,8 @@
     } else if (self.showSelectedMap) {          // SELECTED_MAP_MODE or SELECTED_MAP_MODE_WITH_PIN
         // 선택지도 보기
         [self mapInfoViewSetting];
+
         
-        [self.naviBackBtn setHidden:NO];    // Navi Back 버튼 나타내기
-        [self.view bringSubviewToFront:self.naviBackBtn];
         
     } else {
         // 사용자 모든 핀 보기 (default)
@@ -144,10 +141,6 @@
             });
         });
     }
-    [self.view bringSubviewToFront:self.backBtn];
-    self.backBtn.layer.shadowOffset = CGSizeMake(0, 0);
-    self.backBtn.layer.shadowRadius = 2;
-    self.backBtn.layer.shadowOpacity = 0.7;
 }
 
 
@@ -218,6 +211,15 @@
     
     [self.view layoutIfNeeded];     // 지도 설명 길어졌을 때, View Height 달라짐
     self.mapView.padding = UIEdgeInsetsMake(20, 0, 49 + self.mapInfoView.frame.size.height, 0);
+    
+    
+    // 뒤로가기 버튼 (navi push로 들어왔을 경우)
+    [self.backBtn setHidden:NO];
+    [self.view bringSubviewToFront:self.backBtn];
+    self.backBtn.layer.shadowOffset = CGSizeMake(0, 0);
+    self.backBtn.layer.shadowRadius = 2;
+    self.backBtn.layer.shadowOpacity = 0.7;
+
 
 }
 
@@ -419,11 +421,11 @@
 
         [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
 
-        if (self.showSelectedMap) {
-            // 선택지도 보기 상황
-            [self.mapInfoView setHidden:YES];
-            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
-        }
+//        if (self.showSelectedMap) {
+//            // 선택지도 보기 상황
+//            [self.mapInfoView setHidden:YES];
+//            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
+//        }
         
         [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
         [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
@@ -492,11 +494,11 @@
     [self.makingMarkerBtnView setHidden:YES];
     [(MainTabBarController *)self.tabBarController customTabBarSetHidden:NO];
     
-    if (self.showSelectedMap) {
-        // 선택지도 보기 상황
-        [self.mapInfoView setHidden:NO];
-        self.mapView.padding = UIEdgeInsetsMake(20, 0, 49 + self.mapInfoView.frame.size.height, 0);
-    }
+//    if (self.showSelectedMap) {
+//        // 선택지도 보기 상황
+//        [self.mapInfoView setHidden:NO];
+//        self.mapView.padding = UIEdgeInsetsMake(20, 0, 49 + self.mapInfoView.frame.size.height, 0);
+//    }
 }
 
 // 핀 만들기 다음 버튼 액션
@@ -507,6 +509,10 @@
     
     [pinMakeVC setLat:self.makingMarker.position.latitude
               withLng:self.makingMarker.position.longitude];
+
+    if (self.showSelectedMap) {
+        [pinMakeVC wasSelectedMap:YES withMapPK:self.mapData.pk];
+    }
     
     [self presentViewController:pinMakeVC animated:YES completion:nil];
 }

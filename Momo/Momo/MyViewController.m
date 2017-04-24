@@ -38,12 +38,13 @@
     
     // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
-
     
     // TableView Settings -------------------//
 
     // TableView Nib(xib) Register
     [self initialTableViewCellSettingWithNib];
+    
+    self.tableView.showsVerticalScrollIndicator = NO;       // 스크롤 라인 indicator Hidden
     
     self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
     

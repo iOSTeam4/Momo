@@ -171,6 +171,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="tR1-Vo-1rG"/>
                     <connections>
+                        <outlet property="backBtn" destination="nje-JD-1Tx" id="eC5-o4-s5Y"/>
                         <outlet property="cancelBtn" destination="nT2-e8-Mib" id="yPH-HR-C4j"/>
                         <outlet property="makingMarkerBtnView" destination="caz-H9-CDx" id="0oF-Gk-HQ2"/>
                         <outlet property="mapInfoView" destination="eQP-jP-Ocj" id="4E0-vv-nHG"/>
@@ -179,7 +180,6 @@
                         <outlet property="mapInfoViewNameBtn" destination="NT8-64-NtI" id="HU9-ZV-JHy"/>
                         <outlet property="mapInfoViewPinNumLabel" destination="Y2W-uj-Jug" id="ewP-0d-hFg"/>
                         <outlet property="mapView" destination="kX6-0h-d80" id="QEZ-8b-JZF"/>
-                        <outlet property="naviBackBtn" destination="nje-JD-1Tx" id="5h3-dc-1RS"/>
                         <outlet property="nextBtn" destination="GVJ-bp-TgT" id="PMm-Nw-nOc"/>
                     </connections>
                 </viewController>

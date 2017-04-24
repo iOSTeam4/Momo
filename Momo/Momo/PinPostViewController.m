@@ -76,6 +76,8 @@
         cell.tag = indexPath.row;
         cell.delegate = self;
         
+        
+        cell.pinName1.text = self.pinData.pin_name;
         cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
@@ -83,6 +85,7 @@
         cell.userName1.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
         cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
 
+        
         cell.categoryLabel1.text = [self categoryLabelText];
         cell.categoryColorView1.backgroundColor = [self.pinData labelColor];
         cell.categoryColorView1.layer.cornerRadius = cell.categoryColorView1.frame.size.width/2;
@@ -99,6 +102,8 @@
         cell.tag = indexPath.row;
         cell.delegate = self;
         
+        
+        cell.pinName2.text = self.pinData.pin_name;
         cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
@@ -106,6 +111,7 @@
         cell.userName2.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
         cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
 
+        
         cell.categoryLabel2.text = [self categoryLabelText];
         cell.categoryColorView2.backgroundColor = [self.pinData labelColor];
         cell.categoryColorView2.layer.cornerRadius = cell.categoryColorView2.frame.size.width/2;
@@ -121,12 +127,15 @@
         cell.tag = indexPath.row;
         cell.delegate = self;
         
+        
+        cell.pinName3.text = self.pinData.pin_name;
         cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
 
         cell.userName3.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
         cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
+        
         
         cell.categoryLabel3.text = [self categoryLabelText];
         cell.categoryColorView3.backgroundColor = [self.pinData labelColor];

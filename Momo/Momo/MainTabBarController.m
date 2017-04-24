@@ -13,9 +13,9 @@
 
 #define TAB_BAR_HEIGHT 49.0f   // UITabBar 49pt, border 0.25pt
 
-#define MAP_VIEW 0
-#define MAKE_VIEW 1
-#define MY_VIEW 2
+#define MAP_VIEW    0
+#define MAKE_VIEW   1
+#define MY_VIEW     2
 
 
 @interface MainTabBarController ()
@@ -32,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.tabBar setHidden:YES];
     
     [self setViewControllers];      // TabBarController Setting
     [self setCustomTabBar];         // Custom TabBar Setting
@@ -78,21 +80,22 @@
 - (void)setCustomTabBar {
     
     // CustomTabBar View & TopBorder Setting
-    UIView *customTabBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-TAB_BAR_HEIGHT, self.view.bounds.size.width, TAB_BAR_HEIGHT)];
+    UIView *customTabBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-TAB_BAR_HEIGHT-0.4f, self.view.frame.size.width, TAB_BAR_HEIGHT+0.4f)];
     customTabBar.backgroundColor = [UIColor whiteColor];
     self.customTabBar = customTabBar;
 
-    UIView *customTabBarBorderLine = [[UIView alloc] initWithFrame:CGRectMake(0, customTabBar.bounds.origin.y, self.view.bounds.size.width, 0.25f)];
+    UIView *customTabBarBorderLine = [[UIView alloc] init];
+    [customTabBar addSubview:customTabBarBorderLine];
+    customTabBarBorderLine.frame = CGRectMake(customTabBar.bounds.origin.x, customTabBar.bounds.origin.y, self.view.frame.size.width, 0.4f);
     customTabBarBorderLine.backgroundColor = [UIColor lightGrayColor];
 
-    [customTabBar addSubview:customTabBarBorderLine];
     [self.view addSubview:customTabBar];
     
     
     // @[<Label>, <Btn Img Name>, <Btn Selected Img Name>];
-    NSArray *tabBarItemInfoArr = @[@[@"지도"    , @"tabMapGray" , @"tabMapS" ],
-                                   @[@"핀"     , @"tabPin" , @"tabPinS" ],
-                                   @[@"내 기록" , @"tabMy"  , @"tabMyS"  ]];
+    NSArray *tabBarItemInfoArr = @[@[@"지도"    , @"tabMapGray" ,  @"tabMapS" ],
+                                   @[@"핀"     ,  @"tapPinBtn" ,   @"tapPinBtn" ],
+                                   @[@"내 기록" ,  @"tabMy"     ,   @"tabMyS"  ]];
     
     [self addTabBarBtnWithImgNameArr:tabBarItemInfoArr];
 }
@@ -107,51 +110,63 @@
         btn.tag = i;
         [btn addTarget:self action:@selector(selectedBtn:) forControlEvents:UIControlEventTouchUpInside];
         
-        if (i == 0) {       // 초기 첫번째 버튼이 선택되어 있음
+        if (i == MAP_VIEW) {       // 초기 첫번째 버튼이 선택되어 있음
             btn.selected = YES;
             self.lastSelectedBtn = btn;
             self.mapBtn = btn;      // 지도 버튼 프로퍼티로 갖고있음
         }
         
         // Btn ImageView & Label 세팅 -----------------------------//
-        // Label setting
-        [btn setTitle:arr[i][0] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor mm_warmGreyTwoColor] forState:UIControlStateNormal];
-        [btn setTitle:arr[i][0] forState:UIControlStateSelected];
-        [btn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateSelected];
-        [btn.titleLabel setFont:[UIFont systemFontOfSize:11]];
-        
-        // Image setting
-        [btn setImage:[UIImage imageNamed:arr[i][1]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:arr[i][2]] forState:UIControlStateSelected];
-        [btn setContentMode:UIViewContentModeScaleAspectFit];
-        
-        // Btn ImageView & Label 재배치 ----------------------------//
-        // ImageView와 Label간의 height space
-        CGFloat spacing = 3.0;
-        
-        // lower the text and push it left so it appears centered
-        // below the image
-        CGSize imageSize = btn.imageView.image.size;
-        btn.titleEdgeInsets = UIEdgeInsetsMake(0.0, - imageSize.width, - (imageSize.height + spacing), 0.0);
-        
-        // raise the image and push it right so it appears centered
-        // above the text
-        CGSize titleSize = [btn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: btn.titleLabel.font}];
-        btn.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
-        
-        // increase the content height to avoid clipping
-        CGFloat edgeOffset = fabs(titleSize.height - imageSize.height) / 2.0;
-        btn.contentEdgeInsets = UIEdgeInsetsMake(edgeOffset, 0.0, edgeOffset, 0.0);
         
         // Btn Frame 세팅 -----------------------------------------//
         CGFloat centerX = (self.customTabBar.bounds.size.width / (CGFloat)(arr.count * 2)) * (1 + (2 * i));
-
+        
         [self.customTabBar addSubview:btn];
         
-        btn.frame = CGRectMake(0, 1, self.customTabBar.bounds.size.width / (CGFloat)arr.count, 38);
-        btn.center = CGPointMake(centerX, self.customTabBar.bounds.size.height/2);
-        
+        if (btn.tag != MAKE_VIEW) {
+            
+            btn.frame = CGRectMake(0, 0, self.customTabBar.bounds.size.width / (CGFloat)arr.count, 38);
+            btn.center = CGPointMake(centerX, self.customTabBar.bounds.size.height/2);
+
+            
+            // Label setting
+            [btn setTitle:arr[i][0] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor mm_warmGreyTwoColor] forState:UIControlStateNormal];
+            [btn setTitle:arr[i][0] forState:UIControlStateSelected];
+            [btn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateSelected];
+            [btn.titleLabel setFont:[UIFont systemFontOfSize:11]];
+            
+            // Image setting
+            [btn setImage:[UIImage imageNamed:arr[i][1]] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:arr[i][2]] forState:UIControlStateSelected];
+            
+            // Btn ImageView & Label 재배치 ----------------------------//
+            // ImageView와 Label간의 height space
+            CGFloat spacing = 3.0;
+            
+            // lower the text and push it left so it appears centered
+            // below the image
+            CGSize imageSize = btn.imageView.image.size;
+            btn.titleEdgeInsets = UIEdgeInsetsMake(0.0, - imageSize.width, - (imageSize.height + spacing), 0.0);
+            
+            // raise the image and push it right so it appears centered
+            // above the text
+            CGSize titleSize = [btn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: btn.titleLabel.font}];
+            btn.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
+            
+            // increase the content height to avoid clipping
+            CGFloat edgeOffset = fabs(titleSize.height - imageSize.height) / 2.0;
+            btn.contentEdgeInsets = UIEdgeInsetsMake(edgeOffset, 0.0, edgeOffset, 0.0);
+            
+        } else {
+            // MAKE_VIEW
+            btn.frame = CGRectMake(0, 0, self.customTabBar.bounds.size.width / (CGFloat)arr.count, TAB_BAR_HEIGHT);
+            btn.center = CGPointMake(centerX, self.customTabBar.bounds.size.height/2);
+            
+            // MAKE_VIEW Btn Image setting
+            [btn setImage:[UIImage imageNamed:arr[i][1]] forState:UIControlStateNormal];
+            [btn setImageEdgeInsets:UIEdgeInsetsMake(-9, 0, 0, 0)];
+        }
     }
 }
 
@@ -193,7 +208,7 @@
 
 
 - (void)customTabBarSetHidden:(BOOL)hidden {
-    [self.tabBar setHidden:hidden];
+//    [self.tabBar setHidden:hidden];
     [self.customTabBar setHidden:hidden];
 }
 

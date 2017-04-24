@@ -10,6 +10,10 @@
 
 @interface PinMakeViewController : UIViewController
 
+// 선택 지도보기에서 핀 생성으로 이동했을 때
+- (void)wasSelectedMap:(BOOL)wasSelectedMapView
+             withMapPK:(NSInteger)selectedMap_pk;
+
 - (void)setLat:(CGFloat)lat
        withLng:(CGFloat)lng;
 

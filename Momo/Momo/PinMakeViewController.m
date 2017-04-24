@@ -18,6 +18,9 @@
 @property (nonatomic) BOOL isEditMode;
 @property (nonatomic) MomoPinDataSet *pinData;
 
+@property (nonatomic) BOOL wasSelectedMapView;
+@property (nonatomic) NSInteger selectedMapPK;
+
 @property (weak, nonatomic) IBOutlet UILabel *viewTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -60,6 +63,15 @@
 - (void)setEditModeWithPinData:(MomoPinDataSet *)pinData {
     self.pinData = pinData;
     self.isEditMode = YES;
+}
+
+
+// 선택 지도보기에서 핀 생성으로 이동했을 때
+- (void)wasSelectedMap:(BOOL)wasSelectedMapView
+             withMapPK:(NSInteger)selectedMap_pk {
+
+    self.wasSelectedMapView = wasSelectedMapView;
+    self.selectedMapPK = selectedMap_pk;
 }
 
 
@@ -199,6 +211,17 @@
         }
         
         offsetY += 44;
+        
+        // 선택지도 보기에서 핀 만들기 들어왔을 때 (선택지도 미리 체킹되어 있게)
+        if (self.wasSelectedMapView) {
+            NSInteger mapIndex = [[DataCenter myMapList] indexOfObject:[DataCenter findMapDataWithMapPK:self.selectedMapPK]];
+            
+            if (mapCheckBtn.tag == mapIndex) {
+                mapCheckBtn.selected = YES;
+                self.mapLastSelectedBtn = mapCheckBtn;
+                self.checkMap = YES;
+            }
+        }
         
         // 수정모드일 때, 등록되어있던 맵 정보 세팅 (map pk값으로 구별)
         if (self.isEditMode && (mapArr[i].pk == self.pinData.pin_map_pk)) {
