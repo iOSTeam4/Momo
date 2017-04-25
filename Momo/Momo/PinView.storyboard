@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -60,17 +60,6 @@
                                                         <color key="textColor" red="0.33502128720283508" green="0.7186439037322998" blue="0.97653758525848389" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHI-a5-G5x">
-                                                        <rect key="frame" x="319" y="405" width="40" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="0UQ-G5-BiA"/>
-                                                            <constraint firstAttribute="height" constant="40" id="gPw-e2-jBx"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Button" image="setup"/>
-                                                        <connections>
-                                                            <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="7Zm-pv-FAG"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -78,7 +67,6 @@
                                                     <constraint firstAttribute="height" constant="110" id="5ds-AX-qoh"/>
                                                     <constraint firstItem="odR-2r-Hd4" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" constant="26" id="D1U-FJ-1MM"/>
                                                     <constraint firstItem="odR-2r-Hd4" firstAttribute="top" secondItem="PhD-eq-zWc" secondAttribute="bottom" id="Gxk-kh-kaF"/>
-                                                    <constraint firstAttribute="trailing" secondItem="uHI-a5-G5x" secondAttribute="trailing" constant="16" id="MG9-aa-ThY"/>
                                                     <constraint firstItem="PhD-eq-zWc" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" id="cav-G5-CRQ"/>
                                                     <constraint firstAttribute="width" secondItem="Jiv-fz-0H7" secondAttribute="height" multiplier="75:22" id="dnT-Ca-Mz0"/>
                                                 </constraints>
@@ -171,21 +159,35 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHI-a5-G5x">
+                                                        <rect key="frame" x="319" y="64.5" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="0UQ-G5-BiA"/>
+                                                            <constraint firstAttribute="height" constant="40" id="gPw-e2-jBx"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button" image="setup"/>
+                                                        <connections>
+                                                            <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="7Zm-pv-FAG"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="DF6-aI-0Md" firstAttribute="leading" secondItem="T9J-oI-jTH" secondAttribute="leading" constant="26" id="155-Wp-yVi"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="leading" secondItem="DF6-aI-0Md" secondAttribute="leading" id="2h5-ID-ctd"/>
+                                                    <constraint firstItem="uHI-a5-G5x" firstAttribute="centerY" secondItem="DF6-aI-0Md" secondAttribute="centerY" id="4iJ-gx-ao4"/>
                                                     <constraint firstItem="MGT-Qm-MjQ" firstAttribute="leading" secondItem="jOt-cV-oy5" secondAttribute="leading" id="AKG-Zl-1Kn"/>
                                                     <constraint firstAttribute="trailing" secondItem="08p-ye-2vn" secondAttribute="trailing" id="EKV-ar-boF"/>
                                                     <constraint firstItem="DF6-aI-0Md" firstAttribute="top" secondItem="T9J-oI-jTH" secondAttribute="top" constant="70" id="GlY-Oe-MzQ"/>
                                                     <constraint firstAttribute="width" secondItem="T9J-oI-jTH" secondAttribute="height" multiplier="15:8" id="HlX-Kv-oJw"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="width" secondItem="DF6-aI-0Md" secondAttribute="width" id="LKd-mz-Y4T"/>
                                                     <constraint firstItem="08p-ye-2vn" firstAttribute="leading" secondItem="MGT-Qm-MjQ" secondAttribute="trailing" constant="10" id="McI-4q-1s2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uHI-a5-G5x" secondAttribute="trailing" constant="16" id="Quv-P8-DV3"/>
                                                     <constraint firstItem="MGT-Qm-MjQ" firstAttribute="top" secondItem="jOt-cV-oy5" secondAttribute="bottom" constant="10" id="UQe-61-ETm"/>
                                                     <constraint firstItem="08p-ye-2vn" firstAttribute="centerY" secondItem="MGT-Qm-MjQ" secondAttribute="centerY" id="atx-vW-eZg"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="top" secondItem="DF6-aI-0Md" secondAttribute="bottom" id="g3K-tU-G2X"/>
                                                     <constraint firstAttribute="height" constant="200" id="nAy-Nq-bgu"/>
+                                                    <constraint firstItem="uHI-a5-G5x" firstAttribute="leading" secondItem="DF6-aI-0Md" secondAttribute="trailing" constant="16" id="tak-x4-xpw"/>
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rv0-r5-Tx6">
@@ -245,8 +247,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="uHI-a5-G5x" firstAttribute="leading" secondItem="DF6-aI-0Md" secondAttribute="trailing" constant="16" id="136-uF-EDb"/>
-                                            <constraint firstItem="uHI-a5-G5x" firstAttribute="centerY" secondItem="DF6-aI-0Md" secondAttribute="centerY" id="4La-fh-txt"/>
                                             <constraint firstItem="Jiv-fz-0H7" firstAttribute="top" secondItem="CZA-PH-Hyb" secondAttribute="top" id="4jc-v1-hRD"/>
                                             <constraint firstItem="MZf-bP-nyG" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" constant="-42" id="6D8-xJ-3IO"/>
                                             <constraint firstItem="T9J-oI-jTH" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" id="BKA-IV-Gz4"/>

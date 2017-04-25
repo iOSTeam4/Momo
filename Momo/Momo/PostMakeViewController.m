@@ -430,7 +430,10 @@
                                  
                                  if (isSuccess) {
                                      
+                                     [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
+                                     
                                      if ([DataCenter findPinDataWithPinPK:self.pin_pk].pin_post_list.count != 0) {
+                                         
                                          // 남은 포스트 양이 1개 이상 남아있을 때, 테이블 뷰로 돌아감
                                          [self dismissViewControllerAnimated:YES completion:nil];
 
