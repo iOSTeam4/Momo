@@ -161,7 +161,7 @@
     
     CGFloat offsetY = self.mapCheckRefOriginY.frame.origin.y;
     
-    for (NSInteger i =0 ; i < mapArr.count ; i++) {
+    for (NSInteger i=0 ; i < mapArr.count ; i++) {
         UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(26, offsetY, self.view.frame.size.width-52, 29)];
         [self.contentView addSubview:btnView];
         

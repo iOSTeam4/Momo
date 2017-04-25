@@ -287,7 +287,9 @@
 // 핀 삭제
 + (void)deletePinData:(MomoPinDataSet *)pinData {
     
-    // 포스트 삭제 필요
+    for (MomoPostDataSet *postData in pinData.pin_post_list) {
+        [DataCenter deletePostData:postData];     // 핀 내부에 속한 포스트들도 전부 삭제
+    }
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{

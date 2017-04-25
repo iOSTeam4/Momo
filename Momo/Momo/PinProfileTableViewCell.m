@@ -98,7 +98,7 @@
 
 - (IBAction)pinEditBtnAction:(id)sender {
     NSLog(@"pinEditBtnAction");
-    [self.delegate selectedPinEditBtnWithIndex:self.tag];
+    [self.delegate selectedPinEditBtnWithIndex:self.pinIndex];
 }
 
 @end

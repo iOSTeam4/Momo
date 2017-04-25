@@ -49,19 +49,25 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dXV-xO-sqq">
                                         <rect key="frame" x="245" y="0.0" width="125" height="245"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V20-PE-Q0D">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V20-PE-Q0D">
                                                 <rect key="frame" x="5.5" y="0.0" width="119.5" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="V20-PE-Q0D" secondAttribute="height" multiplier="1:1" id="8Uv-yb-7Vu"/>
                                                 </constraints>
-                                                <state key="normal" image="group2"/>
+                                                <state key="normal" image="defaultLabel"/>
+                                                <connections>
+                                                    <action selector="pinLabelBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ufq-of-YBn"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLy-ek-KPl">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLy-ek-KPl">
                                                 <rect key="frame" x="4.5" y="125" width="120.5" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pLy-ek-KPl" secondAttribute="height" multiplier="1:1" id="wpi-hy-4dI"/>
                                                 </constraints>
-                                                <state key="normal" image="textDefault"/>
+                                                <state key="normal" image="defaultText"/>
+                                                <connections>
+                                                    <action selector="postBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="n3w-iY-8Ex"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -96,11 +102,10 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="522-OQ-exU">
-                                <rect key="frame" x="10" y="40" width="245" height="245"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultMap" translatesAutoresizingMaskIntoConstraints="NO" id="swf-DM-dj8">
+                                <rect key="frame" x="10" y="40.5" width="245" height="245"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="defaultMap"/>
-                            </button>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABY-30-HVp" userLabel="View (mapView 덮는 뷰)">
                                 <rect key="frame" x="10" y="40.5" width="245" height="245"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -121,34 +126,34 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="swf-DM-dj8" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="1AB-ID-OcO"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="1vf-ai-PVM"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="centerY" secondItem="gc4-8R-2oX" secondAttribute="centerY" id="8pZ-6L-xQ4"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerY" secondItem="mOC-oZ-7xj" secondAttribute="centerY" id="DKR-sU-Inz"/>
-                            <constraint firstItem="522-OQ-exU" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="Drd-Cx-k0e"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="height" secondItem="mOC-oZ-7xj" secondAttribute="height" id="E1R-fi-Klj"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="top" secondItem="6TZ-pC-QxF" secondAttribute="bottom" constant="10" id="Efn-uF-tdC"/>
                             <constraint firstAttribute="trailing" secondItem="mOC-oZ-7xj" secondAttribute="trailing" constant="5" id="Fvh-3q-4Si"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="leading" secondItem="mOC-oZ-7xj" secondAttribute="leading" constant="1" id="Ioj-Rt-ncn"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="Ktk-r4-CDE"/>
                             <constraint firstItem="Wx6-8B-Z3a" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="trailing" constant="5" id="Nzn-QZ-igj"/>
-                            <constraint firstItem="522-OQ-exU" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="P7a-eD-NNG"/>
                             <constraint firstAttribute="trailing" secondItem="zaC-BX-6Hc" secondAttribute="trailing" constant="15" id="Pdm-VE-vE9"/>
                             <constraint firstItem="ABY-30-HVp" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="QOw-uG-SlJ"/>
                             <constraint firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" constant="10" id="Qjs-gj-rSv"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="centerY" secondItem="u1x-P1-cON" secondAttribute="centerY" id="QmK-5L-Zby"/>
                             <constraint firstItem="u1x-P1-cON" firstAttribute="top" secondItem="mOC-oZ-7xj" secondAttribute="bottom" constant="8" id="T5M-AA-lAS"/>
-                            <constraint firstItem="522-OQ-exU" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="X5K-t7-GZb"/>
                             <constraint firstItem="ABY-30-HVp" firstAttribute="height" secondItem="xRf-A5-3id" secondAttribute="height" id="XhT-BV-GHz"/>
                             <constraint firstItem="0mL-IY-K8A" firstAttribute="leading" secondItem="u1x-P1-cON" secondAttribute="trailing" constant="3" id="YYF-Fs-aCN"/>
+                            <constraint firstItem="swf-DM-dj8" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="Yds-ff-U5w"/>
                             <constraint firstItem="mOC-oZ-7xj" firstAttribute="leading" secondItem="gc4-8R-2oX" secondAttribute="leading" id="a37-4h-SS5"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="width" secondItem="mOC-oZ-7xj" secondAttribute="width" id="c5Q-N0-OTr"/>
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerX" secondItem="mOC-oZ-7xj" secondAttribute="centerX" id="ckj-ia-tfd"/>
                             <constraint firstItem="ABY-30-HVp" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="d88-ad-B7Y"/>
-                            <constraint firstItem="522-OQ-exU" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="dU0-Pk-pXr"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
                             <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
+                            <constraint firstItem="swf-DM-dj8" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="i3n-Gm-8qZ"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="15" id="pcJ-pd-dTD"/>
+                            <constraint firstItem="swf-DM-dj8" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="qZA-mA-xqO"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" id="vA8-zq-quv"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="leading" secondItem="dGm-5e-gvx" secondAttribute="leading" constant="10" id="w10-yP-sE4"/>
                             <constraint firstItem="ABY-30-HVp" firstAttribute="centerY" secondItem="xRf-A5-3id" secondAttribute="centerY" id="wnm-Ga-2xh"/>
@@ -169,7 +174,7 @@
                 <outlet property="mapEditBtn" destination="zaC-BX-6Hc" id="U6R-iq-Z9E"/>
                 <outlet property="mapNameBtn" destination="mOC-oZ-7xj" id="3Kq-ly-PmG"/>
                 <outlet property="mapPinNumLabel" destination="u1x-P1-cON" id="xuD-yu-Jza"/>
-                <outlet property="mapPlaceholderImgView" destination="522-OQ-exU" id="JwE-gB-y0v"/>
+                <outlet property="mapPlaceholderImgView" destination="swf-DM-dj8" id="AuN-MZ-kNg"/>
                 <outlet property="mapView" destination="xRf-A5-3id" id="H9O-Ka-Pv7"/>
                 <outlet property="postBtnView" destination="pLy-ek-KPl" id="OKt-Rg-vDP"/>
                 <outlet property="userImgView" destination="gc4-8R-2oX" id="UlR-Ni-Udi"/>
@@ -179,9 +184,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="defaultLabel" width="100" height="100"/>
         <image name="defaultMap" width="375" height="381"/>
-        <image name="group2" width="100" height="100"/>
+        <image name="defaultText" width="100" height="100"/>
         <image name="pika.png" width="982" height="596"/>
-        <image name="textDefault" width="100" height="100"/>
     </resources>
 </document>

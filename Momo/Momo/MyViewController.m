@@ -16,9 +16,13 @@
 
 #import "MapViewController.h"
 #import "PinViewController.h"
+#import "PinPostViewController.h"
 
 #import "MapMakeViewController.h"
 #import "PinMakeViewController.h"
+
+#define SHOW_MAP 0
+#define SHOW_PIN 1
 
 @interface MyViewController ()
 <UITableViewDelegate, UITableViewDataSource, UserProfileHeaderViewDelegate, MapProfileTableViewCellDelegate, PinProfileTableViewCellDelegate, UIGestureRecognizerDelegate>
@@ -36,9 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
-    
     // TableView Settings -------------------//
 
     // TableView Nib(xib) Register
@@ -46,7 +47,7 @@
     
     self.tableView.showsVerticalScrollIndicator = NO;       // 스크롤 라인 indicator Hidden
     
-    self.mapPinNum = 0;     // 처음에 Map을 기본으로 보여줌
+    self.mapPinNum = SHOW_MAP;     // 처음에 Map을 기본으로 보여줌
     
     // TableView Header, Cell Height 자동 적용
     self.tableView.estimatedSectionHeaderHeight = 260;
@@ -66,6 +67,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+    
     // 반드시 테이블 뷰 refresh 해야함
     [self.tableView reloadData];
 }
@@ -82,72 +86,7 @@
     return NO;
 }
 
-
-- (void)selectedNaviRightBtn {
-    NSLog(@"selectedNaviRightBtn");
-    
-    
-    UIAlertController *alertSetting = [UIAlertController alertControllerWithTitle:nil
-                                                                          message:nil
-                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *accountSettingBtn = [UIAlertAction actionWithTitle:@"Account Setting"
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * _Nonnull action) {
-                                                                  NSLog(@"Account Setting");
-                                                                  
-                                                                  UserAccountEditViewController *UserAccountEditVC = [[UserAccountEditViewController alloc] init];
-                                                                  [self.navigationController pushViewController:UserAccountEditVC animated:YES];
-                                                              }];
-    
-    UIAlertAction *logOutBtn = [UIAlertAction actionWithTitle:@"Log Out"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction * _Nonnull action) {
-                                                          
-                                                          [self.indicator startAnimating];
-                                                          
-                                                          [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                                              [self.indicator stopAnimating];
-                                                              
-                                                              if (isSuccess) {
-                                                                  NSLog(@"log out success : %@", result);
-                                                                  
-                                                                  UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-                                                                  UIViewController *loginController = [loginStoryboard instantiateInitialViewController];
-                                                                  
-                                                                  [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-                                                                  [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-                                                                  
-                                                              } else {
-                                                                  NSLog(@"error : %@", result);
-                                                                  
-                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                                                           message:result
-                                                                                                                                    preferredStyle:UIAlertControllerStyleAlert];
-                                                                  
-                                                                  UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                                                                     style:UIAlertActionStyleDefault
-                                                                                                                   handler:nil];
-                                                                  [alertController addAction:okButton];
-                                                                  [self presentViewController:alertController animated:YES completion:nil];
-                                                              }
-                                                          }];
-                                                      }];
-    
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
-                                                     style:UIAlertActionStyleCancel
-                                                   handler:nil];
-    
-    
-    [alertSetting addAction:accountSettingBtn];
-    [alertSetting addAction:logOutBtn];
-    [alertSetting addAction:cancel];
-    [self presentViewController:alertSetting animated:YES completion:nil];
-    
-}
-
-
-
+// RefeshControl Method
 - (void)refreshTableView {
     [self.tableViewRefreshControl endRefreshing];
     
@@ -173,7 +112,7 @@
 }
 
 
-// UITableViewDataSource Methods -------------------------------//
+// UITableViewDataSource Methods -----//
 #pragma mark - Section Header Settings
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -204,8 +143,9 @@
 #pragma mark - Rows Settings
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.mapPinNum == 0) {
+    if (self.mapPinNum == SHOW_MAP) {
         return [DataCenter sharedInstance].momoUserData.user_map_list.count;
+        
     } else {
         return [MomoPinDataSet allObjects].count;
 //        return ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list.count;
@@ -216,23 +156,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
     
-    if (self.mapPinNum == 0) {
+    if (self.mapPinNum == SHOW_MAP) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
-        [mapCell initWithMapIndex:indexPath.row];
         
-        mapCell.tag = indexPath.row;    // 태그 설정
+        // 지도 데이터 역순 적용
+        NSInteger inverseOrderIndex = [DataCenter sharedInstance].momoUserData.user_map_list.count - 1 - indexPath.row;
+        
+        [mapCell initWithMapIndex:inverseOrderIndex];
         mapCell.delegate = self;        // 델리게이트 설정
-
         
         return mapCell;
         
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
-        [pinCell initWithPinIndex:indexPath.row];
         
-        pinCell.tag = indexPath.row;    // 태그 설정
+        // 핀 데이터 역순 적용
+        NSInteger inverseOrderIndex = [MomoPinDataSet allObjects].count - 1 - indexPath.row;
+        
+        [pinCell initWithPinIndex:inverseOrderIndex];
         pinCell.delegate = self;    // 델리게이트 설정
-        
         
         return pinCell;
     }
@@ -241,27 +183,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.mapPinNum == 0) {
-        // 선택지도 보기
+    if (self.mapPinNum == SHOW_MAP) {
+        // 선택 지도 보기
         UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
         MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
         
-        [mapVC showSelectedMapAndSetMapData:[DataCenter myMapList][indexPath.row]];
+        // 지도 데이터 역순 적용
+        NSInteger inverseOrderIndex = [DataCenter sharedInstance].momoUserData.user_map_list.count - 1 - indexPath.row;
+        
+        [mapVC showSelectedMapAndSetMapData:[DataCenter myMapList][inverseOrderIndex]];         // 지도 데이터 세팅
         
         [self.navigationController pushViewController:mapVC animated:YES];
         
     } else {
-        // 선택핀 보기
-        
-        // 사용자 모든 핀 정보 넣어서 전달
-        MomoMapDataSet *mapData = [[MomoMapDataSet alloc] init];
-        [mapData.map_pin_list addObjects:[MomoPinDataSet allObjects]];
-        
+        // 선택 핀 보기
         UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
-        
-        // 핀 데이터 세팅
-        [pinVC showSelectedPinAndSetPinData:[MomoPinDataSet allObjects][indexPath.row]];
+
+        // 핀 데이터 역순 적용
+        NSInteger inverseOrderIndex = [MomoPinDataSet allObjects].count - 1 - indexPath.row;
+
+        [pinVC showSelectedPinAndSetPinData:[MomoPinDataSet allObjects][inverseOrderIndex]];    // 핀 데이터 세팅
         
         [self.navigationController pushViewController:pinVC animated:YES];
     }
@@ -300,6 +242,46 @@
 
 //  MapProfileTableViewCell Delegate Methods -------------------//
 #pragma mark - MapProfileTableViewCell Delegate Methods
+
+
+// 해당 지도 보기 & 핀 생성 유도
+- (void)showSelectedMapAndMakePin:(MomoMapDataSet *)mapData {
+    
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
+    MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
+    
+    [mapVC showSelectedMapAndSetMapData:mapData];       // 선택 지도 보기
+    
+    [self.navigationController pushViewController:mapVC animated:YES];
+    [mapVC makePinByMakePinBtn];    // 내 위치로 핀 찍기
+
+}
+
+// 핀 보기
+- (void)showSelectedPin:(MomoPinDataSet *)pinData {
+    
+    UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
+    PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
+    
+    // 핀 데이터 세팅
+    [pinVC showSelectedPinAndSetPinData:pinData];    // 선택 핀 보기
+    
+    [self.navigationController pushViewController:pinVC animated:YES];
+}
+
+// 포스트 보기
+- (void)showSelectedPost:(MomoPostDataSet *)postData {
+
+    UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
+    PinPostViewController *postVC = [pinViewStoryBoard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+
+    // 포스트 데이터 세팅
+    [postVC showSelectedPostAndSetPostData:postData];   // 선택 포스트 보기
+    
+    [self.navigationController pushViewController:postVC animated:YES];
+    
+}
+
 
 - (void)selectedMapEditBtnWithIndex:(NSInteger)index {
     NSLog(@"selectedMapEditBtnWithIndex, %ld", index);

@@ -48,7 +48,7 @@ static NSString *const POST_URL             = @"/api/post/";
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, SIGN_UP_URL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    request.HTTPBody = [[NSString stringWithFormat:@"username=%@&password=%@&email=%@", username, password, email] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [[NSString stringWithFormat:@"userid=%@&password=%@&email=%@", username, password, email] dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"POST";
     
     // Task

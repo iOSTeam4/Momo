@@ -15,6 +15,7 @@
 #import "PostMakeViewController.h"
 #import "PinPostViewController.h"
 
+#define POST_MAKE_BUTTON 0
 
 @interface PinViewController ()
 <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
@@ -146,26 +147,28 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     PinContentsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.contentsBtn.tag = indexPath.row;
+    cell.contentsBtn.tag = self.pinData.pin_post_list.count - indexPath.row;    // 가장 최신 포스트부터 나열하도록
     
-    if (indexPath.row == 0) {       // * 작성 버튼 때문에 실제 데이터는 row에 -1 씩 계산 필요함 *
+    if (indexPath.row == POST_MAKE_BUTTON) {       // * 작성 버튼 때문에 실제 데이터는 row에 -1 씩 계산 필요함 *
         // 포스트 작성 버튼
+        cell.contentsBtn.tag = -1;   // 예외적으로 다시 -1으로 할당
+        
         [cell.contentsBtn setTitle:nil forState:UIControlStateNormal];  // 글 삭제 (초기화)
         
         [cell.contentsBtn setImage:[UIImage imageNamed:@"addPost"] forState:UIControlStateNormal];
 
-    } else if ([self.pinData.pin_post_list[indexPath.row - 1] getPostPhoto]) {
+    } else if ([self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row] getPostPhoto]) {
         // 사진이 있는 경우
         [cell.contentsBtn setTitle:nil forState:UIControlStateNormal];  // 글 삭제 (초기화)
 
-        [cell.contentsBtn setImage:[self.pinData.pin_post_list[indexPath.row - 1] getPostPhoto] forState:UIControlStateNormal];
+        [cell.contentsBtn setImage:[self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row] getPostPhoto] forState:UIControlStateNormal];
 
     } else {
         // 글만 있는 경우
         [cell.contentsBtn setImage:nil forState:UIControlStateNormal];  // 사진 삭제 (초기화)
         
         [cell.contentsBtn setBackgroundColor:[UIColor whiteColor]];
-        [cell.contentsBtn setTitle:self.pinData.pin_post_list[indexPath.row - 1].post_description forState:UIControlStateNormal];
+        [cell.contentsBtn setTitle:self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row].post_description forState:UIControlStateNormal];
         [cell.contentsBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
         [cell.contentsBtn.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [cell.contentsBtn setTitleEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
@@ -180,7 +183,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
+    if (indexPath.row == POST_MAKE_BUTTON) {
         return CGSizeMake(66, 100); // 추가버튼
         
     } else {
@@ -188,23 +191,8 @@
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"didSelectItemAtIndexPath row = %ld", indexPath.row);
-    
-    if (indexPath.row == 0) {
-        // Make Post
-        PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
-        [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
-        [self presentViewController:postMakeVC animated:YES completion:nil];
-        
-    } else {
-        // Post View
-        PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
-        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[indexPath.row - 1]];     // 실제 데이터는 row - 1
-        [self.navigationController pushViewController:postVC animated:YES];
-    }
-    
-}
+
+
 
 
 // 각각의 Cell 속 Btn Action Method
@@ -212,7 +200,7 @@
     
     NSLog(@"버튼 눌림 tag = %ld", sender.tag);
     
-    if (sender.tag == 0) {
+    if (sender.tag == -1) {     // POST_MAKE_BUTTON 태그값은 -1
 
         // Make Post
         PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
@@ -223,7 +211,7 @@
         
         // Post View
         PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
-        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag - 1]];     // 실제 데이터는 row - 1
+        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag]];
         [self.navigationController pushViewController:postVC animated:YES];
         
     }

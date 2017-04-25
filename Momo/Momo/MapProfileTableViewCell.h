@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIButton *mapPlaceholderImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *mapPlaceholderImgView;
 @property (weak, nonatomic) IBOutlet UIButton *mapNameBtn;
 @property (weak, nonatomic) IBOutlet UILabel *mapPinNumLabel;
 
@@ -42,7 +42,11 @@
 
 @protocol MapProfileTableViewCellDelegate <NSObject>
 
-- (void)selectedMapEditBtnWithIndex:(NSInteger)index;
+- (void)showSelectedMapAndMakePin:(MomoMapDataSet *)mapData;    // 해당 지도 보기 & 핀 생성 유도
+- (void)showSelectedPin:(MomoPinDataSet *)pinData;      // 핀 보기
+- (void)showSelectedPost:(MomoPostDataSet *)postData;   // 포스트 보기
+
+- (void)selectedMapEditBtnWithIndex:(NSInteger)index;   // 지도 수정
 
 @end
 
