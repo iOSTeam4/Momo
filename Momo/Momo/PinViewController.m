@@ -236,6 +236,8 @@
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
     
+    pinMakeVC.wasPinView = YES;     // 핀뷰에서 이동
+    
     [pinMakeVC setEditModeWithPinData:self.pinData];   // 수정 모드, 데이터 세팅
     [self presentViewController:pinMakeVC animated:YES completion:nil];
 }

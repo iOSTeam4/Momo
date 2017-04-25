@@ -207,6 +207,8 @@
     PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
     
     [postMakeVC setEditModeWithPostData:self.pinData.pin_post_list[self.pinData.pin_post_list.count - index - 1]];   // 수정 모드, 데이터 세팅
+    postMakeVC.wasPostView = YES;    // post뷰에서 이동
+    
     [self presentViewController:postMakeVC animated:YES completion:nil];
     
 }
