@@ -24,16 +24,25 @@
     NSLog(@"FollowTableViewCell layoutSubviews");
 
     // BackView 세팅
-    [self.backView.layer setCornerRadius:10];
+//    [self.backView.layer setCornerRadius:10];
+    self.backView.layer.shadowOffset = CGSizeMake(-5, 8);
+    self.backView.layer.shadowRadius = 10;
+    self.backView.layer.shadowOpacity = 0.3;
+    
 
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
     NSLog(@"cell width : %f , userImgView.frame.size.height/2 : %f", self.frame.size.width, self.userImgView.frame.size.height/2);
     
     // 수정하기 버튼
-    [self.followBtn.layer setCornerRadius:5];
-    [self.followBtn.layer setBorderColor:[UIColor mm_cafe0ColorColor].CGColor];
+    [self.followBtn.layer setCornerRadius:12];
+    [self.followBtn.layer setBorderColor:[UIColor mm_brightSkyBlueColor].CGColor];
     [self.followBtn.layer setBorderWidth:1];
+    
+    self.followBtn.layer.shadowOffset = CGSizeMake(-5, 8);
+    self.followBtn.layer.shadowRadius = 10;
+    self.followBtn.layer.shadowOpacity = 0.3;
+    
 }
 
 @end

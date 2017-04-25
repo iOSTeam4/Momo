@@ -282,6 +282,11 @@
                                                     <action selector="selectedMakeBtn" destination="7Os-gD-gL4" eventType="touchUpInside" id="1p7-F6-CsH"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HP9-eK-HeI">
+                                                <rect key="frame" x="26" y="540" width="176" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="firstMapMake"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -354,6 +359,7 @@
                         <outlet property="categoryPlaceBtn" destination="L2e-p3-fxh" id="yrd-5C-86D"/>
                         <outlet property="categoryShopBtn" destination="ahz-GM-dId" id="PyA-Z3-83B"/>
                         <outlet property="contentView" destination="XgX-eJ-HrK" id="mCb-Z7-SkV"/>
+                        <outlet property="firstMapMake" destination="HP9-eK-HeI" id="Aey-42-GOB"/>
                         <outlet property="makeBtn1" destination="SEj-XY-4NS" id="BAf-vH-LGx"/>
                         <outlet property="makeBtn2" destination="6pN-Wg-EvK" id="kte-Jt-uZa"/>
                         <outlet property="makeBtn3" destination="ANm-pj-EFx" id="cc0-6d-awa"/>
@@ -616,6 +622,7 @@
         <image name="04S" width="66" height="67"/>
         <image name="05On" width="67" height="67"/>
         <image name="05S" width="67" height="67"/>
+        <image name="firstMapMake" width="16" height="16"/>
         <image name="lockBtnClose" width="16" height="19"/>
         <image name="makeCheckBtn" width="50" height="48"/>
         <image name="makeCheckBtnS" width="52" height="48"/>

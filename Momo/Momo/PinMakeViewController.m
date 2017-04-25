@@ -38,6 +38,7 @@
 @property (weak, nonatomic) UIButton *mapLastSelectedBtn;
 @property (nonatomic) UIButton *deleteBtn;
 @property (nonatomic) NSMutableArray<UIButton *> *mapCheckBtnArr;
+@property (weak, nonatomic) IBOutlet UIButton *firstMapMake;
 
 @property (nonatomic) BOOL checkName;
 @property (nonatomic) BOOL checkCategory;
