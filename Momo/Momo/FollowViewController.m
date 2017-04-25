@@ -64,6 +64,12 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"FollowViewController"];
+}
+
+
 // TableView Methods ----------------------------//
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

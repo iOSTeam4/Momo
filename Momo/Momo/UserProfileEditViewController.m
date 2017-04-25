@@ -69,6 +69,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"UserProfileEditViewController"];
     
     [self subviewSetting];  // UI 관련 설정들 있어서, viewWillAppear에서 호출
     
@@ -157,7 +158,7 @@
     NSLog(@"didFinishPickingMediaWithInfo");
     
     NSLog(@"%@", info);
-    self.userImgView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    self.userImgView.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
@@ -226,7 +227,7 @@
         NSLog(@"Size of Image(bytes): %ld", profileImgdata.length);
         
     } else {
-        
+
         [self.indicator startAnimating];
         
         [NetworkModule patchMemberProfileUpdateWithUsername:self.userNameTextField.text

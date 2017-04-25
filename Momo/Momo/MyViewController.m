@@ -66,6 +66,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MyViewController"];
     
     // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];

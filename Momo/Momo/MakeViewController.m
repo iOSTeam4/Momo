@@ -43,8 +43,14 @@
     // Target이 parentViewController(Main Tab Bar Controller)
     [self.makeMapBtn addTarget:(MainTabBarController *)self.parentViewController action:@selector(selectedMakeMapBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.makePinBtn addTarget:(MainTabBarController *)self.parentViewController action:@selector(selectedMakePinBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MakeViewController"];
+}
+
 
 - (void)pinBtnEnableCheck {
     // 지도가 1개 이상 있을 때, 핀 생성 버튼 활성화

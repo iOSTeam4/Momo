@@ -53,6 +53,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinPostViewController"];
     
     // 반드시 테이블 뷰 refresh 해야함
     [self.tableView reloadData];

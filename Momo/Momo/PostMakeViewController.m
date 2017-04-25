@@ -145,6 +145,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PostMakeViewController"];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     // 텍스트뷰 노티 해제
     [[NSNotificationCenter defaultCenter] removeObserver:self];
