@@ -259,27 +259,25 @@
 + (void)updatePinWithMomoPinCreateDic:(NSDictionary *)pinDic {
     
     MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];
-    
+
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-        // 이전에 속했던 map의 pin_list에서 핀 제거할 수 있게 세팅
-        MomoPinDataSet *previousPinData = [DataCenter findPinDataWithPinPK:pinData.pk];
-        MomoMapDataSet *previousMapData = [DataCenter findMapDataWithMapPK:previousPinData.pin_map_pk];
-        NSInteger previousPinIndex = [previousMapData.map_pin_list indexOfObject:previousPinData];
-
+        
         // 핀 정보 업데이트
         [realm addOrUpdateObject:pinData];
         
         // 속한 지도를 변경했을 때
-        if (previousPinData.pin_map_pk != pinData.pin_map_pk) {
-            // 이전에 속했던 map의 pin_list에서 핀 제거
-            [previousMapData.map_pin_list removeObjectAtIndex:previousPinIndex];
+        for (MomoMapDataSet *mapData in [DataCenter myMapList]) {
+            if ([mapData.map_pin_list objectsWhere:[NSString stringWithFormat:@"pk==%ld", pinData.pk]].count > 0) {
             
-            // 속한 맵의 pin_list에 핀 추가
-            MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];
-            [mapData.map_pin_list addObject:pinData];
+                [mapData.map_pin_list removeObjectAtIndex:[mapData.map_pin_list indexOfObject:pinData]];    // 이전에 속했던 map의 pin_list에서 핀 제거
+                
+                break;      // 단, 하나임 그래서 break
+            }
         }
-        
+    
+        MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];
+        [mapData.map_pin_list addObject:pinData];       // 현재 속한 지도에 등록
     }];
 }
 

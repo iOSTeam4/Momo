@@ -130,7 +130,7 @@
     
     PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.pinData withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
 
-    marker.iconView = pinMarkerView;
+    marker.icon = [pinMarkerView imageFromViewForMarker];
     marker.map = self.mapPreView;
     
 }

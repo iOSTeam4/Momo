@@ -668,7 +668,6 @@ static NSString *const POST_URL             = @"/api/post/";
                                           NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
                                           NSLog(@"%@", responseObject);
                                           
-                                          
                                           // 메인스레드로 돌려서 보냄
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               

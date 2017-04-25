@@ -370,7 +370,7 @@
         [NetworkModule updatePinRequestWithPinPK:self.pinData.pk
                                      withPinname:self.pinNameTextField.text
                                        withLabel:self.categoryLastSelectedBtn.tag
-                                       withMapPK:self.pinData.pin_map_pk
+                                       withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
                              withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                  
                                  [self.indicator stopAnimating];
@@ -387,8 +387,7 @@
                                  } else {
                                      [UtilityCenter presentCommonAlertController:self withMessage:result];
                                  }
-                                 
-                                 
+                             
                              }];
         
     }
