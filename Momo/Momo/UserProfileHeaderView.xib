@@ -31,7 +31,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zec-gh-XT0">
-                            <rect key="frame" x="111" y="30" width="182" height="34"/>
+                            <rect key="frame" x="111" y="30" width="248" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="ugw-mX-VlS"/>
                             </constraints>
@@ -40,24 +40,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@pikapika" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-jo-xka">
-                            <rect key="frame" x="111" y="69" width="182" height="17"/>
+                            <rect key="frame" x="111" y="64" width="248" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-OC-bDx">
-                            <rect key="frame" x="309" y="30" width="40" height="34"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="34" id="1Ye-sF-ehC"/>
-                                <constraint firstAttribute="width" constant="40" id="eOS-eh-zrh"/>
-                            </constraints>
-                            <state key="normal" image="edit">
-                                <color key="titleColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="editBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="arR-xp-sku"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="153" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aR-3M-yop">
                             <rect key="frame" x="111" y="96" width="30.5" height="30"/>
                             <constraints>
@@ -151,14 +138,26 @@
                                 <action selector="mapPinBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="cW9-2c-QxK"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-OC-bDx">
+                            <rect key="frame" x="65" y="96" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="1Ye-sF-ehC"/>
+                                <constraint firstAttribute="width" constant="30" id="eOS-eh-zrh"/>
+                            </constraints>
+                            <state key="normal" image="profileEdit">
+                                <color key="titleColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="editBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="arR-xp-sku"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="33w-V8-FN6" firstAttribute="top" secondItem="dnD-av-G4c" secondAttribute="bottom" constant="15" id="01K-H6-X3o"/>
                         <constraint firstItem="KXS-Ev-vQ1" firstAttribute="height" secondItem="2aR-3M-yop" secondAttribute="height" id="08C-ly-7jB"/>
-                        <constraint firstItem="fTt-OC-bDx" firstAttribute="top" secondItem="NdR-tf-O6X" secondAttribute="top" constant="30" id="12l-1T-dm1"/>
                         <constraint firstItem="dnD-av-G4c" firstAttribute="top" secondItem="2aR-3M-yop" secondAttribute="bottom" constant="17" id="14R-Bz-GkS"/>
-                        <constraint firstItem="ucb-jo-xka" firstAttribute="top" secondItem="Zec-gh-XT0" secondAttribute="bottom" constant="5" id="33M-Aj-Hpf"/>
+                        <constraint firstItem="ucb-jo-xka" firstAttribute="top" secondItem="Zec-gh-XT0" secondAttribute="bottom" id="33M-Aj-Hpf"/>
                         <constraint firstItem="MSu-gd-9mD" firstAttribute="leading" secondItem="NdR-tf-O6X" secondAttribute="leading" constant="15" id="4eA-xT-j2y"/>
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="centerX" secondItem="33w-V8-FN6" secondAttribute="centerX" priority="999" id="99y-LN-BJR"/>
                         <constraint firstItem="MFE-2i-3G2" firstAttribute="top" secondItem="33w-V8-FN6" secondAttribute="top" id="9IH-Ka-kzF"/>
@@ -172,10 +171,10 @@
                         <constraint firstItem="KXS-Ev-vQ1" firstAttribute="centerY" secondItem="2aR-3M-yop" secondAttribute="centerY" id="Ifx-hU-IL1"/>
                         <constraint firstAttribute="bottom" secondItem="33w-V8-FN6" secondAttribute="bottom" id="JGx-Cs-iIJ"/>
                         <constraint firstItem="GjJ-W0-Jpu" firstAttribute="height" secondItem="KXS-Ev-vQ1" secondAttribute="height" id="Jqv-rZ-chi"/>
-                        <constraint firstItem="KXS-Ev-vQ1" firstAttribute="top" secondItem="ucb-jo-xka" secondAttribute="bottom" constant="10" id="LSh-eq-hLT"/>
+                        <constraint firstItem="KXS-Ev-vQ1" firstAttribute="top" secondItem="ucb-jo-xka" secondAttribute="bottom" constant="15" id="LSh-eq-hLT"/>
                         <constraint firstItem="KXS-Ev-vQ1" firstAttribute="leading" secondItem="2aR-3M-yop" secondAttribute="leading" id="NCN-bX-1i4"/>
+                        <constraint firstAttribute="trailing" secondItem="Zec-gh-XT0" secondAttribute="trailing" constant="16" id="NPF-tv-Wm2"/>
                         <constraint firstItem="Zec-gh-XT0" firstAttribute="leading" secondItem="MSu-gd-9mD" secondAttribute="trailing" constant="16" id="OJt-8k-rta"/>
-                        <constraint firstAttribute="trailing" secondItem="fTt-OC-bDx" secondAttribute="trailing" constant="26" id="P5g-Dl-WQB"/>
                         <constraint firstItem="MFE-2i-3G2" firstAttribute="centerX" secondItem="NdR-tf-O6X" secondAttribute="centerX" multiplier="1.4" id="PDC-iq-UeB"/>
                         <constraint firstItem="KXS-Ev-vQ1" firstAttribute="width" secondItem="2aR-3M-yop" secondAttribute="width" constant="49" id="QVJ-78-qaf"/>
                         <constraint firstItem="dnD-av-G4c" firstAttribute="centerX" secondItem="ocM-qE-B8k" secondAttribute="centerX" id="SYc-E4-oO2"/>
@@ -188,10 +187,11 @@
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="centerX" secondItem="MFE-2i-3G2" secondAttribute="centerX" priority="800" id="j5W-ri-l7i"/>
                         <constraint firstItem="kNW-HS-z55" firstAttribute="centerY" secondItem="KXS-Ev-vQ1" secondAttribute="centerY" id="jaz-Z2-hXE"/>
                         <constraint firstItem="kNW-HS-z55" firstAttribute="height" secondItem="2aR-3M-yop" secondAttribute="height" id="keT-53-R5F"/>
-                        <constraint firstItem="fTt-OC-bDx" firstAttribute="leading" secondItem="Zec-gh-XT0" secondAttribute="trailing" constant="16" id="qbA-Sb-6LF"/>
                         <constraint firstItem="vin-Mz-Eye" firstAttribute="bottom" secondItem="ocM-qE-B8k" secondAttribute="bottom" id="tff-Uj-bLv"/>
                         <constraint firstItem="GjJ-W0-Jpu" firstAttribute="width" secondItem="kNW-HS-z55" secondAttribute="width" constant="49" id="wG6-Zg-rrx"/>
+                        <constraint firstItem="fTt-OC-bDx" firstAttribute="top" secondItem="MSu-gd-9mD" secondAttribute="bottom" constant="-19" id="wSR-fq-2g8"/>
                         <constraint firstItem="ocM-qE-B8k" firstAttribute="centerY" secondItem="NdR-tf-O6X" secondAttribute="centerY" id="x1m-kR-j9R"/>
+                        <constraint firstItem="fTt-OC-bDx" firstAttribute="leading" secondItem="MSu-gd-9mD" secondAttribute="trailing" constant="-30" id="xKj-MF-deq"/>
                         <constraint firstItem="ocM-qE-B8k" firstAttribute="centerX" secondItem="NdR-tf-O6X" secondAttribute="centerX" id="y5b-tf-Frv"/>
                         <constraint firstItem="ocM-qE-B8k" firstAttribute="height" secondItem="NdR-tf-O6X" secondAttribute="height" id="yg1-ZL-mdk"/>
                         <constraint firstItem="ucb-jo-xka" firstAttribute="leading" secondItem="Zec-gh-XT0" secondAttribute="leading" id="zw9-Tc-Cx9"/>
@@ -226,12 +226,12 @@
         </view>
     </objects>
     <resources>
-        <image name="edit" width="56" height="48"/>
         <image name="mapWhite" width="24" height="24"/>
         <image name="mapWhiteS" width="24" height="24"/>
         <image name="pika.png" width="982" height="596"/>
         <image name="pinWhite" width="30" height="26"/>
         <image name="pinWhiteS" width="30" height="26"/>
+        <image name="profileEdit" width="24" height="24"/>
         <image name="rectangle5" width="375" height="280"/>
     </resources>
 </document>

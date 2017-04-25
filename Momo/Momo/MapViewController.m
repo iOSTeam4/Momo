@@ -201,9 +201,9 @@
     self.mapInfoViewPinNumLabel.text = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list.count];
     
     // 수정하기 (팔로워/팔로잉) 버튼
-    [self.mapInfoViewBtn.layer setCornerRadius:12];
-    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
-    [self.mapInfoViewBtn.layer setBorderWidth:1];
+//    [self.mapInfoViewBtn.layer setCornerRadius:12];
+//    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
+//    [self.mapInfoViewBtn.layer setBorderWidth:1];
     
     // 선택지도보기 뷰 띄우기
     [self.view bringSubviewToFront:self.mapInfoView];

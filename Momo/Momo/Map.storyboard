@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wgl-2W-VfX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wgl-2W-VfX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -101,13 +101,12 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoY-l3-ovB">
-                                        <rect key="frame" x="266.5" y="45.5" width="93.5" height="28"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoY-l3-ovB">
+                                        <rect key="frame" x="322.5" y="7.5" width="37.5" height="37.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="EoY-l3-ovB" secondAttribute="height" multiplier="10:3" id="4gA-D9-UcR"/>
+                                            <constraint firstAttribute="width" secondItem="EoY-l3-ovB" secondAttribute="height" multiplier="1:1" id="C4o-l5-xbR"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="수정하기">
+                                        <state key="normal" image="setup">
                                             <color key="titleColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -121,6 +120,7 @@
                                     <constraint firstItem="VVw-qM-Xbp" firstAttribute="leading" secondItem="NT8-64-NtI" secondAttribute="leading" id="8ht-RY-9HP"/>
                                     <constraint firstItem="Y2W-uj-Jug" firstAttribute="top" secondItem="VVw-qM-Xbp" secondAttribute="bottom" constant="8" id="ALi-nB-IJe"/>
                                     <constraint firstItem="Y2W-uj-Jug" firstAttribute="leading" secondItem="NT8-64-NtI" secondAttribute="leading" id="Ac2-dH-JjY"/>
+                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="centerY" secondItem="75p-CT-vV3" secondAttribute="centerY" constant="10" id="B0W-Xs-20D"/>
                                     <constraint firstItem="75p-CT-vV3" firstAttribute="width" secondItem="NT8-64-NtI" secondAttribute="width" id="FB3-xe-BZw"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="height" secondItem="eQP-jP-Ocj" secondAttribute="height" id="FUq-Pg-9MG"/>
                                     <constraint firstItem="75p-CT-vV3" firstAttribute="height" secondItem="NT8-64-NtI" secondAttribute="height" id="Jgc-cC-z03"/>
@@ -132,14 +132,13 @@
                                     <constraint firstItem="NT8-64-NtI" firstAttribute="leading" secondItem="eQP-jP-Ocj" secondAttribute="leading" constant="15" id="Tyx-Uc-TEe"/>
                                     <constraint firstItem="75p-CT-vV3" firstAttribute="centerY" secondItem="NT8-64-NtI" secondAttribute="centerY" id="Vxb-Cg-TSX"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ZCg-os-8ek"/>
-                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" multiplier="0.25" id="ZWH-cS-hN9"/>
+                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" multiplier="0.1" id="ZWH-cS-hN9"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="centerX" secondItem="eQP-jP-Ocj" secondAttribute="centerX" id="aFV-tZ-Acx"/>
                                     <constraint firstItem="VVw-qM-Xbp" firstAttribute="top" secondItem="NT8-64-NtI" secondAttribute="bottom" constant="1" id="iWe-XG-Sex"/>
                                     <constraint firstAttribute="trailing" secondItem="EoY-l3-ovB" secondAttribute="trailing" constant="15" id="k7t-Yz-EcS"/>
                                     <constraint firstAttribute="trailing" secondItem="NT8-64-NtI" secondAttribute="trailing" constant="15" id="l8S-QX-6y7"/>
                                     <constraint firstItem="NT8-64-NtI" firstAttribute="top" secondItem="eQP-jP-Ocj" secondAttribute="top" constant="5" id="lqp-vh-s9j"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" id="pTU-Qn-qLO"/>
-                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="centerY" secondItem="Y2W-uj-Jug" secondAttribute="centerY" constant="-2" id="s6b-od-TfS"/>
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nje-JD-1Tx">
@@ -228,5 +227,6 @@
     </scenes>
     <resources>
         <image name="backBtnW" width="13" height="22"/>
+        <image name="setup" width="56" height="48"/>
     </resources>
 </document>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -105,13 +105,12 @@
                                 <rect key="frame" x="10" y="40.5" width="245" height="245"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaC-BX-6Hc">
-                                <rect key="frame" x="278" y="314" width="97" height="29"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaC-BX-6Hc">
+                                <rect key="frame" x="344" y="313.5" width="31" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="zaC-BX-6Hc" secondAttribute="height" multiplier="10:3" id="zRH-Uh-A8m"/>
+                                    <constraint firstAttribute="width" secondItem="zaC-BX-6Hc" secondAttribute="height" multiplier="1:1" id="Rw2-Xi-BeH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="수정하기">
+                                <state key="normal" image="setup">
                                     <color key="titleColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -146,7 +145,7 @@
                             <constraint firstItem="ABY-30-HVp" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="d88-ad-B7Y"/>
                             <constraint firstItem="522-OQ-exU" firstAttribute="width" secondItem="xRf-A5-3id" secondAttribute="width" id="dU0-Pk-pXr"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
-                            <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
+                            <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.08" id="fpn-QL-37V"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="15" id="pcJ-pd-dTD"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="trailing" secondItem="Wx6-8B-Z3a" secondAttribute="trailing" id="vA8-zq-quv"/>
@@ -182,6 +181,7 @@
         <image name="defaultMap" width="375" height="381"/>
         <image name="group2" width="100" height="100"/>
         <image name="pika.png" width="982" height="596"/>
+        <image name="setup" width="56" height="48"/>
         <image name="textDefault" width="100" height="100"/>
     </resources>
 </document>

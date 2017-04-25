@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -51,18 +51,17 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f0-ih-zMc">
-                                <rect key="frame" x="40" y="243.5" width="238.5" height="21"/>
+                                <rect key="frame" x="40" y="243.5" width="308" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-sx-dtA">
-                                <rect key="frame" x="293.5" y="238" width="102.5" height="30.5"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-sx-dtA">
+                                <rect key="frame" x="363" y="237.5" width="33" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Yra-sx-dtA" secondAttribute="height" multiplier="10:3" id="BHu-T3-HYB"/>
+                                    <constraint firstAttribute="width" secondItem="Yra-sx-dtA" secondAttribute="height" multiplier="1:1" id="JeR-96-J1y"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="수정하기">
+                                <state key="normal" image="setup">
                                     <color key="titleColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -86,7 +85,7 @@
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="leading" secondItem="2f0-ih-zMc" secondAttribute="trailing" constant="15" id="cY2-mq-7m6"/>
                             <constraint firstAttribute="trailing" secondItem="Yra-sx-dtA" secondAttribute="trailing" constant="15" id="fCt-Tz-gGy"/>
                             <constraint firstItem="ZfR-pa-AiB" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" id="mY5-YK-zjr"/>
-                            <constraint firstItem="Yra-sx-dtA" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.25" id="nek-PX-95h"/>
+                            <constraint firstItem="Yra-sx-dtA" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.08" id="nek-PX-95h"/>
                             <constraint firstItem="Qty-dZ-bwr" firstAttribute="height" secondItem="ZfR-pa-AiB" secondAttribute="height" id="oxu-sB-89f"/>
                             <constraint firstItem="9lu-jH-Pqd" firstAttribute="leading" secondItem="pqb-1e-o3S" secondAttribute="leading" id="tXv-d0-N0O"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="centerY" secondItem="2f0-ih-zMc" secondAttribute="centerY" id="ynv-f2-F3y"/>
@@ -114,5 +113,6 @@
     </objects>
     <resources>
         <image name="pika.png" width="982" height="596"/>
+        <image name="setup" width="56" height="48"/>
     </resources>
 </document>

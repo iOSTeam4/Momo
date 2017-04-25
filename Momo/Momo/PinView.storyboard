@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aL1-aL-rvC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-PH-Hyb" customClass="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="661"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFw-m2-4Jg" customClass="GMSMapView">
                                                 <rect key="frame" x="0.0" y="110" width="375" height="200"/>
@@ -61,7 +61,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHI-a5-G5x">
-                                                        <rect key="frame" x="319" y="17" width="40" height="40"/>
+                                                        <rect key="frame" x="319" y="405" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="0UQ-G5-BiA"/>
                                                             <constraint firstAttribute="height" constant="40" id="gPw-e2-jBx"/>
@@ -81,14 +81,13 @@
                                                     <constraint firstAttribute="trailing" secondItem="uHI-a5-G5x" secondAttribute="trailing" constant="16" id="MG9-aa-ThY"/>
                                                     <constraint firstItem="PhD-eq-zWc" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" id="cav-G5-CRQ"/>
                                                     <constraint firstAttribute="width" secondItem="Jiv-fz-0H7" secondAttribute="height" multiplier="75:22" id="dnT-Ca-Mz0"/>
-                                                    <constraint firstItem="uHI-a5-G5x" firstAttribute="centerY" secondItem="PhD-eq-zWc" secondAttribute="centerY" constant="5" id="mG1-H5-jtK"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9J-oI-jTH" userLabel="main container view">
                                                 <rect key="frame" x="0.0" y="340" width="375" height="200"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starbucks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DF6-aI-0Md">
-                                                        <rect key="frame" x="26" y="70" width="333" height="35"/>
+                                                        <rect key="frame" x="26" y="70" width="277" height="29"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="DF6-aI-0Md" secondAttribute="height" multiplier="343:36" id="W7f-gs-txB"/>
                                                         </constraints>
@@ -96,17 +95,53 @@
                                                         <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울특별시 강남구 논현동 34" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOt-cV-oy5">
-                                                        <rect key="frame" x="26" y="105" width="333" height="20"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOt-cV-oy5">
+                                                        <rect key="frame" x="26" y="99" width="277" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="ENk-PU-4XA"/>
+                                                            <constraint firstAttribute="height" constant="40" id="ENk-PU-4XA"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="서울특별시">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" ">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="14" name=".SFNSText"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="강남구">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" ">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="14" name=".SFNSText"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="논현동">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" 34">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="14" name=".SFNSText"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DeadpoolShocked" translatesAutoresizingMaskIntoConstraints="NO" id="MGT-Qm-MjQ">
-                                                        <rect key="frame" x="26" y="142" width="50" height="50"/>
+                                                        <rect key="frame" x="26" y="149" width="50" height="50"/>
                                                         <color key="backgroundColor" red="0.9137254901960784" green="0.28645041584968567" blue="0.28626829385757446" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="cPl-59-RY7"/>
@@ -114,7 +149,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="08p-ye-2vn">
-                                                        <rect key="frame" x="86" y="148.5" width="289" height="38"/>
+                                                        <rect key="frame" x="86" y="155.5" width="289" height="38"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i.hanson.jung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lty-aA-3b4">
                                                                 <rect key="frame" x="0.0" y="0.0" width="105.5" height="21"/>
@@ -141,14 +176,13 @@
                                                 <constraints>
                                                     <constraint firstItem="DF6-aI-0Md" firstAttribute="leading" secondItem="T9J-oI-jTH" secondAttribute="leading" constant="26" id="155-Wp-yVi"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="leading" secondItem="DF6-aI-0Md" secondAttribute="leading" id="2h5-ID-ctd"/>
-                                                    <constraint firstItem="DF6-aI-0Md" firstAttribute="width" secondItem="T9J-oI-jTH" secondAttribute="width" constant="-42" id="72o-72-0wR"/>
                                                     <constraint firstItem="MGT-Qm-MjQ" firstAttribute="leading" secondItem="jOt-cV-oy5" secondAttribute="leading" id="AKG-Zl-1Kn"/>
                                                     <constraint firstAttribute="trailing" secondItem="08p-ye-2vn" secondAttribute="trailing" id="EKV-ar-boF"/>
                                                     <constraint firstItem="DF6-aI-0Md" firstAttribute="top" secondItem="T9J-oI-jTH" secondAttribute="top" constant="70" id="GlY-Oe-MzQ"/>
                                                     <constraint firstAttribute="width" secondItem="T9J-oI-jTH" secondAttribute="height" multiplier="15:8" id="HlX-Kv-oJw"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="width" secondItem="DF6-aI-0Md" secondAttribute="width" id="LKd-mz-Y4T"/>
                                                     <constraint firstItem="08p-ye-2vn" firstAttribute="leading" secondItem="MGT-Qm-MjQ" secondAttribute="trailing" constant="10" id="McI-4q-1s2"/>
-                                                    <constraint firstItem="MGT-Qm-MjQ" firstAttribute="top" secondItem="jOt-cV-oy5" secondAttribute="bottom" constant="17" id="UQe-61-ETm"/>
+                                                    <constraint firstItem="MGT-Qm-MjQ" firstAttribute="top" secondItem="jOt-cV-oy5" secondAttribute="bottom" constant="10" id="UQe-61-ETm"/>
                                                     <constraint firstItem="08p-ye-2vn" firstAttribute="centerY" secondItem="MGT-Qm-MjQ" secondAttribute="centerY" id="atx-vW-eZg"/>
                                                     <constraint firstItem="jOt-cV-oy5" firstAttribute="top" secondItem="DF6-aI-0Md" secondAttribute="bottom" id="g3K-tU-G2X"/>
                                                     <constraint firstAttribute="height" constant="200" id="nAy-Nq-bgu"/>
@@ -199,7 +233,7 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZf-bP-nyG">
-                                                <rect key="frame" x="26" y="554" width="333" height="41"/>
+                                                <rect key="frame" x="26" y="561" width="333" height="41"/>
                                                 <string key="text">봄 행사 음료 '슈크림라떼' 출시 22일 만에 100만개 판매
 
 원문보기: 
@@ -211,6 +245,8 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="uHI-a5-G5x" firstAttribute="leading" secondItem="DF6-aI-0Md" secondAttribute="trailing" constant="16" id="136-uF-EDb"/>
+                                            <constraint firstItem="uHI-a5-G5x" firstAttribute="centerY" secondItem="DF6-aI-0Md" secondAttribute="centerY" id="4La-fh-txt"/>
                                             <constraint firstItem="Jiv-fz-0H7" firstAttribute="top" secondItem="CZA-PH-Hyb" secondAttribute="top" id="4jc-v1-hRD"/>
                                             <constraint firstItem="MZf-bP-nyG" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" constant="-42" id="6D8-xJ-3IO"/>
                                             <constraint firstItem="T9J-oI-jTH" firstAttribute="width" secondItem="CZA-PH-Hyb" secondAttribute="width" id="BKA-IV-Gz4"/>

@@ -27,12 +27,18 @@
     self.makeMapBtn.layer.cornerRadius = self.makeMapBtn.frame.size.height/2;
     self.makeMapBtn.layer.borderColor = [UIColor whiteColor].CGColor;
 //    self.makeMapBtn.layer.borderWidth = 2;
+    self.makeMapBtn.layer.shadowOffset = CGSizeMake(0, 10);
+    self.makeMapBtn.layer.shadowRadius = 15;
+    self.makeMapBtn.layer.shadowOpacity = 0.3;
     
     self.makePinBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
     self.makePinBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     self.makePinBtn.layer.cornerRadius = self.makePinBtn.frame.size.height/2;
     self.makePinBtn.layer.borderColor = [UIColor whiteColor].CGColor;
 //    self.makePinBtn.layer.borderWidth = 2;
+    self.makePinBtn.layer.shadowOffset = CGSizeMake(0, 10);
+    self.makePinBtn.layer.shadowRadius = 15;
+    self.makePinBtn.layer.shadowOpacity = 0.3;
 
     // Target이 parentViewController(Main Tab Bar Controller)
     [self.makeMapBtn addTarget:(MainTabBarController *)self.parentViewController action:@selector(selectedMakeMapBtn:) forControlEvents:UIControlEventTouchUpInside];
