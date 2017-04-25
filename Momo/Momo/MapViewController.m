@@ -105,8 +105,6 @@
         // 선택지도 보기
         [self mapInfoViewSetting];
 
-        
-        
     } else {
         // 사용자 모든 핀 보기 (default)
         self.mapData = [[MomoMapDataSet alloc] init];
@@ -121,7 +119,6 @@
     // 선택 핀 중심으로 이동, (선택지도 보기)
     if (self.showSelectedMap == SELECTED_MAP_MODE_WITH_PIN) {
     
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 
             sleep(1);       // 1초 후 이동
@@ -133,7 +130,7 @@
                                                                         longitude:self.focusingPinMarker.position.longitude
                                                                              zoom:13.5f];
                 [CATransaction begin];
-                [CATransaction setValue:[NSNumber numberWithFloat: 2.0f] forKey:kCATransactionAnimationDuration];
+                [CATransaction setValue:[NSNumber numberWithFloat: 1.5f] forKey:kCATransactionAnimationDuration];
                 
                 [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 선택된 핀 중심으로 카메라 이동
                 

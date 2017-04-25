@@ -9,6 +9,15 @@
 #import "MapProfileTableViewCell.h"
 #import "PinMarkerUIView.h"
 
+@interface MapProfileTableViewCell ()
+
+@property (nonatomic) MomoPinDataSet *pinData;
+@property (nonatomic) MomoPostDataSet *postData;
+
+@end
+
+
+
 @implementation MapProfileTableViewCell
 
 - (void)awakeFromNib {
@@ -44,14 +53,50 @@
     
     // 맵 속의 핀 갯수
     self.mapPinNumLabel.text = [NSString stringWithFormat:@"%ld", [DataCenter myMapList][mapIndex].map_pin_list.count];
+    
+    
+    // 데이터, labelBtnView, postBtnView 초기화 (테이블 뷰 셀 dequeue 됨)
+    self.pinData = nil;
+    self.postData = nil;
+    [self.labelBtnView setImage:[UIImage imageNamed:@"defaultLabel"] forState:UIControlStateNormal];
+    [self.postBtnView setImage:[UIImage imageNamed:@"defaultText"] forState:UIControlStateNormal];
+    [self.postBtnView setTitle:nil forState:UIControlStateNormal];
+    
+
+    // 핀이 한 개 이상 있을 때, 라벨 표기
+    if ([DataCenter myMapList][mapIndex].map_pin_list.count > 0) {
+        [self.labelBtnView setImage:[[DataCenter myMapList][mapIndex].map_pin_list[0] labelIcon] forState:UIControlStateNormal];    // 라벨 아이콘 이미지
+        [self.labelBtnView setBackgroundColor:[[DataCenter myMapList][mapIndex].map_pin_list[0] labelColor]];                       // 바탕 색
+        
+        self.pinData = [DataCenter myMapList][mapIndex].map_pin_list[0];    // 첫번째 핀으로 세팅
+        
+        // 포스트 한 개 이상 있을 때, 포스트 노출
+        for (MomoPinDataSet *pinData in [DataCenter myMapList][mapIndex].map_pin_list) {
+            if (pinData.pin_post_list.count > 0) {      // 1개 이상 있나?
+                
+                if ([pinData.pin_post_list[0].post_photo_data length]) {
+                    // 사진
+                    [self.postBtnView setImage:[pinData.pin_post_list[0] getPostPhoto] forState:UIControlStateNormal];
+                    
+                } else {
+                    // 글
+                    [self.postBtnView setImage:nil forState:UIControlStateNormal];
+                    
+                    [self.postBtnView setBackgroundColor:[UIColor colorWithRed:234/255.0 green:234/255.0 blue:234/255.0 alpha:0.37]];
+                    [self.postBtnView setTitle:pinData.pin_post_list[0].post_description forState:UIControlStateNormal];
+                    [self.postBtnView setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
+                    [self.postBtnView setTitleEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+                    [self.postBtnView.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+                    [self.postBtnView.titleLabel setNumberOfLines:3];
+                }
+                
+                self.postData = pinData.pin_post_list[0];        // 첫 번째 포스트로 세팅
+                break;  // for문 빠져나옴 (post한개만으로 충분함)
+            }
+        }
+    }
 }
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -150,9 +195,41 @@
 }
 
 
+
+
+// Btn Actions --------------------------//
+
+- (IBAction)pinLabelBtnAction:(id)sender {
+    
+    if (self.pinData == nil) {
+        // 핀이 하나도 없을 때
+        [self.delegate showSelectedMapAndMakePin:[DataCenter myMapList][self.mapIndex]];    // 지도 보기 & 핀 생성 유도
+
+    } else {
+        // 핀 뷰 이동
+        [self.delegate showSelectedPin:self.pinData];
+    }
+}
+
+- (IBAction)postBtnAction:(id)sender {
+
+    if (self.pinData == nil) {
+        // 핀이 하나도 없을 때
+        [self.delegate showSelectedMapAndMakePin:[DataCenter myMapList][self.mapIndex]];    // 지도 보기 & 핀 생성 유도
+        
+    } else if (self.postData == nil) {
+        // 핀 뷰 이동
+        [self.delegate showSelectedPin:self.pinData];
+        
+    } else {
+        // 포스트 뷰 이동
+        [self.delegate showSelectedPost:self.postData];
+    }
+}
+
 - (IBAction)mapEditBtnAction:(id)sender {
     NSLog(@"mapEditBtnAction");
-    [self.delegate selectedMapEditBtnWithIndex:self.tag];
+    [self.delegate selectedMapEditBtnWithIndex:self.mapIndex];
 }
 
 @end
