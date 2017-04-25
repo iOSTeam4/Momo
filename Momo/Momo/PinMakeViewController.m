@@ -349,6 +349,10 @@
                                    if (isSuccess) {
                                        
                                        self.pinData = [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list lastObject];      // 새로 생성된 데이터가 lastObject
+                                       
+                                       // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
+                                       [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];
+                                       
                                        [self showPinView];
 
                                    } else {
@@ -387,24 +391,6 @@
                                  
                              }];
         
-        
-//        RLMRealm *realm = [RLMRealm defaultRealm];
-//        [realm transactionWithBlock:^{
-//            self.pinData.pin_name = self.pinNameTextField.text;
-//            self.pinData.pin_label = self.categoryLastSelectedBtn.tag;
-//
-//            
-//            // 선택한 맵에 핀 새로 등록
-//            [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list addObject:self.pinData];
-//
-//            // 기존 맵에 핀 삭제
-//            NSInteger pinIndex = [self.pinData.pin_map.map_pin_list indexOfObject:self.pinData];
-//            [self.pinData.pin_map.map_pin_list removeObjectAtIndex:pinIndex];
-//            
-//            // 핀 속에 지도 정보 변경
-//            self.pinData.pin_map = [DataCenter myMapList][self.mapLastSelectedBtn.tag];
-//            
-//        }];
     }
 }
 
@@ -414,10 +400,6 @@
     
     // 핀뷰 이동 전, 데이터 세팅
     [pinVC showSelectedPinAndSetPinData:self.pinData];
-
-    // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
-    [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];
-      
 
     // 만들어진 핀으로 먼저 Push
     [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:pinVC animated:NO];

@@ -392,8 +392,13 @@
                                        [self.indicator stopAnimating];
                                        
                                        if (isSuccess) {
-                                           [self dismissViewControllerAnimated:YES completion:nil];
-                                           
+                                           if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                               
+                                           } else {
+                                               [self showPostView];
+                                           }
+
                                        } else {
                                            [UtilityCenter presentCommonAlertController:self withMessage:result];
                                        }
@@ -409,7 +414,7 @@
     PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
     [postVC showSelectedPostAndSetPostData:self.postData];
     
-    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:postVC animated:NO];        // 만들어진 맵으로 먼저 Push
+    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:postVC animated:NO];        // 만들어진 포스트뷰로 먼저 Push
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

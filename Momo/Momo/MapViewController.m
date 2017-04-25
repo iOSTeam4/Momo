@@ -333,7 +333,8 @@
         marker.icon = [pinMarkerView imageFromViewForMarker];
         marker.map = self.mapView;
         
-        marker.iconView.tag = i;
+        NSLog(@"map_pin_list[%ld].pk : %ld", i, self.mapData.map_pin_list[i].pk);
+        marker.snippet = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list[i].pk];      // snippet에 pin pk 저장
         
         if (self.showSelectedMap == SELECTED_MAP_MODE_WITH_PIN) {
             if (i == [self.mapData.map_pin_list indexOfObject:self.pinData]) {
@@ -385,7 +386,8 @@
         PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
         
         // 핀 데이터 세팅
-        [pinVC showSelectedPinAndSetPinData:self.mapData.map_pin_list[marker.iconView.tag]];        
+        NSLog(@"pinPk : %ld", [marker.snippet integerValue]);
+        [pinVC showSelectedPinAndSetPinData:[DataCenter findPinDataWithPinPK:[marker.snippet integerValue]]];
         [self.navigationController pushViewController:pinVC animated:YES];
         
     }
