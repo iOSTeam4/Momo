@@ -157,11 +157,16 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     if (self.photoImageView.hidden) {
-        [self.scrollView setContentOffset:CGPointMake(0,150) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(0,200) animated:YES];
     } else {
-        [self.scrollView setContentOffset:CGPointMake(0,450) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(0,500) animated:YES];
     }
     
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self.scrollView setContentOffset:CGPointMake(0,0) animated:YES];
+
 }
 
 //- (void)textViewEditingChanged:(UIPlaceHolderTextView *)sender {

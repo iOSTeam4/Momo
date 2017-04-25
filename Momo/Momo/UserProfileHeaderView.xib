@@ -27,7 +27,7 @@
                             <rect key="frame" x="15" y="35" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="7xt-Fa-aLh"/>
-                                <constraint firstAttribute="width" secondItem="MSu-gd-9mD" secondAttribute="height" multiplier="1:1" id="Ug1-fi-URM"/>
+                                <constraint firstAttribute="width" constant="80" id="Sbr-aF-p0L"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zec-gh-XT0">

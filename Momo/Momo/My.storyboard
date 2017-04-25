@@ -75,8 +75,8 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pika.png" translatesAutoresizingMaskIntoConstraints="NO" id="xlX-TW-fsi">
                                         <rect key="frame" x="15" y="70" width="91.5" height="91.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="91.5" id="el9-2z-3fL"/>
-                                            <constraint firstAttribute="width" secondItem="xlX-TW-fsi" secondAttribute="height" multiplier="1:1" id="r2n-3h-z8n"/>
+                                            <constraint firstAttribute="width" constant="91" id="4cD-al-YQ1"/>
+                                            <constraint firstAttribute="height" constant="91" id="el9-2z-3fL"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee7-TN-RXc">
