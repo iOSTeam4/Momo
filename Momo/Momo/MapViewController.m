@@ -330,7 +330,7 @@
             marker.appearAnimation = kGMSMarkerAnimationPop;
         }
         PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:self.currentZoomCase];
-        marker.iconView = pinMarkerView;
+        marker.icon = [pinMarkerView imageFromViewForMarker];
         marker.map = self.mapView;
         
         marker.iconView.tag = i;

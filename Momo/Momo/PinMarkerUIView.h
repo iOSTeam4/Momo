@@ -34,4 +34,8 @@
 // 반드시 이 메소드로 init할 것!
 - (instancetype)initWithPinData:(MomoPinDataSet *)pinData withZoomCase:(NSInteger)zoomCase;
 
+// UIView(모든 SubViews포함)를 UIImage로 변환시켜 반환하는 메소드
+// GoogleMaps의 Marker 꼭 Image로 넣어줘야 함.. (iconView에 넣으면 마커 색 랜덤으로 막 바뀌어 나타나게 됨..)
+- (UIImage *)imageFromViewForMarker;
+
 @end

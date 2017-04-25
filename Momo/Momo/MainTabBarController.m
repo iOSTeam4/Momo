@@ -246,7 +246,6 @@
 - (void)mainTabBarAnotherVCPopToRootViewController {
     NSLog(@"mainTabBarAnotherVCPopToRootViewController");
     
-    NSLog(@"selectedViewController == MAP_VIEW? %d", [self.mapNaviVC isEqual:self.selectedViewController]);
     if ([self.mapNaviVC isEqual:self.selectedViewController]) {
         // MAP_VIEW 일때
         [self.myNaviVC popToRootViewControllerAnimated:YES];    // MY_VIEW를 popToRootView

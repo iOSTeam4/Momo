@@ -311,69 +311,122 @@ static NSString *const POST_URL             = @"/api/post/";
                               withProfileImg:(NSData *)imgData
                          withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
     
-    // Session
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
-    // Request
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-
-    // 헤더 세팅
-    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];     // form-data 아님??
-
-    // 바디 세팅 : Update username & profile_img
-    request.HTTPBody = [[NSString stringWithFormat:@"username=%@&profile_img=%@", username, imgData] dataUsingEncoding:NSUTF8StringEncoding];
-    request.HTTPMethod = @"PATCH";
-
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"PATCH" URLString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFormData:[username dataUsingEncoding:NSUTF8StringEncoding] name:@"username"];           // 유저네임
+        [formData appendPartWithFileData:imgData name:@"profile_img" fileName:@"profile_img.jpeg" mimeType:@"image/jpeg"];          // 프로필 사진
+        
+    } error:nil];
     
-    // Task
-    NSURLSessionUploadTask *patchTask = [session uploadTaskWithRequest:request
-                                                              fromData:nil
-                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                         
-                                                         NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
-                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                                                         
-                                                         // 메인스레드로 돌려서 보냄
-                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                             
-                                                             if (!error) {
-                                                                 if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                                                                     // Code: 200 Success
-                                                                     
-                                                                     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                                     
-                                                                     // realm transaction
-                                                                     RLMRealm *realm = [RLMRealm defaultRealm];
-                                                                     [realm transactionWithBlock:^{
-                                                                         if ([responseDic objectForKey:@"username"]) {
-                                                                             [DataCenter sharedInstance].momoUserData.user_username = [responseDic objectForKey:@"username"];
-                                                                         }
-                                                                         if ([[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]) {
-                                                                             [DataCenter sharedInstance].momoUserData.user_profile_image_url = [[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
-                                                                         }
-                                                                     }];
-                                                                     
-                                                                     completionBlock(YES, @"Code: 200 Success");
-                                                                     
-                                                                 } else {
-                                                                     // Code: 413 Request Entity Too Large
-                                                                     // Code: 500 BAD REQUEST
-                                                                     
-                                                                     completionBlock(NO, @"BAD REQUEST");
-                                                                     
-                                                                 }
-                                                             } else {
-                                                                 // Network error
-                                                                 NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
-                                                                 completionBlock(NO, @"Network error");
-                                                             }
-                                                         });
-                                                         
-                                                     }];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionUploadTask *uploadTask;
     
-    [patchTask resume];
+    [request setValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    uploadTask = [manager uploadTaskWithStreamedRequest:request
+                                               progress:nil
+                                      completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                          
+                                          NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                          NSLog(@"%@", responseObject);
+                                          
+                                          // 메인스레드로 돌려서 보냄
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              
+                                              if (!error) {
+                                                  if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                      // Code: 200 Success
+                                                      
+                                                      // 데이터 파싱, 세팅
+                                                      [DataCenter momoGetMemberProfileDicParsingAndUpdate:responseObject];
+                                                      
+                                                      completionBlock(YES, @"Code: 200 Success");
+                                                      
+                                                  } else {
+                                                      // Code: 413 Request Entity Too Large
+                                                      // Code: 500 BAD REQUEST
+                                                      
+                                                      completionBlock(NO, @"BAD REQUEST");
+                                                      
+                                                  }
+                                              } else {
+                                                  // Network error
+                                                  NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                  completionBlock(NO, @"Network error");
+                                              }
+                                          });
+                                          
+                                      }];
+    
+    [uploadTask resume];
+    
+    
+    
+    
+//    // Session
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//
+//    // Request
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk]];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//
+//    // 헤더 세팅
+//    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+////    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];     // form-data 아님??
+//
+//    // 바디 세팅 : Update username & profile_img
+////    request.HTTPBody = [[NSString stringWithFormat:@"username=%@&profile_img=%@", username, imgData] dataUsingEncoding:NSUTF8StringEncoding];
+//    request.HTTPBody = [[NSString stringWithFormat:@"username=%@", username] dataUsingEncoding:NSUTF8StringEncoding];
+//    request.HTTPMethod = @"PATCH";
+//
+//
+//    // Task
+//    NSURLSessionUploadTask *patchTask = [session uploadTaskWithRequest:request
+//                                                              fromData:nil
+//                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//
+//                                                         NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+//                                                         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//                                                         
+//                                                         // 메인스레드로 돌려서 보냄
+//                                                         dispatch_async(dispatch_get_main_queue(), ^{
+//                                                             
+//                                                             if (!error) {
+//                                                                 if (((NSHTTPURLResponse *)response).statusCode == 200) {
+//                                                                     // Code: 200 Success
+//                                                                     
+//                                                                     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+//                                                                     
+//                                                                     // realm transaction
+//                                                                     RLMRealm *realm = [RLMRealm defaultRealm];
+//                                                                     [realm transactionWithBlock:^{
+//                                                                         if ([responseDic objectForKey:@"username"]) {
+//                                                                             [DataCenter sharedInstance].momoUserData.user_username = [responseDic objectForKey:@"username"];
+//                                                                         }
+//                                                                         if ([[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]) {
+//                                                                             [DataCenter sharedInstance].momoUserData.user_profile_image_url = [[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
+//                                                                         }
+//                                                                     }];
+//                                                                     
+//                                                                     completionBlock(YES, @"Code: 200 Success");
+//                                                                     
+//                                                                 } else {
+//                                                                     // Code: 413 Request Entity Too Large
+//                                                                     // Code: 500 BAD REQUEST
+//                                                                     
+//                                                                     completionBlock(NO, @"BAD REQUEST");
+//                                                                     
+//                                                                 }
+//                                                             } else {
+//                                                                 // Network error
+//                                                                 NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+//                                                                 completionBlock(NO, @"Network error");
+//                                                             }
+//                                                         });
+//                                                         
+//                                                     }];
+//    
+//    [patchTask resume];
 }
 
 
@@ -795,71 +848,130 @@ static NSString *const POST_URL             = @"/api/post/";
                    withDescription:(NSString *)description
                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
-    // Session
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, POST_URL] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFormData:[[NSString stringWithFormat:@"%ld", pin_pk] dataUsingEncoding:NSUTF8StringEncoding] name:@"pin"];
+        
+        if ([photoData length]) {
+            // 사진이 있는 경우
+            [formData appendPartWithFileData:photoData name:@"photo" fileName:@"photo_image.jpeg" mimeType:@"image/jpeg"];
+        }
+        if ([description length]) {
+            // 글이 있는 경우
+            [formData appendPartWithFormData:[description dataUsingEncoding:NSUTF8StringEncoding] name:@"description"];
+        }
+        
+    } error:nil];
     
-    // Request
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, POST_URL]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-
-    // 헤더 세팅
-    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionUploadTask *uploadTask;
     
-    // 바디 세팅
-    if ([photoData length] && [description length]) {
-        // 사진, 글 둘 다 있는 경우
-        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&photo=%@&description=%@", pin_pk, photoData, description] dataUsingEncoding:NSUTF8StringEncoding];
-    } else if ([photoData length]) {
-        // 사진만 있는 경우
-        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&photo=%@", pin_pk, photoData] dataUsingEncoding:NSUTF8StringEncoding];
-    } else {
-        // 글만 있는 경우
-        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&description=%@", pin_pk, description] dataUsingEncoding:NSUTF8StringEncoding];
-    }
-    request.HTTPMethod = @"POST";
+    [request setValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    uploadTask = [manager uploadTaskWithStreamedRequest:request
+                                               progress:nil
+                                      completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                          
+                                          NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                          NSLog(@"%@", responseObject);
+                        
+                                          // 메인스레드로 돌려서 보냄
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              
+                                              if (!error) {
+                                                  if (((NSHTTPURLResponse *)response).statusCode == 201) {
+                                                      // Code: 201 CREATED
+                                                      NSLog(@"Post Create Success");
+                                                      
+                                                      // 포스트 데이터 파싱 및 저장
+                                                      [DataCenter createPostWithMomoPostCreateDic:responseObject];
+                                                      
+                                                      completionBlock(YES, nil);
+                                                      
+                                                      
+                                                  } else {
+                                                      NSLog(@"Post Create Fail");
+                                                      
+                                                      completionBlock(NO, [responseObject objectForKey:@"detail"]);
+                                                      
+                                                  }
+                                              } else {
+                                                  // Network error
+                                                  NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                  completionBlock(NO, @"Network error");
+                                              }
+                                          });
+                                          
+                                      }];
     
-    // Task
-    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
-                                                             fromData:nil
-                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                        
-                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
-                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                                                        
-                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                        
-                                                        
-                                                        // 메인스레드로 돌려서 보냄
-                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                            
-                                                            if (!error) {
-                                                                if (((NSHTTPURLResponse *)response).statusCode == 201) {
-                                                                    // Code: 201 CREATED
-                                                                    NSLog(@"Post Create Success");
-                                                                    
-                                                                    // 포스트 데이터 파싱 및 저장
-                                                                    [DataCenter createPostWithMomoPostCreateDic:responseDic];
-                                                                    
-                                                                    completionBlock(YES, nil);
-                                                                    
-                                                                    
-                                                                } else {
-                                                                    NSLog(@"Post Create Fail");
-                                                                    
-                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
-                                                                    
-                                                                }
-                                                            } else {
-                                                                // Network error
-                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
-                                                                completionBlock(NO, @"Network error");
-                                                            }
-                                                        });
-                                                        
-                                                    }];
+    [uploadTask resume];
     
-    [postTask resume];
+    
+    // 기존 안되던 코드
+    // 이미지 넣는 부분 공부 필요
+//    // Session
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//
+//    // Request
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, POST_URL]];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//
+//    // 헤더 세팅
+//    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+//
+//    // 바디 세팅
+//    if ([photoData length] && [description length]) {
+//        // 사진, 글 둘 다 있는 경우
+//        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&photo=%@&description=%@", pin_pk, photoData, description] dataUsingEncoding:NSUTF8StringEncoding];
+//    } else if ([photoData length]) {
+//        // 사진만 있는 경우
+//        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&photo=%@", pin_pk, photoData] dataUsingEncoding:NSUTF8StringEncoding];
+//    } else {
+//        // 글만 있는 경우
+//        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&description=%@", pin_pk, description] dataUsingEncoding:NSUTF8StringEncoding];
+//    }
+//    request.HTTPMethod = @"POST";
+//    
+//    // Task
+//    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
+//                                                             fromData:nil
+//                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//                                                        
+//                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+//                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//                                                        
+//                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+//                                                        
+//                                                        
+//                                                        // 메인스레드로 돌려서 보냄
+//                                                        dispatch_async(dispatch_get_main_queue(), ^{
+//                                                            
+//                                                            if (!error) {
+//                                                                if (((NSHTTPURLResponse *)response).statusCode == 201) {
+//                                                                    // Code: 201 CREATED
+//                                                                    NSLog(@"Post Create Success");
+//                                                                    
+//                                                                    // 포스트 데이터 파싱 및 저장
+//                                                                    [DataCenter createPostWithMomoPostCreateDic:responseDic];
+//                                                                    
+//                                                                    completionBlock(YES, nil);
+//                                                                    
+//                                                                    
+//                                                                } else {
+//                                                                    NSLog(@"Post Create Fail");
+//                                                                    
+//                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
+//                                                                    
+//                                                                }
+//                                                            } else {
+//                                                                // Network error
+//                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+//                                                                completionBlock(NO, @"Network error");
+//                                                            }
+//                                                        });
+//                                                        
+//                                                    }];
+//    
+//    [postTask resume];
 }
 
 

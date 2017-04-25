@@ -193,7 +193,7 @@
 
 // Back Btn Action
 - (IBAction)selectedPopViewBtn:(id)sender {
-    //Navigation없애고 커스텀 버튼으로 POP
+    // Pop
     [self.navigationController popViewControllerAnimated:YES];
     
 }

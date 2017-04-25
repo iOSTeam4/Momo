@@ -149,7 +149,7 @@
             marker.position = CLLocationCoordinate2DMake(pinData.pin_place.place_lat, pinData.pin_place.place_lng);
             
             PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:pinData withZoomCase:PIN_MARKER_CIRCLE];
-            marker.iconView = pinMarkerView;
+            marker.icon = [pinMarkerView imageFromViewForMarker];
             marker.map = self.mapView;
             
             
