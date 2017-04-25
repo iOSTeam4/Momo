@@ -71,6 +71,21 @@
                                                             <action selector="editBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="7Zm-pv-FAG"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5A-1D-X2L">
+                                                        <rect key="frame" x="236" y="10" width="123" height="44"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="hWa-8f-2QE"/>
+                                                            <constraint firstAttribute="width" constant="123" id="k19-GQ-1o4"/>
+                                                        </constraints>
+                                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="32" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="98" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" title="새 포스트 " image="addBtn">
+                                                            <color key="titleColor" red="0.33502128720000002" green="0.71864390369999998" blue="0.97653758530000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="addPostBtnAction:" destination="aL1-aL-rvC" eventType="touchUpInside" id="8Hf-fQ-aG9"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -81,6 +96,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="uHI-a5-G5x" secondAttribute="trailing" constant="16" id="MG9-aa-ThY"/>
                                                     <constraint firstItem="PhD-eq-zWc" firstAttribute="leading" secondItem="Jiv-fz-0H7" secondAttribute="leading" id="cav-G5-CRQ"/>
                                                     <constraint firstAttribute="width" secondItem="Jiv-fz-0H7" secondAttribute="height" multiplier="75:22" id="dnT-Ca-Mz0"/>
+                                                    <constraint firstItem="q5A-1D-X2L" firstAttribute="centerY" secondItem="PhD-eq-zWc" secondAttribute="centerY" id="oK9-cp-Nj0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="q5A-1D-X2L" secondAttribute="trailing" constant="16" id="r2l-LP-6Nb"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9J-oI-jTH" userLabel="main container view">
@@ -1147,7 +1164,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메타세콰이아 숲" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsG-du-Oo1">
-                                                    <rect key="frame" x="72" y="463" width="151.5" height="30"/>
+                                                    <rect key="frame" x="72" y="463" width="241" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Yef-Pn-CmH"/>
                                                     </constraints>
@@ -1186,8 +1203,8 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <constraint firstItem="TYD-a6-tax" firstAttribute="top" secondItem="ec3-Hr-peb" secondAttribute="bottom" constant="10" id="k7t-Q7-6lG"/>
                                                 <constraint firstItem="EDf-7h-Wcw" firstAttribute="leading" secondItem="DpC-Jo-6cc" secondAttribute="leading" constant="26" id="l6k-zh-xzc"/>
                                                 <constraint firstItem="AsG-du-Oo1" firstAttribute="leading" secondItem="gcs-1H-Qti" secondAttribute="trailing" constant="16" id="lFF-Uz-NvB"/>
+                                                <constraint firstItem="bse-vf-Ai6" firstAttribute="leading" secondItem="AsG-du-Oo1" secondAttribute="trailing" constant="16" id="o4l-Fp-9gw"/>
                                                 <constraint firstItem="EDf-7h-Wcw" firstAttribute="top" secondItem="DpC-Jo-6cc" secondAttribute="top" constant="16" id="oNO-gQ-OWs"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="AsG-du-Oo1" secondAttribute="trailing" constant="56" id="p6s-Bc-XWR"/>
                                                 <constraint firstItem="pMR-VS-9Rx" firstAttribute="top" secondItem="EDf-7h-Wcw" secondAttribute="bottom" constant="16" id="pUR-dI-Hb2"/>
                                                 <constraint firstItem="bPY-s9-z4v" firstAttribute="centerX" secondItem="gcs-1H-Qti" secondAttribute="centerX" id="pcN-us-UST"/>
                                                 <constraint firstAttribute="trailing" secondItem="pMR-VS-9Rx" secondAttribute="trailing" id="y2g-gl-7Pl"/>
@@ -1277,7 +1294,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신라면세점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxj-30-tux">
-                                                    <rect key="frame" x="72" y="72" width="104" height="30"/>
+                                                    <rect key="frame" x="72" y="72" width="241" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="49V-Oe-lnM"/>
                                                     </constraints>
@@ -1330,11 +1347,11 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <constraint firstItem="uZu-0s-Qdx" firstAttribute="leading" secondItem="SKm-9L-yH9" secondAttribute="leadingMargin" constant="16" id="aCO-4R-o4u"/>
                                                 <constraint firstItem="hxj-30-tux" firstAttribute="top" secondItem="ALz-xL-Ked" secondAttribute="bottom" constant="16" id="bw2-Zn-rlI"/>
                                                 <constraint firstItem="Naf-I4-XXO" firstAttribute="centerX" secondItem="elc-jP-7Yo" secondAttribute="centerX" id="l6y-ie-YHr"/>
+                                                <constraint firstItem="zQ7-O9-tpf" firstAttribute="leading" secondItem="hxj-30-tux" secondAttribute="trailing" constant="16" id="loq-Xl-Red"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="m1u-Ha-EF5" secondAttribute="trailing" constant="16" id="lzK-Qg-d49"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="uZu-0s-Qdx" secondAttribute="bottom" constant="16" id="oJr-28-btF"/>
                                                 <constraint firstAttribute="trailing" secondItem="zQ7-O9-tpf" secondAttribute="trailing" constant="10" id="qiC-Pm-H3G"/>
                                                 <constraint firstItem="gxv-jF-W7A" firstAttribute="centerY" secondItem="ALz-xL-Ked" secondAttribute="centerY" id="uOv-Oe-kVy"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="hxj-30-tux" secondAttribute="trailing" constant="16" id="xLM-gL-UWp"/>
                                                 <constraint firstItem="Naf-I4-XXO" firstAttribute="centerY" secondItem="elc-jP-7Yo" secondAttribute="centerY" id="xNy-t4-wq3"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1374,7 +1391,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                     <rect key="frame" x="0.0" y="72.5" width="375" height="375"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disney Land" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dg-ZT-8Fs">
-                                                    <rect key="frame" x="72" y="463" width="135.5" height="30"/>
+                                                    <rect key="frame" x="72" y="463" width="241" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="zin-uY-avu"/>
                                                     </constraints>
@@ -1423,6 +1440,7 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8Dg-ZT-8Fs" firstAttribute="centerY" secondItem="RNq-bk-hzJ" secondAttribute="centerY" id="1Ew-5d-GXC"/>
+                                                <constraint firstItem="nOB-oz-CTT" firstAttribute="leading" secondItem="8Dg-ZT-8Fs" secondAttribute="trailing" constant="16" id="1LB-Z4-Tz4"/>
                                                 <constraint firstItem="8Dg-ZT-8Fs" firstAttribute="top" secondItem="cIM-dL-vDD" secondAttribute="bottom" constant="16" id="9Yn-1J-xlj"/>
                                                 <constraint firstItem="cIM-dL-vDD" firstAttribute="width" secondItem="cIM-dL-vDD" secondAttribute="height" multiplier="1:1" id="D5V-cE-4xa"/>
                                                 <constraint firstItem="cIM-dL-vDD" firstAttribute="width" secondItem="jV8-56-9t5" secondAttribute="width" id="Ght-Ld-UXJ"/>
@@ -1441,7 +1459,6 @@ http://sports.khan.co.kr/bizlife/sk_index.html?art_id=201703281826013&amp;sec_id
                                                 <constraint firstItem="0rz-IV-ag2" firstAttribute="top" secondItem="8Dg-ZT-8Fs" secondAttribute="bottom" constant="5" id="lTL-OH-coe"/>
                                                 <constraint firstAttribute="trailing" secondItem="nOB-oz-CTT" secondAttribute="trailing" constant="10" id="pxb-WL-aKS"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cIM-dL-vDD" secondAttribute="trailing" constant="-8" id="s4i-WD-IZQ"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="8Dg-ZT-8Fs" secondAttribute="trailing" constant="16" id="sin-nh-T5X"/>
                                                 <constraint firstItem="nOB-oz-CTT" firstAttribute="centerY" secondItem="8Dg-ZT-8Fs" secondAttribute="centerY" id="w5X-WY-yte"/>
                                                 <constraint firstItem="xnc-go-Lp3" firstAttribute="top" secondItem="jV8-56-9t5" secondAttribute="top" constant="16" id="zwa-2M-eHq"/>
                                             </constraints>

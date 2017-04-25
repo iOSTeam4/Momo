@@ -111,9 +111,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaC-BX-6Hc">
-                                <rect key="frame" x="277.5" y="279.5" width="97.5" height="97.5"/>
+                                <rect key="frame" x="347" y="314.5" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zaC-BX-6Hc" secondAttribute="height" multiplier="1:1" id="Rw2-Xi-BeH"/>
+                                    <constraint firstAttribute="width" constant="28" id="tAu-Mp-VrM"/>
                                 </constraints>
                                 <state key="normal" image="setup">
                                     <color key="titleColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -148,7 +149,6 @@
                             <constraint firstItem="QaG-Ge-1bw" firstAttribute="centerX" secondItem="mOC-oZ-7xj" secondAttribute="centerX" id="ckj-ia-tfd"/>
                             <constraint firstItem="ABY-30-HVp" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="d88-ad-B7Y"/>
                             <constraint firstItem="gc4-8R-2oX" firstAttribute="top" secondItem="dGm-5e-gvx" secondAttribute="top" constant="10" id="e1d-Kc-wlN"/>
-                            <constraint firstItem="zaC-BX-6Hc" firstAttribute="width" secondItem="dGm-5e-gvx" secondAttribute="width" multiplier="0.25" id="fpn-QL-37V"/>
                             <constraint firstItem="swf-DM-dj8" firstAttribute="centerX" secondItem="xRf-A5-3id" secondAttribute="centerX" id="i3n-Gm-8qZ"/>
                             <constraint firstItem="6TZ-pC-QxF" firstAttribute="top" secondItem="gc4-8R-2oX" secondAttribute="bottom" constant="5" id="meg-2o-bum"/>
                             <constraint firstAttribute="bottom" secondItem="u1x-P1-cON" secondAttribute="bottom" constant="15" id="pcJ-pd-dTD"/>
