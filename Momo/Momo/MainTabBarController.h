@@ -16,4 +16,7 @@
 - (void)selectedMakeMapBtn:(UIButton *)sender;
 - (void)selectedMakePinBtn:(UIButton *)sender;
 
+// Delete popToRootView처리
+- (void)mainTabBarAnotherVCPopToRootViewController;
+
 @end

@@ -11,7 +11,7 @@
 
 static NSString *const API_BASE_URL         = @"https://momo.kizmo04.com";
 
-static NSString *const SIGN_UP_URL          = @"/api/member/signup/";
+static NSString *const SIGN_UP_URL          = @"/api/member/signup-b/"; // @"/api/member/signup/";
 static NSString *const LOG_IN_URL           = @"/api/member/login/";
 static NSString *const LOG_OUT_URL          = @"/api/member/logout/";
 static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id}/      user_id -> pk
@@ -73,7 +73,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                     
                                                                 } else {
                                                                     // Code: 400 BAD REQUEST
-                                                                    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                                    NSDictionary *responseDic = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil] objectForKey:@"detail"];
                                                                     
                                                                     if ([responseDic objectForKey:@"username"]) {
                                                                         // momo user의 username은/는 이미 존재합니다.

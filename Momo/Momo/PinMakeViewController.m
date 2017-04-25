@@ -442,6 +442,9 @@
                                [self.indicator stopAnimating];
                                
                                if (isSuccess) {
+                                   
+                                   [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
+                                   
                                    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (삭제된 핀 뷰로 다시 돌아가면 안되므로)
                                    [self dismissViewControllerAnimated:YES completion:nil];
                                    

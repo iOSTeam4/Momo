@@ -23,7 +23,11 @@
 @property (nonatomic, weak) UIView *customTabBar;
 @property (nonatomic, weak) UIButton *mapBtn;
 @property (nonatomic, weak) UIButton *lastSelectedBtn;
+
 @property (nonatomic, weak) MakeViewController *makeVC;
+
+@property (nonatomic, weak) UINavigationController *mapNaviVC;
+@property (nonatomic, weak) UINavigationController *myNaviVC;
 
 @end
 
@@ -54,6 +58,7 @@
     
     // 0 : 지도 뷰
     UINavigationController *mapNaviVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapNaviViewController"];
+    self.mapNaviVC = mapNaviVC;
     
     // 1 : 지도, 새핀 만들기 뷰
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
@@ -66,7 +71,7 @@
     // 2 : 내 기록 뷰
     UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:nil];
     UINavigationController *myNaviVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyNaviViewController"];
-
+    self.myNaviVC = myNaviVC;
     
     // set ViewControllers
     [self setViewControllers:@[mapNaviVC, makeVC, myNaviVC]];
@@ -235,6 +240,23 @@
     [self.selectedViewController popToRootViewControllerAnimated:YES];  // 루트뷰까지 pop
     [(MapViewController *)((UINavigationController *)self.selectedViewController).viewControllers[0] makePinByMakePinBtn];
 }
+
+
+// Delete popToRootView처리
+- (void)mainTabBarAnotherVCPopToRootViewController {
+    NSLog(@"mainTabBarAnotherVCPopToRootViewController");
+    
+    NSLog(@"selectedViewController == MAP_VIEW? %d", [self.mapNaviVC isEqual:self.selectedViewController]);
+    if ([self.mapNaviVC isEqual:self.selectedViewController]) {
+        // MAP_VIEW 일때
+        [self.myNaviVC popToRootViewControllerAnimated:YES];    // MY_VIEW를 popToRootView
+
+    } else {
+        // MY_VIEW 일때
+        [self.mapNaviVC popToRootViewControllerAnimated:YES];   // MAP_VIEW를 popToRootView
+    }
+}
+
 
 
 @end
