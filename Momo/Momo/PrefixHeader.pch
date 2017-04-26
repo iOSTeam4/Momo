@@ -22,7 +22,7 @@
 #import "GoogleAnalyticsModule.h"
 
 #import "MainTabBarController.h"
-#import "UtilityCenter.h"
+#import "UtilityModule.h"
 
 // Pods -----------------------------------------//
 #import <Google/Analytics.h>
@@ -40,15 +40,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+MultiFormat.h>
 #import <AFNetworking/AFNetworking.h>
-
-// Define Setting -------------------------------//
-#define LAUNCH_SEGUE @"LaunchViewSegue"     //static NSString * const LAUNCH_SEGUE = @"LaunchViewSegue";
-#define LOGIN_SEGUE @"LoginViewSegue"       //static NSString * const LOGIN_SEGUE = @"LoginViewSegue";
-
-
-// TabBar icon
-#define TABBAR_ICON_IMAGE_SIZE 20
-
 
 
 #endif /* PrefixHeader_pch */

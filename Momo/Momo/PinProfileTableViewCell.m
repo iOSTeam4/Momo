@@ -7,14 +7,13 @@
 //
 
 #import "PinProfileTableViewCell.h"
-#import "PinMarkerUIView.h"
+#import "PinMarkerView.h"
 
 @implementation PinProfileTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-    
+//    NSLog(@"awakeFromNib");
 }
 
 
@@ -88,7 +87,7 @@
     
     marker.position = CLLocationCoordinate2DMake(((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]).pin_place.place_lat, ((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]).pin_place.place_lng);
     
-    PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]) withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
+    PinMarkerView *pinMarkerView = [[PinMarkerView alloc] initWithPinData:((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]) withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
     
     marker.icon = [pinMarkerView imageFromViewForMarker];
     marker.map = self.mapView;

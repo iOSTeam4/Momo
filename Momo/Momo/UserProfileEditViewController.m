@@ -219,7 +219,7 @@
     [self.userCommentTextView resignFirstResponder];
 
     
-    NSData *profileImgdata = [UtilityCenter imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
+    NSData *profileImgdata = [UtilityModule imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
     if (profileImgdata.length > 1024*1024) {
         // 들어갈리가 없으나, 일단 예외 상황 로그 수집하기 위해 만들어 둠
@@ -231,9 +231,9 @@
         [self.indicator startAnimating];
         
         [NetworkModule patchMemberProfileUpdateWithUsername:self.userNameTextField.text
-                                             withProfileImg:profileImgdata
+                                         withProfileImgData:profileImgdata
+                                            withDescription:self.userCommentTextView.text
                                         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                            
                                             NSLog(@"finish updateMemberProfileWithUsername");
                                             
                                             [self.indicator stopAnimating];
@@ -244,7 +244,7 @@
                                                 
                                             } else {
                                                 
-                                                [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                                [UtilityModule presentCommonAlertController:self withMessage:result];
                                             }
                                         }];
         

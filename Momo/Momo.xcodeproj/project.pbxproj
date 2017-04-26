@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F3068F51EAB9D0300B451E6 /* UtilityCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */; };
+		3F2A06361EB0594500046128 /* PinPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2A06351EB0594500046128 /* PinPost.storyboard */; };
+		3F2A063A1EB06CC600046128 /* PostTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2A06391EB06CC500046128 /* PostTableViewHeaderView.xib */; };
+		3F2A063D1EB0741B00046128 /* PostTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2A063C1EB0741B00046128 /* PostTableViewHeaderView.m */; };
+		3F3068F51EAB9D0300B451E6 /* UtilityModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3068F41EAB9D0300B451E6 /* UtilityModule.m */; };
 		3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E331E94B25C009F082D /* MapMakeViewController.m */; };
 		3F395E361E94B325009F082D /* Make.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E351E94B325009F082D /* Make.storyboard */; };
 		3F395E3F1E95EFF5009F082D /* MapProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E3D1E95EFF5009F082D /* MapProfileTableViewCell.m */; };
@@ -16,9 +19,7 @@
 		3F395E451E95F00C009F082D /* PinProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E431E95F00C009F082D /* PinProfileTableViewCell.xib */; };
 		3F395E551E961F72009F082D /* UserProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E541E961F72009F082D /* UserProfileHeaderView.xib */; };
 		3F395E581E961FC8009F082D /* UserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F395E571E961FC8009F082D /* UserProfileHeaderView.m */; };
-		3F395E5D1E963695009F082D /* pika.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E5B1E963695009F082D /* pika.png */; };
-		3F395E5E1E963695009F082D /* pika2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F395E5C1E963695009F082D /* pika2.png */; };
-		3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */; };
+		3F3AF1A01E8ACCD8009FD151 /* PinMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3AF19F1E8ACCD8009FD151 /* PinMarkerView.m */; };
 		3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */; };
 		3F5D69CD1E9A752300129C90 /* UserProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69CC1E9A752300129C90 /* UserProfileEditViewController.m */; };
 		3F5D69D31E9A76E800129C90 /* UserAccountEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D69D21E9A76E800129C90 /* UserAccountEditViewController.m */; };
@@ -26,7 +27,7 @@
 		3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F5A1E88FF1F001B87F0 /* MainTabBarController.m */; };
 		3F745F611E891728001B87F0 /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F745F601E891728001B87F0 /* NetworkModule.m */; };
 		3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C27CE1E8A48C6008DD04A /* PinViewController.m */; };
-		3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C27D01E8A48D3008DD04A /* PinView.storyboard */; };
+		3FAA53B81EB1028F00347B17 /* libRealm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FAA53B71EB1028F00347B17 /* libRealm.a */; };
 		3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */; };
 		3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD0B321EA3D56B00319491 /* FollowViewController.m */; };
 		3FC77F4E1E9B7DDA009921D5 /* MomoDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC77F4D1E9B7DDA009921D5 /* MomoDataSet.m */; };
@@ -49,7 +50,7 @@
 		EF4702E61E891E1E0007E4AE /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */; };
 		EF4FA2681E8A10470013008C /* SignupPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2671E8A10470013008C /* SignupPageViewController.m */; };
 		EF4FA2A41E8BA3740013008C /* PinContentsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */; };
-		EF5A49CE1E9F51BD00A33858 /* PinPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5A49CD1E9F51BD00A33858 /* PinPostViewController.m */; };
+		EF5A49CE1E9F51BD00A33858 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5A49CD1E9F51BD00A33858 /* PostViewController.m */; };
 		EF69E57B1EA498A400DE4C65 /* PhotoTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E57A1EA498A400DE4C65 /* PhotoTextCell.m */; };
 		EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E57D1EA498B400DE4C65 /* PhotoCell.m */; };
 		EF69E5811EA498C100DE4C65 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69E5801EA498C100DE4C65 /* TextCell.m */; };
@@ -57,8 +58,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F3068F31EAB9D0300B451E6 /* UtilityCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityCenter.h; sourceTree = "<group>"; };
-		3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityCenter.m; sourceTree = "<group>"; };
+		3F2A06351EB0594500046128 /* PinPost.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinPost.storyboard; sourceTree = "<group>"; };
+		3F2A06391EB06CC500046128 /* PostTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableViewHeaderView.xib; sourceTree = "<group>"; };
+		3F2A063B1EB0741B00046128 /* PostTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewHeaderView.h; sourceTree = "<group>"; };
+		3F2A063C1EB0741B00046128 /* PostTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewHeaderView.m; sourceTree = "<group>"; };
+		3F3068F31EAB9D0300B451E6 /* UtilityModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityModule.h; sourceTree = "<group>"; };
+		3F3068F41EAB9D0300B451E6 /* UtilityModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityModule.m; sourceTree = "<group>"; };
 		3F395E321E94B25C009F082D /* MapMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMakeViewController.h; sourceTree = "<group>"; };
 		3F395E331E94B25C009F082D /* MapMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMakeViewController.m; sourceTree = "<group>"; };
 		3F395E351E94B325009F082D /* Make.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Make.storyboard; sourceTree = "<group>"; };
@@ -71,10 +76,8 @@
 		3F395E541E961F72009F082D /* UserProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileHeaderView.xib; sourceTree = "<group>"; };
 		3F395E561E961FC8009F082D /* UserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHeaderView.h; sourceTree = "<group>"; };
 		3F395E571E961FC8009F082D /* UserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHeaderView.m; sourceTree = "<group>"; };
-		3F395E5B1E963695009F082D /* pika.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pika.png; sourceTree = "<group>"; };
-		3F395E5C1E963695009F082D /* pika2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pika2.png; sourceTree = "<group>"; };
-		3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMarkerUIView.h; sourceTree = "<group>"; };
-		3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMarkerUIView.m; sourceTree = "<group>"; };
+		3F3AF19E1E8ACCD8009FD151 /* PinMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMarkerView.h; sourceTree = "<group>"; };
+		3F3AF19F1E8ACCD8009FD151 /* PinMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMarkerView.m; sourceTree = "<group>"; };
 		3F4F4F881E97376A00CD9C1C /* PinMakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinMakeViewController.h; sourceTree = "<group>"; };
 		3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinMakeViewController.m; sourceTree = "<group>"; };
 		3F5D69CB1E9A752300129C90 /* UserProfileEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileEditViewController.h; sourceTree = "<group>"; };
@@ -89,7 +92,7 @@
 		3F745F601E891728001B87F0 /* NetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModule.m; sourceTree = "<group>"; };
 		3F9C27CD1E8A48C6008DD04A /* PinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinViewController.h; sourceTree = "<group>"; };
 		3F9C27CE1E8A48C6008DD04A /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
-		3F9C27D01E8A48D3008DD04A /* PinView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PinView.storyboard; sourceTree = "<group>"; };
+		3FAA53B71EB1028F00347B17 /* libRealm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRealm.a; path = "../../../Library/Developer/Xcode/DerivedData/Momo-gfxgymketnaolqbzymispmwxsuyi/Build/Products/Debug-iphoneos/Realm/libRealm.a"; sourceTree = "<group>"; };
 		3FBAAB481E92220C00510C21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FBD0B311EA3D56B00319491 /* FollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowViewController.h; sourceTree = "<group>"; };
 		3FBD0B321EA3D56B00319491 /* FollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowViewController.m; sourceTree = "<group>"; };
@@ -132,8 +135,8 @@
 		EF4FA2671E8A10470013008C /* SignupPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupPageViewController.m; sourceTree = "<group>"; };
 		EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinContentsCollectionViewCell.h; sourceTree = "<group>"; };
 		EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinContentsCollectionViewCell.m; sourceTree = "<group>"; };
-		EF5A49CC1E9F51BD00A33858 /* PinPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinPostViewController.h; sourceTree = "<group>"; };
-		EF5A49CD1E9F51BD00A33858 /* PinPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinPostViewController.m; sourceTree = "<group>"; };
+		EF5A49CC1E9F51BD00A33858 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		EF5A49CD1E9F51BD00A33858 /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		EF69E5791EA498A400DE4C65 /* PhotoTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoTextCell.h; path = Assets.xcassets/PhotoTextCell.h; sourceTree = "<group>"; };
 		EF69E57A1EA498A400DE4C65 /* PhotoTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoTextCell.m; path = Assets.xcassets/PhotoTextCell.m; sourceTree = "<group>"; };
 		EF69E57C1EA498B400DE4C65 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FAA53B81EB1028F00347B17 /* libRealm.a in Frameworks */,
 				A3521B7FD35D14519B40D9F7 /* libPods-Momo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,9 +162,28 @@
 		15DC98F4A4A76B66B13157A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FAA53B71EB1028F00347B17 /* libRealm.a */,
 				77C8C6C1265BFE5EB76C0A81 /* libPods-Momo.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F2A06371EB0597200046128 /* PinCell */ = {
+			isa = PBXGroup;
+			children = (
+				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
+				EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */,
+			);
+			name = PinCell;
+			sourceTree = "<group>";
+		};
+		3F2A06381EB059A100046128 /* PinMarkerView */ = {
+			isa = PBXGroup;
+			children = (
+				3F3AF19E1E8ACCD8009FD151 /* PinMarkerView.h */,
+				3F3AF19F1E8ACCD8009FD151 /* PinMarkerView.m */,
+			);
+			name = PinMarkerView;
 			sourceTree = "<group>";
 		};
 		3F395E591E9631F6009F082D /* HeaderView&Cell */ = {
@@ -179,20 +202,11 @@
 			name = "HeaderView&Cell";
 			sourceTree = "<group>";
 		};
-		3F395E5A1E96367F009F082D /* Imges */ = {
-			isa = PBXGroup;
-			children = (
-				3F395E5B1E963695009F082D /* pika.png */,
-				3F395E5C1E963695009F082D /* pika2.png */,
-			);
-			name = Imges;
-			sourceTree = "<group>";
-		};
 		3F4C91AB1E8A0695005BF38F /* View & Controller */ = {
 			isa = PBXGroup;
 			children = (
 				3FD9A5541E88F15000B965A7 /* LoginView */,
-				3FD9A5581E88F4FA00B965A7 /* MainTabBarController */,
+				3FD9A5581E88F4FA00B965A7 /* MomoView */,
 			);
 			name = "View & Controller";
 			sourceTree = "<group>";
@@ -210,17 +224,18 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
-		3F9C27CC1E8A489F008DD04A /* PinView */ = {
+		3F9C27CC1E8A489F008DD04A /* Pin&PostView */ = {
 			isa = PBXGroup;
 			children = (
-				3F9C27D01E8A48D3008DD04A /* PinView.storyboard */,
+				3F2A06351EB0594500046128 /* PinPost.storyboard */,
 				3F9C27CD1E8A48C6008DD04A /* PinViewController.h */,
 				3F9C27CE1E8A48C6008DD04A /* PinViewController.m */,
-				EF4FA2A21E8BA3740013008C /* PinContentsCollectionViewCell.h */,
-				EF4FA2A31E8BA3740013008C /* PinContentsCollectionViewCell.m */,
-				3FEEFA741EA62331003F748F /* PostView */,
+				EF5A49CC1E9F51BD00A33858 /* PostViewController.h */,
+				EF5A49CD1E9F51BD00A33858 /* PostViewController.m */,
+				3F2A06371EB0597200046128 /* PinCell */,
+				EF69E5821EA4A3BF00DE4C65 /* PostHeaderView&Cell */,
 			);
-			name = PinView;
+			name = "Pin&PostView";
 			sourceTree = "<group>";
 		};
 		3FBD0B2B1EA3C3EE00319491 /* Edit */ = {
@@ -246,9 +261,9 @@
 		3FD392EC1E93C8ED00AFBB3A /* MyView */ = {
 			isa = PBXGroup;
 			children = (
+				3FD392F01E93C94400AFBB3A /* My.storyboard */,
 				3FD392ED1E93C92600AFBB3A /* MyViewController.h */,
 				3FD392EE1E93C92600AFBB3A /* MyViewController.m */,
-				3FD392F01E93C94400AFBB3A /* My.storyboard */,
 				3F395E591E9631F6009F082D /* HeaderView&Cell */,
 				3FBD0B2C1EA3C44300319491 /* Follow */,
 				3FBD0B2B1EA3C3EE00319491 /* Edit */,
@@ -259,13 +274,15 @@
 		3FD392F21E93D54400AFBB3A /* MakeView */ = {
 			isa = PBXGroup;
 			children = (
+				3F395E351E94B325009F082D /* Make.storyboard */,
 				3FD392F61E93D58E00AFBB3A /* MakeViewController.h */,
 				3FD392F71E93D58E00AFBB3A /* MakeViewController.m */,
 				3F395E321E94B25C009F082D /* MapMakeViewController.h */,
 				3F395E331E94B25C009F082D /* MapMakeViewController.m */,
 				3F4F4F881E97376A00CD9C1C /* PinMakeViewController.h */,
 				3F4F4F891E97376A00CD9C1C /* PinMakeViewController.m */,
-				3F395E351E94B325009F082D /* Make.storyboard */,
+				3FEBB8941E97C70B006E3E77 /* PostMakeViewController.h */,
+				3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */,
 			);
 			name = MakeView;
 			sourceTree = "<group>";
@@ -284,12 +301,10 @@
 		3FD918CD1E8930A2005B1583 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				3FD918CE1E8930BF005B1583 /* Map.storyboard */,
 				3FD918CA1E893067005B1583 /* MapViewController.h */,
 				3FD918CB1E893067005B1583 /* MapViewController.m */,
-				3F3AF19E1E8ACCD8009FD151 /* PinMarkerUIView.h */,
-				3F3AF19F1E8ACCD8009FD151 /* PinMarkerUIView.m */,
-				3FD918CE1E8930BF005B1583 /* Map.storyboard */,
-				3F9C27CC1E8A489F008DD04A /* PinView */,
+				3F2A06381EB059A100046128 /* PinMarkerView */,
 			);
 			name = MapView;
 			sourceTree = "<group>";
@@ -327,11 +342,10 @@
 		3FD9A5321E88ED3700B965A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3F3068F31EAB9D0300B451E6 /* UtilityCenter.h */,
-				3F3068F41EAB9D0300B451E6 /* UtilityCenter.m */,
-				3FD392FB1E93D70700AFBB3A /* DesignGuide */,
-				3F395E5A1E96367F009F082D /* Imges */,
 				3FF685AF1E892D5300FD927D /* PrefixHeader.pch */,
+				3F3068F31EAB9D0300B451E6 /* UtilityModule.h */,
+				3F3068F41EAB9D0300B451E6 /* UtilityModule.m */,
+				3FD392FB1E93D70700AFBB3A /* DesignGuide */,
 				EFD11B9B1E8E90EF00896952 /* Assets.xcassets */,
 				3FD9A5401E88ED3700B965A7 /* LaunchScreen.storyboard */,
 				3FD9A5431E88ED3700B965A7 /* Info.plist */,
@@ -364,18 +378,18 @@
 		3FD9A5541E88F15000B965A7 /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
+				3FD9A54C1E88F0A300B965A7 /* Login.storyboard */,
 				3FD9A5491E88F08500B965A7 /* LoginViewController.h */,
 				3FD9A54A1E88F08500B965A7 /* LoginViewController.m */,
 				EF4702E41E891E1E0007E4AE /* LoginPageViewController.h */,
 				EF4702E51E891E1E0007E4AE /* LoginPageViewController.m */,
 				EF4FA2661E8A10470013008C /* SignupPageViewController.h */,
 				EF4FA2671E8A10470013008C /* SignupPageViewController.m */,
-				3FD9A54C1E88F0A300B965A7 /* Login.storyboard */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
 		};
-		3FD9A5581E88F4FA00B965A7 /* MainTabBarController */ = {
+		3FD9A5581E88F4FA00B965A7 /* MomoView */ = {
 			isa = PBXGroup;
 			children = (
 				3F745F591E88FF1F001B87F0 /* MainTabBarController.h */,
@@ -383,20 +397,9 @@
 				3FD918CD1E8930A2005B1583 /* MapView */,
 				3FD392F21E93D54400AFBB3A /* MakeView */,
 				3FD392EC1E93C8ED00AFBB3A /* MyView */,
+				3F9C27CC1E8A489F008DD04A /* Pin&PostView */,
 			);
-			name = MainTabBarController;
-			sourceTree = "<group>";
-		};
-		3FEEFA741EA62331003F748F /* PostView */ = {
-			isa = PBXGroup;
-			children = (
-				3FEBB8941E97C70B006E3E77 /* PostMakeViewController.h */,
-				3FEBB8951E97C70B006E3E77 /* PostMakeViewController.m */,
-				EF5A49CC1E9F51BD00A33858 /* PinPostViewController.h */,
-				EF5A49CD1E9F51BD00A33858 /* PinPostViewController.m */,
-				EF69E5821EA4A3BF00DE4C65 /* PostCell */,
-			);
-			name = PostView;
+			name = MomoView;
 			sourceTree = "<group>";
 		};
 		5BFB7AE743B07EA5BE3457CD /* Pods */ = {
@@ -408,9 +411,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		EF69E5821EA4A3BF00DE4C65 /* PostCell */ = {
+		EF69E5821EA4A3BF00DE4C65 /* PostHeaderView&Cell */ = {
 			isa = PBXGroup;
 			children = (
+				3F2A063B1EB0741B00046128 /* PostTableViewHeaderView.h */,
+				3F2A063C1EB0741B00046128 /* PostTableViewHeaderView.m */,
+				3F2A06391EB06CC500046128 /* PostTableViewHeaderView.xib */,
 				EF69E5791EA498A400DE4C65 /* PhotoTextCell.h */,
 				EF69E57A1EA498A400DE4C65 /* PhotoTextCell.m */,
 				EF69E57C1EA498B400DE4C65 /* PhotoCell.h */,
@@ -418,7 +424,7 @@
 				EF69E57F1EA498C100DE4C65 /* TextCell.h */,
 				EF69E5801EA498C100DE4C65 /* TextCell.m */,
 			);
-			name = PostCell;
+			name = "PostHeaderView&Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,9 +489,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F395E5D1E963695009F082D /* pika.png in Resources */,
 				3F395E451E95F00C009F082D /* PinProfileTableViewCell.xib in Resources */,
-				3F9C27D11E8A48D3008DD04A /* PinView.storyboard in Resources */,
 				3FD392F11E93C94400AFBB3A /* My.storyboard in Resources */,
 				3FBAAB491E92220C00510C21 /* GoogleService-Info.plist in Resources */,
 				3F395E551E961F72009F082D /* UserProfileHeaderView.xib in Resources */,
@@ -494,8 +498,9 @@
 				EFD11B9C1E8E90EF00896952 /* Assets.xcassets in Resources */,
 				3FD9A54D1E88F0A300B965A7 /* Login.storyboard in Resources */,
 				3F395E361E94B325009F082D /* Make.storyboard in Resources */,
+				3F2A063A1EB06CC600046128 /* PostTableViewHeaderView.xib in Resources */,
+				3F2A06361EB0594500046128 /* PinPost.storyboard in Resources */,
 				3FD918CF1E8930BF005B1583 /* Map.storyboard in Resources */,
-				3F395E5E1E963695009F082D /* pika2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,7 +560,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF69E57E1EA498B400DE4C65 /* PhotoCell.m in Sources */,
-				3F3068F51EAB9D0300B451E6 /* UtilityCenter.m in Sources */,
+				3F2A063D1EB0741B00046128 /* PostTableViewHeaderView.m in Sources */,
+				3F3068F51EAB9D0300B451E6 /* UtilityModule.m in Sources */,
 				3FD392E81E93B59800AFBB3A /* UIFont+MMAdditions.m in Sources */,
 				3F4F4F8A1E97376A00CD9C1C /* PinMakeViewController.m in Sources */,
 				3FBD0B331EA3D56B00319491 /* FollowViewController.m in Sources */,
@@ -570,9 +576,9 @@
 				3F745F5B1E88FF1F001B87F0 /* MainTabBarController.m in Sources */,
 				3FD392E71E93B59800AFBB3A /* UIColor+MMAdditions.m in Sources */,
 				3F395E341E94B25C009F082D /* MapMakeViewController.m in Sources */,
-				EF5A49CE1E9F51BD00A33858 /* PinPostViewController.m in Sources */,
+				EF5A49CE1E9F51BD00A33858 /* PostViewController.m in Sources */,
 				EF69E5811EA498C100DE4C65 /* TextCell.m in Sources */,
-				3F3AF1A01E8ACCD8009FD151 /* PinMarkerUIView.m in Sources */,
+				3F3AF1A01E8ACCD8009FD151 /* PinMarkerView.m in Sources */,
 				3F9C27CF1E8A48C6008DD04A /* PinViewController.m in Sources */,
 				3F7254E51E92370F007001F2 /* GoogleAnalyticsModule.m in Sources */,
 				3FD392F91E93D58E00AFBB3A /* MakeViewController.m in Sources */,

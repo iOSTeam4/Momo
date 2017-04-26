@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    NSLog(@"awakeFromNib");
+//    NSLog(@"awakeFromNib");
 
 }
 
@@ -32,8 +32,9 @@
 //    [self.userEditBtn.layer setCornerRadius:5];
 //    [self.userEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
 //    [self.userEditBtn.layer setBorderWidth:1];
-    
-    self.userCommentLabel.text = @"자 이제 시작이야 내 꿈을!\n내 꿈을 위한 여행 피카츄! 피카피카!\n걱정따윈 없어 없어 내 친구와 함께니깐~";
+   
+    // 유저 코멘트
+    self.userCommentLabel.text = [DataCenter sharedInstance].momoUserData.user_description;
     
 }
 

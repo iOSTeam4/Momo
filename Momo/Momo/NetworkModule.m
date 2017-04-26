@@ -112,11 +112,6 @@ static NSString *const POST_URL             = @"/api/post/";
     // Request
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, LOG_IN_URL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    
-    
-//    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-//    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     
     request.HTTPBody = [[NSString stringWithFormat:@"username=%@&password=%@", username, password] dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"POST";
@@ -139,14 +134,13 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                 if (((NSHTTPURLResponse *)response).statusCode == 200) {
                                                                     // Code: 200 Success
                                                                     
-                                                                    NSNumber *pk = [responseDic objectForKey:@"user_pk"];
+                                                                    NSInteger pk = [[responseDic objectForKey:@"user_pk"] integerValue];
                                                                     NSString *token = [responseDic objectForKey:@"token"];
                                                                     
-                                                                    NSLog(@"PK : %@, Token : %@", pk, token);
+                                                                    NSLog(@"PK : %ld, Token : %@", pk, token);
                                                                     
-                                                                    [DataCenter sharedInstance].momoUserData.pk = [pk integerValue];
-                                                                    [DataCenter sharedInstance].momoUserData.user_token = token;
-                                                                    
+                                                                    [DataCenter setLoginDataWithPK:pk withToken:token];     // Set User loginData
+                                                                                                                                        
                                                                     completionBlock(YES, @"로그인 성공");
                                                                     
                                                                 } else {
@@ -213,7 +207,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                 if (((NSHTTPURLResponse *)response).statusCode == 200) {
                                                                     // Code: 200 Success
                                                                     
-                                                                    [DataCenter removeMomoUserData];           // 토큰을 비롯한 유저 데이터 삭제
+                                                                    [DataCenter removeMomoLoginData];           // 유저 로그인 데이터 삭제
                                                                     
                                                                     // 정상적으로 로그아웃 되었습니다
                                                                     completionBlock(YES, @"정상적으로 로그아웃 되었습니다");
@@ -247,11 +241,11 @@ static NSString *const POST_URL             = @"/api/post/";
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
     // Request
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoLoginData.pk]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     // 헤더 세팅
-    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
+    [request addValue:[NSString stringWithFormat:@"Token %@", [DataCenter sharedInstance].momoLoginData.token] forHTTPHeaderField:@"Authorization"];
     
     request.HTTPMethod = @"GET";
     
@@ -271,7 +265,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                 // Code: 200 Success
                                                                 
                                                                 // 데이터 파싱, 세팅
-                                                                [DataCenter momoGetMemberProfileDicParsingAndUpdate:responseDic];
+                                                                [DataCenter setMomoUserDataWithResponseDic:responseDic];
 
                                                                 completionBlock(YES, nil);
                                                                 
@@ -285,7 +279,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                 // Code: 404 Not found
                                                                 // 해당 pk의 user가 존재하지 않습니다.
                                                                 
-                                                                [DataCenter removeMomoUserData];  // 세팅된 DB 다시 삭제
+                                                                [DataCenter removeMomoLoginData];       // 세팅된 유저 로그인 데이터 다시 삭제
                                                                 
                                                                 NSLog(@"%@", [responseDic objectForKey:@"detail"]);
                                                                 completionBlock(NO, [responseDic objectForKey:@"detail"]);
@@ -293,11 +287,10 @@ static NSString *const POST_URL             = @"/api/post/";
                                                             }
                                                         } else {
                                                             // Network error
-                                                            [DataCenter removeMomoUserData];  // 세팅된 DB 다시 삭제
+                                                            [DataCenter removeMomoLoginData];  // 세팅된 유저 로그인 데이터 다시 삭제
                                                             NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
                                                             completionBlock(NO, @"Network error");
-                                                        }
-                                                        
+                                                        } 
                                                     });
                                                 }];
     
@@ -309,7 +302,8 @@ static NSString *const POST_URL             = @"/api/post/";
 
 // Patch member profile update
 + (void)patchMemberProfileUpdateWithUsername:(NSString *)username
-                              withProfileImg:(NSData *)imgData
+                          withProfileImgData:(NSData *)imgData
+                             withDescription:(NSString *)description
                          withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
     
     
@@ -317,6 +311,10 @@ static NSString *const POST_URL             = @"/api/post/";
         
         [formData appendPartWithFormData:[username dataUsingEncoding:NSUTF8StringEncoding] name:@"username"];                       // 유저네임
         [formData appendPartWithFileData:imgData name:@"profile_img" fileName:@"profile_img.jpeg" mimeType:@"image/jpeg"];          // 프로필 사진
+        
+        if ([description length] > 0) {
+            [formData appendPartWithFormData:[description dataUsingEncoding:NSUTF8StringEncoding] name:@"description"];                 // 소개글
+        }
         
     } error:nil];
     
@@ -339,7 +337,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                       // Code: 200 Success
                                                       
                                                       // 데이터 파싱, 세팅
-                                                      [DataCenter momoGetMemberProfileDicParsingAndUpdate:responseObject];
+                                                      [DataCenter setMomoUserDataWithResponseDic:responseObject];
                                                       
                                                       completionBlock(YES, @"Code: 200 Success");
                                                       

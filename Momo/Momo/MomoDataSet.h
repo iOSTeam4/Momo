@@ -118,7 +118,7 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 // Map Data Set -----------------------------//
 @interface MomoMapDataSet : RLMObject
-@property NSInteger pk;     // id
+@property NSInteger pk;
 
 // map_<key>
 @property NSString *map_name;
@@ -158,9 +158,21 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 @property RLMArray<MomoMapDataSet *><MomoMapDataSet> *user_map_list;
 
-
 @property NSString *user_id;
 @property NSString *user_description;
+
+// 유저 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
++ (MomoUserDataSet *)makeUserWithDic:(NSDictionary *)userDic;
+
+@end
+
+
+
+// Log in Data Set --------------------------//
+@interface MomoLoginDataSet : RLMObject
+
+@property NSInteger pk;
+@property NSString *token;
 
 @end
 

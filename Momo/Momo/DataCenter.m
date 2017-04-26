@@ -38,40 +38,42 @@
 
 
 
-
-// MOMO Dataset 관련 -----------------------------------//
-#pragma mark - MOMO Dataset 관련
-
-+ (RLMArray<MomoMapDataSet *> *)myMapList {
-    return [DataCenter sharedInstance].momoUserData.user_map_list;
-}
-
-+ (RLMArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex {
-    return [DataCenter myMapList][mapIndex].map_pin_list;
-}
-
-+ (RLMArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex {
-    return [DataCenter myPinListWithMapIndex:mapIndex][pinIndex].pin_post_list;
-}
-
-
-+ (MomoMapDataSet *)findMapDataWithMapPK:(NSInteger)map_pk {
-    return [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", map_pk]][0];
-}
-
-+ (MomoPinDataSet *)findPinDataWithPinPK:(NSInteger)pin_pk {
-    return [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pin_pk]][0];
-}
-
-+ (MomoPostDataSet *)findPostDataWithPostPK:(NSInteger)post_pk {
-    return [MomoPostDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", post_pk]][0];
-}
-
-
-
-
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter
+
+
+// 로그인 정보 저장
++ (void)setLoginDataWithPK:(NSInteger)pk withToken:(NSString *)token {
+    
+    [DataCenter sharedInstance].momoLoginData = [[MomoLoginDataSet alloc] init];
+    [DataCenter sharedInstance].momoLoginData.pk = pk;
+    [DataCenter sharedInstance].momoLoginData.token = token;
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm addObject:[DataCenter sharedInstance].momoLoginData];
+    }];
+    
+}
+
+// 로그인 정보 삭제
++ (void)removeMomoLoginData {    
+    NSLog(@"user_pk : %ld", [DataCenter sharedInstance].momoLoginData.pk);
+    NSLog(@"user_token : %@", [DataCenter sharedInstance].momoLoginData.token);
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm deleteObject:[DataCenter sharedInstance].momoLoginData];
+    }];
+}
+
+
+
+
+// MOMO Dataset 관련 -----------------------------------//
+
+
+#pragma mark - MOMO User Data 저장, 패치
 
 - (NSString *)getUserToken {
     // Token 없으면 nil
@@ -79,45 +81,29 @@
 }
 
 
-// User Data 저장, 패치, 삭제 --------------------------//
-#pragma mark - MOMO User Data 저장, 패치, 삭제
-
-// 초기 저장
-// 최초 객체 세팅 후, Realm에 addObject할 때만 부름
-+ (void)initialSaveMomoUserData {
-    NSLog(@"saveMomoUserData : %@", [DataCenter sharedInstance].momoUserData);
-    
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [realm addObject:[DataCenter sharedInstance].momoUserData];
-    }];
-    
-    NSLog(@"realm url : %@", realm.configuration.fileURL);
-}
-
 // 패치
 - (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
     
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
     // 기존 저장되어있던 기본 데이터들 패치 (페북 & 이메일 공통)
-    if([MomoUserDataSet allObjects].firstObject) {     // nil이 아닐 때 불러옴
-        [DataCenter sharedInstance].momoUserData = [MomoUserDataSet allObjectsInRealm:[RLMRealm defaultRealm]].firstObject;    // 첫번째 UserData가 내 계정
+    if([MomoLoginDataSet allObjectsInRealm:realm].firstObject) {     // nil이 아닐 때 불러옴
+        [DataCenter sharedInstance].momoLoginData = [MomoLoginDataSet allObjectsInRealm:realm].firstObject;     // 로그인 데이터는 하나만 있음
 
-        NSLog(@"token : %@, count : %ld =? %ld", [DataCenter sharedInstance].momoUserData.user_token, [MomoUserDataSet allObjectsInRealm:[RLMRealm defaultRealm]].count, [MomoUserDataSet allObjects].count);
+        NSLog(@"token : %@, login cnt : %ld, user cnt : %ld", [DataCenter sharedInstance].momoLoginData.token, [MomoLoginDataSet allObjectsInRealm:realm].count, [MomoUserDataSet allObjects].count);
         
         [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
             
             if (isSuccess) {
-                NSLog(@"get Member Profile success : %@", result);
+                NSLog(@"get Member Profile Request success : %@", result);
 
                 completionBlock(YES);
                 
             } else {
                 NSLog(@"get Member Profile Request error : %@", result);
-                [DataCenter removeMomoUserData];
-                [DataCenter sharedInstance].momoUserData = [[MomoUserDataSet alloc] init];
+                [DataCenter removeMomoLoginData];
                 
                 completionBlock(NO);
-                
             }
         }];
         
@@ -128,71 +114,49 @@
     }
 }
 
-// 삭제
-+ (void)removeMomoUserData {
-    
-    NSLog(@"removeUserData %@", [DataCenter sharedInstance].momoUserData);
-    NSLog(@"user_token : %@", [DataCenter sharedInstance].momoUserData.user_token);
-
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [realm deleteAllObjects];
-    }];
-
-}
-
 
 // 유저 전체 데이터 파싱 및 저장
-+ (void)momoGetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic {
-        
++ (void)setMomoUserDataWithResponseDic:(NSDictionary *)responseDic {
+    
     // realm transaction
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-
-        // 추가 User 정보
-        [DataCenter sharedInstance].momoUserData.user_username = [responseDic objectForKey:@"username"];
-        [DataCenter sharedInstance].momoUserData.user_id = [responseDic objectForKey:@"userid"];
-//        [DataCenter sharedInstance].momoUserData.user_description = [responseDic objectForKey:@"description"];    // String 값으로 바꿔 전달해달라해야함
+    
+        // User 정보
+        [DataCenter sharedInstance].momoUserData = [MomoUserDataSet makeUserWithDic:responseDic];   // 캐싱 정보 사용 or 새로 만들어 realm에 add
+        [realm addOrUpdateObject:[DataCenter sharedInstance].momoUserData];
         
-        if ([responseDic objectForKey:@"email"]) {
-            [DataCenter sharedInstance].momoUserData.user_email = [responseDic objectForKey:@"email"];
-        }
-        if ([[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]) {
-            [DataCenter sharedInstance].momoUserData.user_profile_image_url = [[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
-            [DataCenter sharedInstance].momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[responseDic objectForKey:@"profile_img"] objectForKey:@"full_size"]]];      // setter 왜 안불리지?
-        }
-        
-
-        // 기존 데이터, 새로 생성된 데이터 구별했으나, 어차피 다른 디바이스에서 같은 계정으로 데이터 삭제 되있었을 때
-        // 삭제에 관한 부분(RLMArray 해당 index 삭제까지) 복잡하게 처리할 바에야 그냥 전부 데이터 받아오니, 다시 세팅하는 방식으로 함
-        // 추후, create_date기반으로 update 된 부분만 서버에서 보내주는 API가 나온다면 전부 삭제하는 로직 없앨 것.
-        [[DataCenter myMapList] removeAllObjects];
-        [realm deleteObjects:[MomoMapDataSet allObjects]];
-        [realm deleteObjects:[MomoPinDataSet allObjects]];
-        [realm deleteObjects:[MomoPostDataSet allObjects]];
         
         // Map 데이터 파싱 및 저장(업데이트)
         for (NSDictionary *mapDic in ((NSArray *)[responseDic objectForKey:@"map_list"])) {
-            MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];
+
+            MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];                       // 캐싱 정보 사용 or 새로 만들어 realm에 add
+            [realm addOrUpdateObject:mapData];
+            mapData.map_pin_list = nil;     // 핀 리스트 초기화
             
-            [realm addOrUpdateObject:mapData];              // map 데이터 add or update
-            [[DataCenter myMapList] addObject:mapData];     // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
+            [[DataCenter myMapList] addObject:mapData];    // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
             
             
             // Pin 데이터 파싱 및 저장(업데이트)
             for (NSDictionary *pinDic in ((NSArray *)[mapDic objectForKey:@"pin_list"])) {
-                MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];
+
+                MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];                   // 캐싱 정보 사용 or 새로 만들어 realm에 add
+                [realm addOrUpdateObject:pinData];
+                pinData.pin_post_list = nil;        // 포스트 리스트 초기화
                 
-                [realm addOrUpdateObject:pinData];              // pin 데이터 add or update
+                // 재로그인시 아래와 같은 에러 발생.. 이해안됨..
+                // Terminating app due to uncaught exception 'RLMException', reason: 'Index 0 is out of bounds (must be less than 0)'
                 [mapData.map_pin_list addObject:pinData];       // map의 pin_list에 pin 추가
                 
                 
                 // Post 데이터 파싱 및 저장(업데이트)
                 for (NSDictionary *postDic in ((NSArray *)[pinDic objectForKey:@"post_list"])) {
-                    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];
                     
-                    [realm addOrUpdateObject:postData];             // post 데이터 add or update
+                    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];          // 캐싱 정보 사용 or 새로 만들어 realm에 add
+                    [realm addOrUpdateObject:postData];
+                    
                     [pinData.pin_post_list addObject:postData];     // pin의 post_list에 post 추가
+
                 }
             }
         }
@@ -338,6 +302,57 @@
     }];
 }
 
+
+
+#pragma mark - MOMO Data List
+
++ (RLMArray<MomoMapDataSet *> *)myMapList {
+    return [DataCenter sharedInstance].momoUserData.user_map_list;
+}
+
++ (RLMArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex {
+    return [DataCenter myMapList][mapIndex].map_pin_list;
+}
+
++ (RLMArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex {
+    return [DataCenter myPinListWithMapIndex:mapIndex][pinIndex].pin_post_list;
+}
+
+
+#pragma mark - MOMO Data Find
+
++ (MomoUserDataSet *)findUserDataWithUserPK:(NSInteger)user_pk {
+    if ([MomoUserDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", user_pk]].count > 0) {
+        return [MomoUserDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", user_pk]][0];
+    } else {
+        return nil;
+    }
+}
+
+
++ (MomoMapDataSet *)findMapDataWithMapPK:(NSInteger)map_pk {
+    if ([MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", map_pk]].count > 0) {
+        return [MomoMapDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", map_pk]][0];
+    } else {
+        return nil;
+    }
+}
+
++ (MomoPinDataSet *)findPinDataWithPinPK:(NSInteger)pin_pk {
+    if ([MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pin_pk]].count > 0) {
+        return [MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", pin_pk]][0];
+    } else {
+        return nil;
+    }
+}
+
++ (MomoPostDataSet *)findPostDataWithPostPK:(NSInteger)post_pk {
+    if ([MomoPostDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", post_pk]].count > 0) {
+        return [MomoPostDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", post_pk]][0];
+    } else {
+        return nil;
+    }
+}
 
 
 

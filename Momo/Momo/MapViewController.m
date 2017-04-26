@@ -7,7 +7,7 @@
 //
 
 #import "MapViewController.h"
-#import "PinMarkerUIView.h"
+#import "PinMarkerView.h"
 #import "PinViewController.h"
 
 #import "MapMakeViewController.h"
@@ -91,11 +91,6 @@
         
         [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
         
-//        if (self.showSelectedMap) {
-//            // 선택지도 보기 상황
-//            [self.mapInfoView setHidden:YES];
-//            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
-//        }
         
         [self.view layoutIfNeeded];                                     // 탭바 뺀, Constraints 다시 적용
         [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
@@ -121,7 +116,7 @@
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 
-            sleep(1);       // 1초 후 이동
+            sleep(0.5);       // 0.5초 후 이동
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"선택 핀을 중심으로 카메라 이동");
@@ -130,7 +125,7 @@
                                                                         longitude:self.focusingPinMarker.position.longitude
                                                                              zoom:13.5f];
                 [CATransaction begin];
-                [CATransaction setValue:[NSNumber numberWithFloat: 1.5f] forKey:kCATransactionAnimationDuration];
+                [CATransaction setValue:[NSNumber numberWithFloat: 1.f] forKey:kCATransactionAnimationDuration];
                 
                 [self.mapView animateWithCameraUpdate:[GMSCameraUpdate setCamera:camera]];    // 선택된 핀 중심으로 카메라 이동
                 
@@ -149,9 +144,9 @@
 }
 
 
+
 // NaviBar Hidden 상황 & PopGestureRecognizer 사용 예외처리
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    NSLog(@"MyViewController : gestureRecognizerShouldBegin, %ld", self.navigationController.viewControllers.count);
     
     // NaviController RootViewController에서는 PopGesture 실행 안되도록 처리
     if(self.navigationController.viewControllers.count > 1){
@@ -166,7 +161,7 @@
 
 // 선택지도 보기 세팅
 - (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData {
-    NSLog(@"showSelectedMapAndSetMapData : %@", mapData.map_name);
+//    NSLog(@"showSelectedMapAndSetMapData : %@", mapData.map_name);
     
     self.showSelectedMap = SELECTED_MAP_MODE;
     self.mapData = mapData;
@@ -175,7 +170,7 @@
 // 선택지도 보기, 지도, 중심 핀 데이터 세팅
 - (void)showSelectedMapAndSetMapData:(MomoMapDataSet *)mapData
                  withFocusingPinData:(MomoPinDataSet *)pinData {
-    NSLog(@"showSelectedMapAndSetMapData : %@ withFocusingPinData : %@", mapData.map_name, pinData.pin_name);
+//    NSLog(@"showSelectedMapAndSetMapData : %@ withFocusingPinData : %@", mapData.map_name, pinData.pin_name);
     
     self.showSelectedMap = SELECTED_MAP_MODE_WITH_PIN;
     self.mapData = mapData;
@@ -196,11 +191,6 @@
     
     self.mapInfoViewDescriptionLabel.text = self.mapData.map_description;
     self.mapInfoViewPinNumLabel.text = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list.count];
-    
-    // 수정하기 (팔로워/팔로잉) 버튼
-//    [self.mapInfoViewBtn.layer setCornerRadius:12];
-//    [self.mapInfoViewBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
-//    [self.mapInfoViewBtn.layer setBorderWidth:1];
     
     // 선택지도보기 뷰 띄우기
     [self.view bringSubviewToFront:self.mapInfoView];
@@ -329,11 +319,11 @@
         if (withAnimation) {
             marker.appearAnimation = kGMSMarkerAnimationPop;
         }
-        PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:self.currentZoomCase];
+        PinMarkerView *pinMarkerView = [[PinMarkerView alloc] initWithPinData:self.mapData.map_pin_list[i] withZoomCase:self.currentZoomCase];
         marker.icon = [pinMarkerView imageFromViewForMarker];
         marker.map = self.mapView;
         
-        NSLog(@"map_pin_list[%ld].pk : %ld", i, self.mapData.map_pin_list[i].pk);
+//        NSLog(@"map_pin_list[%ld].pk : %ld", i, self.mapData.map_pin_list[i].pk);
         marker.snippet = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list[i].pk];      // snippet에 pin pk 저장
         
         if (self.showSelectedMap == SELECTED_MAP_MODE_WITH_PIN) {
@@ -377,16 +367,16 @@
 
 // 탭 제스쳐, 핀마커 상세 보기
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
-    NSLog(@"didTapMarker");
+//    NSLog(@"didTapMarker");
     
     if (!self.isMakingMarker) {
         // 핀마커 등록 중엔 상세 보기 페이지 이동 불가
         
-        UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
-        PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
+        UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+        PinViewController *pinVC = [pinPostViewStoryBoard instantiateInitialViewController];
         
         // 핀 데이터 세팅
-        NSLog(@"pinPk : %ld", [marker.snippet integerValue]);
+//        NSLog(@"pinPk : %ld", [marker.snippet integerValue]);
         [pinVC showSelectedPinAndSetPinData:[DataCenter findPinDataWithPinPK:[marker.snippet integerValue]]];
         [self.navigationController pushViewController:pinVC animated:YES];
         
@@ -398,7 +388,7 @@
 
 // 롱 프레스 새 핀마커 생성, 등록
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinatee {
-    NSLog(@"didLongPressAtCoordinate, isMakingMarker:%d", self.isMakingMarker);
+//    NSLog(@"didLongPressAtCoordinate, isMakingMarker:%d", self.isMakingMarker);
     
     if (!self.isDragingMarker) {
         // 마커 드래그 아닐 때, 새 핀마커 생성 (하나씩만 만들 수 있게)
@@ -419,12 +409,6 @@
         [self.makingMarkerBtnView setHidden:NO];
 
         [(MainTabBarController *)self.tabBarController customTabBarSetHidden:YES];      // 탭바 Hidden
-
-//        if (self.showSelectedMap) {
-//            // 선택지도 보기 상황
-//            [self.mapInfoView setHidden:YES];
-//            self.mapView.padding = UIEdgeInsetsMake(20, 0, 49, 0);
-//        }
         
         [self.view layoutIfNeeded];                 // 탭바 뺀, Constraints 다시 적용
         [self.view bringSubviewToFront:self.makingMarkerBtnView];       // Google Map View가 맨 앞으로 올라가는 현상 때문에 호출
@@ -451,7 +435,7 @@
         while([self.mapView myLocation].coordinate.latitude == 0.0f);   // 내 위치 받아오기까지 조금 시간 걸림
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"%f, %f", [self.mapView myLocation].coordinate.latitude, [self.mapView myLocation].coordinate.longitude);
+//            NSLog(@"%f, %f", [self.mapView myLocation].coordinate.latitude, [self.mapView myLocation].coordinate.longitude);
             
             GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.mapView myLocation].coordinate.latitude
                                                                     longitude:[self.mapView myLocation].coordinate.longitude
@@ -484,7 +468,7 @@
 
 // 핀 만들기 취소 버튼 액션
 - (IBAction)cancelBtnAction:(id)sender {
-    NSLog(@"cancelBtnAction");
+//    NSLog(@"cancelBtnAction");
     
     // 위치등록 버튼 노출
     self.makingMarker.map = nil;
@@ -493,11 +477,6 @@
     [self.makingMarkerBtnView setHidden:YES];
     [(MainTabBarController *)self.tabBarController customTabBarSetHidden:NO];
     
-//    if (self.showSelectedMap) {
-//        // 선택지도 보기 상황
-//        [self.mapInfoView setHidden:NO];
-//        self.mapView.padding = UIEdgeInsetsMake(20, 0, 49 + self.mapInfoView.frame.size.height, 0);
-//    }
 }
 
 // 핀 만들기 다음 버튼 액션

@@ -16,7 +16,7 @@
 
 #import "MapViewController.h"
 #import "PinViewController.h"
-#import "PinPostViewController.h"
+#import "PostViewController.h"
 
 #import "MapMakeViewController.h"
 #import "PinMakeViewController.h"
@@ -40,6 +40,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
+
+    
     // TableView Settings -------------------//
 
     // TableView Nib(xib) Register
@@ -50,7 +54,7 @@
     self.mapPinNum = SHOW_MAP;     // 처음에 Map을 기본으로 보여줌
     
     // TableView Header, Cell Height 자동 적용
-    self.tableView.estimatedSectionHeaderHeight = 260;
+    self.tableView.estimatedSectionHeaderHeight = 245;
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -67,9 +71,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MyViewController"];
-    
-    // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
-    [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
     
     // 반드시 테이블 뷰 refresh 해야함
     [self.tableView reloadData];
@@ -130,12 +131,9 @@
     if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
         headerView.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
     }
-    if ([DataCenter sharedInstance].momoUserData.user_username) {
-        headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
-    }
-//    if ([DataCenter sharedInstance].momoUserData.user_id) {
-//        headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
-//    }
+    
+    headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
+    headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
     
     return headerView;
 }
@@ -155,7 +153,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
+//    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
     
     if (self.mapPinNum == SHOW_MAP) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
@@ -198,8 +196,8 @@
         
     } else {
         // 선택 핀 보기
-        UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
-        PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
+        UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+        PinViewController *pinVC = [pinPostViewStoryBoard instantiateInitialViewController];
 
         // 핀 데이터 역순 적용
         NSInteger inverseOrderIndex = [MomoPinDataSet allObjects].count - 1 - indexPath.row;
@@ -261,8 +259,8 @@
 // 핀 보기
 - (void)showSelectedPin:(MomoPinDataSet *)pinData {
     
-    UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
-    PinViewController *pinVC = [pinViewStoryBoard instantiateInitialViewController];
+    UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PinViewController *pinVC = [pinPostViewStoryBoard instantiateInitialViewController];
     
     // 핀 데이터 세팅
     [pinVC showSelectedPinAndSetPinData:pinData];    // 선택 핀 보기
@@ -273,8 +271,8 @@
 // 포스트 보기
 - (void)showSelectedPost:(MomoPostDataSet *)postData {
 
-    UIStoryboard *pinViewStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
-    PinPostViewController *postVC = [pinViewStoryBoard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+    UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PostViewController *postVC = [pinPostViewStoryBoard instantiateViewControllerWithIdentifier:@"PostViewController"];
 
     // 포스트 데이터 세팅
     [postVC showSelectedPostAndSetPostData:postData];   // 선택 포스트 보기

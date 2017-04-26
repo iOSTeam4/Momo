@@ -356,7 +356,7 @@
                                        [self showPinView];
 
                                    } else {
-                                       [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                       [UtilityModule presentCommonAlertController:self withMessage:result];
                                    }
                                }];
         
@@ -385,7 +385,7 @@
                                      }
                                      
                                  } else {
-                                     [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                     [UtilityModule presentCommonAlertController:self withMessage:result];
                                  }
                              
                              }];
@@ -431,7 +431,7 @@
                                    [self dismissViewControllerAnimated:YES completion:nil];
                                    
                                } else {
-                                   [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                   [UtilityModule presentCommonAlertController:self withMessage:result];
                                }
                            }];
     

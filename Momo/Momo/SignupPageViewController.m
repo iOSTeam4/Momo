@@ -161,7 +161,7 @@
                                  
                              } else {
                                  NSLog(@"error : %@", result);
-                                 [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                 [UtilityModule presentCommonAlertController:self withMessage:result];
                              }
                          }];
     
@@ -179,8 +179,6 @@
                   if (isSuccess) {
                       NSLog(@"fb 로그인 성공");
                     
-                      [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
-                      
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
                           [self.indicator stopAnimating];
@@ -193,7 +191,7 @@
                               
                           } else {
                               NSLog(@"error : %@", result);
-                              [UtilityCenter presentCommonAlertController:self withMessage:result];
+                              [UtilityModule presentCommonAlertController:self withMessage:result];
                           }
 
                       }];

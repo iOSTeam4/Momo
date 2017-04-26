@@ -15,29 +15,22 @@
 + (instancetype)sharedInstance;
 
 
-// MOMO Dataset 관련 -----------------------------------//
-#pragma mark - MOMO Dataset 관련
-@property (nonatomic) MomoUserDataSet *momoUserData;    // Map, Pin, Post 전부 포함
-+ (RLMArray<MomoMapDataSet *> *)myMapList;
-+ (RLMArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex;
-+ (RLMArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex;
-
-+ (MomoMapDataSet *)findMapDataWithMapPK:(NSInteger)map_pk;
-+ (MomoPinDataSet *)findPinDataWithPinPK:(NSInteger)pin_pk;
-+ (MomoPostDataSet *)findPostDataWithPostPK:(NSInteger)post_pk;
-
-
 // Account Token 자동로그인 ------------------------------//
 #pragma mark - Auto Login / Token getter
+@property (nonatomic) MomoLoginDataSet *momoLoginData;
+
++ (void)setLoginDataWithPK:(NSInteger)pk withToken:(NSString *)token;       // 로그인 정보 저장
++ (void)removeMomoLoginData;                                                // 로그인 정보 삭제
+
+
+// MOMO Dataset 관련 -----------------------------------//
+#pragma mark - MOMO Data property
+@property (nonatomic) MomoUserDataSet *momoUserData;    // Map, Pin, Post 전부 포함
 - (NSString *)getUserToken;
 
-
-// User Data 저장, 불러오기, 삭제 --------------------------//
-#pragma mark - MOMO User Data 저장, 패치, 삭제
-+ (void)momoGetMemberProfileDicParsingAndUpdate:(NSDictionary *)responseDic;
-+ (void)initialSaveMomoUserData;   // 초기 저장
-- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;  // 패치
-+ (void)removeMomoUserData; // 삭제
+#pragma mark - MOMO User Data 저장, 패치
++ (void)setMomoUserDataWithResponseDic:(NSDictionary *)responseDic;                         // 유저 정보 Dic 파싱하고 저장(업데이트)
+- (void)fetchMomoUserDataWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock;     // 패치
 
 #pragma mark - MOMO Map
 + (void)createMapWithMomoMapCreateDic:(NSDictionary *)mapDic;   // 맵 생성
@@ -55,7 +48,18 @@
 + (void)createPostWithMomoPostCreateDic:(NSDictionary *)postDic;    // 포스트 생성
 + (void)updatePostWithMomoPostCreateDic:(NSDictionary *)postDic;    // 포스트 수정
 + (void)deletePostData:(MomoPostDataSet *)postData;                 // 포스트 삭제
-    
+
+
+#pragma mark - MOMO Data List
++ (RLMArray<MomoMapDataSet *> *)myMapList;                                                                          // Map List
++ (RLMArray<MomoPinDataSet *> *)myPinListWithMapIndex:(NSInteger)mapIndex;                                          // Pin List
++ (RLMArray<MomoPostDataSet *> *)myPostListWithMapIndex:(NSInteger)mapIndex WithPinIndex:(NSInteger)pinIndex;       // Post List
+
+#pragma mark - MOMO Data Find
++ (MomoUserDataSet *)findUserDataWithUserPK:(NSInteger)user_pk;     // user pk로 user 데이터 객체 찾기
++ (MomoMapDataSet *)findMapDataWithMapPK:(NSInteger)map_pk;         // map  pk로 map  데이터 객체 찾기
++ (MomoPinDataSet *)findPinDataWithPinPK:(NSInteger)pin_pk;         // pin  pk로 pin  데이터 객체 찾기
++ (MomoPostDataSet *)findPostDataWithPostPK:(NSInteger)post_pk;     // post pk로 post 데이터 객체 찾기
 
 
 @end

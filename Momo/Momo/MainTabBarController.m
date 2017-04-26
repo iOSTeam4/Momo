@@ -199,11 +199,12 @@
                 
                 if (sender.tag == MAP_VIEW) {
                     // 0 MapView : 내 위치 이동
+                    NSLog(@"MapView : Map Camera to MyLocation");
                     [((MapViewController *)((UINavigationController *)self.selectedViewController).visibleViewController) moveToMyLocationWithCompletionBlock:nil];
                     
                 } else if (sender.tag == MY_VIEW) {
                     // 2 MyView : 테이블 뷰 맨 위로 이동
-                    NSLog(@"MyView : 테이블 뷰 맨 위로 이동");
+                    NSLog(@"MyView : TableView ScrollToTop");
                     [((MyViewController *)((UINavigationController *)self.selectedViewController).visibleViewController).tableView setContentOffset:CGPointMake(0, -20) animated:YES];      // status bar 20pt
                 }
             }

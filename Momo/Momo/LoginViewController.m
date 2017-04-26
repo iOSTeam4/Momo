@@ -29,6 +29,7 @@
     // Navi Pop Gesture 활성화, 아래 gestureRecognizerShouldBegin와 세트
     [self.navigationController.interactivePopGestureRecognizer setDelegate:self];
 
+    // 버튼 cornerRadius
     self.fbBtn.layer.cornerRadius = self.fbBtn.frame.size.height/2;
     self.loginBtn.layer.cornerRadius = self.loginBtn.frame.size.height/2;
     self.signUpBtn.layer.cornerRadius = self.signUpBtn.frame.size.height/2;
@@ -113,8 +114,6 @@
                   if (isSuccess) {
                       NSLog(@"fb 로그인 성공");
                       
-                      [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
-                      
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
                           [self.indicator stopAnimating];
@@ -127,7 +126,7 @@
                               
                           } else {
                               NSLog(@"error : %@", result);
-                              [UtilityCenter presentCommonAlertController:self withMessage:result];
+                              [UtilityModule presentCommonAlertController:self withMessage:result];
                           }
                           
                       }];

@@ -129,12 +129,12 @@
     [NetworkModule loginRequestWithUsername:self.idTextField.text
                                withPassword:self.pwTextField.text
                         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+
                             NSLog(@"Username : %@, Password : %@", self.idTextField.text, self.pwTextField.text);
+                            
                             if (isSuccess) {
                                 NSLog(@"log in success : %@", result);
                             
-                                [DataCenter initialSaveMomoUserData];  // 초기 DB 세팅
-                                
                                 [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
                                     [self.indicator stopAnimating];
@@ -148,7 +148,7 @@
 
                                     } else {
                                         NSLog(@"error : %@", result);
-                                        [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                        [UtilityModule presentCommonAlertController:self withMessage:result];
                                     }
                                     
                                 }];

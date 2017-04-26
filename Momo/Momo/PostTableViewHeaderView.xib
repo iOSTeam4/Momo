@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PostTableViewHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VtU-FX-642">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbR-a9-Naz" userLabel="back">
+                    <rect key="frame" x="0.0" y="30" width="70" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="IBe-76-Xp8"/>
+                        <constraint firstAttribute="height" constant="44" id="oh8-ji-G8v"/>
+                    </constraints>
+                    <state key="normal" image="backBtn"/>
+                    <connections>
+                        <action selector="backBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="NZs-LB-Stf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlh-8W-Jqv">
+                    <rect key="frame" x="242" y="30.5" width="123" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="5Xl-1P-OXd"/>
+                        <constraint firstAttribute="width" constant="123" id="8tv-N8-XIl"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="32" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="98" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="새 포스트 " image="addBtn">
+                        <color key="titleColor" red="0.33502128720000002" green="0.71864390369999998" blue="0.97653758530000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <connections>
+                        <action selector="addPostBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="dHe-gM-zEP"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SxU-8V-py5" userLabel="Line">
+                    <rect key="frame" x="0.0" y="73" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="aeq-70-ele"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="SxU-8V-py5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0It-Je-72u"/>
+                <constraint firstItem="VtU-FX-642" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MNc-5X-KDL"/>
+                <constraint firstItem="TbR-a9-Naz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PD4-aR-BUM"/>
+                <constraint firstItem="VtU-FX-642" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ro8-Ds-fcE"/>
+                <constraint firstAttribute="bottom" secondItem="TbR-a9-Naz" secondAttribute="bottom" id="X14-rP-oNI"/>
+                <constraint firstItem="VtU-FX-642" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="cDi-pm-kBv"/>
+                <constraint firstItem="Tlh-8W-Jqv" firstAttribute="centerY" secondItem="TbR-a9-Naz" secondAttribute="centerY" id="dox-vk-rd2"/>
+                <constraint firstItem="TbR-a9-Naz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="fnY-HS-tWS"/>
+                <constraint firstItem="VtU-FX-642" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="hdx-Wv-vJg"/>
+                <constraint firstItem="SxU-8V-py5" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="lM6-ju-hcg"/>
+                <constraint firstAttribute="trailing" secondItem="Tlh-8W-Jqv" secondAttribute="trailing" constant="10" id="ufd-gE-WqL"/>
+                <constraint firstAttribute="bottom" secondItem="SxU-8V-py5" secondAttribute="bottom" id="wyQ-sd-TMN"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="42.5" y="40"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="addBtn" width="23" height="23"/>
+        <image name="backBtn" width="13" height="22"/>
+    </resources>
+</document>

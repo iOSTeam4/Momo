@@ -8,12 +8,12 @@
 
 #import "PinViewController.h"
 #import "PinContentsCollectionViewCell.h"
-#import "PinMarkerUIView.h"
+#import "PinMarkerView.h"
 #import "PinMakeViewController.h"
 #import "MapViewController.h"
 
 #import "PostMakeViewController.h"
-#import "PinPostViewController.h"
+#import "PostViewController.h"
 
 #define POST_MAKE_BUTTON 0
 
@@ -52,6 +52,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Navi Pop Gesture 활성화, MapView지나고 나면 popGesture 안되던 현상 처리
+    [self.navigationController.interactivePopGestureRecognizer setDelegate:nil];
+
     
     // 지도 위, 투명 버튼 셀렉터 메서드 세팅 (IBAction으로 바꿀 것)
     [self.mapPreViewBtn addTarget:self action:@selector(mapPreViewBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -128,7 +132,7 @@
     
     marker.position = CLLocationCoordinate2DMake(self.pinData.pin_place.place_lat, self.pinData.pin_place.place_lng);
     
-    PinMarkerUIView *pinMarkerView = [[PinMarkerUIView alloc] initWithPinData:self.pinData withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
+    PinMarkerView *pinMarkerView = [[PinMarkerView alloc] initWithPinData:self.pinData withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
 
     marker.icon = [pinMarkerView imageFromViewForMarker];
     marker.map = self.mapPreView;
@@ -203,14 +207,15 @@
     if (sender.tag == -1) {     // POST_MAKE_BUTTON 태그값은 -1
 
         // Make Post
-        PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+        UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
+        PostMakeViewController *postMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
         [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
         [self presentViewController:postMakeVC animated:YES completion:nil];
         
     } else {
         
         // Post View
-        PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+        PostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostViewController"];
         [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag]];
         [self.navigationController pushViewController:postVC animated:YES];
         
@@ -222,7 +227,8 @@
     NSLog(@"addPostBtnAction");
     
     // Make Post
-    PostMakeViewController *postMakeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
+    UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
+    PostMakeViewController *postMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
     [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
     postMakeVC.wasPostView = YES;    // post뷰에서 이동
     [self presentViewController:postMakeVC animated:YES completion:nil];

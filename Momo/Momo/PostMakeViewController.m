@@ -7,7 +7,7 @@
 //
 
 #import "PostMakeViewController.h"
-#import "PinPostViewController.h"
+#import "PostViewController.h"
 
 @class UIPlaceHolderTextView;
 
@@ -349,7 +349,7 @@
     // 키보드 내리기
     [self.userCommentTextView resignFirstResponder];
     
-    NSData *photodata = [UtilityCenter imgResizing:self.photoImageView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
+    NSData *photodata = [UtilityModule imgResizing:self.photoImageView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
     if (photodata.length > 1024*1024) {
         // 들어갈리가 없으나, 일단 예외 상황 로그 수집하기 위해 만들어 둠
@@ -383,7 +383,7 @@
                                           
                                       } else {
                                           
-                                          [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                          [UtilityModule presentCommonAlertController:self withMessage:result];
                                           
                                       }
                                       
@@ -410,7 +410,7 @@
                                            }
 
                                        } else {
-                                           [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                           [UtilityModule presentCommonAlertController:self withMessage:result];
                                        }
 
                                    }];
@@ -421,10 +421,14 @@
 
 
 - (void)showPostView {
-    PinPostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PinPostViewController"];
+    UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PostViewController *postVC = [pinPostViewStoryBoard instantiateViewControllerWithIdentifier:@"PostViewController"];
+    
+    // 포스트뷰 이동 전, 데이터 세팅
     [postVC showSelectedPostAndSetPostData:self.postData];
     
-    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:postVC animated:NO];        // 만들어진 포스트뷰로 먼저 Push
+    // 만들어진 포스트뷰로 먼저 Push
+    [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) pushViewController:postVC animated:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -459,7 +463,7 @@
                                      
                                      
                                  } else {
-                                     [UtilityCenter presentCommonAlertController:self withMessage:result];
+                                     [UtilityModule presentCommonAlertController:self withMessage:result];
                                  }
 
 

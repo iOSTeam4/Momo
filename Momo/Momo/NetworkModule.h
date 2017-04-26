@@ -40,7 +40,8 @@
 
 // Patch member profile update
 + (void)patchMemberProfileUpdateWithUsername:(NSString *)username
-                              withProfileImg:(NSData *)imgData
+                          withProfileImgData:(NSData *)imgData
+                             withDescription:(NSString *)description
                          withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock;
 
 
