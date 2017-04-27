@@ -3,11 +3,11 @@
 > 2017. 03. 27 ~ 2017. 04. 25  
 
 ## Momo (Map Of My Oasis)  
-###내가 아끼는 곳, 나만의 지도 MOMO  
+### 내가 아끼는 곳, 나만의 지도 MOMO  
 > 지도를 만들고, 지도에 장소를 등록하고  
 > 장소에 기록(글, 사진)을 남길 수 있습니다.  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/u_HlN_1t79g" frameborder="0" allowfullscreen></iframe>  
+[Youtube 영상보기🎬](https://youtu.be/u_HlN_1t79g)
 
 
 
@@ -90,13 +90,11 @@
 	- 검색, 소셜기능 적용  
 
 
-##Momo Team  
+## Momo Team  
 협업 방식 : 주 1~2회 스프린트 미팅, Daily Scrum으로 매일(평일) 개발 상황 공유  
 협업 도구 : Slack, Google docs, Hangout, Trello  
 
-
-
-   | Name | GitHub | e-mail   
+Dev | Name | GitHub | e-mail  
 --- | --- | --- | ---  
 **iOS** | **최제헌** | [**Jeheonjeol**](https://github.com/Jeheonjeol) | [**c92921@gmail.com**](c92921@gmail.com)  
 **iOS** | **정한선** | [**hansonjung**](https://github.com/hansonjung) | [**hansonjung@gmail.com**](hansonjung@gmail.com)  
