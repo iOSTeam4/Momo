@@ -3,8 +3,8 @@ FastCampus School TeamProject
 2017. 03. 27 ~ 2017. 04. 25  
 
   - [Momo (Map Of My Oasis)](#Momo)
-  - [iOS Dev Features](#iOS Dev Features)
-  - [Momo Team](#Momo Team)
+  - [iOS Dev Features](#iOS_Dev_Features)
+  - [Momo Team](#Momo_Team)
 
 ## Momo (Map Of My Oasis) <a id="Momo"></a>  
 ### 내가 아끼는 곳, 나만의 지도 MOMO  
@@ -15,11 +15,11 @@ FastCampus School TeamProject
 
 <img src="./momo_gif1.gif?raw=true" width="350"> <img src="./momo_gif2.gif?raw=true" width="350">
 
-## iOS Dev Features <a id="iOS Dev Features"></a>  
+## iOS Dev Features <a id="iOS_Dev_Features"></a>  
 개발 언어 : Objective-C  
 개발 도구 : Xcode, Git(GitHub), Postman, Sketch, Zeplin  
 
-- Google Maps 기반의 지도 앱[^1]  
+- Google Maps 기반의 지도 앱 [^1]  
 - 일반 계정(e-mail) / Facebook 계정(FB Login, Graph API) 로그인, 회원가입[^2]  
 - Network (일반 코드, AFNetworking) 코드 로직 설계 및 네트워크 연결[^3]  
 - Realm Mobile DataBase로 데이터셋 구조 설계 및 관리[^4]  
@@ -47,6 +47,7 @@ FastCampus School TeamProject
 	- 검색, 소셜기능 적용  
 
 [^1]: Apple Map이 더 가볍고, 이쁘고(구글 로고 노출...), (당연하지만) 프레임웍에 친화적인 것 같습니다.  
+
 [^2]: 후반까지 웹서버 팀원들과 합의된 페북 로그인 구조가 조금은 특이했어서</br>직접 Facebook Graph API를 통해 userName, profileImg, e-mail 등을 가져와 서버에 보내는 방식을 취했습니다.  
 [^3]: [Momo API Documents](https://momo-wps.gitbooks.io/momo-apis/content/)  
 [^4]: 데이터 셋 클래스는 아래와 같이 7가지이며</br>크게 봤을 때, [Login - User > Map > Pin > Post] 1 > n (일대다) 구조로 설계하였습니다.</br>LoginDataSet  : 자동로그인을 위한 token, pk관리</br>UserDataSet   : 유저 정보, 맵 리스트</br>MapDataSet    : 맵 정보, 핀 리스트</br>PinDataSet    : 핀 정보, 포스트 리스트</br>PostDataSet   : 포스트 정보</br>PlaceDataSet  : 위도, 경도, 주소 등 위치 정보</br>AuthorDataSet : 맵, 핀, 포스트 작성자 정보   
@@ -58,7 +59,7 @@ FastCampus School TeamProject
 [^10]: 한선이형 👍  
 
 
-## Momo Team <a id="Momo Team"></a>  
+## Momo Team <a id="Momo_Team"></a>  
 협업 방식 : 주 1~2회 스프린트 미팅, Daily Scrum으로 매일(평일) 개발 상황 공유  
 협업 도구 : Slack, Google docs, Hangout, Trello  
 
