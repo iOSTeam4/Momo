@@ -1,10 +1,12 @@
 # MOMO iOS APP  
 FastCampus School TeamProject  
 2017. 03. 27 ~ 2017. 04. 25  
-
-  - [Momo (Map Of My Oasis)](#Momo)
-  - [iOS Dev Features](#iOS_Dev_Features)
-  - [Momo Team](#Momo_Team)
+</br>
+ - [Momo (Map Of My Oasis)](#Momo)
+ - [iOS Dev Features](#iOS_Dev_Features)
+ - [Momo Team](#Momo_Team)  
+ 
+</br></br>
 
 ## Momo (Map Of My Oasis) <a id="Momo"></a>  
 ### 내가 아끼는 곳, 나만의 지도 MOMO  
@@ -14,7 +16,7 @@ FastCampus School TeamProject
 #### [Youtube 영상보기 🎬](https://youtu.be/u_HlN_1t79g)
 
 <img src="./momo_gif1.gif?raw=true" width="350"> <img src="./momo_gif2.gif?raw=true" width="350">
-
+</br></br>
 ## iOS Dev Features <a id="iOS_Dev_Features"></a>  
 개발 언어 : Objective-C  
 개발 도구 : Xcode, Git(GitHub), Postman, Sketch, Zeplin  
@@ -45,7 +47,7 @@ FastCampus School TeamProject
 	- 보다 효율적인 네트웍 처리, 제대로 된 캐싱구조 적용  
 	- indicator 띄울 때, 버튼 등 눌리지 않게 처리  
 	- 검색, 소셜기능 적용  
-
+</br></br>
 ## Momo Team <a id="Momo_Team"></a>  
 협업 방식 : 주 1~2회 스프린트 미팅, Daily Scrum으로 매일(평일) 개발 상황 공유  
 협업 도구 : Slack, Google docs, Hangout, Trello  
@@ -62,8 +64,10 @@ android | 박지훈 | [reach0328](https://github.com/reach0328) | [reach0328@gma
 android | 박유석 | [yseok](https://github.com/yseok) | [ys920603@gmail.com](ys920603@gmail.com)  
 
 
+</br></br></br></br></br>
 ------------  
 
+### footnote
 
 <a name="Map">1</a>. Apple Map이 더 가볍고, 이쁘고(구글 로고 노출...), (당연하지만) 프레임웍에 친화적인 것 같습니다.  
 
