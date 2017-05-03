@@ -34,10 +34,7 @@
 
     
     // 앱 실행하면서, Realm에 있는 유저 정보 확인
-    [UtilityModule showIndicator];
     [[DataCenter sharedInstance] checkUserDataWithCompletionBlock:^(BOOL isSuccess) {
-        [UtilityModule dismissIndicator];
-        
         if (isSuccess) {
             // 자동로그인
             [LoginViewController autoLoginCheck];
