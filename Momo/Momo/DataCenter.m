@@ -31,6 +31,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         data = [[self alloc] init];
+        data.realm = [RLMRealm defaultRealm];       // Set Singleton Realm Object
     });
     
     return data;
@@ -87,10 +88,10 @@
     RLMRealm *realm = [RLMRealm defaultRealm];
     
     // 기존 저장되어있던 기본 데이터들 패치 (페북 & 이메일 공통)
-    if([MomoLoginDataSet allObjectsInRealm:realm].firstObject) {     // nil이 아닐 때 불러옴
+    if([MomoLoginDataSet allObjectsInRealm:realm].count > 0) {     // nil이 아닐 때 불러옴
         [DataCenter sharedInstance].momoLoginData = [MomoLoginDataSet allObjectsInRealm:realm].firstObject;     // 로그인 데이터는 하나만 있음
 
-        NSLog(@"token : %@, login cnt : %ld, user cnt : %ld", [DataCenter sharedInstance].momoLoginData.token, [MomoLoginDataSet allObjectsInRealm:realm].count, [MomoUserDataSet allObjects].count);
+        NSLog(@"token : %@, loginData cnt : %ld, userData cnt : %ld", [DataCenter sharedInstance].momoLoginData.token, [MomoLoginDataSet allObjectsInRealm:realm].count, [MomoUserDataSet allObjects].count);
         
         [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
             
@@ -121,42 +122,37 @@
     // realm transaction
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-    
+        
         // User 정보
-        [DataCenter sharedInstance].momoUserData = [MomoUserDataSet makeUserWithDic:responseDic];   // 캐싱 정보 사용 or 새로 만들어 realm에 add
-        [realm addOrUpdateObject:[DataCenter sharedInstance].momoUserData];
+        [DataCenter sharedInstance].momoUserData = [MomoUserDataSet makeUserWithDic:responseDic];
+        [realm addOrUpdateObject:[DataCenter sharedInstance].momoUserData];     // userData add or update
         
-        
+    
         // Map 데이터 파싱 및 저장(업데이트)
         for (NSDictionary *mapDic in ((NSArray *)[responseDic objectForKey:@"map_list"])) {
 
-            MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];                       // 캐싱 정보 사용 or 새로 만들어 realm에 add
-            [realm addOrUpdateObject:mapData];
-            mapData.map_pin_list = nil;     // 핀 리스트 초기화
-            
-            [[DataCenter myMapList] addObject:mapData];    // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
+            MomoMapDataSet *mapData = [MomoMapDataSet makeMapWithDic:mapDic];
+            [realm addOrUpdateObject:mapData];              // mapData add or update
+
+            [[DataCenter myMapList] addObject:mapData];     // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
             
             
             // Pin 데이터 파싱 및 저장(업데이트)
             for (NSDictionary *pinDic in ((NSArray *)[mapDic objectForKey:@"pin_list"])) {
 
-                MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];                   // 캐싱 정보 사용 or 새로 만들어 realm에 add
-                [realm addOrUpdateObject:pinData];
-                pinData.pin_post_list = nil;        // 포스트 리스트 초기화
+                MomoPinDataSet *pinData = [MomoPinDataSet makePinWithDic:pinDic];
+                [realm addOrUpdateObject:pinData];              // pinData add or update
                 
-                // 재로그인시 아래와 같은 에러 발생.. 이해안됨..
-                // Terminating app due to uncaught exception 'RLMException', reason: 'Index 0 is out of bounds (must be less than 0)'
                 [mapData.map_pin_list addObject:pinData];       // map의 pin_list에 pin 추가
-                
+
                 
                 // Post 데이터 파싱 및 저장(업데이트)
                 for (NSDictionary *postDic in ((NSArray *)[pinDic objectForKey:@"post_list"])) {
                     
-                    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];          // 캐싱 정보 사용 or 새로 만들어 realm에 add
-                    [realm addOrUpdateObject:postData];
+                    MomoPostDataSet *postData = [MomoPostDataSet makePostWithDic:postDic];
+                    [realm addOrUpdateObject:postData];             // postData add or update
                     
                     [pinData.pin_post_list addObject:postData];     // pin의 post_list에 post 추가
-
                 }
             }
         }

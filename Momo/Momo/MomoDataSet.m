@@ -39,6 +39,7 @@
 
 // Author 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoAuthorDataSet *)makeAuthorWithDic:(NSDictionary *)authorDic {
+    //realm transaction 속에서 불림
     
     MomoAuthorDataSet *authorData;
     
@@ -69,11 +70,12 @@
 
 // Place 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoPlaceDataSet *)makePlaceWithDic:(NSDictionary *)placeDic {
+    //realm transaction 속에서 불림
     
     MomoPlaceDataSet *placeData;
     
     if ([MomoPlaceDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", [[placeDic objectForKey:@"pk"] integerValue]]].count > 0) {
-        placeData = [MomoAuthorDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", [[placeDic objectForKey:@"pk"] integerValue]]][0];
+        placeData = [MomoPlaceDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", [[placeDic objectForKey:@"pk"] integerValue]]][0];
         
     } else {
         placeData = [[MomoPlaceDataSet alloc] init];
@@ -111,7 +113,7 @@
     if (post_photo_url) {       // nil이 아닐 때
         // url 설정하면서 자동으로 이미지 가져옴
         
-        if (![_post_photo_thumbnail_url isEqualToString:post_photo_url]) {
+        if (![_post_photo_url isEqualToString:post_photo_url]) {
             // 기존 img url과 다를 때, 이미지 불러오고 저장
             NSLog(@"post pk : %ld, img load", self.pk);
             
@@ -151,10 +153,10 @@
 // 포스트 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoPostDataSet *)makePostWithDic:(NSDictionary *)postDic {
     //realm transaction 속에서 불림
-
+    
     MomoPostDataSet *postData;
     
-    if ([DataCenter findPinDataWithPinPK:[[postDic objectForKey:@"pk"] integerValue]] != nil) {
+    if ([DataCenter findPostDataWithPostPK:[[postDic objectForKey:@"pk"] integerValue]] != nil) {
         postData = [DataCenter findPostDataWithPostPK:[[postDic objectForKey:@"pk"] integerValue]];
 
     } else {
@@ -171,7 +173,6 @@
     
     postData.post_created_date = [postDic objectForKey:@"created_date"];
     postData.post_description = [postDic objectForKey:@"description"];
-
     
     
     return postData;
@@ -197,7 +198,7 @@
 // 핀 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoPinDataSet *)makePinWithDic:(NSDictionary *)pinDic {
     //realm transaction 속에서 불림
-
+    
     MomoPinDataSet *pinData;
     
     if ([DataCenter findPinDataWithPinPK:[[pinDic objectForKey:@"pk"] integerValue]] != nil) {
@@ -206,7 +207,6 @@
     } else {
         pinData = [[MomoPinDataSet alloc] init];
         pinData.pk = [[pinDic objectForKey:@"pk"] integerValue];
-        pinData.pin_post_list = (RLMArray<MomoPostDataSet *><MomoPostDataSet> *)[[RLMArray alloc] initWithObjectClassName:@"MomoPostDataSet"];        
     }
     
 
@@ -221,37 +221,13 @@
     // pin_place
     pinData.pin_place = [MomoPlaceDataSet makePlaceWithDic:[pinDic objectForKey:@"place"]];
     
+    // pin_post_list 초기화
+    [pinData.pin_post_list removeAllObjects];
 
+    
     return pinData;
 }
 
-
-// 핀 생성 및 등록
-+ (MomoPinDataSet *)makePinWithName:(NSString *)pinName
-                       withPinLabel:(NSInteger)pinLabel
-                            withMap:(NSInteger)mapIndex {
-    
-    MomoPinDataSet *pinData = [[MomoPinDataSet alloc] init];
-    
-    pinData.pin_name = pinName;
-    pinData.pin_label = pinLabel;
-    pinData.pin_map_pk = [DataCenter myMapList][mapIndex].pk;
-    
-    MomoPlaceDataSet *placeData = [[MomoPlaceDataSet alloc] init];
-    placeData.place_lat = 37.515692;
-    placeData.place_lng = 127.021302;
-    
-    pinData.pin_place = placeData;
-    
-    NSLog(@"name : %@, label : %ld, mapIndex : %ld", pinName, pinLabel, mapIndex);
-    
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [[DataCenter myMapList][mapIndex].map_pin_list addObject:pinData];
-    }];
-    
-    return pinData;
-}
 
 - (UIColor *)labelColor {
     switch (self.pin_label) {
@@ -304,7 +280,7 @@
 // 맵 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoMapDataSet *)makeMapWithDic:(NSDictionary *)mapDic {
     //realm transaction 속에서 불림
-
+    
     MomoMapDataSet *mapData;
     
     if ([DataCenter findMapDataWithMapPK:[[mapDic objectForKey:@"pk"] integerValue]] != nil) {
@@ -313,9 +289,7 @@
     } else {
         mapData = [[MomoMapDataSet alloc] init];
         mapData.pk = [[mapDic objectForKey:@"pk"] integerValue];
-        mapData.map_pin_list = (RLMArray<MomoPinDataSet *><MomoPinDataSet> *)[[RLMArray alloc] initWithObjectClassName:@"MomoPinDataSet"];
     }
-    
     
     mapData.map_name = [mapDic objectForKey:@"map_name"];
     
@@ -326,6 +300,8 @@
     // map_author
     mapData.map_author = [MomoAuthorDataSet makeAuthorWithDic:[mapDic objectForKey:@"author"]];
     
+    // map_pin_list 초기화
+    [mapData.map_pin_list removeAllObjects];
     
     
     return mapData;
@@ -386,6 +362,7 @@
     }
     
     
+    
     userData.user_token = [userDic objectForKey:@"auth_token"];
     
     userData.user_username = [userDic objectForKey:@"username"];
@@ -402,7 +379,10 @@
     if ([[userDic objectForKey:@"profile_img"] objectForKey:@"thumbnail"]) {
         userData.user_profile_image_url = [[userDic objectForKey:@"profile_img"] objectForKey:@"thumbnail"];
     }
-        
+    
+    // user_map_list 초기화
+    [userData.user_map_list removeAllObjects];
+
     
     return userData;
 }

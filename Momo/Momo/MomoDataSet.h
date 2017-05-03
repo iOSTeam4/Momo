@@ -14,12 +14,14 @@
 @class MomoPinDataSet;
 @class MomoMapDataSet;
 @class MomoUserDataSet;
+@class MomoLoginDataSet;
 
 RLM_ARRAY_TYPE(MomoPlaceDataSet)
 RLM_ARRAY_TYPE(MomoPostDataSet)
 RLM_ARRAY_TYPE(MomoPinDataSet)
 RLM_ARRAY_TYPE(MomoMapDataSet)
 RLM_ARRAY_TYPE(MomoUserDataSet)
+RLM_ARRAY_TYPE(MomoLoginDataSet)
 
 
 // Author Data Set ---------------------------//
@@ -101,11 +103,6 @@ RLM_ARRAY_TYPE(MomoUserDataSet)
 
 // 핀 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
 + (MomoPinDataSet *)makePinWithDic:(NSDictionary *)pinDic;
-
-// 핀 생성 및 등록
-+ (MomoPinDataSet *)makePinWithName:(NSString *)pinName
-                       withPinLabel:(NSInteger)pinLabel
-                            withMap:(NSInteger)mapIndex;
 
 // 핀 라벨 아이콘, 색 반환 메서드
 - (UIImage *)labelIcon;

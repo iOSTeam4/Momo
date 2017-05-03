@@ -49,8 +49,6 @@
 //                        Map API                         //
 //********************************************************//
 
-//// 서버로부터 유저 지도정보 패치하는 메서드
-//+ (void)fetchUserMapData;
 
 // Map Create
 + (void)createMapRequestWithMapname:(NSString *)mapname

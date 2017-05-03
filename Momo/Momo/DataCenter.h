@@ -12,7 +12,8 @@
 @interface DataCenter : NSObject
 
 // 싱글턴 객체 호출 메소드
-+ (instancetype)sharedInstance;
++ (instancetype)sharedInstance;         // DataCenter
+@property RLMRealm *realm;              // Realm
 
 
 // Account Token 자동로그인 ------------------------------//
