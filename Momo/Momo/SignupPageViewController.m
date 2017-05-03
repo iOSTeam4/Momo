@@ -18,8 +18,6 @@
 
 @property (weak, nonatomic) UITextField *lastFirstResponderTextField;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
-
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *fbBtn;
 
@@ -131,15 +129,15 @@
 // 회원가입 버튼
 - (IBAction)signupBtnAction:(id)sender {
     
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     [self.lastFirstResponderTextField resignFirstResponder];
     
     [NetworkModule signUpRequestWithUsername:self.idTextField.text
                                 withPassword:self.pwTextField.text
                                    withEmail:self.emailTextField.text
                          withCompletionBlock:^(BOOL isSuccess, NSString* result) {
-                             
-                             [self.indicator stopAnimating];
+                        
+                             [UtilityModule dismissIndicator];
                             
                              if (isSuccess) {
                                  NSLog(@"sign up success : %@", result);
@@ -171,17 +169,16 @@
 // 페북 버튼
 - (IBAction)fbBtnAction:(id)sender {
     
-    [self.indicator startAnimating];
-    
     [FacebookModule fbLoginFromVC:self
               withCompletionBlock:^(BOOL isSuccess, NSString *token) {
                   
                   if (isSuccess) {
+                      [UtilityModule showIndicator];
                       NSLog(@"fb 로그인 성공");
                     
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
-                          [self.indicator stopAnimating];
+                          [UtilityModule dismissIndicator];
                           
                           if (isSuccess) {
                               NSLog(@"get Member Profile success : %@", result);
@@ -197,7 +194,6 @@
                       }];
                       
                   } else {
-                      [self.indicator stopAnimating];
                       NSLog(@"fb 로그인 실패");
                   }
               }];

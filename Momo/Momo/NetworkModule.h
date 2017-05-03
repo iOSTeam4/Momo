@@ -23,6 +23,10 @@
                         withEmail:(NSString *)email
               withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
 
+// Auth-Mail
++ (void)sendMailWithUserPK:(NSInteger)userPK
+       withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock;
+
 // Login
 + (void)loginRequestWithUsername:(NSString *)username
                     withPassword:(NSString *)password

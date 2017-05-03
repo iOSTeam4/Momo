@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="HwH-KB-0lW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="HwH-KB-0lW">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,9 +32,6 @@
                                     <outlet property="delegate" destination="xON-4F-pUN" id="OQ9-dh-snF"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8zB-FZ-0L1">
-                                <rect key="frame" x="178" y="324" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -42,13 +39,10 @@
                             <constraint firstItem="HwH-KB-0lW" firstAttribute="centerX" secondItem="wJW-0H-yGA" secondAttribute="centerX" id="qcq-9I-LDc"/>
                             <constraint firstItem="HwH-KB-0lW" firstAttribute="centerY" secondItem="wJW-0H-yGA" secondAttribute="centerY" id="u8m-eU-OzA"/>
                             <constraint firstItem="HwH-KB-0lW" firstAttribute="height" secondItem="wJW-0H-yGA" secondAttribute="height" id="v1P-Fj-D6O"/>
-                            <constraint firstItem="8zB-FZ-0L1" firstAttribute="centerY" secondItem="wJW-0H-yGA" secondAttribute="centerY" id="zcO-f1-r3P"/>
-                            <constraint firstItem="8zB-FZ-0L1" firstAttribute="centerX" secondItem="wJW-0H-yGA" secondAttribute="centerX" id="zt7-C2-CDA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="95q-5H-TUP"/>
                     <connections>
-                        <outlet property="indicator" destination="8zB-FZ-0L1" id="4V5-7v-9SR"/>
                         <outlet property="tableView" destination="HwH-KB-0lW" id="L15-91-kPY"/>
                         <segue destination="7ra-oB-aUB" kind="presentation" identifier="userProfileEditSegue" id="QJq-Yx-Gk8"/>
                     </connections>

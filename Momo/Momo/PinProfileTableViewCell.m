@@ -9,6 +9,13 @@
 #import "PinProfileTableViewCell.h"
 #import "PinMarkerView.h"
 
+@interface PinProfileTableViewCell ()
+
+@property (nonatomic) MomoPinDataSet *pinData;
+
+@end
+
+
 @implementation PinProfileTableViewCell
 
 - (void)awakeFromNib {
@@ -17,30 +24,22 @@
 }
 
 
-- (void)initWithPinIndex:(NSInteger)pinIndex {
+- (void)initWithPinData:(MomoPinDataSet *)pinData {
     
     // 데이터 세팅
-    self.pinIndex = pinIndex;       // 지도에 핀 마커 표시를 위해 pinIndex 프로퍼티에 셋
+    self.pinData = pinData;
     
     // 유저 프사
-    if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
-        self.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
+    if (self.pinData.pin_author.profile_img_data) {
+        self.userImgView.image  = [self.pinData.pin_author getAuthorProfileImg];
     }
     
     // 유저 이름
-    if ([DataCenter sharedInstance].momoUserData.user_username) {
-        self.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;
-    }
+    self.userNameLabel.text = self.pinData.pin_author.username;
     
     // 핀 제목
-    self.pinNameLabel.text = ((MomoPinDataSet *)[MomoPinDataSet allObjects][pinIndex]).pin_name;
+    self.pinNameLabel.text = self.pinData.pin_name;
     
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 
@@ -49,11 +48,9 @@
 //    NSLog(@"layoutSubviews");
     
     // 프로필 BackView 세팅
-//    [self.backView.layer setCornerRadius:20];
     self.backView.layer.shadowOffset = CGSizeMake(-5, 8);
     self.backView.layer.shadowRadius = 10;
     self.backView.layer.shadowOpacity = 0.3;
-
     
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
@@ -73,8 +70,8 @@
 
 - (void)mapViewSetting {
     
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]).pin_place.place_lat
-                                                            longitude:((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]).pin_place.place_lng
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.pinData.pin_place.place_lat
+                                                            longitude:self.pinData.pin_place.place_lng
                                                                  zoom:16.0f];
     
     [self.mapView setCamera:camera];    // 핀 중심으로 카메라 설정
@@ -85,9 +82,9 @@
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.groundAnchor = CGPointMake(0.5, 0.6);        // 마커가 지도 중앙 위치에 놓일 수 있게 설정 (중앙 약간 위)
     
-    marker.position = CLLocationCoordinate2DMake(((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]).pin_place.place_lat, ((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]).pin_place.place_lng);
+    marker.position = CLLocationCoordinate2DMake(self.pinData.pin_place.place_lat, self.pinData.pin_place.place_lng);
     
-    PinMarkerView *pinMarkerView = [[PinMarkerView alloc] initWithPinData:((MomoPinDataSet *)[MomoPinDataSet allObjects][self.pinIndex]) withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
+    PinMarkerView *pinMarkerView = [[PinMarkerView alloc] initWithPinData:self.pinData withZoomCase:PIN_MARKER_PIN_VIEW_CIRCLE];
     
     marker.icon = [pinMarkerView imageFromViewForMarker];
     marker.map = self.mapView;
@@ -97,7 +94,7 @@
 
 - (IBAction)pinEditBtnAction:(id)sender {
     NSLog(@"pinEditBtnAction");
-    [self.delegate selectedPinEditBtnWithIndex:self.pinIndex];
+    [self.delegate selectedPinEditBtnWithPinData:self.pinData];
 }
 
 @end

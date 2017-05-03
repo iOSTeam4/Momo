@@ -47,8 +47,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
 
-@property (weak, nonatomic) UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation PinMakeViewController
@@ -78,14 +76,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // 스토리보드로 옮길 것 --------------------//
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.center = self.view.center;
-    indicator.hidesWhenStopped = YES;
-    [self.view addSubview:indicator];
-    self.indicator = indicator;
-    //------------------------------------//
     
     // pinNameTextField에 셀렉터 추가
     [self.pinNameTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -331,7 +321,7 @@
     // 키보드 내리기
     [self.pinNameTextField resignFirstResponder];
 
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 핀 만들어!");
@@ -344,7 +334,7 @@
                                    withDescription:@"추후 생길 필드값입니다."
                                withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                    
-                                   [self.indicator stopAnimating];
+                                   [UtilityModule dismissIndicator];
                                    
                                    if (isSuccess) {
                                        
@@ -373,7 +363,7 @@
                                        withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
                              withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                  
-                                 [self.indicator stopAnimating];
+                                 [UtilityModule dismissIndicator];
                                  
                                  if (isSuccess) {
                                      
@@ -394,8 +384,8 @@
 }
 
 - (void)showPinView {
-    UIStoryboard *pinStoryBoard = [UIStoryboard storyboardWithName:@"PinView" bundle:nil];
-    PinViewController *pinVC = [pinStoryBoard instantiateInitialViewController];
+    UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PinViewController *pinVC = [pinPostStoryBoard instantiateInitialViewController];
     
     // 핀뷰 이동 전, 데이터 세팅
     [pinVC showSelectedPinAndSetPinData:self.pinData];
@@ -416,12 +406,12 @@
     [self.pinNameTextField resignFirstResponder];
 
     
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     
     [NetworkModule deletePinRequestWithPinData:self.pinData
                            withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                
-                               [self.indicator stopAnimating];
+                               [UtilityModule dismissIndicator];
                                
                                if (isSuccess) {
                                    

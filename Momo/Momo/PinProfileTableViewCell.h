@@ -13,8 +13,7 @@
 
 @interface PinProfileTableViewCell : UITableViewCell
 
-- (void)initWithPinIndex:(NSInteger)pinIndex;
-@property (nonatomic) NSInteger pinIndex;
+- (void)initWithPinData:(MomoPinDataSet *)pinData;
 
 @property (weak, nonatomic) id<PinProfileTableViewCellDelegate> delegate;
 
@@ -37,6 +36,6 @@
 // 델리게이트 프로토콜 ----------------------------//
 @protocol PinProfileTableViewCellDelegate <NSObject>
 
-- (void)selectedPinEditBtnWithIndex:(NSInteger)index;
+- (void)selectedPinEditBtnWithPinData:(MomoPinDataSet *)pinData;
 
 @end

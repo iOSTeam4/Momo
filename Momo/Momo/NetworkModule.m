@@ -12,6 +12,7 @@
 static NSString *const API_BASE_URL         = @"https://momo.kizmo04.com";
 
 static NSString *const SIGN_UP_URL          = @"/api/member/signup-b/"; // @"/api/member/signup/";
+static NSString *const AUTH_MAIL_URL        = @"/api/member/auth-mail/";
 static NSString *const LOG_IN_URL           = @"/api/member/login/";
 static NSString *const LOG_OUT_URL          = @"/api/member/logout/";
 static NSString *const MEMBER_PROFILE_URL   = @"/api/member/";    // + /{user_id}/      user_id -> pk
@@ -67,9 +68,13 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                 if (((NSHTTPURLResponse *)response).statusCode == 201) {
                                                                     // Code: 201 CREATED
                                                                     
-                                                                    // 이메일 인증해야 아이디 사용가능
-                                                                    completionBlock(YES, @"이메일 인증을 완료해주세요");
+                                                                    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                                     
+                                                                    // 인증메일 보내기
+                                                                    [NetworkModule sendMailWithUserPK:[[responseDic objectForKey:@"pk"] integerValue] withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                                                        completionBlock(isSuccess, result);
+                                                                    }];
+                                                                
                                                                     
                                                                 } else {
                                                                     // Code: 400 BAD REQUEST
@@ -99,6 +104,61 @@ static NSString *const POST_URL             = @"/api/post/";
     
     [postTask resume];
 }
+
+// Auth-Mail
++ (void)sendMailWithUserPK:(NSInteger)userPK
+       withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+    // Session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    // Request
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, AUTH_MAIL_URL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    request.HTTPBody = [[NSString stringWithFormat:@"pk=%ld", userPK] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPMethod = @"POST";
+    
+    // Task
+    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
+                                                             fromData:nil
+                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                        
+                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                        
+                                                        // 메인스레드로 돌려서 보냄
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            
+                                                            if (!error) {
+                                                                if (((NSHTTPURLResponse *)response).statusCode == 200) {
+                                                                    // Code: 200 Success
+                                                                    // 인증메일이 발송되었습니다
+
+                                                                    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+
+                                                                    completionBlock(YES, [responseDic objectForKey:@"detail"]);
+                                                                    
+                                                                } else {
+                                                                    // Code: 400 BAD REQUEST
+                                                                    
+                                                                    // error
+                                                                    NSLog(@"아이디 또는 비밀번호를 다시 확인하세요.");
+                                                                    completionBlock(NO, @"아이디 또는 비밀번호를 다시 확인하세요.");
+                                                                    
+                                                                }
+                                                            } else {
+                                                                // Network error
+                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
+                                                                completionBlock(NO, @"Network error");
+                                                            }
+                                                            
+                                                        });
+                                                        
+                                                    }];
+    [postTask resume];
+}
+
 
 
 // Login
@@ -309,12 +369,9 @@ static NSString *const POST_URL             = @"/api/post/";
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"PATCH" URLString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        [formData appendPartWithFormData:[username dataUsingEncoding:NSUTF8StringEncoding] name:@"username"];                       // 유저네임
+        [formData appendPartWithFormData:[username dataUsingEncoding:NSUTF8StringEncoding] name:@"username"];                       // 유저 네임
         [formData appendPartWithFileData:imgData name:@"profile_img" fileName:@"profile_img.jpeg" mimeType:@"image/jpeg"];          // 프로필 사진
-        
-        if ([description length] > 0) {
-            [formData appendPartWithFormData:[description dataUsingEncoding:NSUTF8StringEncoding] name:@"description"];                 // 소개글
-        }
+        [formData appendPartWithFormData:[description dataUsingEncoding:NSUTF8StringEncoding] name:@"description"];                 // 유저 코멘트
         
     } error:nil];
     
@@ -336,8 +393,8 @@ static NSString *const POST_URL             = @"/api/post/";
                                                   if (((NSHTTPURLResponse *)response).statusCode == 200) {
                                                       // Code: 200 Success
                                                       
-                                                      // 데이터 파싱, 세팅
-                                                      [DataCenter setMomoUserDataWithResponseDic:responseObject];
+                                                      // 유저 데이터 수정
+                                                      [DataCenter updateUserWithUserDic:responseObject withProfileImgData:imgData];
                                                       
                                                       completionBlock(YES, @"Code: 200 Success");
                                                       
@@ -414,7 +471,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                     NSLog(@"Map Create Success");
                                                                     
                                                                     // 맵 데이터 파싱 및 저장
-                                                                    [DataCenter createMapWithMomoMapCreateDic:responseDic];
+                                                                    [DataCenter createMapWithMapDic:responseDic];
                                                                     
                                                                     completionBlock(YES, nil);
                                                                     
@@ -476,7 +533,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                       NSLog(@"Map Update Success");
                                                       
                                                       // 맵 수정
-                                                      [DataCenter updateMapWithMomoMapCreateDic:responseObject];
+                                                      [DataCenter updateMapWithMapDic:responseObject];
                                                       
                                                       completionBlock(YES, nil);
                                                       
@@ -615,7 +672,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                     NSLog(@"Pin Create Success");
                                                                     
                                                                     // 핀 데이터 파싱 및 저장
-                                                                    [DataCenter createPinWithMomoPinCreateDic:responseDic];
+                                                                    [DataCenter createPinWithPinDic:responseDic];
                                                                     
                                                                     completionBlock(YES, nil);
                                                                     
@@ -675,7 +732,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                       NSLog(@"Pin Update Success");
                                                       
                                                       // 핀 수정
-                                                      [DataCenter updatePinWithMomoPinCreateDic:responseObject];
+                                                      [DataCenter updatePinWithPinDic:responseObject];
                                                       
                                                       completionBlock(YES, nil);
                                                       
@@ -808,7 +865,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                       NSLog(@"Post Create Success");
                                                       
                                                       // 포스트 데이터 파싱 및 저장
-                                                      [DataCenter createPostWithMomoPostCreateDic:responseObject];
+                                                      [DataCenter createPostWithPostDic:responseObject withPhotoData:photoData];
                                                       
                                                       completionBlock(YES, nil);
                                                       
@@ -944,7 +1001,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                       NSLog(@"Post Update Success");
                                                       
                                                       // 포스트 수정
-                                                      [DataCenter updatePostWithMomoPostCreateDic:responseObject];
+                                                      [DataCenter updatePostWithPostDic:responseObject withPhotoData:photoData];
                                                       
                                                       completionBlock(YES, nil);
                                                       

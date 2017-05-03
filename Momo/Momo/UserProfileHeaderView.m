@@ -20,22 +20,9 @@
     [super layoutSubviews];
 //    NSLog(@"layoutSubviews");
     
-    
-    // 프로필 BackView 세팅
-//    [self.backView.layer setCornerRadius:20];
-    
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
-//    NSLog(@"%f", self.userImgView.frame.size.height/2);
 
-    // 수정하기 버튼
-//    [self.userEditBtn.layer setCornerRadius:5];
-//    [self.userEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
-//    [self.userEditBtn.layer setBorderWidth:1];
-   
-    // 유저 코멘트
-    self.userCommentLabel.text = [DataCenter sharedInstance].momoUserData.user_description;
-    
 }
 
 
@@ -69,7 +56,7 @@
     } else {
         self.mapBtn.selected = NO;
 
-        self.selectedMapTabViewConstraint.priority = 780.0f; // pin선택 priority는 800
+        self.selectedMapTabViewConstraint.priority = 780.0f; // pin선택 Constraint priority는 800
 
         [UIView animateWithDuration:0.2 animations:^{
             [self layoutIfNeeded];

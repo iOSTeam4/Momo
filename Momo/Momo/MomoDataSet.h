@@ -65,18 +65,17 @@ RLM_ARRAY_TYPE(MomoLoginDataSet)
 @property (nonatomic) NSString *post_photo_thumbnail_url;
 @property NSData *post_photo_data;
 @property NSData *post_photo_thumbnail_data;
-
-
-// 포스트 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoPostDataSet *)makePostWithDic:(NSDictionary *)postDic;
-
-- (UIImage *)getPostPhotoThumbnail;
 - (UIImage *)getPostPhoto;
+- (UIImage *)getPostPhotoThumbnail;
 
 // description
 @property NSString *post_description;
 
 @property NSString *post_created_date;
+
+
+// 포스트 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환   (with PhotoData)
++ (MomoPostDataSet *)parsePostDic:(NSDictionary *)postDic withPhotoData:(NSData *)photoData;
 
 
 @end
@@ -101,8 +100,8 @@ RLM_ARRAY_TYPE(MomoLoginDataSet)
 @property NSString *pin_description;
 ///////////////
 
-// 핀 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoPinDataSet *)makePinWithDic:(NSDictionary *)pinDic;
+// Momo 서버로부터 받아온 Dic으로 Pin 객체 세팅(생성 or 업데이트) & 반환
++ (MomoPinDataSet *)parsePinDic:(NSDictionary *)pinDic;
 
 // 핀 라벨 아이콘, 색 반환 메서드
 - (UIImage *)labelIcon;
@@ -127,8 +126,8 @@ RLM_ARRAY_TYPE(MomoLoginDataSet)
 
 @property RLMArray<MomoPinDataSet *><MomoPinDataSet> *map_pin_list;
 
-// 맵 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoMapDataSet *)makeMapWithDic:(NSDictionary *)mapDic;
+// Momo 서버로부터 받아온 MapDic으로 Map 객체 세팅(생성 or 업데이트) & 반환
++ (MomoMapDataSet *)parseMapDic:(NSDictionary *)mapDic;
 
 @end
 
@@ -141,14 +140,8 @@ RLM_ARRAY_TYPE(MomoLoginDataSet)
 @property NSString *user_token;
 @property NSString *user_fb_token;
 
-@property NSString *user_username;
-
+@property MomoAuthorDataSet *user_author;       // username, img
 @property NSString *user_email;
-
-@property (nonatomic) NSString *user_profile_image_url;
-@property NSData *user_profile_image_data;
-- (UIImage *)getUserProfileImage;
-
 
 @property RLMArray<MomoUserDataSet *><MomoUserDataSet> *user_follower_list;
 @property RLMArray<MomoUserDataSet *><MomoUserDataSet> *user_following_list;
@@ -158,8 +151,8 @@ RLM_ARRAY_TYPE(MomoLoginDataSet)
 @property NSString *user_id;
 @property NSString *user_description;
 
-// 유저 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoUserDataSet *)makeUserWithDic:(NSDictionary *)userDic;
+// Momo 서버로부터 받아온 UserDic으로 User객체 세팅(생성 or 업데이트) & 반환      (+ with imgData)
++ (MomoUserDataSet *)parseUserDic:(NSDictionary *)userDic withProfileImgData:(NSData *)imgData;
 
 @end
 

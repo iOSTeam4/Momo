@@ -66,7 +66,7 @@
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinPostViewController"];
     
-    // 반드시 테이블 뷰 refresh 해야함
+    // 데이터 변경되었을 때, 바로 반영되어야하므로 viewWillAppear할 때마다 테이블 뷰 refresh
     [self.tableView reloadData];
 }
 
@@ -108,8 +108,9 @@
         
         // 핀 작성자 username, img
         cell.userName1.text = self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.username;
-        cell.profileImageView1.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
-        cell.profileImageView1.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        if (self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.profile_img_data) {
+            cell.profileImageView1.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        }
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
 
@@ -137,8 +138,9 @@
         
         // 핀 작성자 username, img
         cell.userName2.text = self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.username;
-        cell.profileImageView2.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
-        cell.profileImageView2.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        if (self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.profile_img_data) {
+            cell.profileImageView2.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        }
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
 
@@ -165,8 +167,9 @@
         
         // 핀 작성자 username, img
         cell.userName3.text = self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.username;
-        cell.profileImageView3.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
-        cell.profileImageView3.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        if (self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.profile_img_data) {
+            cell.profileImageView3.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        }
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
 

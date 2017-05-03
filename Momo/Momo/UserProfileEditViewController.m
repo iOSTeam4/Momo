@@ -19,8 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *editDoneBtn;
 
-@property (weak, nonatomic) UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation UserProfileEditViewController
@@ -36,33 +34,21 @@
     [self.userImgView addGestureRecognizer:userImgTap];
 
     // UserNameTextField userNameEditChanged 추가
-    [self.userNameTextField addTarget:self action:@selector(userNameEditChanged) forControlEvents:UIControlEventEditingChanged];
+    [self.userNameTextField addTarget:self action:@selector(editDoneBtnSetEnabled) forControlEvents:UIControlEventEditingChanged];
     
     // UIPlaceHolderTextView descriptionEditChanged noti 추가
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(descriptionEditChanged:) name:UITextViewTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editDoneBtnSetEnabled) name:UITextViewTextDidChangeNotification object:nil];
     
-    
-    // 임시 indicator ----------------------//
-    
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.hidesWhenStopped = YES;
-    indicator.center = self.view.center;
-    self.indicator = indicator;
-    [self.view addSubview:indicator];
-    
-    //---------------------------------------------//
     
     
     // 데이터 세팅
-    if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
-        self.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
+    if ([DataCenter sharedInstance].momoUserData.user_author.profile_img_data) {
+        self.userImgView.image  = [[DataCenter sharedInstance].momoUserData.user_author getAuthorProfileImg];           // 프사
     }
-    if ([DataCenter sharedInstance].momoUserData.user_username) {
-        self.userNameTextField.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
-    }
-//    if ([DataCenter sharedInstance].momoUserData.user_id) {
-//        self.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
-//    }
+    self.userNameTextField.text = [DataCenter sharedInstance].momoUserData.user_author.username;                        // 이름
+    self.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id];     // 아이디
+    self.userCommentTextView.text = [DataCenter sharedInstance].momoUserData.user_description;                          // 유저 코멘트
+
 }
 
 
@@ -76,9 +62,8 @@
 }
 
 - (void)dealloc {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
-    
-    // 노티 nil 처리 필요
+    // noti 해제
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)subviewSetting {
@@ -188,12 +173,10 @@
     return YES;
 }
 
-// UserNameTextField EditChanged Selector Method
-- (void)userNameEditChanged {
+// UserName or Description 수정 했을 때, 불리는 Method
+- (void)editDoneBtnSetEnabled {
     [self.editDoneBtn setEnabled:YES];      // 수정하기 버튼 활성화
 }
-
-
 
 
 
@@ -221,34 +204,27 @@
     
     NSData *profileImgdata = [UtilityModule imgResizing:self.userImgView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
-    if (profileImgdata.length > 1024*1024) {
-        // 들어갈리가 없으나, 일단 예외 상황 로그 수집하기 위해 만들어 둠
-        NSLog(@"Img Size Too Large");
-        NSLog(@"Size of Image(bytes): %ld", profileImgdata.length);
-        
-    } else {
-
-        [self.indicator startAnimating];
-        
-        [NetworkModule patchMemberProfileUpdateWithUsername:self.userNameTextField.text
-                                         withProfileImgData:profileImgdata
-                                            withDescription:self.userCommentTextView.text
-                                        withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                            NSLog(@"finish updateMemberProfileWithUsername");
+    
+    [UtilityModule showIndicator];
+    
+    [NetworkModule patchMemberProfileUpdateWithUsername:self.userNameTextField.text
+                                     withProfileImgData:profileImgdata
+                                        withDescription:self.userCommentTextView.text
+                                    withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                        NSLog(@"finish updateMemberProfileWithUsername");
+                                        
+                                        [UtilityModule dismissIndicator];
+                                        
+                                        if (isSuccess) {
+                                            NSLog(@"프로필 수정 완료");
+                                            [self dismissViewControllerAnimated:YES completion:nil];
                                             
-                                            [self.indicator stopAnimating];
+                                        } else {
                                             
-                                            if (isSuccess) {
-                                                NSLog(@"프로필 수정 완료");
-                                                [self dismissViewControllerAnimated:YES completion:nil];
-                                                
-                                            } else {
-                                                
-                                                [UtilityModule presentCommonAlertController:self withMessage:result];
-                                            }
-                                        }];
-        
-    }
+                                            [UtilityModule presentCommonAlertController:self withMessage:result];
+                                        }
+                                    }];
+    
 }
 
 
@@ -262,11 +238,11 @@
     [self.userCommentTextView resignFirstResponder];
 
     
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     
     [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
         
-        [self.indicator stopAnimating];
+        [UtilityModule dismissIndicator];
         
         if (isSuccess) {
             NSLog(@"log out success : %@", result);

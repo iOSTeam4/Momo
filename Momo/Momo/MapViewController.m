@@ -83,7 +83,7 @@
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MapViewController"];
     NSLog(@"MapViewController : viewWillAppear");
     
-    // 다른뷰 갔다가 와도 다시 Refresh될 수 있게 viewWillAppear에서 호출
+    // 다른뷰에서 변경사항이 있는채로 돌아와도 Refresh 될 수 있게 viewWillAppear에서 호출
     
     if (self.isMakingMarker) {
         // 핀 마커 만들기 중, 뒤로 돌아왔을 때
@@ -116,7 +116,7 @@
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 
-            sleep(0.5);       // 0.5초 후 이동
+            sleep(1);       // 0.5초 후 이동
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"선택 핀을 중심으로 카메라 이동");
@@ -268,7 +268,7 @@
         
         // 최초 min, max에 0번 핀 값 넣음
         CLLocationCoordinate2D minCoordinate = CLLocationCoordinate2DMake(self.mapData.map_pin_list[0].pin_place.place_lat, self.mapData.map_pin_list[0].pin_place.place_lng);
-        CLLocationCoordinate2D maxCoordinate = CLLocationCoordinate2DMake(self.mapData.map_pin_list[0].pin_place.place_lat, self.mapData.map_pin_list[0].pin_place.place_lng);
+        CLLocationCoordinate2D maxCoordinate = minCoordinate;
         
         for (MomoPinDataSet *pinData in self.mapData.map_pin_list) {
             
@@ -372,8 +372,8 @@
     if (!self.isMakingMarker) {
         // 핀마커 등록 중엔 상세 보기 페이지 이동 불가
         
-        UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
-        PinViewController *pinVC = [pinPostViewStoryBoard instantiateInitialViewController];
+        UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+        PinViewController *pinVC = [pinPostStoryBoard instantiateInitialViewController];
         
         // 핀 데이터 세팅
 //        NSLog(@"pinPk : %ld", [marker.snippet integerValue]);

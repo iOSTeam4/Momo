@@ -11,6 +11,7 @@
 
 @interface MapProfileTableViewCell ()
 
+@property (nonatomic) MomoMapDataSet *mapData;
 @property (nonatomic) MomoPinDataSet *pinData;
 @property (nonatomic) MomoPostDataSet *postData;
 
@@ -26,26 +27,24 @@
     
 }
 
-- (void)initWithMapIndex:(NSInteger)mapIndex {
+- (void)initWithMapData:(MomoMapDataSet *)mapData {
 
     // 데이터 세팅
-    self.mapIndex = mapIndex;       // 지도 마커 표시를 위해 mapIndex 프로퍼티에 셋
+    self.mapData = mapData;
     
     // 유저 프사
-    if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
-        self.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
+    if (self.mapData.map_author.profile_img_data) {
+        self.userImgView.image  = [self.mapData.map_author getAuthorProfileImg];
     }
     
     // 유저 이름
-    if ([DataCenter sharedInstance].momoUserData.user_username) {
-        self.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;
-    }
+    self.userNameLabel.text = self.mapData.map_author.username;
     
     // 맵 제목
-    [self.mapNameBtn setTitle:[DataCenter myMapList][mapIndex].map_name forState:UIControlStateNormal];
+    [self.mapNameBtn setTitle:self.mapData.map_name forState:UIControlStateNormal];
     
     // 비밀지도일때 자물쇠 아이콘 추가
-    if ([DataCenter myMapList][mapIndex].map_is_private) {
+    if (self.mapData.map_is_private) {
         [self.mapNameBtn setImage:[UIImage imageNamed:@"lockBtnClose"] forState:UIControlStateNormal];
         [self.mapNameBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
         [self.mapNameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2.5, 0, 0)];
@@ -55,7 +54,7 @@
     }
     
     // 맵 속의 핀 갯수
-    self.mapPinNumLabel.text = [NSString stringWithFormat:@"%ld", [DataCenter myMapList][mapIndex].map_pin_list.count];
+    self.mapPinNumLabel.text = [NSString stringWithFormat:@"%ld", self.mapData.map_pin_list.count];
     
     
     // 데이터, labelBtnView, postBtnView 초기화 (테이블 뷰 셀 dequeue 됨)
@@ -67,44 +66,39 @@
     
 
     // 핀이 한 개 이상 있을 때, 라벨 표기
-    if ([DataCenter myMapList][mapIndex].map_pin_list.count > 0) {
+    if (self.mapData.map_pin_list.count > 0) {
         
-        NSInteger lastPinIndex = [DataCenter myMapList][mapIndex].map_pin_list.count - 1;
+        NSInteger lastPinIndex = self.mapData.map_pin_list.count - 1;
         
-        [self.labelBtnView setImage:[[DataCenter myMapList][mapIndex].map_pin_list[lastPinIndex] labelIcon] forState:UIControlStateNormal];    // 라벨 아이콘 이미지
-        [self.labelBtnView setBackgroundColor:[[DataCenter myMapList][mapIndex].map_pin_list[lastPinIndex] labelColor]];                       // 바탕 색
+        [self.labelBtnView setImage:[self.mapData.map_pin_list[lastPinIndex] labelIcon] forState:UIControlStateNormal];    // 라벨 아이콘 이미지
+        [self.labelBtnView setBackgroundColor:[self.mapData.map_pin_list[lastPinIndex] labelColor]];                       // 바탕 색
         
-        self.pinData = [DataCenter myMapList][mapIndex].map_pin_list[lastPinIndex];    // 마지막 핀으로 세팅
+        self.pinData = self.mapData.map_pin_list[lastPinIndex];    // 마지막 핀으로 세팅
         
         // 포스트 한 개 이상 있을 때, 포스트 노출
-        for (NSInteger j = [DataCenter myMapList][mapIndex].map_pin_list.count - 1 ; j >= 0; j--) {     // 역순 (가장 최신 순으로)
+        if ([DataCenter myPinListWithMapPK:mapData.pk].count > 0) {
             
-            MomoPinDataSet *pinData = [DataCenter myMapList][mapIndex].map_pin_list[j];
+            NSInteger lastPostIndex = [DataCenter myPostListWithMapPK:mapData.pk].count - 1;    // 역순 (가장 최신 순으로)
+            self.postData = [DataCenter myPostListWithMapPK:mapData.pk][lastPostIndex];         // 마지막 핀의 마지막 포스트로 세팅 (그냥 마지막 포스트는 아님..)
             
-            if (pinData.pin_post_list.count > 0) {      // 1개 이상 있나?
+            if ([self.postData.post_photo_data length]) {
+                // 사진
+                [self.postBtnView setImage:[self.postData getPostPhoto] forState:UIControlStateNormal];
                 
-                NSInteger lastPostIndex = pinData.pin_post_list.count - 1;
+            } else {
+                // 글
+                [self.postBtnView setImage:nil forState:UIControlStateNormal];
                 
-                if ([pinData.pin_post_list[lastPostIndex].post_photo_data length]) {
-                    // 사진
-                    [self.postBtnView setImage:[pinData.pin_post_list[lastPostIndex] getPostPhoto] forState:UIControlStateNormal];
-                    
-                } else {
-                    // 글
-                    [self.postBtnView setImage:nil forState:UIControlStateNormal];
-                    
-                    [self.postBtnView setBackgroundColor:[UIColor colorWithRed:234/255.0 green:234/255.0 blue:234/255.0 alpha:0.37]];
-                    [self.postBtnView setTitle:pinData.pin_post_list[lastPostIndex].post_description forState:UIControlStateNormal];
-                    [self.postBtnView setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
-                    [self.postBtnView setTitleEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-                    [self.postBtnView.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-                    [self.postBtnView.titleLabel setNumberOfLines:3];
-                }
-                
-                self.postData = pinData.pin_post_list[lastPostIndex];        // 마지막 생성 핀의 마지막 포스트로 세팅
-                break;  // for문 빠져나옴 (post한개만으로 충분함)
+                [self.postBtnView setBackgroundColor:[UIColor colorWithRed:234/255.0 green:234/255.0 blue:234/255.0 alpha:0.37]];
+                [self.postBtnView setTitle:self.postData.post_description forState:UIControlStateNormal];
+                [self.postBtnView setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
+                [self.postBtnView setTitleEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+                [self.postBtnView.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+                [self.postBtnView.titleLabel setNumberOfLines:3];
             }
+            
         }
+        
     }
 }
 
@@ -114,11 +108,10 @@
 //    NSLog(@"layoutSubviews");
     
     // 프로필 BackView 세팅
-//    [self.backView.layer setCornerRadius:20];
     self.backView.layer.shadowOffset = CGSizeMake(-5, 8);
     self.backView.layer.shadowRadius = 10;
     self.backView.layer.shadowOpacity = 0.3;
-//    
+    
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
 //    NSLog(@"cell width : %f , userImgView.frame.size.height/2 : %f", self.frame.size.width, self.userImgView.frame.size.height/2);
@@ -141,7 +134,7 @@
     [self bringSubviewToFront:self.mapPlaceholderImgView];
     
     // Google Map View 설정
-    if ([DataCenter myPinListWithMapIndex:self.mapIndex].count > 0) {
+    if (self.mapData.map_pin_list.count > 0) {
         self.mapPlaceholderImgView.alpha = 0.0f;    // mapPlaceholderImgView 가리기
         
         // Cell Reuse 할 때, 기존 마커 Clear
@@ -149,10 +142,10 @@
         
         
         // 최초 min, max에 0번 핀 값 넣음
-        CLLocationCoordinate2D minCoordinate = CLLocationCoordinate2DMake([DataCenter myPinListWithMapIndex:self.mapIndex][0].pin_place.place_lat, [DataCenter myPinListWithMapIndex:self.mapIndex][0].pin_place.place_lng);
-        CLLocationCoordinate2D maxCoordinate = CLLocationCoordinate2DMake([DataCenter myPinListWithMapIndex:self.mapIndex][0].pin_place.place_lat, [DataCenter myPinListWithMapIndex:self.mapIndex][0].pin_place.place_lng);
+        CLLocationCoordinate2D minCoordinate = CLLocationCoordinate2DMake(self.mapData.map_pin_list[0].pin_place.place_lat, self.mapData.map_pin_list[0].pin_place.place_lng);
+        CLLocationCoordinate2D maxCoordinate = minCoordinate;
         
-        for (MomoPinDataSet *pinData in [DataCenter myPinListWithMapIndex:self.mapIndex]) {
+        for (MomoPinDataSet *pinData in self.mapData.map_pin_list) {
             
             // pin marker 찍기
             GMSMarker *marker = [[GMSMarker alloc] init];
@@ -207,7 +200,7 @@
     
     if (self.pinData == nil) {
         // 핀이 하나도 없을 때
-        [self.delegate showSelectedMapAndMakePin:[DataCenter myMapList][self.mapIndex]];    // 지도 보기 & 핀 생성 유도
+        [self.delegate showSelectedMapAndMakePin:self.mapData];    // 지도 보기 & 핀 생성 유도
 
     } else {
         // 핀 뷰 이동
@@ -219,7 +212,7 @@
 
     if (self.pinData == nil) {
         // 핀이 하나도 없을 때
-        [self.delegate showSelectedMapAndMakePin:[DataCenter myMapList][self.mapIndex]];    // 지도 보기 & 핀 생성 유도
+        [self.delegate showSelectedMapAndMakePin:self.mapData];    // 지도 보기 & 핀 생성 유도
         
     } else if (self.postData == nil) {
         // 핀 뷰 이동
@@ -233,7 +226,7 @@
 
 - (IBAction)mapEditBtnAction:(id)sender {
     NSLog(@"mapEditBtnAction");
-    [self.delegate selectedMapEditBtnWithIndex:self.mapIndex];
+    [self.delegate selectedMapEditBtnWithMapData:self.mapData];
 }
 
 @end

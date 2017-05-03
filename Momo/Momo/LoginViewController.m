@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *signUpBtn;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation LoginViewController
@@ -35,10 +33,10 @@
     self.signUpBtn.layer.cornerRadius = self.signUpBtn.frame.size.height/2;
 
     
-    // 앱 실행하면서, Realm에 있는 유저 정보 패치
-    [self.indicator startAnimating];
-    [[DataCenter sharedInstance] fetchMomoUserDataWithCompletionBlock:^(BOOL isSuccess) {
-        [self.indicator stopAnimating];
+    // 앱 실행하면서, Realm에 있는 유저 정보 확인
+    [UtilityModule showIndicator];
+    [[DataCenter sharedInstance] checkUserDataWithCompletionBlock:^(BOOL isSuccess) {
+        [UtilityModule dismissIndicator];
         
         if (isSuccess) {
             // 자동로그인
@@ -106,17 +104,16 @@
 
 - (IBAction)fbBtnAction:(id)sender {
     
-    [self.indicator startAnimating];
-    
     [FacebookModule fbLoginFromVC:self
               withCompletionBlock:^(BOOL isSuccess, NSString *token) {
                   
                   if (isSuccess) {
+                      [UtilityModule showIndicator];
                       NSLog(@"fb 로그인 성공");
                       
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
-                          [self.indicator stopAnimating];
+                          [UtilityModule dismissIndicator];
 
                           if (isSuccess) {
                               NSLog(@"get Member Profile success : %@", result);
@@ -132,7 +129,6 @@
                       }];
                       
                   } else {
-                      [self.indicator stopAnimating];
                       NSLog(@"fb 로그인 실패");
                   }
               }];

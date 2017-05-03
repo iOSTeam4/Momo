@@ -13,8 +13,7 @@
 
 @interface MapProfileTableViewCell : UITableViewCell
 
-- (void)initWithMapIndex:(NSInteger)mapIndex;
-@property (nonatomic) NSInteger mapIndex;
+- (void)initWithMapData:(MomoMapDataSet *)mapData;
 
 @property (weak, nonatomic) id<MapProfileTableViewCellDelegate> delegate;
 
@@ -46,7 +45,7 @@
 - (void)showSelectedPin:(MomoPinDataSet *)pinData;      // 핀 보기
 - (void)showSelectedPost:(MomoPostDataSet *)postData;   // 포스트 보기
 
-- (void)selectedMapEditBtnWithIndex:(NSInteger)index;   // 지도 수정
+- (void)selectedMapEditBtnWithMapData:(MomoMapDataSet *)mapData;   // 지도 수정
 
 @end
 

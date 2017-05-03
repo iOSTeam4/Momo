@@ -57,9 +57,6 @@
     [self.navigationController.interactivePopGestureRecognizer setDelegate:nil];
 
     
-    // 지도 위, 투명 버튼 셀렉터 메서드 세팅 (IBAction으로 바꿀 것)
-    [self.mapPreViewBtn addTarget:self action:@selector(mapPreViewBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    
     //collectionView size
     CGFloat itemWidth = self.collectionView.frame.size.width / 3.0f;
     NSLog(@"itemWidth %f", itemWidth);
@@ -71,7 +68,9 @@
     self.collectionView.layer.shadowRadius = 10;
     self.collectionView.layer.shadowOpacity = 0.3;
     self.collectionView.layer.masksToBounds = NO;
-    self.collectionView.showsHorizontalScrollIndicator = NO;
+    
+    // Author Img Radius
+    self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
     
 }
 
@@ -80,7 +79,7 @@
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PinViewController"];
     
-    // 반드시 컬렉션 뷰 refresh 해야함
+    // 데이터 변경되었을 때, 바로 반영되어야하므로 viewWillAppear할 때마다 컬렉션 뷰 refresh
     [self.collectionView reloadData];
     
     // Map 세팅
@@ -92,15 +91,15 @@
     self.pinMainText.text = self.pinData.pin_description;
     
     // User UI, 정보 세팅
-    self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2;
-    self.userProfileImage.image = [[DataCenter sharedInstance].momoUserData getUserProfileImage];
-    self.userNameToMade.text = [DataCenter sharedInstance].momoUserData.user_username;
+    if (self.pinData.pin_author.profile_img_data) {
+        self.userProfileImage.image = [self.pinData.pin_author getAuthorProfileImg];
+    }
+    self.userNameToMade.text = self.pinData.pin_author.username;
 
 }
 
-
 // 지도 버튼 액션
-- (void)mapPreViewBtnAction {
+- (IBAction)mapPreViewBtnAction:(id)sender {
     // 선택 핀 중심으로 지도 보기
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
     MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];

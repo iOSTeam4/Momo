@@ -31,8 +31,6 @@
 
 @property (nonatomic) UIRefreshControl *tableViewRefreshControl;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation MyViewController
@@ -49,8 +47,6 @@
     // TableView Nib(xib) Register
     [self initialTableViewCellSettingWithNib];
     
-    self.tableView.showsVerticalScrollIndicator = NO;       // 스크롤 라인 indicator Hidden
-    
     self.mapPinNum = SHOW_MAP;     // 처음에 Map을 기본으로 보여줌
     
     // TableView Header, Cell Height 자동 적용
@@ -63,7 +59,7 @@
     self.tableViewRefreshControl = [[UIRefreshControl alloc] init];
     [self.tableView addSubview:self.tableViewRefreshControl];
     [self.tableViewRefreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
-
+    
 }
 
 
@@ -72,7 +68,7 @@
     [super viewWillAppear:animated];
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"MyViewController"];
     
-    // 반드시 테이블 뷰 refresh 해야함
+    // 데이터 변경되었을 때, 바로 반영되어야하므로 viewWillAppear할 때마다 테이블 뷰 refresh
     [self.tableView reloadData];
 }
 
@@ -117,23 +113,23 @@
 // UITableViewDataSource Methods -----//
 #pragma mark - Section Header Settings
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // always 1 : userProfile
-    return 1;
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     UserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"userProfileHeader"];
     headerView.delegate = self;
     
-    // 데이터 세팅
-    if ([DataCenter sharedInstance].momoUserData.user_profile_image_data) {
-        headerView.userImgView.image  = [[DataCenter sharedInstance].momoUserData getUserProfileImage];  // 프사
+    // 유저 데이터 세팅
+    if ([DataCenter sharedInstance].momoUserData.user_author.profile_img_data) {
+        headerView.userImgView.image  = [[DataCenter sharedInstance].momoUserData.user_author getAuthorProfileImg];         // 프사
     }
     
-    headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_username;       // 이름
-    headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id]; // 아이디
+    headerView.userNameLabel.text = [DataCenter sharedInstance].momoUserData.user_author.username;                          // 이름
+    headerView.userIDLabel.text   = [NSString stringWithFormat:@"@%@", [DataCenter sharedInstance].momoUserData.user_id];   // 아이디
+    
+    if ([DataCenter sharedInstance].momoUserData.user_description) {
+        headerView.userCommentLabel.text = [DataCenter sharedInstance].momoUserData.user_description;                       // 유저 코멘트
+    }
+
     
     return headerView;
 }
@@ -143,11 +139,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.mapPinNum == SHOW_MAP) {
-        return [DataCenter sharedInstance].momoUserData.user_map_list.count;
+        return [DataCenter myMapList].count;
         
     } else {
-        return [MomoPinDataSet allObjects].count;
-//        return ((MomoMapDataSet *)([DataCenter sharedInstance].momoUserData.user_map_list[0])).map_pin_list.count;
+        return [DataCenter myPinList].count;
     }
 }
 
@@ -159,9 +154,9 @@
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
         
         // 지도 데이터 역순 적용
-        NSInteger inverseOrderIndex = [DataCenter sharedInstance].momoUserData.user_map_list.count - 1 - indexPath.row;
+        NSInteger inverseOrderIndex = [DataCenter myMapList].count - 1 - indexPath.row;
         
-        [mapCell initWithMapIndex:inverseOrderIndex];
+        [mapCell initWithMapData:[DataCenter myMapList][inverseOrderIndex]];
         mapCell.delegate = self;        // 델리게이트 설정
         
         return mapCell;
@@ -170,9 +165,9 @@
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
         
         // 핀 데이터 역순 적용
-        NSInteger inverseOrderIndex = [MomoPinDataSet allObjects].count - 1 - indexPath.row;
+        NSInteger inverseOrderIndex = [DataCenter myPinList].count - 1 - indexPath.row;
         
-        [pinCell initWithPinIndex:inverseOrderIndex];
+        [pinCell initWithPinData:[DataCenter myPinList][inverseOrderIndex]];
         pinCell.delegate = self;    // 델리게이트 설정
         
         return pinCell;
@@ -188,7 +183,7 @@
         MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
         
         // 지도 데이터 역순 적용
-        NSInteger inverseOrderIndex = [DataCenter sharedInstance].momoUserData.user_map_list.count - 1 - indexPath.row;
+        NSInteger inverseOrderIndex = [DataCenter myMapList].count - 1 - indexPath.row;
         
         [mapVC showSelectedMapAndSetMapData:[DataCenter myMapList][inverseOrderIndex]];         // 지도 데이터 세팅
         
@@ -196,13 +191,13 @@
         
     } else {
         // 선택 핀 보기
-        UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
-        PinViewController *pinVC = [pinPostViewStoryBoard instantiateInitialViewController];
+        UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+        PinViewController *pinVC = [pinPostStoryBoard instantiateInitialViewController];
 
         // 핀 데이터 역순 적용
-        NSInteger inverseOrderIndex = [MomoPinDataSet allObjects].count - 1 - indexPath.row;
+        NSInteger inverseOrderIndex = [DataCenter myPinList].count - 1 - indexPath.row;
 
-        [pinVC showSelectedPinAndSetPinData:[MomoPinDataSet allObjects][inverseOrderIndex]];    // 핀 데이터 세팅
+        [pinVC showSelectedPinAndSetPinData:[DataCenter myPinList][inverseOrderIndex]];    // 핀 데이터 세팅
         
         [self.navigationController pushViewController:pinVC animated:YES];
     }
@@ -259,8 +254,8 @@
 // 핀 보기
 - (void)showSelectedPin:(MomoPinDataSet *)pinData {
     
-    UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
-    PinViewController *pinVC = [pinPostViewStoryBoard instantiateInitialViewController];
+    UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PinViewController *pinVC = [pinPostStoryBoard instantiateInitialViewController];
     
     // 핀 데이터 세팅
     [pinVC showSelectedPinAndSetPinData:pinData];    // 선택 핀 보기
@@ -271,8 +266,8 @@
 // 포스트 보기
 - (void)showSelectedPost:(MomoPostDataSet *)postData {
 
-    UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
-    PostViewController *postVC = [pinPostViewStoryBoard instantiateViewControllerWithIdentifier:@"PostViewController"];
+    UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PostViewController *postVC = [pinPostStoryBoard instantiateViewControllerWithIdentifier:@"PostViewController"];
 
     // 포스트 데이터 세팅
     [postVC showSelectedPostAndSetPostData:postData];   // 선택 포스트 보기
@@ -282,14 +277,14 @@
 }
 
 
-- (void)selectedMapEditBtnWithIndex:(NSInteger)index {
-    NSLog(@"selectedMapEditBtnWithIndex, %ld", index);
+- (void)selectedMapEditBtnWithMapData:(MomoMapDataSet *)mapData {
+    NSLog(@"selectedMapEditBtnWithMapData, %@", mapData);
     
     // 선택 지도 수정
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     MapMakeViewController *mapMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapMakeViewController"];
     
-    [mapMakeVC setEditModeWithMapData:[DataCenter myMapList][index]];   // 수정 모드, 데이터 세팅
+    [mapMakeVC setEditModeWithMapData:mapData];   // 수정 모드, 데이터 세팅
     [self presentViewController:mapMakeVC animated:YES completion:nil];
     
 }
@@ -297,14 +292,14 @@
 //  PinProfileTableViewCell Delegate Methods -------------------//
 #pragma mark - PinProfileTableViewCell Delegate Methods
 
-- (void)selectedPinEditBtnWithIndex:(NSInteger)index {
-    NSLog(@"selectedPinEditBtnWithIndex, %ld", index);
+- (void)selectedPinEditBtnWithPinData:(MomoPinDataSet *)pinData {
+    NSLog(@"selectedPinEditBtnWithPinData, %@", pinData);
     
     // 선택 핀 수정
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     PinMakeViewController *pinMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PinMakeViewController"];
     
-    [pinMakeVC setEditModeWithPinData:[MomoPinDataSet allObjects][index]];   // 수정 모드, 데이터 세팅
+    [pinMakeVC setEditModeWithPinData:pinData];   // 수정 모드, 데이터 세팅
     [self presentViewController:pinMakeVC animated:YES completion:nil];
     
 }

@@ -30,8 +30,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *secretSwitch;
 @property (nonatomic) UIButton *deleteBtn;
 
-@property (weak, nonatomic) UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation MapMakeViewController
@@ -46,14 +44,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // 스토리보드로 옮길 것 --------------------//
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.center = self.view.center;
-    indicator.hidesWhenStopped = YES;
-    [self.view addSubview:indicator];
-    self.indicator = indicator;
-    //------------------------------------//
     
     
     // 맵 이름 텍스트필드 셀렉터 추가
@@ -148,7 +138,7 @@
     // 키보드 내리기
     for (UIView *view in @[self.mapNameTextField, self.mapContentTextField]) [view resignFirstResponder];
     
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 맵 만들어!");
@@ -158,7 +148,7 @@
                                      withIsPrivate:self.secretSwitch.on
                                withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                    
-                                   [self.indicator stopAnimating];
+                                   [UtilityModule dismissIndicator];
                                    
                                    if (isSuccess) {
                                        self.mapData = [[DataCenter myMapList] lastObject];      // 새로 생성된 데이터가 lastObject
@@ -179,7 +169,7 @@
                                    withIsPrivate:self.secretSwitch.on
                              withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                  
-                                [self.indicator stopAnimating];
+                                 [UtilityModule dismissIndicator];
                                  
                                  if (isSuccess) {
                                      
@@ -225,12 +215,12 @@
     // 키보드 내리기
     for (UIView *view in @[self.mapNameTextField, self.mapContentTextField]) [view resignFirstResponder];
     
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     
     [NetworkModule deleteMapRequestWithMapData:self.mapData
                            withCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
-                               [self.indicator stopAnimating];
+                               [UtilityModule dismissIndicator];
                                
                                if (isSuccess) {
                                    

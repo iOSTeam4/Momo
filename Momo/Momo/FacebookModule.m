@@ -73,9 +73,9 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
                                                                       [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
                                                                           
                                                                           // 페북 서버에서 받아온 추가 정보를 모모 서버에 보냄
-                                                                          [NetworkModule patchMemberProfileUpdateWithUsername:[DataCenter sharedInstance].momoUserData.user_username
-                                                                                                           withProfileImgData:[DataCenter sharedInstance].momoUserData.user_profile_image_data
-                                                                                                              withDescription:@""
+                                                                          [NetworkModule patchMemberProfileUpdateWithUsername:[DataCenter sharedInstance].momoUserData.user_author.username
+                                                                                                           withProfileImgData:[DataCenter sharedInstance].momoUserData.user_author.profile_img_data
+                                                                                                              withDescription:@"팔로워들에게 자기소개를 해보세요 :0"
                                                                                                           withCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
                                                                                                               // 정보를 잘 가져왔든, 말든 로그인 성공
@@ -113,17 +113,19 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
         NSLog(@"FBSDKGraphRequest : %@", result);
         
         if (!error) {
+            
+            [DataCenter sharedInstance].momoUserData.user_author.pk = [DataCenter sharedInstance].momoLoginData.pk;     // user_author pk 값 반드시 세팅해야 함
     
             // 이름
             if ([result objectForKey:@"name"]) {
-                [DataCenter sharedInstance].momoUserData.user_username = [result objectForKey:@"name"];
-                NSLog(@"momoUserData.user_username : %@", [DataCenter sharedInstance].momoUserData.user_username);
+                [DataCenter sharedInstance].momoUserData.user_author.username = [result objectForKey:@"name"];
+                NSLog(@"momoUserData.user_username : %@", [result objectForKey:@"name"]);
             }
             
             // 프로필 사진
             if ([result objectForKey:@"picture"]) {
-                [DataCenter sharedInstance].momoUserData.user_profile_image_url = result[@"picture"][@"data"][@"url"];
-//                [DataCenter sharedInstance].momoUserData.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].momoUserData.user_profile_image_url]];
+                [DataCenter sharedInstance].momoUserData.user_author.profile_img_url = result[@"picture"][@"data"][@"url"];
+                [DataCenter sharedInstance].momoUserData.user_author.profile_img_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].momoUserData.user_author.profile_img_url]];
                 NSLog(@"url : %@", result[@"picture"][@"data"][@"url"]);
             }
             

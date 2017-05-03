@@ -18,6 +18,11 @@
 // 이미지 리사이징 데이터
 + (NSData *)imgResizing:(UIImage *)img;
 
+
+// SVProgressHUD & InteractionEvents Control
++ (void)showIndicator;
++ (void)dismissIndicator;
+
 @end
 
 

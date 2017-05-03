@@ -41,8 +41,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *makeBtn3;
 @property (weak, nonatomic) UIButton *deleteBtn;
 
-@property (weak, nonatomic) UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation PostMakeViewController
@@ -63,25 +61,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // 스토리보드로 옮길 것 --------------------//
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.center = self.view.center;
-    indicator.hidesWhenStopped = YES;
-    [self.view addSubview:indicator];
-    self.indicator = indicator;
-    //------------------------------------//
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
     
     // 핀 정보 세팅
     MomoPinDataSet *pinData = [DataCenter findPinDataWithPinPK:self.pin_pk];
     self.pinNameLabel.text = pinData.pin_name;
     self.pinAddressLabel.text = pinData.pin_place.place_address;
     
-    // TextView EditingChanged Event
-//    [self.userCommentTextView addTarget:self action:@selector(textViewEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    // 텍스트뷰 노티 설정
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewEditChanged) name:UITextViewTextDidChangeNotification object:nil];
+
     
     // Photo ImgView Setting
     // 사진불러올 이미지뷰를 생성만 해놓고 hidden. 실제 사진을 불러오면 그때 아래 버튼이하 항목들을 밀어낸다.
@@ -150,7 +138,7 @@
     [GoogleAnalyticsModule startGoogleAnalyticsTrackingWithScreenName:@"PostMakeViewController"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)dealloc {
     // 텍스트뷰 노티 해제
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -174,19 +162,9 @@
 
 }
 
-//- (void)textViewEditingChanged:(UIPlaceHolderTextView *)sender {
-//    NSLog(@"textViewEditingChanged %ld, %d", [sender.text length], ([sender.text length] > 0));
-//    
-//    if ([sender.text length] > 0) {
-//        self.checkTextView = YES;
-//    } else {
-//        self.checkTextView = NO;       // nil or @""
-//    }
-//    
-//    [self checkMakeBtnState];
-//}
 
-- (void)textChanged:(NSNotification*)notification {
+- (void)textViewEditChanged {
+    NSLog(@"textViewEditChanged");
     
     if ([self.userCommentTextView.text length] > 0) {
         self.checkTextView = YES;
@@ -197,16 +175,6 @@
     [self checkMakeBtnState];
 }
 
-//- (void)textFieldEditingChanged:(UITextField *)sender {
-//    
-//    if ([sender.text isEqualToString:@""]) {
-//        self.checkTextField = NO;
-//    } else {
-//        self.checkTextField = (BOOL)sender.text;
-//    }
-//    
-//    [self checkMakeBtnState];
-//}
 
 // 터치하면 텍스트필드 resign되게
 - (IBAction)textViewResignTapGesture:(id)sender {
@@ -324,7 +292,7 @@
 
 - (void)checkMakeBtnState {
     
-    if (!self.photoImageView.hidden || self.checkTextView) {
+    if ((self.photoImageView.hidden == NO) || self.checkTextView) {
         for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:YES];
     } else {
         for (UIButton *btn in @[self.makeBtn1, self.makeBtn2, self.makeBtn3]) [btn setEnabled:NO];
@@ -351,78 +319,71 @@
     
     NSData *photodata = [UtilityModule imgResizing:self.photoImageView.image];    // 이미지 리사이징 (nil처리까지 알아서 함)
     
-    if (photodata.length > 1024*1024) {
-        // 들어갈리가 없으나, 일단 예외 상황 로그 수집하기 위해 만들어 둠
-        NSLog(@"Img Size Too Large");
-        NSLog(@"Size of Image(bytes): %ld", photodata.length);
+    
+    [UtilityModule showIndicator];
+    
+    if (!self.isEditMode) {     // 만들기
+        NSLog(@"새 포스트 만들어!");
         
-    } else {
-        
-        [self.indicator startAnimating];
-        
-        if (!self.isEditMode) {     // 만들기
-            NSLog(@"새 포스트 만들어!");
-            
-            [NetworkModule createPostRequestWithPinPK:self.pin_pk
-                                        withPhotoData:UIImageJPEGRepresentation(self.photoImageView.image, 0.3)
-                                      withDescription:self.userCommentTextView.text
-                                  withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+        [NetworkModule createPostRequestWithPinPK:self.pin_pk
+                                    withPhotoData:UIImageJPEGRepresentation(self.photoImageView.image, 0.3)
+                                  withDescription:self.userCommentTextView.text
+                              withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                  
+                                  [UtilityModule dismissIndicator];
+                                  
+                                  if (isSuccess) {
                                       
-                                      [self.indicator stopAnimating];
+                                      self.postData = [[MomoPostDataSet allObjects] lastObject];      // 새로 생성된 데이터가 lastObject
                                       
-                                      if (isSuccess) {
-                                          
-                                          self.postData = [[MomoPostDataSet allObjects] lastObject];      // 새로 생성된 데이터가 lastObject
-                                          
-                                          if (self.wasPostView) {       // post뷰에서 넘어왔을 때
-                                              [self dismissViewControllerAnimated:YES completion:nil];
-                                              
-                                          } else {
-                                              [self showPostView];
-                                          }
+                                      if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                                          [self dismissViewControllerAnimated:YES completion:nil];
                                           
                                       } else {
-                                          
-                                          [UtilityModule presentCommonAlertController:self withMessage:result];
-                                          
+                                          [self showPostView];
                                       }
                                       
-                                  }];
-            
-
-        } else {    // 수정하기
-            NSLog(@"포스트 수정해!");
-            
-            [NetworkModule updatePostRequestWithPostPK:self.postData.pk
-                                             WithPinPK:self.pin_pk
-                                         withPhotoData:photodata
-                                       withDescription:self.userCommentTextView.text
-                                   withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                       
-                                       [self.indicator stopAnimating];
-                                       
-                                       if (isSuccess) {
-                                           if (self.wasPostView) {       // post뷰에서 넘어왔을 때
-                                               [self dismissViewControllerAnimated:YES completion:nil];
-                                               
-                                           } else {
-                                               [self showPostView];
-                                           }
-
+                                  } else {
+                                      
+                                      [UtilityModule presentCommonAlertController:self withMessage:result];
+                                      
+                                  }
+                                  
+                              }];
+        
+        
+    } else {    // 수정하기
+        NSLog(@"포스트 수정해!");
+        
+        [NetworkModule updatePostRequestWithPostPK:self.postData.pk
+                                         WithPinPK:self.pin_pk
+                                     withPhotoData:photodata
+                                   withDescription:self.userCommentTextView.text
+                               withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                   
+                                   [UtilityModule dismissIndicator];
+                                   
+                                   if (isSuccess) {
+                                       if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                           
                                        } else {
-                                           [UtilityModule presentCommonAlertController:self withMessage:result];
+                                           [self showPostView];
                                        }
-
-                                   }];
-            
-        }
+                                       
+                                   } else {
+                                       [UtilityModule presentCommonAlertController:self withMessage:result];
+                                   }
+                                   
+                               }];
+        
     }
 }
 
 
 - (void)showPostView {
-    UIStoryboard *pinPostViewStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
-    PostViewController *postVC = [pinPostViewStoryBoard instantiateViewControllerWithIdentifier:@"PostViewController"];
+    UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
+    PostViewController *postVC = [pinPostStoryBoard instantiateViewControllerWithIdentifier:@"PostViewController"];
     
     // 포스트뷰 이동 전, 데이터 세팅
     [postVC showSelectedPostAndSetPostData:self.postData];
@@ -440,12 +401,12 @@
     // 키보드 내리기
     [self.userCommentTextView resignFirstResponder];
     
-    [self.indicator startAnimating];
+    [UtilityModule showIndicator];
     
     [NetworkModule deletePostRequestWithPostData:self.postData
                              withCompletionBlock:^(BOOL isSuccess, NSString *result) {
         
-                                 [self.indicator stopAnimating];
+                                 [UtilityModule dismissIndicator];
                                  
                                  if (isSuccess) {
                                      

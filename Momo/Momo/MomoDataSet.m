@@ -9,12 +9,20 @@
 #import "MomoDataSet.h"
 
 // Author Data Set ---------------------------//
+@interface MomoAuthorDataSet ()
+
+@property (nonatomic) BOOL getProfileImgDataWithURL;     // Photo Data를 서버의 URL로부터 가져오는 것을 결정하는 프로퍼티
+
+@end
+
 @implementation MomoAuthorDataSet
 
 + (NSString *)primaryKey {
     return @"pk";
 }
 
+
+// Img 세팅 관련
 - (void)setProfile_img_url:(NSString *)profile_img_url {
     NSLog(@"setProfile_img_url setter %@", profile_img_url);
     
@@ -23,12 +31,13 @@
         
         if (![_profile_img_url isEqualToString:profile_img_url]) {
             // 기존 img url과 다를 때, 이미지 불러오고 저장
-            NSLog(@"author pk : %ld, img load", self.pk);
             
             _profile_img_url = profile_img_url;
-            self.profile_img_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:profile_img_url]];
+            
+            if (self.getProfileImgDataWithURL) {
+                self.profile_img_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:profile_img_url]];
+            }
         }
-
     }
 }
 
@@ -37,25 +46,36 @@
 }
 
 
-// Author 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoAuthorDataSet *)makeAuthorWithDic:(NSDictionary *)authorDic {
+
+// Momo 서버로부터 받아온 AuthorDic으로 Author 객체 세팅(생성 or 업데이트) & 반환
++ (MomoAuthorDataSet *)parseAuthorDic:(NSDictionary *)authorDic withProfileImgData:(NSData *)imgData {
     //realm transaction 속에서 불림
     
     MomoAuthorDataSet *authorData;
     
     if ([MomoAuthorDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", [[authorDic objectForKey:@"pk"] integerValue]]].count > 0) {
         authorData = [MomoAuthorDataSet objectsWhere:[NSString stringWithFormat:@"pk==%ld", [[authorDic objectForKey:@"pk"] integerValue]]][0];
-
+        
     } else {
         authorData = [[MomoAuthorDataSet alloc] init];
         authorData.pk = [[authorDic objectForKey:@"pk"] integerValue];
     }
     
+    
+    // 프사는 업로드(수정)할 때, 사용한 imgData 그대로 사용 (서버 URL로 부터 imgData 다시 받아오지 않음)
+    if (imgData != nil) {
+        authorData.getProfileImgDataWithURL = NO;
+        authorData.profile_img_data = imgData;
+    } else {
+        authorData.getProfileImgDataWithURL = YES;
+    }
+    
     authorData.username = [authorDic objectForKey:@"username"];
-    authorData.profile_img_url = [[authorDic objectForKey:@"profile_img"] objectForKey:@"full_size"];
+    authorData.profile_img_url = [[authorDic objectForKey:@"profile_img"] objectForKey:@"thumbnail"];
     
     return authorData;
 }
+
 
 @end
 
@@ -68,8 +88,8 @@
 }
 
 
-// Place 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoPlaceDataSet *)makePlaceWithDic:(NSDictionary *)placeDic {
+// Momo 서버로부터 받아온 PlaceDic으로 Place 객체 세팅(생성 or 업데이트) & 반환
++ (MomoPlaceDataSet *)parsePlaceDic:(NSDictionary *)placeDic {
     //realm transaction 속에서 불림
     
     MomoPlaceDataSet *placeData;
@@ -95,6 +115,14 @@
 
 
 // Post Data Set ---------------------------//
+@interface MomoPostDataSet ()
+
+@property (nonatomic) BOOL getPhotoDataWithURL;     // Photo Data를 서버의 URL로부터 가져오는 것을 결정하는 프로퍼티
+
+@end
+
+
+
 @implementation MomoPostDataSet
 
 + (NSString *)primaryKey {
@@ -115,10 +143,13 @@
         
         if (![_post_photo_url isEqualToString:post_photo_url]) {
             // 기존 img url과 다를 때, 이미지 불러오고 저장
-            NSLog(@"post pk : %ld, img load", self.pk);
             
             _post_photo_url = post_photo_url;
-            self.post_photo_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:post_photo_url]];
+            
+            if (self.getPhotoDataWithURL) {
+                NSLog(@"post pk : %ld, img load", self.pk);
+                self.post_photo_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:post_photo_url]];
+            }
         }
     }
 }
@@ -131,10 +162,13 @@
         
         if (![_post_photo_thumbnail_url isEqualToString:post_photo_thumbnail_url]) {
             // 기존 img url과 다를 때, 이미지 불러오고 저장
-            NSLog(@"post pk : %ld, img load", self.pk);
             
             _post_photo_thumbnail_url = post_photo_thumbnail_url;
-            self.post_photo_thumbnail_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:post_photo_thumbnail_url]];
+            
+            if (self.getPhotoDataWithURL) {
+                NSLog(@"post pk : %ld, thumbnail_img load", self.pk);
+                self.post_photo_thumbnail_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:post_photo_thumbnail_url]];
+            }
         }
     }
 }
@@ -150,8 +184,8 @@
 
 
 
-// 포스트 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoPostDataSet *)makePostWithDic:(NSDictionary *)postDic {
+// Momo 서버로부터 받아온 PostDic으로 Post 객체 세팅(생성 or 업데이트) & 반환
++ (MomoPostDataSet *)parsePostDic:(NSDictionary *)postDic withPhotoData:(NSData *)photoData {
     //realm transaction 속에서 불림
     
     MomoPostDataSet *postData;
@@ -164,9 +198,17 @@
         postData.pk = [[postDic objectForKey:@"pk"] integerValue];
     }
     
+    // 사진은 업로드(생성, 수정)할 때, 사용한 photoData 그대로 사용 (서버 URL로 부터 photoData 다시 받아오지 않음)
+    if (photoData != nil) {
+        postData.getPhotoDataWithURL = NO;
+        postData.post_photo_data = photoData;
+    } else {
+        postData.getPhotoDataWithURL = YES;
+    }
 
+    
     postData.post_pin_pk = [[postDic objectForKey:@"pin"] integerValue];
-    postData.post_author = [MomoAuthorDataSet makeAuthorWithDic:[postDic objectForKey:@"author"]];
+    postData.post_author = [MomoAuthorDataSet parseAuthorDic:[postDic objectForKey:@"author"] withProfileImgData:nil];
     
     postData.post_photo_url = [[postDic objectForKey:@"photo"] objectForKey:@"full_size"];
 //    postData.post_photo_url = [[postDic objectForKey:@"photo"] objectForKey:@"thumbnail"];
@@ -195,8 +237,8 @@
 }
 
 
-// 핀 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoPinDataSet *)makePinWithDic:(NSDictionary *)pinDic {
+// Momo 서버로부터 받아온 PinDic으로 Pin 객체 세팅(생성 or 업데이트) & 반환
++ (MomoPinDataSet *)parsePinDic:(NSDictionary *)pinDic {
     //realm transaction 속에서 불림
     
     MomoPinDataSet *pinData;
@@ -216,13 +258,10 @@
     pinData.pin_created_date = [pinDic objectForKey:@"created_date"];
 
     // pin_author
-    pinData.pin_author = [MomoAuthorDataSet makeAuthorWithDic:[pinDic objectForKey:@"author"]];
+    pinData.pin_author = [MomoAuthorDataSet parseAuthorDic:[pinDic objectForKey:@"author"] withProfileImgData:nil];
     
     // pin_place
-    pinData.pin_place = [MomoPlaceDataSet makePlaceWithDic:[pinDic objectForKey:@"place"]];
-    
-    // pin_post_list 초기화
-    [pinData.pin_post_list removeAllObjects];
+    pinData.pin_place = [MomoPlaceDataSet parsePlaceDic:[pinDic objectForKey:@"place"]];
 
     
     return pinData;
@@ -277,8 +316,8 @@
 }
 
 
-// 맵 생성, Momo 서버로부터 받아온 Dic으로 객체 생성, 반환
-+ (MomoMapDataSet *)makeMapWithDic:(NSDictionary *)mapDic {
+// Momo 서버로부터 받아온 MapDic으로 Map 객체 세팅(생성 or 업데이트) & 반환
++ (MomoMapDataSet *)parseMapDic:(NSDictionary *)mapDic {
     //realm transaction 속에서 불림
     
     MomoMapDataSet *mapData;
@@ -298,10 +337,7 @@
     mapData.map_is_private = [[mapDic objectForKey:@"is_private"] boolValue];
     
     // map_author
-    mapData.map_author = [MomoAuthorDataSet makeAuthorWithDic:[mapDic objectForKey:@"author"]];
-    
-    // map_pin_list 초기화
-    [mapData.map_pin_list removeAllObjects];
+    mapData.map_author = [MomoAuthorDataSet parseAuthorDic:[mapDic objectForKey:@"author"] withProfileImgData:nil];
     
     
     return mapData;
@@ -326,29 +362,8 @@
 
 
 
-// User profile image
-- (void)setUser_profile_image_url:(NSString *)user_profile_image_url {
-    NSLog(@"setUser_profile_image_url setter");
-
-    if (user_profile_image_url) {       // nil이 아닐 때
-        // url 설정하면서 자동으로 이미지 가져옴
-        
-        if (![_user_profile_image_url isEqualToString:user_profile_image_url]) {
-            // 기존 img url과 다를 때, 이미지 불러오고 저장
-            NSLog(@"user pk : %ld, img load", self.pk);
-            
-            _user_profile_image_url = user_profile_image_url;
-            self.user_profile_image_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:user_profile_image_url]];
-        }
-    }
-}
-
-- (UIImage *)getUserProfileImage {
-    return [UIImage imageWithData:self.user_profile_image_data];
-}
-
-
-+ (MomoUserDataSet *)makeUserWithDic:(NSDictionary *)userDic {
+// Momo 서버로부터 받아온 UserDic으로 User 객체 세팅(생성 or 업데이트) & 반환      (+ with imgData)
++ (MomoUserDataSet *)parseUserDic:(NSDictionary *)userDic withProfileImgData:(NSData *)imgData {
     //realm transaction 속에서 불림
     
     MomoUserDataSet *userData;
@@ -361,11 +376,12 @@
         userData.pk = [[userDic objectForKey:@"pk"] integerValue];
     }
     
-    
-    
     userData.user_token = [userDic objectForKey:@"auth_token"];
     
-    userData.user_username = [userDic objectForKey:@"username"];
+    // Author에 Username & Profile Img 세팅 (User와 Author는 같음 (pk, username, img))
+    userData.user_author = [MomoAuthorDataSet parseAuthorDic:userDic withProfileImgData:imgData];
+
+    
     userData.user_id = [userDic objectForKey:@"userid"];
 
     if (![[NSString stringWithFormat:@"%@", [userDic objectForKey:@"description"]] isEqualToString:@"<null>"]) {     // null값이 참 이상하게 날라옴..
@@ -375,14 +391,7 @@
     if ([userDic objectForKey:@"email"]) {
         userData.user_email = [userDic objectForKey:@"email"];
     }
-
-    if ([[userDic objectForKey:@"profile_img"] objectForKey:@"thumbnail"]) {
-        userData.user_profile_image_url = [[userDic objectForKey:@"profile_img"] objectForKey:@"thumbnail"];
-    }
     
-    // user_map_list 초기화
-    [userData.user_map_list removeAllObjects];
-
     
     return userData;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "UtilityModule.h"
+#import <SVProgressHUD.h>
 
 @implementation UtilityModule
 
@@ -45,6 +46,21 @@
         return nil;
     }
 }
+
+
+
+// SVProgressHUD & InteractionEvents Control
++ (void)showIndicator {
+    [SVProgressHUD setForegroundColor:[UIColor mm_brightSkyBlueColor]];
+    [SVProgressHUD show];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+}
+
++ (void)dismissIndicator {
+    [SVProgressHUD dismiss];
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+}
+
 
 @end
 

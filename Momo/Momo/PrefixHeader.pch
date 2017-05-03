@@ -37,9 +37,9 @@
 
 #import <Realm/Realm.h>
 
+#import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+MultiFormat.h>
-#import <AFNetworking/AFNetworking.h>
 
 
 #endif /* PrefixHeader_pch */

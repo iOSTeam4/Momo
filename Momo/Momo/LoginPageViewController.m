@@ -18,8 +18,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
-
 @end
 
 @implementation LoginPageViewController
@@ -122,8 +120,8 @@
 
 // 로그인 버튼
 - (IBAction)loginBtnAction:(id)sender {
-    
-    [self.indicator startAnimating];
+
+    [UtilityModule showIndicator];
     [self.lastFirstResponderTextField resignFirstResponder];
     
     [NetworkModule loginRequestWithUsername:self.idTextField.text
@@ -137,7 +135,7 @@
                             
                                 [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
 
-                                    [self.indicator stopAnimating];
+                                    [UtilityModule dismissIndicator];
                                     
                                     if (isSuccess) {
                                         NSLog(@"get Member Profile success : %@", result);
@@ -154,7 +152,7 @@
                                 }];
                                 
                             } else {
-                                [self.indicator stopAnimating];
+                                [UtilityModule dismissIndicator];
 
                                 NSLog(@"error : %@", result);
                                 
