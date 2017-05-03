@@ -24,7 +24,7 @@ FastCampus School TeamProject
 - Google Maps 기반의 지도 앱 <sup>[1](#Map)</sup>  
 - 일반 계정(e-mail) / Facebook 계정(FB Login, Graph API) 로그인, 회원가입 <sup>[2](#login)</sup>  
 - Network (일반 코드, AFNetworking) 코드 로직 설계 및 네트워크 연결 <sup>[3](#network)</sup>  
-- Realm Mobile DataBase로 데이터셋 구조 설계 및 싱글턴 객체로 데이터 관리 <sup>[4](#dataset)</sup>  
+- Realm Mobile DataBase로 데이터셋 구조 설계&저장 및 싱글턴 객체로 데이터 관리 <sup>[4](#dataset)</sup>  
 - AutoLayout(StoryBoard, Xib/Nib) / Code(frame) / AutoLayout & Code 다양한 방식으로 UI를 적용 <sup>[5](#ui)</sup>  
 - Tab-Navi-ViewController 구조에서 CustomTabBar 구현 <sup>[6](#tabbar)</sup>  
 - NaviBar Hidden에 따른 popGesture 예외 처리 <sup>[7](#navibar)</sup>  
@@ -39,15 +39,17 @@ FastCampus School TeamProject
 	- Realm Mobile DB  
 	- AFNetworking  
 	- UIPlaceHolderTextView  
+	- SVProgressHUD
 	- SDWebImage  
 	- FontAwesomeKit  
 
 - 아직 남아있는 개발거리, 이슈들  
 	- 리팩토링  
-	- 보다 효율적인 네트웍 처리, 제대로 된 캐싱구조 적용  
-	- indicator 띄울 때, 버튼 등 눌리지 않게 처리  
+	- Facebook 로그인창 갑자기 안뜨는 이슈
 	- 검색, 소셜기능 적용  
-</br></br>
+
+</br></br>  
+
 ## Momo Team <a id="Momo_Team"></a>  
 협업 방식 : 주 1~2회 스프린트 미팅, Daily Scrum으로 매일(평일) 개발 상황 공유  
 협업 도구 : Slack, Google docs, Hangout, Trello  
