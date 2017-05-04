@@ -76,7 +76,7 @@
         self.pinData = self.mapData.map_pin_list[lastPinIndex];    // 마지막 핀으로 세팅
         
         // 포스트 한 개 이상 있을 때, 포스트 노출
-        if ([DataCenter myPinListWithMapPK:mapData.pk].count > 0) {
+        if ([DataCenter myPostListWithMapPK:mapData.pk].count > 0) {
             
             NSInteger lastPostIndex = [DataCenter myPostListWithMapPK:mapData.pk].count - 1;    // 역순 (가장 최신 순으로)
             self.postData = [DataCenter myPostListWithMapPK:mapData.pk][lastPostIndex];         // 마지막 핀의 마지막 포스트로 세팅 (그냥 마지막 포스트는 아님..)
@@ -89,16 +89,14 @@
                 // 글
                 [self.postBtnView setImage:nil forState:UIControlStateNormal];
                 
-                [self.postBtnView setBackgroundColor:[UIColor colorWithRed:234/255.0 green:234/255.0 blue:234/255.0 alpha:0.37]];
                 [self.postBtnView setTitle:self.postData.post_description forState:UIControlStateNormal];
                 [self.postBtnView setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
+                [self.postBtnView setBackgroundColor:[UIColor colorWithRed:234/255.0 green:234/255.0 blue:234/255.0 alpha:0.37]];
                 [self.postBtnView setTitleEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
                 [self.postBtnView.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
                 [self.postBtnView.titleLabel setNumberOfLines:3];
             }
-            
         }
-        
     }
 }
 
