@@ -163,7 +163,7 @@
 
 
 - (void)textViewEditChanged {
-    NSLog(@"textViewEditChanged");
+//    NSLog(@"textViewEditChanged");
     
     if ([self.userCommentTextView.text length] > 0) {
         self.checkTextView = YES;
@@ -369,6 +369,7 @@
                                    
                                    if (isSuccess) {
                                        if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                                           [((PostViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) showSelectedPostAndSetPostData:self.postData];    // 다시 수정된 포스트 중심으로 보이게 세팅
                                            [self dismissViewControllerAnimated:YES completion:nil];
                                            
                                        } else {
@@ -416,7 +417,7 @@
                                      
                                      [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
                                      
-                                     if ([DataCenter findPinDataWithPinPK:self.pin_pk].pin_post_list.count != 0) {
+                                     if ([DataCenter findPinDataWithPinPK:self.pin_pk].pin_post_list.count > 0) {
                                          
                                          // 남은 포스트 양이 1개 이상 남아있을 때, 테이블 뷰로 돌아감
                                          [self dismissViewControllerAnimated:YES completion:nil];

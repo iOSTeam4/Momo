@@ -71,7 +71,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedPostIndex inSection:0]
                               atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-        
+        NSLog(@"self.selectedPostIndex : %ld", self.selectedPostIndex);
         [self.tableView setHidden:NO];
         self.selectedPostIndex = 0;     // 초기화
     });
@@ -246,7 +246,6 @@
     
     [postMakeVC setEditModeWithPostData:self.pinData.pin_post_list[index]];   // 수정 모드, 데이터 세팅
     postMakeVC.wasPostView = YES;       // post뷰에서 이동
-    self.selectedPostIndex = index;     // 다시 postView로 돌아왔을 때, 보일 post index 값 세팅
     
     [self presentViewController:postMakeVC animated:YES completion:nil];
     
