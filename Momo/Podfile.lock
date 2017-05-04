@@ -57,9 +57,9 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - JSONModel (1.7.0)
-  - Realm (2.6.2):
-    - Realm/Headers (= 2.6.2)
-  - Realm/Headers (2.6.2)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -98,7 +98,7 @@ SPEC CHECKSUMS:
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
-  Realm: 29222766425b9f831228f81b63f0e38a97a4d700
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 

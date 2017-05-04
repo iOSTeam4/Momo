@@ -34,7 +34,10 @@
 
     
     // 앱 실행하면서, Realm에 있는 유저 정보 확인
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];        // whiteColor로 적용, dismiss하면서 다시 기본 컬러인 mm_brightSkyBlueColor로 세팅 됨
+    [UtilityModule showIndicator];
     [[DataCenter sharedInstance] checkUserDataWithCompletionBlock:^(BOOL isSuccess) {
+        [UtilityModule dismissIndicator];
         if (isSuccess) {
             // 자동로그인
             [LoginViewController autoLoginCheck];
@@ -100,12 +103,14 @@
 // Facebook Login BtnAction ----------------------------------//
 
 - (IBAction)fbBtnAction:(id)sender {
+
+    // whiteColor로 적용, dismiss하면서 다시 기본 컬러인 mm_brightSkyBlueColor로 세팅 됨
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     [FacebookModule fbLoginFromVC:self
               withCompletionBlock:^(BOOL isSuccess, NSString *token) {
                   
                   if (isSuccess) {
-                      [UtilityModule showIndicator];
                       NSLog(@"fb 로그인 성공");
                       
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
@@ -126,6 +131,7 @@
                       }];
                       
                   } else {
+                      [UtilityModule dismissIndicator];
                       NSLog(@"fb 로그인 실패");
                   }
               }];

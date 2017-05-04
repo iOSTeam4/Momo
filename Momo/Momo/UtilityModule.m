@@ -7,7 +7,6 @@
 //
 
 #import "UtilityModule.h"
-#import <SVProgressHUD.h>
 
 @implementation UtilityModule
 
@@ -32,8 +31,7 @@
 
     if (img) {  // not nil
         // 이미지 데이터 압축, 허용 용량 약 2.5mb정도
-        // Point가 아닌, Pixel 사이즈로 조정됨 : 약 40kb img
-        CGSize imgSize = CGSizeMake(200.0f, 200.0f);
+        CGSize imgSize = CGSizeMake(500.0f, 500.0f);    // 약 50kb img
         
         UIGraphicsBeginImageContext(imgSize);
         [img drawInRect:CGRectMake(0,0,imgSize.width,imgSize.height)];
@@ -51,7 +49,6 @@
 
 // SVProgressHUD & InteractionEvents Control
 + (void)showIndicator {
-    [SVProgressHUD setForegroundColor:[UIColor mm_brightSkyBlueColor]];
     [SVProgressHUD show];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 }
@@ -59,6 +56,7 @@
 + (void)dismissIndicator {
     [SVProgressHUD dismiss];
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    [SVProgressHUD setForegroundColor:[UIColor mm_brightSkyBlueColor]];     // 항상 다시 mm_brightSkyBlueColor로 세팅해둠
 }
 
 

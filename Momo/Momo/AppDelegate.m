@@ -19,6 +19,9 @@
     // App 전체 tint 컬러 적용
     [self.window setTintColor:[UIColor mm_brightSkyBlueColor]];
     
+    // SVProgressHUD 기본 Color 적용
+    [SVProgressHUD setForegroundColor:[UIColor mm_brightSkyBlueColor]];
+    
     // Google Analytics
     [self googleAnalyticsTrackerStart];
     

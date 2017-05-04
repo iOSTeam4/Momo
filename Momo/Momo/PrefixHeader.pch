@@ -41,5 +41,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+MultiFormat.h>
 
+#import <SVProgressHUD.h>
 
 #endif /* PrefixHeader_pch */

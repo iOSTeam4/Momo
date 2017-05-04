@@ -43,7 +43,9 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
     [[self sharedFBLoginManeger] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
                                        fromViewController:fromVC
                                                   handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                                      
+                                        
+                                                      [UtilityModule showIndicator];
+                           
                                                       // isMainThread
                                                       
                                                       if (error) {

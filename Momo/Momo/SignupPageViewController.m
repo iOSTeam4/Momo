@@ -173,7 +173,6 @@
               withCompletionBlock:^(BOOL isSuccess, NSString *token) {
                   
                   if (isSuccess) {
-                      [UtilityModule showIndicator];
                       NSLog(@"fb 로그인 성공");
                     
                       [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
@@ -194,6 +193,7 @@
                       }];
                       
                   } else {
+                      [UtilityModule dismissIndicator];
                       NSLog(@"fb 로그인 실패");
                   }
               }];
