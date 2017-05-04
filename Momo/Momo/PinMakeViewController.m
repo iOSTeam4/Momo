@@ -338,7 +338,7 @@
                                    
                                    if (isSuccess) {
                                        
-                                       self.pinData = [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list lastObject];      // 새로 생성된 데이터가 lastObject
+                                       self.pinData = [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list firstObject];      // 새로 생성된 데이터가 firstObject
                                        
                                        // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
                                        [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];

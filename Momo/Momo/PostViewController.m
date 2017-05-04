@@ -56,10 +56,6 @@
     self.tableView.estimatedRowHeight = 180;    // 글만 있을 때 (제일 작은 사이즈)
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    // 선택한 포스트로 바로 이동
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.pinData.pin_post_list.count - self.selectedPostIndex - 1 inSection:0]
-                          atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,7 +64,19 @@
     
     // 데이터 변경되었을 때, 바로 반영되어야하므로 viewWillAppear할 때마다 테이블 뷰 refresh
     [self.tableView reloadData];
+    
+    // 선택 포스트로 바로 이동
+    [self.tableView setHidden:YES];     // Post가 많을 때, 최신 게시글의 잔상이 남아, 이동 전까지 hidden 처리함
+    // Auto Sizing Cell일 때, Height가 확정되지 않은 시점에서 scrollToRowAtIndexPath 메서드부르면 작동안됨
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedPostIndex inSection:0]
+                              atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+        
+        [self.tableView setHidden:NO];
+        self.selectedPostIndex = 0;     // 초기화
+    });
 }
+
 
 
 
@@ -95,7 +103,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_description length] && [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_photo_data length]) {
+    if ([self.pinData.pin_post_list[indexPath.row].post_description length] && [self.pinData.pin_post_list[indexPath.row].post_photo_data length]) {
         // 글 사진 다 있는 경우
         PhotoTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoTextCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -107,9 +115,9 @@
         cell.pinAddress1.text = self.pinData.pin_place.place_address;
         
         // 핀 작성자 username, img
-        cell.userName1.text = self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.username;
-        if (self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.profile_img_data) {
-            cell.profileImageView1.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        cell.userName1.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
+        if (self.pinData.pin_post_list[indexPath.row].post_author.profile_img_data) {
+            cell.profileImageView1.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         }
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
@@ -120,12 +128,12 @@
         cell.categoryColorView1.layer.cornerRadius = cell.categoryColorView1.frame.size.width/2;
         
         // * 사진 & 글 *
-        [cell.contentImageView1 setImage:[self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1] getPostPhoto]];     // 사진
-        [cell.pinMainText1 setText:self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_description];         // 글
+        [cell.contentImageView1 setImage:[self.pinData.pin_post_list[indexPath.row] getPostPhoto]];     // 사진
+        [cell.pinMainText1 setText:self.pinData.pin_post_list[indexPath.row].post_description];         // 글
         
         return cell;
     
-    } else if ([self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_photo_data length]) {
+    } else if ([self.pinData.pin_post_list[indexPath.row].post_photo_data length]) {
         // 사진만 있는 경우
         PhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoCell" forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -137,9 +145,9 @@
         cell.pinAddress2.text = self.pinData.pin_place.place_address;
         
         // 핀 작성자 username, img
-        cell.userName2.text = self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.username;
-        if (self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.profile_img_data) {
-            cell.profileImageView2.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        cell.userName2.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
+        if (self.pinData.pin_post_list[indexPath.row].post_author.profile_img_data) {
+            cell.profileImageView2.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         }
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
@@ -150,7 +158,7 @@
         cell.categoryColorView2.layer.cornerRadius = cell.categoryColorView2.frame.size.width/2;
         
         // * 사진 *
-        [cell.contentImageView2 setImage:[self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1] getPostPhoto]];
+        [cell.contentImageView2 setImage:[self.pinData.pin_post_list[indexPath.row] getPostPhoto]];
 
         return cell;
 
@@ -166,9 +174,9 @@
         cell.pinAddress3.text = self.pinData.pin_place.place_address;
         
         // 핀 작성자 username, img
-        cell.userName3.text = self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.username;
-        if (self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author.profile_img_data) {
-            cell.profileImageView3.image = [self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_author getAuthorProfileImg];
+        cell.userName3.text = self.pinData.pin_post_list[indexPath.row].post_author.username;
+        if (self.pinData.pin_post_list[indexPath.row].post_author.profile_img_data) {
+            cell.profileImageView3.image = [self.pinData.pin_post_list[indexPath.row].post_author getAuthorProfileImg];
         }
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
@@ -179,7 +187,7 @@
         cell.categoryColorView3.layer.cornerRadius = cell.categoryColorView3.frame.size.width/2;
         
         // * 글 *
-        [cell.pinMainText3 setText:self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row - 1].post_description];
+        [cell.pinMainText3 setText:self.pinData.pin_post_list[indexPath.row].post_description];
 
         return cell;
     }
@@ -222,7 +230,7 @@
     PostMakeViewController *postMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
 
     [postMakeVC setMakeModeWithPinPK:self.pinData.pk];      // pin_pk 전달해줘야 포스트 생성가능
-    postMakeVC.wasPostView = YES;    // post뷰에서 이동
+    postMakeVC.wasPostView = YES;       // post뷰에서 이동
     
     [self presentViewController:postMakeVC animated:YES completion:nil];
 }
@@ -236,8 +244,9 @@
     UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
     PostMakeViewController *postMakeVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"PostMakeViewController"];
     
-    [postMakeVC setEditModeWithPostData:self.pinData.pin_post_list[self.pinData.pin_post_list.count - index - 1]];   // 수정 모드, 데이터 세팅
-    postMakeVC.wasPostView = YES;    // post뷰에서 이동
+    [postMakeVC setEditModeWithPostData:self.pinData.pin_post_list[index]];   // 수정 모드, 데이터 세팅
+    postMakeVC.wasPostView = YES;       // post뷰에서 이동
+    self.selectedPostIndex = index;     // 다시 postView로 돌아왔을 때, 보일 post index 값 세팅
     
     [self presentViewController:postMakeVC animated:YES completion:nil];
     

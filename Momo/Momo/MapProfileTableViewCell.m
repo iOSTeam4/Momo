@@ -68,18 +68,15 @@
     // 핀이 한 개 이상 있을 때, 라벨 표기
     if (self.mapData.map_pin_list.count > 0) {
         
-        NSInteger lastPinIndex = self.mapData.map_pin_list.count - 1;
+        [self.labelBtnView setImage:[self.mapData.map_pin_list[0] labelIcon] forState:UIControlStateNormal];    // 라벨 아이콘 이미지
+        [self.labelBtnView setBackgroundColor:[self.mapData.map_pin_list[0] labelColor]];                       // 바탕 색
         
-        [self.labelBtnView setImage:[self.mapData.map_pin_list[lastPinIndex] labelIcon] forState:UIControlStateNormal];    // 라벨 아이콘 이미지
-        [self.labelBtnView setBackgroundColor:[self.mapData.map_pin_list[lastPinIndex] labelColor]];                       // 바탕 색
-        
-        self.pinData = self.mapData.map_pin_list[lastPinIndex];    // 마지막 핀으로 세팅
+        self.pinData = self.mapData.map_pin_list[0];    // 마지막 핀으로 세팅
         
         // 포스트 한 개 이상 있을 때, 포스트 노출
         if ([DataCenter myPostListWithMapPK:mapData.pk].count > 0) {
             
-            NSInteger lastPostIndex = [DataCenter myPostListWithMapPK:mapData.pk].count - 1;    // 역순 (가장 최신 순으로)
-            self.postData = [DataCenter myPostListWithMapPK:mapData.pk][lastPostIndex];         // 마지막 핀의 마지막 포스트로 세팅 (그냥 마지막 포스트는 아님..)
+            self.postData = [DataCenter myPostListWithMapPK:mapData.pk][0];         // 최대한 마지막 핀의 마지막 포스트로 세팅 (그냥 마지막 포스트는 아님..)
             
             if ([self.postData.post_photo_data length]) {
                 // 사진

@@ -150,29 +150,27 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     PinContentsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.contentsBtn.tag = self.pinData.pin_post_list.count - indexPath.row;    // 가장 최신 포스트부터 나열하도록
+    cell.contentsBtn.tag = indexPath.row;   // tag에 indexPath.row 그대로 넣음 (indexPath.row 1부터 index 0 유의할 것!)
     
     if (indexPath.row == POST_MAKE_BUTTON) {       // * 작성 버튼 때문에 실제 데이터는 row에 -1 씩 계산 필요함 *
         // 포스트 작성 버튼
-        cell.contentsBtn.tag = -1;   // 예외적으로 다시 -1으로 할당
-        
         [cell.contentsBtn setTitle:nil forState:UIControlStateNormal];  // 글 삭제 (초기화)
         
         [cell.contentsBtn setImage:[UIImage imageNamed:@"addPost"] forState:UIControlStateNormal];
 
-    } else if ([self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row] getPostPhoto]) {
+    } else if ([self.pinData.pin_post_list[indexPath.row -1] getPostPhoto]) {
         // 사진이 있는 경우
         [cell.contentsBtn setTitle:nil forState:UIControlStateNormal];  // 글 삭제 (초기화)
 
-        [cell.contentsBtn setImage:[self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row] getPostPhoto] forState:UIControlStateNormal];
+        [cell.contentsBtn setImage:[self.pinData.pin_post_list[indexPath.row - 1] getPostPhoto] forState:UIControlStateNormal];
 
     } else {
         // 글만 있는 경우
         [cell.contentsBtn setImage:nil forState:UIControlStateNormal];  // 사진 삭제 (초기화)
         
-        [cell.contentsBtn setBackgroundColor:[UIColor whiteColor]];
-        [cell.contentsBtn setTitle:self.pinData.pin_post_list[self.pinData.pin_post_list.count - indexPath.row].post_description forState:UIControlStateNormal];
+        [cell.contentsBtn setTitle:self.pinData.pin_post_list[indexPath.row - 1].post_description forState:UIControlStateNormal];
         [cell.contentsBtn setTitleColor:[UIColor mm_brightSkyBlueColor] forState:UIControlStateNormal];
+        [cell.contentsBtn setBackgroundColor:[UIColor whiteColor]];
         [cell.contentsBtn.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [cell.contentsBtn setTitleEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
         [cell.contentsBtn.titleLabel setNumberOfLines:3];
@@ -203,7 +201,7 @@
     
     NSLog(@"버튼 눌림 tag = %ld", sender.tag);
     
-    if (sender.tag == -1) {     // POST_MAKE_BUTTON 태그값은 -1
+    if (sender.tag == POST_MAKE_BUTTON) {
 
         // Make Post
         UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Make" bundle:nil];
@@ -215,7 +213,7 @@
         
         // Post View
         PostViewController *postVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostViewController"];
-        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag]];
+        [postVC showSelectedPostAndSetPostData:self.pinData.pin_post_list[sender.tag - 1]];
         [self.navigationController pushViewController:postVC animated:YES];
         
     }

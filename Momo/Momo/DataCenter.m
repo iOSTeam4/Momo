@@ -106,7 +106,7 @@
             [mapData.map_pin_list removeAllObjects];        // map_pin_list 초기화
             
             [realm addOrUpdateObject:mapData];              // mapData add or update
-            [[DataCenter myMapList] addObject:mapData];     // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
+            [[DataCenter myMapList] insertObject:mapData atIndex:0];     // 싱글턴 객체 UserData 프로퍼티 map_list에 지도 추가
             
             
             // Pin 데이터 파싱 및 저장(업데이트)
@@ -116,7 +116,7 @@
                 [pinData.pin_post_list removeAllObjects];       // pin_post_list 초기화
                 
                 [realm addOrUpdateObject:pinData];              // pinData add or update
-                [mapData.map_pin_list addObject:pinData];       // map의 pin_list에 pin 추가
+                [mapData.map_pin_list insertObject:pinData atIndex:0];       // map의 pin_list에 pin 추가
                 
                 
                 // Post 데이터 파싱 및 저장(업데이트)
@@ -125,7 +125,7 @@
                     MomoPostDataSet *postData = [MomoPostDataSet parsePostDic:postDic withPhotoData:nil];
                     
                     [realm addOrUpdateObject:postData];             // postData add or update
-                    [pinData.pin_post_list addObject:postData];     // pin의 post_list에 post 추가
+                    [pinData.pin_post_list insertObject:postData atIndex:0];     // pin의 post_list에 post 추가
                 }
             }
         }
@@ -197,7 +197,7 @@
         MomoMapDataSet *mapData = [MomoMapDataSet parseMapDic:mapDic];
     
         [realm addOrUpdateObject:mapData];
-        [[DataCenter myMapList] addObject:mapData];
+        [[DataCenter myMapList] insertObject:mapData atIndex:0];
     }];
 }
 
@@ -241,7 +241,7 @@
         [realm addOrUpdateObject:pinData];
         
         MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];
-        [mapData.map_pin_list addObject:pinData];
+        [mapData.map_pin_list insertObject:pinData atIndex:0];
     }];
 }
 
@@ -267,7 +267,7 @@
         }
         
         MomoMapDataSet *mapData = [DataCenter findMapDataWithMapPK:pinData.pin_map_pk];
-        [mapData.map_pin_list addObject:pinData];       // 현재 속한 지도에 등록
+        [mapData.map_pin_list insertObject:pinData atIndex:0];       // 현재 속한 지도에 등록
     }];
 }
 
@@ -301,7 +301,7 @@
         [realm addOrUpdateObject:postData];
         
         MomoPinDataSet *pinData = [DataCenter findPinDataWithPinPK:postData.post_pin_pk];
-        [pinData.pin_post_list addObject:postData];
+        [pinData.pin_post_list insertObject:postData atIndex:0];
     }];
 }
 
@@ -338,8 +338,8 @@
     return [DataCenter sharedInstance].momoUserData.user_map_list;
 }
 
-+ (RLMArray<MomoPinDataSet *> *)myPinList {    
-    return (RLMArray<MomoPinDataSet *> *)[MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pin_author.pk == %ld", [DataCenter sharedInstance].momoUserData.pk]];
++ (RLMArray<MomoPinDataSet *> *)myPinList {
+    return (RLMArray<MomoPinDataSet *> *)[[MomoPinDataSet objectsWhere:[NSString stringWithFormat:@"pin_author.pk == %ld", [DataCenter sharedInstance].momoUserData.pk]] sortedResultsUsingKeyPath:@"pk" ascending:NO];
 }
 
 + (RLMArray<MomoPinDataSet *> *)myPinListWithMapPK:(NSInteger)mapPK {

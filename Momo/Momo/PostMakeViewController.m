@@ -99,15 +99,6 @@
         [self.makeBtn2 setTitle:@"수정하기" forState:UIControlStateNormal];
         
         
-        // 삭제 버튼 추가
-        UIButton *deleteBtn = [[UIButton alloc] init];
-        self.deleteBtn = deleteBtn;
-        [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
-        [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-        [self.deleteBtn addTarget:self action:@selector(selectedDeletePostBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:self.deleteBtn];
-        
-        
         // 기존 포스트 정보 넣기 -------------------//
 
         // 사진
@@ -128,6 +119,14 @@
             self.userCommentTextView.text = self.postData.post_description;
             self.checkTextView = YES;
         }
+        
+        // 삭제 버튼 추가
+        UIButton *deleteBtn = [[UIButton alloc] init];
+        self.deleteBtn = deleteBtn;
+        [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
+        [self.deleteBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [self.deleteBtn addTarget:self action:@selector(selectedDeletePostBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:self.deleteBtn];
         
         [self checkMakeBtnState];
     }
@@ -262,7 +261,9 @@
         [self.view layoutIfNeeded];     // autolayout constraint 값을 코드로 변경한 걸 적용할 때 꼭!!!!
         
         self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.makeBtn3.frame.origin.y + self.makeBtn3.frame.size.height + 30);
-        
+
+        // DeleteBtn Frame setting (Edit Mode 일 때만 해당되긴하나, 구분없이 이렇게 불러도 상관없음)
+        [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
     }
     
     [self.scrollView setContentOffset:CGPointMake(0,400) animated:YES];
@@ -282,6 +283,9 @@
     
     [self.view layoutIfNeeded];
     [self.scrollView setContentOffset:CGPointMake(0,0) animated:YES];
+    
+    // DeleteBtn Frame setting (Edit Mode 일 때만 해당되긴하나, 구분없이 이렇게 불러도 상관없음)
+    [self.deleteBtn setFrame:CGRectMake(self.makeBtn3.frame.origin.x+3, self.makeBtn3.frame.origin.y+70, 34, 44)];
     
     [self checkMakeBtnState];
 }

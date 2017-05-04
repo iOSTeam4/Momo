@@ -148,15 +148,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
+//    NSLog(@"cellForRowAtIndexPath mapPinNum : %ld, indexPath : %ld", self.mapPinNum, indexPath.row);
     
     if (self.mapPinNum == SHOW_MAP) {
         MapProfileTableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:@"mapProfileCell" forIndexPath:indexPath];
         
-        // 지도 데이터 역순 적용
-        NSInteger inverseOrderIndex = [DataCenter myMapList].count - 1 - indexPath.row;
-        
-        [mapCell initWithMapData:[DataCenter myMapList][inverseOrderIndex]];
+        // 지도 데이터 세팅
+        [mapCell initWithMapData:[DataCenter myMapList][indexPath.row]];
         mapCell.delegate = self;        // 델리게이트 설정
         
         return mapCell;
@@ -164,10 +162,8 @@
     } else  {
         PinProfileTableViewCell *pinCell = [tableView dequeueReusableCellWithIdentifier:@"pinProfileCell" forIndexPath:indexPath];
         
-        // 핀 데이터 역순 적용
-        NSInteger inverseOrderIndex = [DataCenter myPinList].count - 1 - indexPath.row;
-        
-        [pinCell initWithPinData:[DataCenter myPinList][inverseOrderIndex]];
+        // 핀 데이터 세팅
+        [pinCell initWithPinData:[DataCenter myPinList][indexPath.row]];
         pinCell.delegate = self;    // 델리게이트 설정
         
         return pinCell;
@@ -182,10 +178,7 @@
         UIStoryboard *makeStoryBoard = [UIStoryboard storyboardWithName:@"Map" bundle:nil];
         MapViewController *mapVC = [makeStoryBoard instantiateViewControllerWithIdentifier:@"MapViewController"];
         
-        // 지도 데이터 역순 적용
-        NSInteger inverseOrderIndex = [DataCenter myMapList].count - 1 - indexPath.row;
-        
-        [mapVC showSelectedMapAndSetMapData:[DataCenter myMapList][inverseOrderIndex]];         // 지도 데이터 세팅
+        [mapVC showSelectedMapAndSetMapData:[DataCenter myMapList][indexPath.row]];         // 지도 데이터 세팅
         
         [self.navigationController pushViewController:mapVC animated:YES];
         
@@ -194,10 +187,7 @@
         UIStoryboard *pinPostStoryBoard = [UIStoryboard storyboardWithName:@"PinPost" bundle:nil];
         PinViewController *pinVC = [pinPostStoryBoard instantiateInitialViewController];
 
-        // 핀 데이터 역순 적용
-        NSInteger inverseOrderIndex = [DataCenter myPinList].count - 1 - indexPath.row;
-
-        [pinVC showSelectedPinAndSetPinData:[DataCenter myPinList][inverseOrderIndex]];    // 핀 데이터 세팅
+        [pinVC showSelectedPinAndSetPinData:[DataCenter myPinList][indexPath.row]];    // 핀 데이터 세팅
         
         [self.navigationController pushViewController:pinVC animated:YES];
     }

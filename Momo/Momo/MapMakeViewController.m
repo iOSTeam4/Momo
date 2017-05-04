@@ -151,7 +151,7 @@
                                    [UtilityModule dismissIndicator];
                                    
                                    if (isSuccess) {
-                                       self.mapData = [[DataCenter myMapList] lastObject];      // 새로 생성된 데이터가 lastObject
+                                       self.mapData = [[DataCenter myMapList] firstObject];      // 새로 생성된 데이터가 firstObject
                                        [self showMapView];
                                        
                                    } else {                                       
@@ -185,17 +185,7 @@
                                  }
                                  
                              }];
-        
-        
-        
-        
-//        RLMRealm *realm = [RLMRealm defaultRealm];
-//        [realm transactionWithBlock:^{
-//            self.mapData.map_name = self.mapNameTextField.text;
-//            self.mapData.map_description = self.mapContentTextField.text;
-//            self.mapData.map_is_private = self.secretSwitch.on;
-//        }];
-        
+
     }
 }
 
