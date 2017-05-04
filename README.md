@@ -45,7 +45,6 @@ FastCampus School TeamProject
 
 - 아직 남아있는 개발거리, 이슈들  
 	- 리팩토링  
-	- Facebook 로그인창 갑자기 안뜨는 이슈
 	- 검색, 소셜기능 적용  
 
 </br></br>  
