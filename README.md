@@ -6,7 +6,7 @@ FastCampus School TeamProject
  - [iOS Dev Features](#iOS_Dev_Features)
  - [Momo Team](#Momo_Team)  
  
-</br></br>
+</br>
 
 ## Momo (Map Of My Oasis) <a id="Momo"></a>  
 ### 내가 아끼는 곳, 나만의 지도 MOMO  
@@ -15,7 +15,7 @@ FastCampus School TeamProject
 
 #### [Youtube 영상보기 🎬](https://youtu.be/u_HlN_1t79g)
 
-<img src="./momo_gif1.gif?raw=true" width="350"> <img src="./momo_gif2.gif?raw=true" width="350">
+<img src="./momo_gif1.gif?raw=true" width="250"> <img src="./momo_gif2.gif?raw=true" width="250">
 </br></br>
 ## iOS Dev Features <a id="iOS_Dev_Features"></a>  
 개발 언어 : Objective-C  
