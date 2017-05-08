@@ -68,7 +68,7 @@ android | 박유석 | [yseok](https://github.com/yseok) | [ys920603@gmail.com](y
 </br></br></br></br></br>
 ------------  
 
-### footnote
+### footnotes
 
 <a name="Map">1</a>. Apple Map이 더 가볍고, 이쁘고(구글 로고 노출...), (당연하지만) 프레임웍에 친화적인 것 같습니다.  
 
