@@ -329,59 +329,60 @@
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 포스트 만들어!");
         
-        [NetworkModule createPostRequestWithPinPK:self.pin_pk
-                                    withPhotoData:UIImageJPEGRepresentation(self.photoImageView.image, 0.3)
-                                  withDescription:self.userCommentTextView.text
-                              withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                  
-                                  [UtilityModule dismissIndicator];
-                                  
-                                  if (isSuccess) {
-                                      
-                                      self.postData = [[MomoPostDataSet allObjects] lastObject];      // 새로 생성된 데이터가 lastObject
-                                      
-                                      if (self.wasPostView) {       // post뷰에서 넘어왔을 때
-                                          [self dismissViewControllerAnimated:YES completion:nil];
-                                          
-                                      } else {
-                                          [self showPostView];
-                                      }
-                                      
-                                  } else {
-                                      
-                                      [UtilityModule presentCommonAlertController:self withMessage:result];
-                                      
-                                  }
-                                  
-                              }];
+        [[NetworkModule momoNetworkManager]
+         createPostRequestWithPinPK:self.pin_pk
+         withPhotoData:UIImageJPEGRepresentation(self.photoImageView.image, 0.3)
+         withDescription:self.userCommentTextView.text
+         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                                       
+             [UtilityModule dismissIndicator];
+             
+             if (isSuccess) {
+                 
+                 self.postData = [[MomoPostDataSet allObjects] lastObject];      // 새로 생성된 데이터가 lastObject
+                 
+                 if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                     
+                 } else {
+                     [self showPostView];
+                 }
+                 
+             } else {
+                 
+                 [UtilityModule presentCommonAlertController:self withMessage:result];
+                 
+             }
+             
+         }];
         
         
     } else {    // 수정하기
         NSLog(@"포스트 수정해!");
         
-        [NetworkModule updatePostRequestWithPostPK:self.postData.pk
-                                         WithPinPK:self.pin_pk
-                                     withPhotoData:photodata
-                                   withDescription:self.userCommentTextView.text
-                               withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                   
-                                   [UtilityModule dismissIndicator];
-                                   
-                                   if (isSuccess) {
-                                       if (self.wasPostView) {       // post뷰에서 넘어왔을 때
-                                           [((PostViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) showSelectedPostAndSetPostData:self.postData];    // 다시 수정된 포스트 중심으로 보이게 세팅
-                                           [self dismissViewControllerAnimated:YES completion:nil];
-                                           
-                                       } else {
-                                           [self showPostView];
-                                       }
-                                       
-                                   } else {
-                                       [UtilityModule presentCommonAlertController:self withMessage:result];
-                                   }
-                                   
-                               }];
-        
+        [[NetworkModule momoNetworkManager]
+         updatePostRequestWithPostPK:self.postData.pk
+         WithPinPK:self.pin_pk
+         withPhotoData:photodata
+         withDescription:self.userCommentTextView.text
+         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+             
+             [UtilityModule dismissIndicator];
+             
+             if (isSuccess) {
+                 if (self.wasPostView) {       // post뷰에서 넘어왔을 때
+                     [((PostViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) showSelectedPostAndSetPostData:self.postData];    // 다시 수정된 포스트 중심으로 보이게 세팅
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                     
+                 } else {
+                     [self showPostView];
+                 }
+                 
+             } else {
+                 [UtilityModule presentCommonAlertController:self withMessage:result];
+             }
+             
+         }];
     }
 }
 
@@ -408,32 +409,32 @@
     
     [UtilityModule showIndicator];
     
-    [NetworkModule deletePostRequestWithPostData:self.postData
-                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-        
-                                 [UtilityModule dismissIndicator];
-                                 
-                                 if (isSuccess) {
-                                     
-                                     [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
-                                     
-                                     if ([DataCenter findPinDataWithPinPK:self.pin_pk].pin_post_list.count > 0) {
-                                         
-                                         // 남은 포스트 양이 1개 이상 남아있을 때, 테이블 뷰로 돌아감
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-
-                                     } else {
-                                         [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popViewControllerAnimated:NO];   // 테이블 뷰에서 빠져나와 PinView로 먼저 이동
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                     }
-                                     
-                                     
-                                 } else {
-                                     [UtilityModule presentCommonAlertController:self withMessage:result];
-                                 }
-
-
-                             }];
+    [[NetworkModule momoNetworkManager]
+     deletePostRequestWithPostData:self.postData
+     withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+         
+         [UtilityModule dismissIndicator];
+         
+         if (isSuccess) {
+             
+             [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
+             
+             if ([DataCenter findPinDataWithPinPK:self.pin_pk].pin_post_list.count > 0) {
+                 
+                 // 남은 포스트 양이 1개 이상 남아있을 때, 테이블 뷰로 돌아감
+                 [self dismissViewControllerAnimated:YES completion:nil];
+                 
+             } else {
+                 [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popViewControllerAnimated:NO];   // 테이블 뷰에서 빠져나와 PinView로 먼저 이동
+                 [self dismissViewControllerAnimated:YES completion:nil];
+             }
+             
+             
+         } else {
+             [UtilityModule presentCommonAlertController:self withMessage:result];
+         }
+         
+     }];
     
 }
 

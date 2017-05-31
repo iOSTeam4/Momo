@@ -124,50 +124,51 @@
     [UtilityModule showIndicator];
     [self.lastFirstResponderTextField resignFirstResponder];
     
-    [NetworkModule loginRequestWithUsername:self.idTextField.text
-                               withPassword:self.pwTextField.text
-                        withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-
-                            NSLog(@"Username : %@, Password : %@", self.idTextField.text, self.pwTextField.text);
-                            
-                            if (isSuccess) {
-                                NSLog(@"log in success : %@", result);
-                            
-                                [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
-
-                                    [UtilityModule dismissIndicator];
-                                    
-                                    if (isSuccess) {
-                                        NSLog(@"get Member Profile success : %@", result);
-
-                                        // 로그인 체킹
-                                        [LoginViewController autoLoginCheck];
-
-
-                                    } else {
-                                        NSLog(@"error : %@", result);
-                                        [UtilityModule presentCommonAlertController:self withMessage:result];
-                                    }
-                                    
-                                }];
-                                
-                            } else {
-                                [UtilityModule dismissIndicator];
-
-                                NSLog(@"error : %@", result);
-                                
-                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
-                                                                                                         message:@"아이디 또는 비밀번호가 틀렸습니다"
-                                                                                                  preferredStyle:UIAlertControllerStyleAlert];
-                                
-                                UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                                   style:UIAlertActionStyleDefault
-                                                                                 handler:nil];
-                                [alertController addAction:okButton];
-                                [self presentViewController:alertController animated:YES completion:nil];
-                                
-                            }
-                        }];
+    [[NetworkModule momoNetworkManager]
+     loginRequestWithUsername:self.idTextField.text
+     withPassword:self.pwTextField.text
+     withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                                 
+         NSLog(@"Username : %@, Password : %@", self.idTextField.text, self.pwTextField.text);
+         
+         if (isSuccess) {
+             NSLog(@"log in success : %@", result);
+             
+             [[NetworkModule momoNetworkManager] getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                 
+                 [UtilityModule dismissIndicator];
+                 
+                 if (isSuccess) {
+                     NSLog(@"get Member Profile success : %@", result);
+                     
+                     // 로그인 체킹
+                     [LoginViewController autoLoginCheck];
+                     
+                     
+                 } else {
+                     NSLog(@"error : %@", result);
+                     [UtilityModule presentCommonAlertController:self withMessage:result];
+                 }
+                 
+             }];
+             
+         } else {
+             [UtilityModule dismissIndicator];
+             
+             NSLog(@"error : %@", result);
+             
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"oops!"
+                                                                                      message:@"아이디 또는 비밀번호가 틀렸습니다"
+                                                                               preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:nil];
+             [alertController addAction:okButton];
+             [self presentViewController:alertController animated:YES completion:nil];
+             
+         }
+     }];
     
 }
 

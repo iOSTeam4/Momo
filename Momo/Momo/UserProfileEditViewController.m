@@ -207,23 +207,25 @@
     
     [UtilityModule showIndicator];
     
-    [NetworkModule patchMemberProfileUpdateWithUsername:self.userNameTextField.text
-                                     withProfileImgData:profileImgdata
-                                        withDescription:self.userCommentTextView.text
-                                    withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                        NSLog(@"finish updateMemberProfileWithUsername");
-                                        
-                                        [UtilityModule dismissIndicator];
-                                        
-                                        if (isSuccess) {
-                                            NSLog(@"프로필 수정 완료");
-                                            [self dismissViewControllerAnimated:YES completion:nil];
-                                            
-                                        } else {
-                                            
-                                            [UtilityModule presentCommonAlertController:self withMessage:result];
-                                        }
-                                    }];
+    [[NetworkModule momoNetworkManager]
+     patchMemberProfileUpdateWithUsername:self.userNameTextField.text
+     withProfileImgData:profileImgdata
+     withDescription:self.userCommentTextView.text
+     withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+
+         NSLog(@"finish updateMemberProfileWithUsername");
+         
+         [UtilityModule dismissIndicator];
+         
+         if (isSuccess) {
+             NSLog(@"프로필 수정 완료");
+             [self dismissViewControllerAnimated:YES completion:nil];
+             
+         } else {
+             
+             [UtilityModule presentCommonAlertController:self withMessage:result];
+         }
+     }];
     
 }
 
@@ -240,7 +242,7 @@
     
     [UtilityModule showIndicator];
     
-    [NetworkModule logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+    [[NetworkModule momoNetworkManager] logOutRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
         
         [UtilityModule dismissIndicator];
         

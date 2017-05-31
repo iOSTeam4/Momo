@@ -402,6 +402,7 @@
         self.makingMarker.map = nil;    // 이전 만들던 마커 삭제
         self.makingMarker = marker;     // 새롭게 만드는 마커 프로퍼티에 셋
         
+        marker.zIndex = 1;     // 생성 중인 마커 가려지지 않게 처리
         marker.map = mapView;       // 마커 지도에 찍기
 
         

@@ -27,6 +27,19 @@ static NSString *const POST_URL             = @"/api/post/";
 
 @implementation NetworkModule
 
+#pragma mark - Momo NetworkModule Singleton Manager
++ (instancetype)momoNetworkManager {
+    
+    static NetworkModule *momoNetworkManager;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        momoNetworkManager = [[NetworkModule alloc] init];
+    });
+    
+    return momoNetworkManager;
+}
+
 
 //********************************************************//
 //                       Member API                       //
@@ -37,7 +50,7 @@ static NSString *const POST_URL             = @"/api/post/";
 #pragma mark - E-mail Auth Account Methods
 
 // Sign Up
-+ (void)signUpRequestWithUsername:(NSString *)username
+- (void)signUpRequestWithUsername:(NSString *)username
                      withPassword:(NSString *)password
                         withEmail:(NSString *)email
               withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
@@ -71,7 +84,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                                     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                                     
                                                                     // 인증메일 보내기
-                                                                    [NetworkModule sendMailWithUserPK:[[responseDic objectForKey:@"pk"] integerValue] withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                                                    [[NetworkModule momoNetworkManager] sendMailWithUserPK:[[responseDic objectForKey:@"pk"] integerValue] withCompletionBlock:^(BOOL isSuccess, NSString *result) {
                                                                         completionBlock(isSuccess, result);
                                                                     }];
                                                                 
@@ -106,7 +119,7 @@ static NSString *const POST_URL             = @"/api/post/";
 }
 
 // Auth-Mail
-+ (void)sendMailWithUserPK:(NSInteger)userPK
+- (void)sendMailWithUserPK:(NSInteger)userPK
        withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
@@ -162,7 +175,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Login
-+ (void)loginRequestWithUsername:(NSString *)username
+- (void)loginRequestWithUsername:(NSString *)username
                     withPassword:(NSString *)password
              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
@@ -227,12 +240,12 @@ static NSString *const POST_URL             = @"/api/post/";
 #pragma mark - Account Common Methods
 
 // Log Out (Facebook & e-mail 계정)
-+ (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+- (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
 
     // Facebook 계정 처리 (fb Server)
     if ([FBSDKAccessToken currentAccessToken]) {
         NSLog(@"Facebook Log out");
-        [FacebookModule fbLogOut];
+        [[FacebookModule fbNetworkManager] fbLogOut];
     }
 
     // e-mail & 페북 계정 공통 (Momo Server)
@@ -295,7 +308,7 @@ static NSString *const POST_URL             = @"/api/post/";
 }
 
 // Get member profile (Facebook & e-mail 계정)
-+ (void)getMemberProfileRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+- (void)getMemberProfileRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -361,7 +374,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Patch member profile update
-+ (void)patchMemberProfileUpdateWithUsername:(NSString *)username
+- (void)patchMemberProfileUpdateWithUsername:(NSString *)username
                           withProfileImgData:(NSData *)imgData
                              withDescription:(NSString *)description
                          withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
@@ -432,7 +445,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Map Create
-+ (void)createMapRequestWithMapname:(NSString *)mapname
+- (void)createMapRequestWithMapname:(NSString *)mapname
                     withDescription:(NSString *)description
                       withIsPrivate:(BOOL)is_private
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
@@ -497,7 +510,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Map Update
-+ (void)updateMapRequestWithMapPK:(NSInteger)map_pk
+- (void)updateMapRequestWithMapPK:(NSInteger)map_pk
                       withMapname:(NSString *)mapname
                   withDescription:(NSString *)description
                     withIsPrivate:(BOOL)is_private
@@ -561,7 +574,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Map Delete
-+ (void)deleteMapRequestWithMapData:(MomoMapDataSet *)mapData
+- (void)deleteMapRequestWithMapData:(MomoMapDataSet *)mapData
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
@@ -623,7 +636,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Pin Create
-+ (void)createPinRequestWithPinname:(NSString *)pinname
+- (void)createPinRequestWithPinname:(NSString *)pinname
                           withMapPK:(NSInteger)map_pk
                           withLabel:(NSInteger)pinLabel
                             withLat:(CGFloat)lat
@@ -697,7 +710,7 @@ static NSString *const POST_URL             = @"/api/post/";
 }
 
 // Pin Update
-+ (void)updatePinRequestWithPinPK:(NSInteger)pin_pk
+- (void)updatePinRequestWithPinPK:(NSInteger)pin_pk
                       withPinname:(NSString *)pinname
                         withLabel:(NSInteger)pinLabel
                         withMapPK:(NSInteger)map_pk
@@ -760,7 +773,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Pin Delete
-+ (void)deletePinRequestWithPinData:(MomoPinDataSet *)pinData
+- (void)deletePinRequestWithPinData:(MomoPinDataSet *)pinData
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session
@@ -825,7 +838,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Post Create
-+ (void)createPostRequestWithPinPK:(NSInteger)pin_pk
+- (void)createPostRequestWithPinPK:(NSInteger)pin_pk
                      withPhotoData:(NSData *)photoData
                    withDescription:(NSString *)description
                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
@@ -887,78 +900,11 @@ static NSString *const POST_URL             = @"/api/post/";
     
     [uploadTask resume];
     
-    
-    // 기존 안되던 코드
-    // 이미지 넣는 부분 공부 필요
-//    // Session
-//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-//
-//    // Request
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, POST_URL]];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//
-//    // 헤더 세팅
-//    [request addValue:[NSString stringWithFormat:@"Token %@", [[DataCenter sharedInstance] getUserToken]] forHTTPHeaderField:@"Authorization"];
-//
-//    // 바디 세팅
-//    if ([photoData length] && [description length]) {
-//        // 사진, 글 둘 다 있는 경우
-//        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&photo=%@&description=%@", pin_pk, photoData, description] dataUsingEncoding:NSUTF8StringEncoding];
-//    } else if ([photoData length]) {
-//        // 사진만 있는 경우
-//        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&photo=%@", pin_pk, photoData] dataUsingEncoding:NSUTF8StringEncoding];
-//    } else {
-//        // 글만 있는 경우
-//        request.HTTPBody = [[NSString stringWithFormat:@"pin=%ld&description=%@", pin_pk, description] dataUsingEncoding:NSUTF8StringEncoding];
-//    }
-//    request.HTTPMethod = @"POST";
-//    
-//    // Task
-//    NSURLSessionUploadTask *postTask = [session uploadTaskWithRequest:request
-//                                                             fromData:nil
-//                                                    completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//                                                        
-//                                                        NSLog(@"Status Code : %ld", ((NSHTTPURLResponse *)response).statusCode);
-//                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//                                                        
-//                                                        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-//                                                        
-//                                                        
-//                                                        // 메인스레드로 돌려서 보냄
-//                                                        dispatch_async(dispatch_get_main_queue(), ^{
-//                                                            
-//                                                            if (!error) {
-//                                                                if (((NSHTTPURLResponse *)response).statusCode == 201) {
-//                                                                    // Code: 201 CREATED
-//                                                                    NSLog(@"Post Create Success");
-//                                                                    
-//                                                                    // 포스트 데이터 파싱 및 저장
-//                                                                    [DataCenter createPostWithMomoPostCreateDic:responseDic];
-//                                                                    
-//                                                                    completionBlock(YES, nil);
-//                                                                    
-//                                                                    
-//                                                                } else {
-//                                                                    NSLog(@"Post Create Fail");
-//                                                                    
-//                                                                    completionBlock(NO, [responseDic objectForKey:@"detail"]);
-//                                                                    
-//                                                                }
-//                                                            } else {
-//                                                                // Network error
-//                                                                NSLog(@"Network error! Code : %ld - %@", error.code, error.description);
-//                                                                completionBlock(NO, @"Network error");
-//                                                            }
-//                                                        });
-//                                                        
-//                                                    }];
-//    
-//    [postTask resume];
 }
 
 
 // Post Update
-+ (void)updatePostRequestWithPostPK:(NSInteger)post_pk
+- (void)updatePostRequestWithPostPK:(NSInteger)post_pk
                           WithPinPK:(NSInteger)pin_pk
                       withPhotoData:(NSData *)photoData
                     withDescription:(NSString *)description
@@ -1030,7 +976,7 @@ static NSString *const POST_URL             = @"/api/post/";
 
 
 // Post Delete
-+ (void)deletePostRequestWithPostData:(MomoPostDataSet *)postData
+- (void)deletePostRequestWithPostData:(MomoPostDataSet *)postData
                   withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
     // Session

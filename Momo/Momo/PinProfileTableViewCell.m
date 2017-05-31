@@ -54,12 +54,7 @@
     
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
-    
-    // 수정하기 버튼
-    [self.pinEditBtn.layer setCornerRadius:12];
-    [self.pinEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
-    [self.pinEditBtn.layer setBorderWidth:1];
-    
+        
     // 전체 Cell Frame 설정
     self.backView.frame = CGRectMake(self.backView.frame.origin.x, self.backView.frame.origin.y, self.backView.frame.size.width, self.pinEditBtn.frame.origin.y + self.pinEditBtn.frame.size.height + 10);
     

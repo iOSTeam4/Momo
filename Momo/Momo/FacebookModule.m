@@ -15,99 +15,103 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
 @implementation FacebookModule
 
 // Facebook account -------------------------------//
-#pragma mark - Facebook Server API Methods
 
-// FBSDKLoginManager Singleton Instance
-+ (FBSDKLoginManager *)sharedFBLoginManeger {
+#pragma mark - FacebookModule Singleton Manager
++ (instancetype)fbNetworkManager {
     
-    static FBSDKLoginManager *fbLoginManeger;
+    static FacebookModule *fbNetworkManager;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        fbLoginManeger = [[FBSDKLoginManager alloc] init];
+        fbNetworkManager = [[FacebookModule alloc] init];
     });
     
-    return fbLoginManeger;
+    return fbNetworkManager;
 }
 
-+ (void)fbLogOut {
-    [[FacebookModule sharedFBLoginManeger] logOut];
+
+#pragma mark - Facebook Server API Methods
+- (void)fbLogOut {
+    [[[FBSDKLoginManager alloc] init] logOut];
 }
 
 
 
 // Facebook Login (& Sign Up)
-+ (void)fbLoginFromVC:(UIViewController *)fromVC
+- (void)fbLoginFromVC:(UIViewController *)fromVC
   withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
     
-    [[self sharedFBLoginManeger] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
-                                       fromViewController:fromVC
-                                                  handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                        
-                                                      [UtilityModule showIndicator];
-                           
-                                                      // isMainThread
-                                                      
-                                                      if (error) {
-                                                          NSLog(@"network error : %@", error.description);
-                                                          
-                                                          completionBlock(NO, nil);
-                                                          
-                                                      } else if (result.isCancelled) {
-                                                          NSLog(@"isCancelled");
-                                                          
-                                                          completionBlock(NO, nil);
-                                                          
-                                                      } else {
-                                                          NSLog(@"Facebook Login Success");
-                                                          NSLog(@"fb token : %@", [FBSDKAccessToken currentAccessToken].tokenString);
-                                                        
-                                                          
-                                                          // fb_token 정보 가지고 Momo 서버 Facebook계정 로그인
-                                                          [self fbLoginRequestWithFBToken:[FBSDKAccessToken currentAccessToken].tokenString withCompletionBlock:^(BOOL isSuccess, BOOL newMember, NSString *result) {
-                                                              
-                                                              if (isSuccess) {
-                                                                  // 페북 로그인 성공
-                                                                  
-                                                                  if (newMember) {
-                                                                      // 신규 회원
-                                                                      // Facebook id, name, profileImage, email 얻어오기
-                                                                      [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
-                                                                          
-                                                                          // 페북 서버에서 받아온 추가 정보를 모모 서버에 보냄
-                                                                          [NetworkModule patchMemberProfileUpdateWithUsername:[DataCenter sharedInstance].momoUserData.user_author.username
-                                                                                                           withProfileImgData:[DataCenter sharedInstance].momoUserData.user_author.profile_img_data
-                                                                                                              withDescription:@"팔로워들에게 자기소개를 해보세요 :0"
-                                                                                                          withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-
-                                                                                                              // 정보를 잘 가져왔든, 말든 로그인 성공
-                                                                                                              completionBlock(YES, result);
-                                                                                                          }];
-                                                                          
-
-                                                                      }];
-                                                                  } else {
-                                                                      // 기존 회원
-                                                                      completionBlock(YES, result);
-                                                                  }
-                                                                  
-                                                              } else {
-                                                                  // 페북 로그인 실패
-                                                                  completionBlock(NO, result);
-                                                              }
-                                                              
-                                                          }];
-                                                          
-                                                      }
-                                                  }];
-
+    [[[FBSDKLoginManager alloc] init]
+     logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
+     fromViewController:fromVC
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         
+         [UtilityModule showIndicator];
+         
+         // isMainThread
+         
+         if (error) {
+             NSLog(@"network error : %@", error.description);
+             
+             completionBlock(NO, nil);
+             
+         } else if (result.isCancelled) {
+             NSLog(@"isCancelled");
+             
+             completionBlock(NO, nil);
+             
+         } else {
+             NSLog(@"Facebook Login Success");
+             NSLog(@"fb token : %@", [FBSDKAccessToken currentAccessToken].tokenString);
+             
+             
+             // fb_token 정보 가지고 Momo 서버 Facebook계정 로그인
+             [self fbLoginRequestWithFBToken:[FBSDKAccessToken currentAccessToken].tokenString
+                         withCompletionBlock:^(BOOL isSuccess, BOOL newMember, NSString *result) {
+                 
+                             if (isSuccess) {
+                                 // 페북 로그인 성공
+                                 
+                                 if (newMember) {
+                                     // 신규 회원
+                                     // Facebook id, name, profileImage, email 얻어오기
+                                     [self getFacebookProfileInfosWithCompletionBlock:^(BOOL isSuccess) {
+                                         
+                                         // 페북 서버에서 받아온 추가 정보를 모모 서버에 보냄
+                                         [[NetworkModule momoNetworkManager]
+                                          patchMemberProfileUpdateWithUsername:[DataCenter sharedInstance].momoUserData.user_author.username
+                                          withProfileImgData:[DataCenter sharedInstance].momoUserData.user_author.profile_img_data
+                                          withDescription:@"팔로워들에게 자기소개를 해보세요 :0"
+                                          withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                                              
+                                              // 정보를 잘 가져왔든, 말든 로그인 성공
+                                              completionBlock(YES, result);
+                                          }];
+                                         
+                                         
+                                     }];
+                                 } else {
+                                     // 기존 회원
+                                     completionBlock(YES, result);
+                                 }
+                                 
+                             } else {
+                                 // 페북 로그인 실패
+                                 completionBlock(NO, result);
+                             }
+                             
+                         }];
+             
+         }
+     }];
+    
 }
 
 
 
 // Facebook 서버로부터 유저 프로필 정보들 받아와 세팅하는 메서드
 // 신규 회원일 경우만 받아옴
-+ (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
+- (void)getFacebookProfileInfosWithCompletionBlock:(void (^)(BOOL isSuccess))completionBlock {
     
     [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, picture.type(large), email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         
@@ -150,7 +154,7 @@ static NSString *const FACEBOOK_LOGIN_URL   = @"/api/member/fb/";
 #pragma mark - Facebook Account Momo server API Methods
 
 // Momo 서버 Facebook계정 로그인
-+ (void)fbLoginRequestWithFBToken:(NSString *)fbToken
+- (void)fbLoginRequestWithFBToken:(NSString *)fbToken
               withCompletionBlock:(void (^)(BOOL isSuccess, BOOL newMember, NSString *result))completionBlock {
     
     // Session

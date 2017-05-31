@@ -326,59 +326,57 @@
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 핀 만들어!");
         
-        [NetworkModule createPinRequestWithPinname:self.pinNameTextField.text
-                                         withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
-                                         withLabel:self.categoryLastSelectedBtn.tag
-                                           withLat:self.lat
-                                           withLng:self.lng
-                                   withDescription:@"추후 생길 필드값입니다."
-                               withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                   
-                                   [UtilityModule dismissIndicator];
-                                   
-                                   if (isSuccess) {
-                                       
-                                       self.pinData = [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list firstObject];      // 새로 생성된 데이터가 firstObject
-                                       
-                                       // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
-                                       [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];
-                                       
-                                       [self showPinView];
-
-                                   } else {
-                                       [UtilityModule presentCommonAlertController:self withMessage:result];
-                                   }
-                               }];
-        
-        
-        
-
+        [[NetworkModule momoNetworkManager]
+         createPinRequestWithPinname:self.pinNameTextField.text
+         withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
+         withLabel:self.categoryLastSelectedBtn.tag
+         withLat:self.lat
+         withLng:self.lng
+         withDescription:@"추후 생길 필드값입니다."
+         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+             
+             [UtilityModule dismissIndicator];
+             
+             if (isSuccess) {
+                 
+                 self.pinData = [[DataCenter myMapList][self.mapLastSelectedBtn.tag].map_pin_list firstObject];      // 새로 생성된 데이터가 firstObject
+                 
+                 // 이전 MapView에서 만들기 모드 해제 (네비 구조이므로)
+                 [((MapViewController *)((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController).topViewController) successCreatePin];
+                 
+                 [self showPinView];
+                 
+             } else {
+                 [UtilityModule presentCommonAlertController:self withMessage:result];
+             }
+         }];
         
     } else {    // 수정하기
         NSLog(@"핀 수정해!");
         
-        [NetworkModule updatePinRequestWithPinPK:self.pinData.pk
-                                     withPinname:self.pinNameTextField.text
-                                       withLabel:self.categoryLastSelectedBtn.tag
-                                       withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
-                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                 
-                                 [UtilityModule dismissIndicator];
-                                 
-                                 if (isSuccess) {
-                                     
-                                     // 핀 뷰에서 수정했을 때
-                                     if (self.wasPinView) {
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                     } else {
-                                         [self showPinView];    // 수정된 핀 뷰로 이동
-                                     }
-                                     
-                                 } else {
-                                     [UtilityModule presentCommonAlertController:self withMessage:result];
-                                 }
-                             
-                             }];
+        [[NetworkModule momoNetworkManager]
+         updatePinRequestWithPinPK:self.pinData.pk
+         withPinname:self.pinNameTextField.text
+         withLabel:self.categoryLastSelectedBtn.tag
+         withMapPK:[DataCenter myMapList][self.mapLastSelectedBtn.tag].pk
+         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+             
+             [UtilityModule dismissIndicator];
+             
+             if (isSuccess) {
+                 
+                 // 핀 뷰에서 수정했을 때
+                 if (self.wasPinView) {
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                 } else {
+                     [self showPinView];    // 수정된 핀 뷰로 이동
+                 }
+                 
+             } else {
+                 [UtilityModule presentCommonAlertController:self withMessage:result];
+             }
+             
+         }];
         
     }
 }
@@ -408,22 +406,23 @@
     
     [UtilityModule showIndicator];
     
-    [NetworkModule deletePinRequestWithPinData:self.pinData
-                           withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                               
-                               [UtilityModule dismissIndicator];
-                               
-                               if (isSuccess) {
-                                   
-                                   [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
-                                   
-                                   [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (삭제된 핀 뷰로 다시 돌아가면 안되므로)
-                                   [self dismissViewControllerAnimated:YES completion:nil];
-                                   
-                               } else {
-                                   [UtilityModule presentCommonAlertController:self withMessage:result];
-                               }
-                           }];
+    [[NetworkModule momoNetworkManager]
+     deletePinRequestWithPinData:self.pinData
+     withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+         
+         [UtilityModule dismissIndicator];
+         
+         if (isSuccess) {
+             
+             [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
+             
+             [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (삭제된 핀 뷰로 다시 돌아가면 안되므로)
+             [self dismissViewControllerAnimated:YES completion:nil];
+             
+         } else {
+             [UtilityModule presentCommonAlertController:self withMessage:result];
+         }
+     }];
     
 }
 

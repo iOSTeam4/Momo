@@ -111,11 +111,6 @@
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
 //    NSLog(@"cell width : %f , userImgView.frame.size.height/2 : %f", self.frame.size.width, self.userImgView.frame.size.height/2);
     
-    // 수정하기 버튼
-    [self.mapEditBtn.layer setCornerRadius:12];
-    [self.mapEditBtn.layer setBorderColor:[UIColor mm_warmGreyColor].CGColor];
-    [self.mapEditBtn.layer setBorderWidth:1];
-    
     // 전체 Cell Frame 설정
     self.backView.frame = CGRectMake(self.backView.frame.origin.x, self.backView.frame.origin.y, self.backView.frame.size.width, self.mapEditBtn.frame.origin.y + self.mapEditBtn.frame.size.height + 10);
     

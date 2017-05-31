@@ -8,14 +8,27 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
+/**
+ * \defgroup PlacesErrors GMSPlacesErrors
+ * @{
+ */
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/* Error domain used for Places API errors. */
-extern NSString * const kGMSPlacesErrorDomain;
+/**
+ * Error domain used for Places API errors.
+ *
+ * @related GMSPlacesErrors
+ */
+extern NSString *const kGMSPlacesErrorDomain;
 
-/* Error codes for |kGMSPlacesErrorDomain|. */
+/**
+ * Error codes for |kGMSPlacesErrorDomain|.
+ *
+ * @related GMSPlacesErrors
+ */
 typedef NS_ENUM(NSInteger, GMSPlacesErrorCode) {
   /**
    * Something went wrong with the connection to the Places API server.
@@ -97,3 +110,5 @@ typedef NS_ENUM(NSInteger, GMSPlacesErrorCode) {
 };
 
 NS_ASSUME_NONNULL_END
+
+/**@}*/

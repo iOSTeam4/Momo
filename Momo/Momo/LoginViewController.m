@@ -107,34 +107,35 @@
     // whiteColor로 적용, dismiss하면서 다시 기본 컬러인 mm_brightSkyBlueColor로 세팅 됨
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
-    [FacebookModule fbLoginFromVC:self
-              withCompletionBlock:^(BOOL isSuccess, NSString *token) {
-                  
-                  if (isSuccess) {
-                      NSLog(@"fb 로그인 성공");
-                      
-                      [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
-
-                          [UtilityModule dismissIndicator];
-
-                          if (isSuccess) {
-                              NSLog(@"get Member Profile success : %@", result);
-
-                              // 로그인 체킹
-                              [LoginViewController autoLoginCheck];
-                              
-                          } else {
-                              NSLog(@"error : %@", result);
-                              [UtilityModule presentCommonAlertController:self withMessage:result];
-                          }
-                          
-                      }];
-                      
-                  } else {
-                      [UtilityModule dismissIndicator];
-                      NSLog(@"fb 로그인 실패");
-                  }
-              }];
+    [[FacebookModule fbNetworkManager]
+     fbLoginFromVC:self
+     withCompletionBlock:^(BOOL isSuccess, NSString *token) {
+         
+         if (isSuccess) {
+             NSLog(@"fb 로그인 성공");
+             
+             [[NetworkModule momoNetworkManager] getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                 
+                 [UtilityModule dismissIndicator];
+                 
+                 if (isSuccess) {
+                     NSLog(@"get Member Profile success : %@", result);
+                     
+                     // 로그인 체킹
+                     [LoginViewController autoLoginCheck];
+                     
+                 } else {
+                     NSLog(@"error : %@", result);
+                     [UtilityModule presentCommonAlertController:self withMessage:result];
+                 }
+                 
+             }];
+             
+         } else {
+             [UtilityModule dismissIndicator];
+             NSLog(@"fb 로그인 실패");
+         }
+     }];
 }
 
 

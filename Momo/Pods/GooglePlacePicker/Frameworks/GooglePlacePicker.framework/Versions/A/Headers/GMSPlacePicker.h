@@ -8,15 +8,28 @@
 //  Service: https://developers.google.com/maps/terms
 //
 
+#if __has_feature(modules)
+@import GoogleMaps;
+#else
+#import <GoogleMaps/GoogleMaps.h>
+#endif
 #import <GooglePlacePicker/GMSPlacePickerConfig.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 
-/* Error domain used for Place Picker errors. */
-extern NSString * const kGMSPlacePickerErrorDomain;
+/**
+ * Error domain used for Place Picker errors.
+ *
+ * @related GMSPlacePicker
+ */
+extern NSString *const kGMSPlacePickerErrorDomain;
 
-/* Error codes for |kGMSPlacePickerErrorDomain|. */
+/**
+ * Error codes for |kGMSPlacePickerErrorDomain|.
+ *
+ * @related GMSPlacePicker
+ */
 typedef NS_ENUM(NSInteger, GMSPlacePickerErrorCode) {
   /**
    * Something unknown went wrong.
@@ -39,19 +52,26 @@ typedef NS_ENUM(NSInteger, GMSPlacePickerErrorCode) {
 /**
  * The Place Picker is a dialog that allows the user to pick a |GMSPlace| using an interactive map
  * and other tools. Users can select the place they're at or nearby.
+ *
+ * NOTE: This class is deprecated, it is recommended that you use |GMSPlacePickerViewController|
+ * instead.
  */
+__GMS_AVAILABLE_BUT_DEPRECATED_MSG("Use GMSPlacePickerViewController instead")
 @interface GMSPlacePicker : NSObject
 
 /**
  * The configuration of the place picker, as passed in at initialization.
  */
-@property(nonatomic, readonly, copy) GMSPlacePickerConfig *config;
+@property(nonatomic, readonly, copy)
+    GMSPlacePickerConfig *config __GMS_AVAILABLE_BUT_DEPRECATED_MSG(
+        "Use GMSPlacePickerViewController instead");
 
 /**
  * Initializes the place picker with a given configuration. This does not start the process of
  * picking a place.
  */
-- (instancetype)initWithConfig:(GMSPlacePickerConfig *)config;
+- (instancetype)initWithConfig:(GMSPlacePickerConfig *)config
+    __GMS_AVAILABLE_BUT_DEPRECATED_MSG("Use GMSPlacePickerViewController instead");
 
 /**
  * Prompt the user to pick a place. The place picker is a full-screen window that appears on
@@ -65,7 +85,8 @@ typedef NS_ENUM(NSInteger, GMSPlacePickerErrorCode) {
  * It is not possible to have multiple place picking operations active at the same time. If this is
  * attempted, the callback will be invoked with an error.
  */
-- (void)pickPlaceWithCallback:(GMSPlaceResultCallback)callback;
+- (void)pickPlaceWithCallback:(GMSPlaceResultCallback)callback
+    __GMS_AVAILABLE_BUT_DEPRECATED_MSG("Use GMSPlacePickerViewController instead");
 
 @end
 

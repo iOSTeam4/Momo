@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wgl-2W-VfX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G8c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wgl-2W-VfX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -84,7 +84,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="맛집 리스트 입니다." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVw-qM-Xbp">
-                                        <rect key="frame" x="15" y="28" width="345" height="17"/>
+                                        <rect key="frame" x="15" y="30" width="345" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -102,7 +102,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoY-l3-ovB">
-                                        <rect key="frame" x="322.5" y="7.5" width="37.5" height="37.5"/>
+                                        <rect key="frame" x="326.5" y="1" width="33.5" height="33.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="EoY-l3-ovB" secondAttribute="height" multiplier="1:1" id="C4o-l5-xbR"/>
                                         </constraints>
@@ -118,9 +118,9 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Y2W-uj-Jug" secondAttribute="bottom" constant="10" id="7h7-Bb-yMe"/>
                                     <constraint firstItem="VVw-qM-Xbp" firstAttribute="leading" secondItem="NT8-64-NtI" secondAttribute="leading" id="8ht-RY-9HP"/>
-                                    <constraint firstItem="Y2W-uj-Jug" firstAttribute="top" secondItem="VVw-qM-Xbp" secondAttribute="bottom" constant="8" id="ALi-nB-IJe"/>
+                                    <constraint firstItem="Y2W-uj-Jug" firstAttribute="top" secondItem="VVw-qM-Xbp" secondAttribute="bottom" constant="6" id="ALi-nB-IJe"/>
                                     <constraint firstItem="Y2W-uj-Jug" firstAttribute="leading" secondItem="NT8-64-NtI" secondAttribute="leading" id="Ac2-dH-JjY"/>
-                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="centerY" secondItem="75p-CT-vV3" secondAttribute="centerY" constant="10" id="B0W-Xs-20D"/>
+                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="centerY" secondItem="75p-CT-vV3" secondAttribute="centerY" constant="1.5" id="B0W-Xs-20D"/>
                                     <constraint firstItem="75p-CT-vV3" firstAttribute="width" secondItem="NT8-64-NtI" secondAttribute="width" id="FB3-xe-BZw"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="height" secondItem="eQP-jP-Ocj" secondAttribute="height" id="FUq-Pg-9MG"/>
                                     <constraint firstItem="75p-CT-vV3" firstAttribute="height" secondItem="NT8-64-NtI" secondAttribute="height" id="Jgc-cC-z03"/>
@@ -132,9 +132,9 @@
                                     <constraint firstItem="NT8-64-NtI" firstAttribute="leading" secondItem="eQP-jP-Ocj" secondAttribute="leading" constant="15" id="Tyx-Uc-TEe"/>
                                     <constraint firstItem="75p-CT-vV3" firstAttribute="centerY" secondItem="NT8-64-NtI" secondAttribute="centerY" id="Vxb-Cg-TSX"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ZCg-os-8ek"/>
-                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" multiplier="0.1" id="ZWH-cS-hN9"/>
+                                    <constraint firstItem="EoY-l3-ovB" firstAttribute="width" secondItem="eQP-jP-Ocj" secondAttribute="width" multiplier="0.09" id="ZWH-cS-hN9"/>
                                     <constraint firstItem="f46-ra-rOp" firstAttribute="centerX" secondItem="eQP-jP-Ocj" secondAttribute="centerX" id="aFV-tZ-Acx"/>
-                                    <constraint firstItem="VVw-qM-Xbp" firstAttribute="top" secondItem="NT8-64-NtI" secondAttribute="bottom" constant="1" id="iWe-XG-Sex"/>
+                                    <constraint firstItem="VVw-qM-Xbp" firstAttribute="top" secondItem="NT8-64-NtI" secondAttribute="bottom" constant="3" id="iWe-XG-Sex"/>
                                     <constraint firstAttribute="trailing" secondItem="EoY-l3-ovB" secondAttribute="trailing" constant="15" id="k7t-Yz-EcS"/>
                                     <constraint firstAttribute="trailing" secondItem="NT8-64-NtI" secondAttribute="trailing" constant="15" id="l8S-QX-6y7"/>
                                     <constraint firstItem="NT8-64-NtI" firstAttribute="top" secondItem="eQP-jP-Ocj" secondAttribute="top" constant="5" id="lqp-vh-s9j"/>

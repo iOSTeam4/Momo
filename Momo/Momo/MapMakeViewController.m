@@ -143,49 +143,50 @@
     if (!self.isEditMode) {     // 만들기
         NSLog(@"새 맵 만들어!");
 
-        [NetworkModule createMapRequestWithMapname:self.mapNameTextField.text
-                                   withDescription:self.mapContentTextField.text
-                                     withIsPrivate:self.secretSwitch.on
-                               withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                   
-                                   [UtilityModule dismissIndicator];
-                                   
-                                   if (isSuccess) {
-                                       self.mapData = [[DataCenter myMapList] firstObject];      // 새로 생성된 데이터가 firstObject
-                                       [self showMapView];
-                                       
-                                   } else {                                       
-                                       [UtilityModule presentCommonAlertController:self withMessage:result];
-                                   }
-                                   
-                               }];
+        [[NetworkModule momoNetworkManager]
+         createMapRequestWithMapname:self.mapNameTextField.text
+         withDescription:self.mapContentTextField.text
+         withIsPrivate:self.secretSwitch.on
+         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+             
+             [UtilityModule dismissIndicator];
+             
+             if (isSuccess) {
+                 self.mapData = [[DataCenter myMapList] firstObject];      // 새로 생성된 데이터가 firstObject
+                 [self showMapView];
+                 
+             } else {
+                 [UtilityModule presentCommonAlertController:self withMessage:result];
+             }
+             
+         }];
 
     } else {    // 수정하기
         NSLog(@"맵 수정해!");
         
-        [NetworkModule updateMapRequestWithMapPK:self.mapData.pk
-                                     withMapname:self.mapNameTextField.text
-                                 withDescription:self.mapContentTextField.text
-                                   withIsPrivate:self.secretSwitch.on
-                             withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-                                 
-                                 [UtilityModule dismissIndicator];
-                                 
-                                 if (isSuccess) {
-                                     
-                                     // (선택지도) 맵 뷰에서 수정했을 때
-                                     if (self.wasMapView) {
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                     } else {
-                                         [self showMapView];    // 수정된 맵 뷰로 이동
-                                     }
-                                     
-                                 } else {
-                                     [UtilityModule presentCommonAlertController:self withMessage:result];
-                                 }
-                                 
-                             }];
-
+        [[NetworkModule momoNetworkManager]
+         updateMapRequestWithMapPK:self.mapData.pk
+         withMapname:self.mapNameTextField.text
+         withDescription:self.mapContentTextField.text
+         withIsPrivate:self.secretSwitch.on
+         withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+             
+             [UtilityModule dismissIndicator];
+             
+             if (isSuccess) {
+                 
+                 // (선택지도) 맵 뷰에서 수정했을 때
+                 if (self.wasMapView) {
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                 } else {
+                     [self showMapView];    // 수정된 맵 뷰로 이동
+                 }
+                 
+             } else {
+                 [UtilityModule presentCommonAlertController:self withMessage:result];
+             }
+             
+         }];
     }
 }
 
@@ -207,22 +208,23 @@
     
     [UtilityModule showIndicator];
     
-    [NetworkModule deleteMapRequestWithMapData:self.mapData
-                           withCompletionBlock:^(BOOL isSuccess, NSString *result) {
-
-                               [UtilityModule dismissIndicator];
-                               
-                               if (isSuccess) {
-                                   
-                                   [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
-                                   
-                                   [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (지워진 선택 지도 뷰로 다시 돌아가면 안되므로)
-                                   [self dismissViewControllerAnimated:YES completion:nil];
-                                   
-                               } else {
-                                   [UtilityModule presentCommonAlertController:self withMessage:result];
-                               }
-                           }];
+    [[NetworkModule momoNetworkManager]
+     deleteMapRequestWithMapData:self.mapData
+     withCompletionBlock:^(BOOL isSuccess, NSString *result) {
+         
+         [UtilityModule dismissIndicator];
+         
+         if (isSuccess) {
+             
+             [((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController) mainTabBarAnotherVCPopToRootViewController];   // Delete popToRootView처리
+             
+             [((UINavigationController *)((MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController) popToRootViewControllerAnimated:NO];   // 탭바 루트뷰까지 먼저 이동 (지워진 선택 지도 뷰로 다시 돌아가면 안되므로)
+             [self dismissViewControllerAnimated:YES completion:nil];
+             
+         } else {
+             [UtilityModule presentCommonAlertController:self withMessage:result];
+         }
+     }];
     
 }
 

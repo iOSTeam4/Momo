@@ -145,7 +145,7 @@
         
         NSLog(@"token : %@, loginData cnt : %ld, userData cnt : %ld", [DataCenter sharedInstance].momoLoginData.token, [MomoLoginDataSet allObjectsInRealm:realm].count, [MomoUserDataSet allObjects].count);
         
-        [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+        [[NetworkModule momoNetworkManager] getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
             
             if (isSuccess) {
                 NSLog(@"get Member Profile Request success : %@", result);

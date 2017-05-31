@@ -1,3 +1,21 @@
+Version 2.3.0 - May 2017
+========================
+Features:
+  - Expanded the number of scenarios where you can use the place picker with the
+    addition of GMSPlacePickerViewController. The old GMSPlacePicker is now
+    deprecated.
+
+Improvements:
+  - Dropped support for iOS 7, which enabled the use of modern core data
+    threading models. This means that applications should be able to use
+    -com.apple.CoreData.ConcurrencyDebug 1 when debugging with iOS 10 devices.
+
+Note:
+  - The armv7s architecture in the frameworks will be removed in 2.4. Devices
+    which previously used armv7s can continue to be supported using the armv7
+    architecture. All applications using the default architecture settings
+    in any supported version of Xcode shouldn't notice any change.
+
 Version 2.2.0 - February 2017
 =============================
 Resolved Issues:

@@ -132,36 +132,37 @@
     [UtilityModule showIndicator];
     [self.lastFirstResponderTextField resignFirstResponder];
     
-    [NetworkModule signUpRequestWithUsername:self.idTextField.text
-                                withPassword:self.pwTextField.text
-                                   withEmail:self.emailTextField.text
-                         withCompletionBlock:^(BOOL isSuccess, NSString* result) {
-                        
-                             [UtilityModule dismissIndicator];
-                            
-                             if (isSuccess) {
-                                 NSLog(@"sign up success : %@", result);
-                                 
-                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"회원가입 완료"
-                                                                                                          message:result
-                                                                                                   preferredStyle:UIAlertControllerStyleAlert];
-                                 
-                                 UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
-                                                                                    style:UIAlertActionStyleDefault
-                                                                                  handler:^(UIAlertAction * _Nonnull action) {
-
-                                                                                      // 로그인뷰 페이지로 이동
-                                                                                      [self.navigationController popToRootViewControllerAnimated:YES];
-                                                                                  }];
-                                 [alertController addAction:okButton];
-                                 [self presentViewController:alertController animated:YES completion:nil];
- 
-                                 
-                             } else {
-                                 NSLog(@"error : %@", result);
-                                 [UtilityModule presentCommonAlertController:self withMessage:result];
-                             }
-                         }];
+    [[NetworkModule momoNetworkManager]
+     signUpRequestWithUsername:self.idTextField.text
+     withPassword:self.pwTextField.text
+     withEmail:self.emailTextField.text
+     withCompletionBlock:^(BOOL isSuccess, NSString* result) {
+         
+         [UtilityModule dismissIndicator];
+         
+         if (isSuccess) {
+             NSLog(@"sign up success : %@", result);
+             
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"회원가입 완료"
+                                                                                      message:result
+                                                                               preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"확인"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                  
+                                                                  // 로그인뷰 페이지로 이동
+                                                                  [self.navigationController popToRootViewControllerAnimated:YES];
+                                                              }];
+             [alertController addAction:okButton];
+             [self presentViewController:alertController animated:YES completion:nil];
+             
+             
+         } else {
+             NSLog(@"error : %@", result);
+             [UtilityModule presentCommonAlertController:self withMessage:result];
+         }
+     }];
     
 }
 
@@ -169,34 +170,35 @@
 // 페북 버튼
 - (IBAction)fbBtnAction:(id)sender {
     
-    [FacebookModule fbLoginFromVC:self
-              withCompletionBlock:^(BOOL isSuccess, NSString *token) {
-                  
-                  if (isSuccess) {
-                      NSLog(@"fb 로그인 성공");
-                    
-                      [NetworkModule getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
-
-                          [UtilityModule dismissIndicator];
-                          
-                          if (isSuccess) {
-                              NSLog(@"get Member Profile success : %@", result);
-                              
-                              // 로그인 체킹
-                              [LoginViewController autoLoginCheck];
-                              
-                          } else {
-                              NSLog(@"error : %@", result);
-                              [UtilityModule presentCommonAlertController:self withMessage:result];
-                          }
-
-                      }];
-                      
-                  } else {
-                      [UtilityModule dismissIndicator];
-                      NSLog(@"fb 로그인 실패");
-                  }
-              }];
+    [[FacebookModule fbNetworkManager]
+     fbLoginFromVC:self
+     withCompletionBlock:^(BOOL isSuccess, NSString *token) {
+         
+         if (isSuccess) {
+             NSLog(@"fb 로그인 성공");
+             
+             [[NetworkModule momoNetworkManager] getMemberProfileRequestWithCompletionBlock:^(BOOL isSuccess, NSString *result) {
+                 
+                 [UtilityModule dismissIndicator];
+                 
+                 if (isSuccess) {
+                     NSLog(@"get Member Profile success : %@", result);
+                     
+                     // 로그인 체킹
+                     [LoginViewController autoLoginCheck];
+                     
+                 } else {
+                     NSLog(@"error : %@", result);
+                     [UtilityModule presentCommonAlertController:self withMessage:result];
+                 }
+                 
+             }];
+             
+         } else {
+             [UtilityModule dismissIndicator];
+             NSLog(@"fb 로그인 실패");
+         }
+     }];
 
 }
 

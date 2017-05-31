@@ -13,11 +13,16 @@
 
 // Facebook account -------------------------------//
 
+#pragma mark - FacebookModule Singleton Manager
++ (instancetype)fbNetworkManager;
+
+
+#pragma mark - Facebook Server API Methods
 // Facebook Log out
-+ (void)fbLogOut;
+- (void)fbLogOut;
 
 // Facebook Login (& Sign Up)
-+ (void)fbLoginFromVC:(UIViewController *)fromVC
+- (void)fbLoginFromVC:(UIViewController *)fromVC
   withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock;
 
 
