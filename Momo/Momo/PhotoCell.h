@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel2;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn2;
 @property (weak, nonatomic) IBOutlet UILabel *userName2;
+@property (weak, nonatomic) IBOutlet UILabel *postDate2;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView2;
 @property (weak, nonatomic) IBOutlet UILabel *pinName2;
 @property (weak, nonatomic) IBOutlet UILabel *pinAddress2;

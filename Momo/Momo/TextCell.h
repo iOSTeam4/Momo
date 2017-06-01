@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView3;
 @property (weak, nonatomic) IBOutlet UILabel *userName3;
+@property (weak, nonatomic) IBOutlet UILabel *postDate3;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn3;
 @property (weak, nonatomic) IBOutlet UIView *categoryColorView3;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel3;

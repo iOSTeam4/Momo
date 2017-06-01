@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,15 +50,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f0-ih-zMc">
-                                <rect key="frame" x="40" y="243.5" width="308" height="21"/>
+                                <rect key="frame" x="40" y="243.5" width="311" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-sx-dtA">
-                                <rect key="frame" x="363" y="237.5" width="33" height="33"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-sx-dtA">
+                                <rect key="frame" x="366" y="239" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Yra-sx-dtA" secondAttribute="height" multiplier="1:1" id="JeR-96-J1y"/>
+                                    <constraint firstAttribute="width" constant="30" id="pMb-0A-a1e"/>
                                 </constraints>
                                 <state key="normal" image="setup">
                                     <color key="titleColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,7 +85,6 @@
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="leading" secondItem="2f0-ih-zMc" secondAttribute="trailing" constant="15" id="cY2-mq-7m6"/>
                             <constraint firstAttribute="trailing" secondItem="Yra-sx-dtA" secondAttribute="trailing" constant="15" id="fCt-Tz-gGy"/>
                             <constraint firstItem="ZfR-pa-AiB" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" id="mY5-YK-zjr"/>
-                            <constraint firstItem="Yra-sx-dtA" firstAttribute="width" secondItem="4Ih-A0-G2a" secondAttribute="width" multiplier="0.08" id="nek-PX-95h"/>
                             <constraint firstItem="Qty-dZ-bwr" firstAttribute="height" secondItem="ZfR-pa-AiB" secondAttribute="height" id="oxu-sB-89f"/>
                             <constraint firstItem="9lu-jH-Pqd" firstAttribute="leading" secondItem="pqb-1e-o3S" secondAttribute="leading" id="tXv-d0-N0O"/>
                             <constraint firstItem="Yra-sx-dtA" firstAttribute="centerY" secondItem="2f0-ih-zMc" secondAttribute="centerY" id="ynv-f2-F3y"/>

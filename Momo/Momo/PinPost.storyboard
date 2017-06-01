@@ -464,6 +464,7 @@
                                             <outlet property="pinAddress1" destination="KSt-eH-mOM" id="3nI-dQ-y7B"/>
                                             <outlet property="pinMainText1" destination="m1F-1i-5hH" id="s8p-0V-rrj"/>
                                             <outlet property="pinName1" destination="AC8-Vn-EHx" id="Y8W-6o-eLP"/>
+                                            <outlet property="postDate1" destination="M5j-SR-mMe" id="HYj-Au-UUK"/>
                                             <outlet property="profileImageView1" destination="gdS-88-A09" id="g4G-sd-5yK"/>
                                             <outlet property="userName1" destination="f7t-qm-31g" id="puI-3X-v6r"/>
                                         </connections>
@@ -584,6 +585,7 @@
                                             <outlet property="editBtn2" destination="d4X-wa-W0U" id="7GD-UC-2OM"/>
                                             <outlet property="pinAddress2" destination="TcK-1w-14q" id="Ymi-zU-Yrn"/>
                                             <outlet property="pinName2" destination="zwG-wH-dxE" id="y36-Mu-odZ"/>
+                                            <outlet property="postDate2" destination="XVj-6v-bJ3" id="OKH-Io-mqi"/>
                                             <outlet property="profileImageView2" destination="8Sv-5C-ePY" id="PWu-VA-dkw"/>
                                             <outlet property="userName2" destination="aSs-ba-4FX" id="9Cl-G8-rO6"/>
                                         </connections>
@@ -742,6 +744,7 @@
                                             <outlet property="pinAddress3" destination="VoJ-C1-TYy" id="yqD-HE-atK"/>
                                             <outlet property="pinMainText3" destination="MU4-ry-JCB" id="Mzi-t7-xia"/>
                                             <outlet property="pinName3" destination="VO7-3b-NfX" id="IsL-yO-5KJ"/>
+                                            <outlet property="postDate3" destination="Uup-2w-4oU" id="CvN-Z0-hOF"/>
                                             <outlet property="profileImageView3" destination="HQF-88-Rhi" id="6OI-3v-oUI"/>
                                             <outlet property="userName3" destination="bCa-UZ-2FI" id="bvi-Zo-Cdr"/>
                                         </connections>

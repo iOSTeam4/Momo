@@ -122,6 +122,12 @@
         cell.profileImageView1.layer.cornerRadius = cell.profileImageView1.frame.size.width/2;
         cell.profileImageView1.layer.masksToBounds = YES;
 
+        // 날짜
+        NSString *year = [self.postData.post_created_date substringWithRange:NSMakeRange(0, 4)];
+        NSString *month = [self.postData.post_created_date substringWithRange:NSMakeRange(5, 2)];
+        NSString *day = [self.postData.post_created_date substringWithRange:NSMakeRange(8, 2)];
+        cell.postDate1.text = [NSString stringWithFormat:@"%@. %@. %@", year, month, day];
+        
         // 핀 카테고리 라벨
         cell.categoryLabel1.text = [self categoryLabelText];
         cell.categoryColorView1.backgroundColor = [self.pinData labelColor];
@@ -151,6 +157,12 @@
         }
         cell.profileImageView2.layer.cornerRadius = cell.profileImageView2.frame.size.width/2;
         cell.profileImageView2.layer.masksToBounds = YES;
+        
+        // 날짜
+        NSString *year = [self.postData.post_created_date substringWithRange:NSMakeRange(0, 4)];
+        NSString *month = [self.postData.post_created_date substringWithRange:NSMakeRange(5, 2)];
+        NSString *day = [self.postData.post_created_date substringWithRange:NSMakeRange(8, 2)];
+        cell.postDate2.text = [NSString stringWithFormat:@"%@. %@. %@", year, month, day];
 
         // 핀 카테고리 라벨
         cell.categoryLabel2.text = [self categoryLabelText];
@@ -180,6 +192,12 @@
         }
         cell.profileImageView3.layer.cornerRadius = cell.profileImageView3.frame.size.width/2;
         cell.profileImageView3.layer.masksToBounds = YES;
+        
+        // 날짜
+        NSString *year = [self.postData.post_created_date substringWithRange:NSMakeRange(0, 4)];
+        NSString *month = [self.postData.post_created_date substringWithRange:NSMakeRange(5, 2)];
+        NSString *day = [self.postData.post_created_date substringWithRange:NSMakeRange(8, 2)];
+        cell.postDate3.text = [NSString stringWithFormat:@"%@. %@. %@", year, month, day];
 
         // 핀 카테고리 라벨
         cell.categoryLabel3.text = [self categoryLabelText];

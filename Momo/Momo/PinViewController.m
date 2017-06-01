@@ -95,7 +95,13 @@
         self.userProfileImage.image = [self.pinData.pin_author getAuthorProfileImg];
     }
     self.userNameToMade.text = self.pinData.pin_author.username;
-
+    
+    
+    NSString *year = [self.pinData.pin_created_date substringWithRange:NSMakeRange(0, 4)];
+    NSString *month = [self.pinData.pin_created_date substringWithRange:NSMakeRange(5, 2)];
+    NSString *day = [self.pinData.pin_created_date substringWithRange:NSMakeRange(8, 2)];
+    self.date.text = [NSString stringWithFormat:@"%@. %@. %@", year, month, day];
+    
 }
 
 // 지도 버튼 액션

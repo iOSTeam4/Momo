@@ -22,7 +22,6 @@
     
     // 프로필 사진 동그랗게
     [self.userImgView.layer setCornerRadius:self.userImgView.frame.size.height/2];
-
 }
 
 
