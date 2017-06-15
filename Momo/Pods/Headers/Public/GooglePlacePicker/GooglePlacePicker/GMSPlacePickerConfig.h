@@ -1,1 +1,0 @@
-../../../../GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Versions/A/Headers/GMSPlacePickerConfig.h

@@ -27,7 +27,6 @@
     
     // GoogleMaps & GooglePlaces API Key Setting
     [GMSServices provideAPIKey:GOOGLE_API_KEY];
-    [GMSPlacesClient provideAPIKey:GOOGLE_API_KEY];
     
     
     // Facebook API

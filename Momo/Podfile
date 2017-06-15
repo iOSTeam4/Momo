@@ -8,10 +8,8 @@ target 'Momo' do
 
   # Pods for Momo
     # Google api
-    # map, places
-    pod 'GoogleMaps'
-    pod 'GooglePlaces'
-    pod 'GooglePlacePicker'
+    # maps
+    pod 'GoogleMaps’, '2.3'
     # analytics
     pod 'Google/Analytics'
 
@@ -25,10 +23,6 @@ target 'Momo' do
     pod 'Realm'
     
     pod 'AFNetworking', '~> 3.0'
-    pod 'SDWebImage'
-
-    pod 'JSONModel'
     pod 'SVProgressHUD'     # 로딩 팝업
-    pod 'FontAwesomeKit/FontAwesome'    # icon fonts
 
 end

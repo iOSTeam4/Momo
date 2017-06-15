@@ -34,13 +34,10 @@ PODS:
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.10):
     - FirebaseCore (~> 3.6)
-  - FontAwesomeKit/Core (2.2.1)
-  - FontAwesomeKit/FontAwesome (2.2.1):
-    - FontAwesomeKit/Core
-  - Google/Analytics (3.0.3):
+  - Google/Analytics (3.1.0):
     - Google/Core
     - GoogleAnalytics (~> 3.12)
-  - Google/Core (3.0.3):
+  - Google/Core (3.1.0):
     - FirebaseAnalytics (~> 3.2)
   - GoogleAnalytics (3.17.0)
   - GoogleMaps (2.3.0):
@@ -48,21 +45,12 @@ PODS:
   - GoogleMaps/Base (2.3.0)
   - GoogleMaps/Maps (2.3.0):
     - GoogleMaps/Base
-  - GooglePlacePicker (2.3.0):
-    - GoogleMaps (= 2.3.0)
-    - GooglePlaces (= 2.3.0)
-  - GooglePlaces (2.3.0):
-    - GoogleMaps/Base (= 2.3.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - JSONModel (1.7.0)
-  - Realm (2.7.0):
-    - Realm/Headers (= 2.7.0)
-  - Realm/Headers (2.7.0)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - Realm (2.8.1):
+    - Realm/Headers (= 2.8.1)
+  - Realm/Headers (2.8.1)
   - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
@@ -71,14 +59,9 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - FontAwesomeKit/FontAwesome
   - Google/Analytics
-  - GoogleMaps
-  - GooglePlacePicker
-  - GooglePlaces
-  - JSONModel
+  - GoogleMaps (= 2.3)
   - Realm
-  - SDWebImage
   - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -90,18 +73,13 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
-  FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
-  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleMaps: 340a6a0bebd17c2db8abcd3921976c7c53c86cb8
-  GooglePlacePicker: 80a6719aa4d06c63524a231d0ecd8f87e87d98c2
-  GooglePlaces: 74d322c74184ea4576184089b496d291cf0dcd38
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
-  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  Realm: 2627602ad6818451f0cb8c2a6e072f7f10a5f360
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: a99c023d8ad8e731114728aa51e48de4989f6e34
+PODFILE CHECKSUM: a742f0511969da8f414b1cd7c6874a44045a9021
 
 COCOAPODS: 1.2.1
