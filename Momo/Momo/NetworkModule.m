@@ -55,6 +55,10 @@ static NSString *const POST_URL             = @"/api/post/";
                         withEmail:(NSString *)email
               withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
+#if REALM
+
+#else
+    
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
@@ -116,11 +120,16 @@ static NSString *const POST_URL             = @"/api/post/";
                                                     }];
     
     [postTask resume];
+#endif
 }
 
 // Auth-Mail
 - (void)sendMailWithUserPK:(NSInteger)userPK
        withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+#if REALM
+
+#else
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -170,6 +179,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                         
                                                     }];
     [postTask resume];
+#endif
 }
 
 
@@ -178,6 +188,10 @@ static NSString *const POST_URL             = @"/api/post/";
 - (void)loginRequestWithUsername:(NSString *)username
                     withPassword:(NSString *)password
              withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+#if REALM
+    
+#else
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -234,6 +248,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                         
                                                     }];
     [postTask resume];
+#endif
 }
 
 
@@ -241,7 +256,9 @@ static NSString *const POST_URL             = @"/api/post/";
 
 // Log Out (Facebook & e-mail 계정)
 - (void)logOutRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
-
+#if REALM
+    
+#else
     // Facebook 계정 처리 (fb Server)
     if ([FBSDKAccessToken currentAccessToken]) {
         NSLog(@"Facebook Log out");
@@ -304,11 +321,15 @@ static NSString *const POST_URL             = @"/api/post/";
                                                     }];
     
     [postTask resume];
-        
+#endif
 }
 
 // Get member profile (Facebook & e-mail 계정)
 - (void)getMemberProfileRequestWithCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+    
+#if REALM
+    
+#else
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -368,7 +389,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                 }];
     
     [dataTask resume];
-
+#endif
 }
 
 
@@ -379,6 +400,9 @@ static NSString *const POST_URL             = @"/api/post/";
                              withDescription:(NSString *)description
                          withCompletionBlock:(void (^)(BOOL isSuccess, NSString *result))completionBlock {
     
+#if REALM
+    
+#else
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"PATCH" URLString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MEMBER_PROFILE_URL, [DataCenter sharedInstance].momoUserData.pk] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
@@ -428,7 +452,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                       }];
     
     [uploadTask resume];
-    
+#endif
 }
 
 
@@ -449,6 +473,9 @@ static NSString *const POST_URL             = @"/api/post/";
                     withDescription:(NSString *)description
                       withIsPrivate:(BOOL)is_private
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
+    
+#else
     
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -506,6 +533,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                     }];
     
     [postTask resume];
+#endif
 }
 
 
@@ -515,7 +543,9 @@ static NSString *const POST_URL             = @"/api/post/";
                   withDescription:(NSString *)description
                     withIsPrivate:(BOOL)is_private
               withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
     
+#else
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"PATCH" URLString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, MAP_URL, map_pk] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
@@ -568,7 +598,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                       }];
     
     [uploadTask resume];
-
+#endif
 }
 
 
@@ -577,6 +607,9 @@ static NSString *const POST_URL             = @"/api/post/";
 - (void)deleteMapRequestWithMapData:(MomoMapDataSet *)mapData
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
     
+#if REALM
+    
+#else
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
@@ -627,6 +660,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                     }];
     
     [dataTask resume];
+#endif
 }
 
 
@@ -643,7 +677,9 @@ static NSString *const POST_URL             = @"/api/post/";
                             withLng:(CGFloat)lng
                     withDescription:(NSString *)description
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
     
+#else
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
@@ -707,6 +743,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                     }];
     
     [postTask resume];
+#endif
 }
 
 // Pin Update
@@ -715,7 +752,9 @@ static NSString *const POST_URL             = @"/api/post/";
                         withLabel:(NSInteger)pinLabel
                         withMapPK:(NSInteger)map_pk
               withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
     
+#else
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"PATCH" URLString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, PIN_URL, pin_pk] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
@@ -767,7 +806,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                       }];
     
     [uploadTask resume];
-    
+#endif
 }
 
 
@@ -775,7 +814,9 @@ static NSString *const POST_URL             = @"/api/post/";
 // Pin Delete
 - (void)deletePinRequestWithPinData:(MomoPinDataSet *)pinData
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
     
+#else
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
@@ -826,6 +867,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                 }];
     
     [dataTask resume];
+#endif
 }
 
 
@@ -842,7 +884,9 @@ static NSString *const POST_URL             = @"/api/post/";
                      withPhotoData:(NSData *)photoData
                    withDescription:(NSString *)description
                withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
     
+#else
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@%@", API_BASE_URL, POST_URL] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         [formData appendPartWithFormData:[[NSString stringWithFormat:@"%ld", pin_pk] dataUsingEncoding:NSUTF8StringEncoding] name:@"pin"];
@@ -899,7 +943,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                       }];
     
     [uploadTask resume];
-    
+#endif
 }
 
 
@@ -909,7 +953,9 @@ static NSString *const POST_URL             = @"/api/post/";
                       withPhotoData:(NSData *)photoData
                     withDescription:(NSString *)description
                 withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
-
+#if REALM
+    
+#else
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"PATCH" URLString:[NSString stringWithFormat:@"%@%@%ld/", API_BASE_URL, POST_URL, post_pk] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 
         
@@ -969,7 +1015,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                       }];
     
     [uploadTask resume];
-    
+#endif
 }
 
 
@@ -978,7 +1024,9 @@ static NSString *const POST_URL             = @"/api/post/";
 // Post Delete
 - (void)deletePostRequestWithPostData:(MomoPostDataSet *)postData
                   withCompletionBlock:(void (^)(BOOL isSuccess, NSString* result))completionBlock {
+#if REALM
     
+#else
     // Session
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
@@ -1029,6 +1077,7 @@ static NSString *const POST_URL             = @"/api/post/";
                                                 }];
     
     [dataTask resume];
+#endif
 }
 
 

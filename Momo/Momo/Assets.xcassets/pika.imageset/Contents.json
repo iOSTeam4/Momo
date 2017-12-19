@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "pika.png",
-      "scale" : "1x"
+      "filename" : "pika.png"
     }
   ],
   "info" : {
