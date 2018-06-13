@@ -505,7 +505,6 @@
 				3FD9A52B1E88ED3700B965A7 /* Sources */,
 				3FD9A52C1E88ED3700B965A7 /* Frameworks */,
 				3FD9A52D1E88ED3700B965A7 /* Resources */,
-				6DF7E0E7BEE6ADE69B344E53 /* [CP] Embed Pods Frameworks */,
 				45201C0B995B554079D44563 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -525,7 +524,6 @@
 				DAD4E35F1FE8B2B100BBEB16 /* Sources */,
 				DAD4E3821FE8B2B100BBEB16 /* Frameworks */,
 				DAD4E3851FE8B2B100BBEB16 /* Resources */,
-				DAD4E3921FE8B2B100BBEB16 /* [CP] Embed Pods Frameworks */,
 				DAD4E3931FE8B2B100BBEB16 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -648,26 +646,13 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momo/Pods-Momo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6DF7E0E7BEE6ADE69B344E53 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momo/Pods-Momo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAD4E35E1FE8B2B100BBEB16 /* [CP] Check Pods Manifest.lock */ = {
@@ -688,21 +673,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DAD4E3921FE8B2B100BBEB16 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momo_Realm/Pods-Momo_Realm-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DAD4E3931FE8B2B100BBEB16 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -716,7 +686,9 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
