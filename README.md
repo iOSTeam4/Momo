@@ -13,8 +13,6 @@ FastCampus School TeamProject
 지도를 만들고, 지도에 장소를 등록하고  
 장소에 기록(글, 사진)을 남기는 지도 다이어리 앱입니다.
 
-#### [Youtube 영상보기 🎬](https://youtu.be/u_HlN_1t79g)
-
 <img src="./momo_gif1.gif?raw=true" width="250"> <img src="./momo_gif2.gif?raw=true" width="250">
 </br></br>
 ## iOS Dev Features <a id="iOS_Dev_Features"></a>  
